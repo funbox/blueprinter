@@ -1,13 +1,22 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import MainLayout from 'app/common/layouts/main';
-import Home from './views/home';
+import App from './components/app';
+
+const sandbox = () => {
+  if (ENV !== 'production') {
+    const SandboxApp = require('sandbox/components/sandbox-app').default;
+    return <Route path="/sandbox" component={SandboxApp}/>;
+  }
+
+  return null;
+};
 
 const component = (
   <BrowserRouter basename={BASE_PATH}>
-    <MainLayout>
-      <Home/>
-    </MainLayout>
+    <Switch>
+      {sandbox()}
+      <Route component={App}/>
+    </Switch>
   </BrowserRouter>
 );
 

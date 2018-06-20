@@ -1,0 +1,17 @@
+.sandbox-anchor
+  display: inline-block
+  position: relative
+  width: 20px
+  text-decoration: none
+  color: #ccc
+  transition: color .2s
+
+  &:hover,
+  &:focus
+    opacity: 1
+    color: #000
+
+.sandbox-anchor-context
+  &:target
+    .sandbox-anchor
+      color: #00f
