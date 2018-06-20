@@ -10,8 +10,14 @@ export default class SandboxLayout extends React.Component {
 
     return (
       <Fragment>
-        {children}
-        <SandboxNavigation/>
+        <div className="sandbox-layout">
+          <div className="sandbox-layout__content">
+            {children}
+          </div>
+          <div className="sandbox-layout__drawer">
+            <SandboxNavigation/>
+          </div>
+        </div>
       </Fragment>
     );
   }

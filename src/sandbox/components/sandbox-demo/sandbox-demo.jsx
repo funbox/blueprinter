@@ -1,6 +1,8 @@
 const SandboxDemo = (props) => (
   <div className={b('sandbox-demo', props)}>
-    {props.children}
+    <div className="sandbox-demo__canvas">
+      {props.children}
+    </div>
   </div>
 );
 

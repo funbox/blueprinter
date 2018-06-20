@@ -1,0 +1,8 @@
+.sandbox-demo_theme_standard {
+  .sandbox-demo__canvas {
+    padding: 20px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, .2);
+    background: #efefef linear-gradient(to right, rgba(0, 0, 0, .02) 0, rgba(0, 0, 0, .02) 4px, rgba(0, 0, 0, 0) 4px, rgba(0, 0, 0, 0) 8px); // stylelint-disable max-line-length
+    background-size: 8px;
+  }
+}

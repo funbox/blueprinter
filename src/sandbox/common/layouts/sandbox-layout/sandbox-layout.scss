@@ -1,0 +1,33 @@
+$tablet: 600px;
+$desktop: 1000px;
+$drawerWidth: 300px;
+
+.sandbox-layout__drawer {
+  left: -$drawerWidth;
+  box-sizing: border-box;
+
+  @media (min-width: $tablet) {
+    padding: 0 50px;
+  }
+
+  @media (min-width: $desktop) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    width: $drawerWidth;
+    padding: 0 25px;
+    border-right: 5px solid;
+  }
+}
+
+.sandbox-layout__content {
+  @media (min-width: $tablet) {
+    padding: 50px;
+  }
+
+  @media (min-width: $desktop) {
+    margin-left: $drawerWidth;
+  }
+}
