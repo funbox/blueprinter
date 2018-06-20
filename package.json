@@ -1,0 +1,54 @@
+{
+  "name": "blueprinter-frontend",
+  "version": "0.1.0",
+  "description": "Replacement of Aglio library for rendering generated AST as HTML page.",
+  "scripts": {
+    "start": "npm run dev",
+    "build": "funbox-build",
+    "build-production": "funbox-build-production",
+    "dev": "funbox-dev",
+    "lint:sass": "sass-lint -c node_modules/sass-lint-config-funbox/lib/.sass-lint.yml \"src/**/*.sass\" -v",
+    "lint:scss": "stylelint \"src/**/*.scss\" --syntax scss --fix --config node_modules/funbox-scss-lint-config/.stylelintrc --cache",
+    "lint:js:app": "eslint --cache -c .eslintrc_react --ext .jsx,.js src/app",
+    "lint:js:tests": "eslint -c node_modules/eslint-config-funbox/.eslintrc.test.only src/tests",
+    "lint:js": "npm run -s lint:js:app && npm run -s lint:js:tests",
+    "lint": "npm run -s lint:scss && npm run -s lint:sass && npm run -s lint:js",
+    "prebuild": "npm run lint"
+  },
+  "dependencies": {
+    "bem-react-helper": "1.1.2",
+    "prop-types": "15.6.0",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "react-router-dom": "4.2.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "7.2.5",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-plugin-transform-react-constant-elements": "6.23.0",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.12",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-react-hmre": "1.1.1",
+    "css-loader": "0.28.9",
+    "csso-webpack-plugin": "1.0.0-beta.10",
+    "eslint": "2.9.0",
+    "eslint-config-funbox": "1.2.0",
+    "funbox-frontend-env-webpack": "10.2.0",
+    "funbox-scss-imports-loader": "1.0.0",
+    "funbox-scss-lint-config": "1.0.1",
+    "funbox-scss-vars-loader": "1.0.0",
+    "lodash": "4.17.4",
+    "node-sass": "4.7.2",
+    "postcss-loader": "2.0.10",
+    "postcss-url": "7.3.0",
+    "sass-lint": "1.10.2-fb-1.8.1",
+    "sass-lint-config-funbox": "1.4.1",
+    "sass-loader": "6.0.6",
+    "style-loader": "0.20.1",
+    "stylelint": "8.4.0"
+  },
+  "pugLintConfig": {
+    "extends": "funbox"
+  }
+}
