@@ -120,7 +120,7 @@ module.exports = options => {
     {
       loader: 'funbox-scss-imports-loader',
       options: {
-        paths: require('./scss-imports'),
+        paths: require('./webpack.app.scssImports'),
       },
     },
     'funbox-scss-vars-loader',
