@@ -5,6 +5,10 @@ module.exports = {
       "to": "/sandbox"
     },
     {
+      "name": "Боковое меню",
+      "to": "/sandbox/side-menu"
+    },
+    {
       "name": "...",
     },
   ],
