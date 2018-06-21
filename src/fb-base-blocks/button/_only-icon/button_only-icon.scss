@@ -1,0 +1,5 @@
+.button_only-icon {
+  .button__text {
+    @include visually-hidden;
+  }
+}

@@ -1,0 +1,21 @@
+.button {
+  display: inline-block;
+  overflow: visible;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  font: inherit;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+
+  &::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+}
