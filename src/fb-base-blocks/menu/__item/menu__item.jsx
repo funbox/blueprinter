@@ -6,10 +6,11 @@ const Menu__Item = (props) => {
     children,
     icon,
     text,
+    tag,
     submenu,
   } = props;
   const isCurrent = mods ? mods.current : false;
-  const Tag = isCurrent ? 'span' : Link;
+  const Tag = tag ? tag : (isCurrent ? 'span' : Link);
 
   const localProps = Object.assign({}, props);
 
@@ -43,6 +44,7 @@ Menu__Item.propTypes = {
   mods: PropTypes.object,
   icon: PropTypes.object,
   text: PropTypes.string,
+  tag: PropTypes.string,
   children: PropTypes.node,
   submenu: PropTypes.node,
 };
