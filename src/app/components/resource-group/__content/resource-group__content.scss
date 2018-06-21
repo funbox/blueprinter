@@ -1,0 +1,9 @@
+.resource-group__content {
+  overflow: hidden;
+
+  &:empty {
+    box-sizing: border-box;
+    height: 10px;
+    border-top: 1px solid $gray;
+  }
+}
