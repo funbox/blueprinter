@@ -6,6 +6,7 @@ const Menu__Item = (props) => {
     children,
     icon,
     text,
+    submenu,
   } = props;
   const isCurrent = mods ? mods.current : false;
   const Tag = isCurrent ? 'span' : Link;
@@ -16,6 +17,7 @@ const Menu__Item = (props) => {
   delete localProps.mix;
   delete localProps.icon;
   delete localProps.text;
+  delete localProps.submenu;
 
   return (
     <li className={b('menu__item', props)}>
@@ -31,6 +33,8 @@ const Menu__Item = (props) => {
         {!!text && (<span className="menu__item-text">{text}</span>)}
         {children}
       </Tag>
+
+      {!!submenu && (<div className="menu__item-submenu">{submenu}</div>)}
     </li>
   );
 };
@@ -40,6 +44,7 @@ Menu__Item.propTypes = {
   icon: PropTypes.object,
   text: PropTypes.string,
   children: PropTypes.node,
+  submenu: PropTypes.node,
 };
 
 export default Menu__Item;
