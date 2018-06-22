@@ -9,6 +9,10 @@ module.exports = {
       "to": "/sandbox/side-menu"
     },
     {
+      "name": "Контентная область",
+      "to": "/sandbox/raw-content"
+    },
+    {
       "name": "...",
     },
   ],
