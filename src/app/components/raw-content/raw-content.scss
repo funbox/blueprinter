@@ -1,0 +1,115 @@
+// stylelint-disable selector-max-type, no-descending-specificity
+
+.raw-content {
+  font-family: $baseFontStack;
+  font-size: $baseFontSize;
+  line-height: $baseLineHeight;
+  color: $black;
+
+  h1 {
+    margin: $baseMargin 0;
+    font-family: $headingFontStack;
+    font-size: 36px;
+    font-weight: 200;
+    line-height: 40px;
+  }
+
+  h2 {
+    margin: $baseMargin 0;
+    font-family: $headingFontStack;
+    font-size: 30px;
+    font-weight: 200;
+    line-height: 36px;
+  }
+
+  h3 {
+    margin: $baseMargin 0;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  h4, h5, h6 {
+    margin: $baseMargin 0;
+  }
+
+  p {
+    margin: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: $blueDark;
+
+    &:focus,
+    &:hover {
+      outline: 0;
+      text-decoration: underline;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+  }
+
+  ul, ol {
+    padding-left: 2em;
+
+    > li {
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  blockquote {
+    margin: $baseMargin 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-left: 5px solid $gray;
+    color: rgba($black, .5);
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  code {
+    padding: 1px 4px;
+    border: 1px solid #cfcfcf;
+    border-radius: 3px;
+    background-color: $grayLight;
+    color: $grayDark;
+  }
+
+  pre {
+    overflow: auto;
+    padding: $basePadding;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+    background-color: $grayLight;
+
+    code {
+      padding: 0;
+      border: none;
+      background-color: transparent;
+      color: $black;
+    }
+  }
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-bottom: $baseMargin;
+
+    th, td {
+      padding: $basePadding / 2 $basePadding;
+      border: 1px solid #e6e6e6;
+    }
+
+    tr:nth-child(2n) {
+      background-color: $grayExtraLight;
+    }
+  }
+}
