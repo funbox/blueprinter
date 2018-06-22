@@ -19,6 +19,7 @@ class ResourceGroup extends React.Component {
 
   buildContentList(content, options = {}) {
     const { level } = options;
+    const { route } = this.context.router;
     if (level > maxNestingLevel) return null;
 
     const menuItems = content.map((item, index) => {
@@ -35,7 +36,7 @@ class ResourceGroup extends React.Component {
           mods={level ? { level, submenu: true } : {}}
           key={`${itemType}-${index}`}
           text={title}
-          to={{ hash: hashFromTitle(title) }}
+          to={{ hash: hashFromTitle(title), pathname: route.location.pathname }}
           submenu={hasSubmenu ? this.buildContentList(item.content, { level: nextLevel }) : null}
         >{badge}</Menu__Item>
       );
@@ -53,6 +54,7 @@ class ResourceGroup extends React.Component {
   }
 
   render() {
+    const { route } = this.context.router;
     const { group } = this.props;
     const { collapsed } = this.state;
     const hasContent = !!group.content && group.content.length > 0;
@@ -72,7 +74,10 @@ class ResourceGroup extends React.Component {
               className="resource-group__heading"
               onClick={onToggle}
             >
-              <Link mix="resource-group__title" to={{ hash: hashFromTitle(title) }}>{title}</Link>
+              <Link
+                mix="resource-group__title"
+                to={{ hash: hashFromTitle(title), pathname: route.location.pathname }}
+              >{title}</Link>
             </h3>
 
             <div className="resource-group__content" ref={setCollapsibleElement}>
