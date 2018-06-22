@@ -1,5 +1,8 @@
 /* stylelint-disable selector-max-type */
 
 body {
-  color: #333;
+  font-family: $baseFontStack;
+  font-size: $baseFontSize;
+  line-height: $baseLineHeight;
+  color: $grayDark;
 }
