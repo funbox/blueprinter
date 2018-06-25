@@ -69,6 +69,10 @@ module.exports = options => {
       // для того, чтобы редаксы-реакты выкидывали ненужный код при минификации
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
+    new webpack.ContextReplacementPlugin(
+      /highlight.js[\\/]lib[\\/]languages$/,
+      new RegExp('^./(json|javascript)$')
+    ),
   ]);
 
   if (!options.disableCssExtracting) {

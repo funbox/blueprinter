@@ -2,10 +2,11 @@ import Highlight from 'react-highlight';
 
 const CodeSnippet = (props) => {
   const disabledSyntax = props.mods && props.mods.disabledSyntax;
+  const languages = disabledSyntax ? [] : ['json'];
 
   return (
     <div className={b('code-snippet', props)}>
-      <Highlight className={disabledSyntax ? 'nohighlight' : 'json'}>
+      <Highlight languages={languages} className={disabledSyntax ? 'nohighlight' : ''}>
         {props.children}
       </Highlight>
     </div>
