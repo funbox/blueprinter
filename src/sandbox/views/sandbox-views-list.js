@@ -13,6 +13,10 @@ module.exports = {
       "to": "/sandbox/raw-content"
     },
     {
+      "name": "Блок структуры запроса-ответа",
+      "to": "/sandbox/request-response"
+    },
+    {
       "name": "...",
     },
   ],
