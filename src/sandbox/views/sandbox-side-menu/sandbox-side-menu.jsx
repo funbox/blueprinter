@@ -15,7 +15,7 @@ export default class SandboxSideMenu extends React.Component {
     const httpMethods = ['delete', 'get', 'head', 'options', 'patch', 'post', 'put'];
     const badgeTableRows = [
       httpMethods,
-      httpMethods.map(m => <MethodBadge mods={{ type: m }} method={m.toUpperCase()}/>)
+      httpMethods.map(m => <MethodBadge method={m}/>),
     ];
 
     return (
