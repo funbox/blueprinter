@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "имя отправителя отзыва"
+    },
+    "email": {
+      "type": "string",
+      "description": "email отправителя отзыва"
+    },
+    "msisdn": {
+      "type": "number",
+      "description": "телефон отправителя отзыва"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "problem",
+        "question",
+        "improvement",
+        "partner"
+      ],
+      "description": "тип запроса"
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "msisdn",
+    "kind",
+    "message"
+  ]
+}
