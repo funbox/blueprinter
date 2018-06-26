@@ -1,0 +1,25 @@
+.attribute_has-children {
+  > .attribute__row {
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+      content: '-';
+      position: absolute;
+      top: 0;
+      left: 2px;
+    }
+  }
+
+  &.attribute_collapsed {
+    .attribute__children {
+      display: none;
+    }
+
+    > .attribute__row {
+      &::before {
+        content: '+';
+      }
+    }
+  }
+}
