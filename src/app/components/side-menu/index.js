@@ -1,3 +1,1 @@
-import SideMenu from './side-menu';
-
-export default SideMenu;
+export { default } from './side-menu';
