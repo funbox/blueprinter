@@ -16,13 +16,14 @@
     "prebuild": "npm run lint"
   },
   "dependencies": {
+    "@babel/polyfill": "7.0.0-beta.51",
     "bem-react-helper": "1.1.2",
     "prop-types": "15.6.0",
     "react": "16.3.2",
     "react-dom": "16.3.2",
+    "react-highlight": "0.12.0",
     "react-router-dom": "4.2.2",
-    "react-slide-toggle": "0.1.13",
-    "react-highlight": "0.12.0"
+    "react-slide-toggle": "0.1.13"
   },
   "devDependencies": {
     "autoprefixer": "7.2.5",
