@@ -1,0 +1,11 @@
+.transition {
+  padding: $basePadding;
+  background-color: $grayDark;
+  color: $white;
+
+  .transition__example-names {
+    + .transition__description {
+      margin-top: $baseMargin;
+    }
+  }
+}
