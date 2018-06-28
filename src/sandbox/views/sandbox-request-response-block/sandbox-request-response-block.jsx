@@ -5,8 +5,10 @@ import InlineCode from 'sandbox/components/inline-code';
 
 import CodeSnippet from 'app/components/code-snippet';
 import AttributesList from 'app/components/attirbutes-list';
+import Transition from 'app/components/transition';
 
 import { body, schema, rawBody } from 'app/mocks/json';
+import request from 'app/mocks/request';
 import {
   arrayAttribute,
   arrayOfObjects,
@@ -78,6 +80,12 @@ export default class SandboxRequestResponseBlock extends React.Component {
         <SandboxSection id="attributes-block" title="Блок атрибутов">
           <SandboxDemo mods={{ for: 'attributes-list' }}>
             <AttributesList attributes={attributeBlock}/>
+          </SandboxDemo>
+        </SandboxSection>
+
+        <SandboxSection id="request-response-section" title="Запрос-ответ">
+          <SandboxDemo mods={{ for: 'transition-block' }}>
+            <Transition transactions={request}/>
           </SandboxDemo>
         </SandboxSection>
       </div>
