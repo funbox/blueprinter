@@ -1,10 +1,16 @@
 const MethodBadge = (props = {}) => {
-  const { method } = props;
-  const mods = method ? Object.assign({}, props.mods, { type: method }) : props.mods;
-  const extendedProps = Object.assign({}, props, { mods });
+  const {
+    method,
+    mods = {},
+    mix = [],
+  } = props;
+
+  if (method) {
+    mods.type = method;
+  }
 
   return (
-    <p className={b('method-badge', extendedProps)}>
+    <p className={b('method-badge', { mods, mix })}>
       {method && (
         <span className="method-badge__text">{method.toUpperCase()}</span>
       )}
@@ -15,6 +21,10 @@ const MethodBadge = (props = {}) => {
 MethodBadge.propTypes = {
   method: PropTypes.string,
   mods: PropTypes.object,
+  mix: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.string,
+  ]),
 };
 
 export default MethodBadge;
