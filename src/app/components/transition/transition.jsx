@@ -1,5 +1,15 @@
+import URL from 'url-parse';
+
 import Section from 'app/components/section';
 import Transition__Content from './__content';
+
+const highlightQuery = queryObj => (
+  Object.keys(queryObj).map(qKey => {
+    const key = `<span class="hljs-attr">${qKey}</span>`;
+    const value = `<span class="hljs-literal">${queryObj[qKey]}</span>`;
+    return `${key}=${value}`;
+  }).join('&')
+);
 
 class Transition extends React.Component {
   constructor(props) {
@@ -24,6 +34,8 @@ class Transition extends React.Component {
 
     const { request, response, attributes } = currentTransaction;
     const { method, uri } = attributes;
+    const { pathname, query } = new URL(uri, true);
+    const formattedQuery = highlightQuery(query);
     return (
       <Section
         title={`Структура ответов на запрос ${method} ${uri}`}
@@ -34,7 +46,9 @@ class Transition extends React.Component {
         <p className="transition__definition">
           <span className="transition__method">{method.toUpperCase()}</span>
           {' '}
-          {uri}
+          {pathname}
+          {'?'}
+          <span dangerouslySetInnerHTML={{ __html: formattedQuery }}/>
         </p>
 
         <Transition__Content data={request} contentType={'Requests'}/>

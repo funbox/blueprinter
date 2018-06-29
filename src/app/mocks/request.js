@@ -22,7 +22,7 @@ export default [
     },
     attributes: {
       method: 'POST',
-      uri: '/user',
+      uri: '/users/{id}?country=ru&active=true&votes=0',
     },
   },
 ];
