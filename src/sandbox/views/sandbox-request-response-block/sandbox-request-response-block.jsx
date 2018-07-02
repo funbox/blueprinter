@@ -45,6 +45,19 @@ export default class SandboxRequestResponseBlock extends React.Component {
               {rawBody}
             </CodeSnippet>
           </SandboxDemo>
+
+          <SandboxParagraph>
+            Для подсветки http-заголовков можно использовать свойство
+            {' '}
+            <InlineCode>{'syntax="http"'}</InlineCode>:
+          </SandboxParagraph>
+          <SandboxDemo>
+            <CodeSnippet syntax="http">
+              Content-Type: application/json
+              {'\n'}
+              X-Auth-Token: Session token
+            </CodeSnippet>
+          </SandboxDemo>
         </SandboxSection>
 
         <SandboxSection id="single-attribute" title="Одиночный атрибут">
