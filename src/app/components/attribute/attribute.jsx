@@ -1,3 +1,4 @@
+import { SlideToggle } from 'react-slide-toggle';
 import Attribute__Row from './__row';
 
 class Attribute extends React.Component {
@@ -29,17 +30,27 @@ class Attribute extends React.Component {
     }
 
     return (
-      <div className={b('attribute', { mods, mix })}>
-        <Attribute__Row
-          attribute={attribute}
-          disabledExample={!!nestedAttributes}
-          onClick={nestedAttributes ? this.toggleCollapsedState : null}
-        />
+      <SlideToggle
+        duration={200}
+        bestPerfomance
+        onExpanded={this.toggleCollapsedState}
+        onCollapsing={this.toggleCollapsedState}
+        collapsed
+      >
+        {({ onToggle, setCollapsibleElement }) => (
+          <div className={b('attribute', { mods, mix })}>
+            <Attribute__Row
+              attribute={attribute}
+              disabledExample={!!nestedAttributes}
+              onClick={onToggle}
+            />
 
-        {!!nestedAttributes &&
-          <div className="attribute__children">{nestedAttributes}</div>
-        }
-      </div>
+            {!!nestedAttributes &&
+              <div className="attribute__children" ref={setCollapsibleElement}>{nestedAttributes}</div>
+            }
+          </div>
+        )}
+      </SlideToggle>
     );
   }
 }
