@@ -1,0 +1,16 @@
+.resource-group-section__heading {
+  position: relative;
+  margin: 0 0 12px;
+  padding: $basePadding;
+  padding-right: $basePadding * 2;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: $headingFontStack;
+  font-size: 30px;
+  font-weight: 200;
+  line-height: 36px;
+  border: 1px solid $gray;
+  border-radius: 6px 6px 0 0;
+  background-color: $grayLight;
+}

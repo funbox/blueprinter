@@ -21,6 +21,9 @@ const resourceGroup = groupName => (
       title: {
         content: groupName,
       },
+      text: {
+        content: 'Resource Group content',
+      },
     },
     content: [resource, resource],
   }

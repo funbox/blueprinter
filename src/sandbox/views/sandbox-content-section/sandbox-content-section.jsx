@@ -3,7 +3,9 @@ import SandboxDemo from 'sandbox/components/sandbox-demo';
 import SandboxParagraph from 'sandbox/components/sandbox-paragraph';
 
 import RawContent from 'app/components/raw-content';
+import ResourceGroupSection from 'app/components/resource-group-section';
 
+import data from 'app/mocks/data';
 
 export default class SandboxContentSection extends React.Component {
   render() {
@@ -82,6 +84,14 @@ export default class SandboxContentSection extends React.Component {
               </table>
 
             </RawContent>
+          </SandboxDemo>
+        </SandboxSection>
+
+        <h1>Контент</h1>
+
+        <SandboxSection id="resource-group-section" title="Блок Resource group">
+          <SandboxDemo>
+            <ResourceGroupSection group={data[0]} />
           </SandboxDemo>
         </SandboxSection>
       </div>
