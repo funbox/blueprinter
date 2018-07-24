@@ -6,6 +6,7 @@ import RawContent from 'app/components/raw-content';
 import Page from 'app/components/page';
 import ResourceGroupSection from 'app/components/resource-group-section';
 import MainContent from 'app/components/main-content';
+import Resource from 'app/components/resource';
 
 import data from 'app/mocks/data';
 
@@ -109,6 +110,12 @@ export default class SandboxContentSection extends React.Component {
                 <ResourceGroupSection group={data[0]}/>
               </MainContent>
             </Page>
+          </SandboxDemo>
+        </SandboxSection>
+
+        <SandboxSection id="resource" title="Блок Resource">
+          <SandboxDemo>
+            <Resource resource={data[3]} />
           </SandboxDemo>
         </SandboxSection>
       </div>

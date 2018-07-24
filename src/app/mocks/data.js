@@ -10,6 +10,9 @@ const resource = {
     title: {
       content: 'Users',
     },
+    text: {
+      content: 'Users resource content',
+    },
   },
   content: [getUsers, deleteUser],
 };
@@ -33,4 +36,5 @@ export default [
   resourceGroup('Users Group'),
   resourceGroup('Senders Group'),
   resourceGroup('Templates Group'),
+  resource,
 ];
