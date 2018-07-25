@@ -98,7 +98,10 @@ export default class SandboxRequestResponseBlock extends React.Component {
 
         <SandboxSection id="request-response-section" title="Запрос-ответ">
           <SandboxDemo mods={{ for: 'transition-block' }}>
-            <Transition transactions={request}/>
+            <Transition
+              transactions={request.content}
+              attributes={request.attributes}
+            />
           </SandboxDemo>
         </SandboxSection>
       </div>
