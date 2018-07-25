@@ -8,7 +8,7 @@ import MethodBadge from 'app/components/method-badge';
 import SideMenu from 'app/components/side-menu';
 import ResourceGroup from 'app/components/resource-group';
 
-import data from 'app/mocks/data';
+import group from 'app/mocks/resource-group';
 
 export default class SandboxSideMenu extends React.Component {
   render() {
@@ -35,12 +35,12 @@ export default class SandboxSideMenu extends React.Component {
         </SandboxSection>
 
         <SandboxSection id="resource-group-block" title="Блок Resource group бокового меню">
-          <ResourceGroup group={data[0]}/>
+          <ResourceGroup group={group[0]}/>
         </SandboxSection>
 
         <SandboxSection id="side-menu" title="Боковое меню">
           <SandboxDemo mods={{ for: 'side-menu' }}>
-            <SideMenu data={data}/>
+            <SideMenu data={group}/>
           </SandboxDemo>
         </SandboxSection>
       </div>

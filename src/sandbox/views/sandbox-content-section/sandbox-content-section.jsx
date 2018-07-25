@@ -8,7 +8,8 @@ import ResourceGroupSection from 'app/components/resource-group-section';
 import MainContent from 'app/components/main-content';
 import Resource from 'app/components/resource';
 
-import data from 'app/mocks/data';
+import resource from 'app/mocks/resource';
+import group from 'app/mocks/resource-group';
 
 export default class SandboxContentSection extends React.Component {
   render() {
@@ -110,12 +111,13 @@ export default class SandboxContentSection extends React.Component {
                 <ResourceGroupSection group={data[0]}/>
               </MainContent>
             </Page>
+            <ResourceGroupSection group={group[0]} />
           </SandboxDemo>
         </SandboxSection>
 
         <SandboxSection id="resource" title="Блок Resource">
           <SandboxDemo>
-            <Resource resource={data[3]} />
+            <Resource resource={resource} />
           </SandboxDemo>
         </SandboxSection>
       </div>
