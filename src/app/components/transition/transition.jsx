@@ -19,26 +19,35 @@ class Transition extends React.Component {
       transactions: [],
       currentTransaction: null,
     };
+
+    this.transitionAttributes = {};
   }
 
   componentWillMount() {
+    const { attributes, transactions } = this.props;
+
+    if (attributes.href && attributes.method) {
+      Object.assign(this.transitionAttributes, attributes);
+    }
+
     if (this.props.transactions.length > 0) {
-      this.setState({ currentTransaction: this.props.transactions[0] });
+      this.setState({ currentTransaction: transactions[0] });
     }
   }
 
   render() {
-    const { currentTransaction } = this.state;
+    const {
+      currentTransaction,
+    } = this.state;
 
     if (!currentTransaction) return null;
 
-    const { request, response, attributes } = currentTransaction;
-    const { method, uri } = attributes;
-    const { pathname, query } = new URL(uri, true);
+    const { method, href } = this.transitionAttributes;
+    const { pathname, query } = new URL(href, true);
     const formattedQuery = highlightQuery(query);
     return (
       <Section
-        title={`Структура ответов на запрос ${method} ${uri}`}
+        title={`Структура ответов на запрос ${method} ${href}`}
         titleTag="h4"
         mix={[b('transition', { mods: { type: method.toLowerCase() } })]}
         mods={{ hiddenTitle: true }}
@@ -60,6 +69,10 @@ class Transition extends React.Component {
 
 Transition.defaultProps = {
   transactions: [],
+  attributes: {
+    href: '',
+    method: '',
+  },
 };
 
 Transition.propTypes = {
@@ -67,9 +80,12 @@ Transition.propTypes = {
     PropTypes.shape({
       request: PropTypes.object,
       response: PropTypes.object,
-      attributes: PropTypes.object,
     })
   ),
+  attributes: PropTypes.shape({
+    href: PropTypes.string,
+    method: PropTypes.string,
+  }),
 };
 
 export default Transition;

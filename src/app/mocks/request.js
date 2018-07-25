@@ -20,10 +20,6 @@ const transaction1 = {
     body,
     schema,
   },
-  attributes: {
-    method: 'POST',
-    uri: '/users/{id}?country=ru&active=true&votes=0',
-  },
 };
 
 const transaction2 = {
@@ -36,13 +32,15 @@ const transaction2 = {
     headers: [{ key: 'Content-Type', value: 'application/json' }],
     attributes: attributesBlock,
   },
-  attributes: {
-    method: 'POST',
-    uri: '/users/{id}?country=ru&active=true&votes=0',
-  },
 };
 
-export default [
-  transaction1,
-  transaction2,
-];
+export default {
+  content: [
+    transaction1,
+    transaction2,
+  ],
+  attributes: {
+    method: 'POST',
+    href: '/users/{id}?country=ru&active=true&votes=0',
+  },
+};
