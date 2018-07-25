@@ -1,0 +1,10 @@
+.parameters__title {
+  margin: 0 (-$baseMargin);
+  padding: $basePadding;
+
+  .collapse-button {
+    float: right;
+    color: #428bca;
+    cursor: pointer;
+  }
+}

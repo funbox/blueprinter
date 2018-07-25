@@ -7,9 +7,11 @@ import Page from 'app/components/page';
 import ResourceGroupSection from 'app/components/resource-group-section';
 import MainContent from 'app/components/main-content';
 import Resource from 'app/components/resource';
+import Parameters from 'app/components/parameters';
 
 import resource from 'app/mocks/resource';
 import group from 'app/mocks/resource-group';
+import hrefVariables from 'app/mocks/hrefVariables';
 
 export default class SandboxContentSection extends React.Component {
   render() {
@@ -117,6 +119,13 @@ export default class SandboxContentSection extends React.Component {
         <SandboxSection id="resource" title="Блок Resource">
           <SandboxDemo>
             <Resource resource={resource} />
+          </SandboxDemo>
+        </SandboxSection>
+      
+
+        <SandboxSection id="parameters" title="Блок параметров">
+          <SandboxDemo>
+            <Parameters params={hrefVariables.content} />
           </SandboxDemo>
         </SandboxSection>
       </div>
