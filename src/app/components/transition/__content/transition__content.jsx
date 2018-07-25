@@ -14,16 +14,27 @@ const Transition__Content = (props) => {
     availableData,
     contentType,
     title,
+    onLabelClick,
   } = props;
 
   if (Object.keys(selectedData).length === 0) return null;
 
   const { headers, attributes, body, description, schema } = selectedData;
 
+  const selectedDataId = availableData.indexOf(selectedData);
+  const examplesList = availableData.map((d, index) => (
+    {
+      content: (contentType === 'request' ? d.title : d.statusCode),
+      selected: index === selectedDataId,
+    }
+  ));
+
   return (
     <div className="transition__content">
       <Transition__ExampleNames
         title={title}
+        options={examplesList}
+        onLabelClick={onLabelClick}
       />
 
       {!!description && (
@@ -105,6 +116,7 @@ Transition__Content.propTypes = {
   availableData: PropTypes.array,
   contentType: PropTypes.oneOf(['request', 'response']),
   title: PropTypes.string,
+  onLabelClick: PropTypes.func,
 };
 
 export default Transition__Content;

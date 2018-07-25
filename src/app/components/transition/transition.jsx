@@ -24,6 +24,9 @@ class Transition extends React.Component {
 
     this.availableRequests = [];
     this.availableResponses = [];
+
+    this.onRequestOptionLabelClick = this.onRequestOptionLabelClick.bind(this);
+    this.onResponseOptionLabelClick = this.onResponseOptionLabelClick.bind(this);
   }
 
   componentWillMount() {
@@ -50,6 +53,16 @@ class Transition extends React.Component {
         selectedResponse: this.availableResponses[0],
       });
     }
+  }
+
+  onRequestOptionLabelClick(labelId) {
+    const selectedRequest = this.availableRequests[labelId];
+    this.setState({ selectedRequest });
+  }
+
+  onResponseOptionLabelClick(labelId) {
+    const selectedResponse = this.availableResponses[labelId];
+    this.setState({ selectedResponse });
   }
 
   render() {
@@ -83,12 +96,14 @@ class Transition extends React.Component {
           selectedData={selectedRequest}
           contentType="request"
           title="Requests"
+          onLabelClick={this.onRequestOptionLabelClick}
         />
         <Transition__Content
           availableData={this.availableResponses}
           selectedData={selectedResponse}
           contentType="response"
           title="Responses"
+          onLabelClick={this.onResponseOptionLabelClick}
         />
       </Section>
     );
