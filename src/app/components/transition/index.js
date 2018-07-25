@@ -4,6 +4,9 @@ require('./transition.scss');
 require('./__content/transition__content.scss');
 require('./__definition/transition__definition.scss');
 require('./__example-names/transition__example-names.scss');
+require('./__example-label/transition__example-label.scss');
+require('./__example-label/_selected/transition__example-label_selected.scss');
+require('./__example-list/transition__example-list.scss');
 require('./__method/transition__method.scss');
 
 require('./_type/_delete/transition_type_delete.scss');

@@ -1,4 +1,6 @@
 .transition__example-names {
+  display: flex;
+  align-items: center;
   padding: $basePadding;
   border-radius: 6px;
   background-color: #444;
