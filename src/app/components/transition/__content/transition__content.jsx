@@ -19,6 +19,8 @@ const Transition__Content = (props) => {
 
   if (Object.keys(selectedData).length === 0) return null;
 
+  const isEmpty = Object.keys(selectedData).length === 1 && (!!selectedData.statusCode || !!selectedData.title);
+
   const { headers, attributes, body, description, schema } = selectedData;
 
   const selectedDataId = availableData.indexOf(selectedData);
@@ -36,6 +38,10 @@ const Transition__Content = (props) => {
         options={examplesList}
         onLabelClick={onLabelClick}
       />
+
+      {isEmpty && (
+        <p className="transition__no-content-notice">This {contentType} has no content</p>
+      )}
 
       {!!description && (
         <Section

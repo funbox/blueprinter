@@ -34,10 +34,17 @@ const transaction2 = {
   },
 };
 
+const transaction3 = {
+  response: {
+    statusCode: 201,
+  },
+};
+
 export default {
   content: [
     transaction1,
     transaction2,
+    transaction3,
   ],
   attributes: {
     method: 'POST',
