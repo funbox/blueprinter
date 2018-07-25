@@ -1,6 +1,7 @@
 import AttributesList from 'app/components/attirbutes-list';
 import CodeSnippet from 'app/components/code-snippet';
 import Section from 'app/components/section';
+import Transition__ExampleNames from '../__example-names';
 
 const formatHeaders = arrayOfHeaders => arrayOfHeaders.reduce((res, h) => {
   res = `${res}${h.key}: ${h.value}\n`;
@@ -15,9 +16,9 @@ const Transition__Content = (props) => {
   const { headers, attributes, body, description, schema } = data;
   return (
     <div className="transition__content">
-      <div className="transition__example-names">
-        {contentType}
-      </div>
+      <Transition__ExampleNames
+        contentType={contentType}
+      />
 
       {!!description && (
         <Section
