@@ -1,9 +1,8 @@
 import RawContent from 'app/components/raw-content';
-import Link from 'app/components/link';
+import Anchor from 'app/components/anchor';
 
 const defaultTitle = 'Resource Group';
 const defaultContent = '';
-const hashFromTitle = title => title.split(' ').join('-');
 
 class ResourceGroupSection extends React.Component {
   render() {
@@ -18,10 +17,11 @@ class ResourceGroupSection extends React.Component {
       <section className="resource-group-section">
         <h2 className="resource-group-section__heading">
           {title}
-          <Link
+          <Anchor
             mix="resource-group-section__anchor"
-            to={{ hash: hashFromTitle(title), pathname: route.location.pathname }}
-          >¶</Link>
+            title={title}
+            pathname={route.location.pathname}
+          />
         </h2>
         <div className="resource-group-section__content">
           <RawContent>

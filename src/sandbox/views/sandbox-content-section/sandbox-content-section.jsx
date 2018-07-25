@@ -95,7 +95,7 @@ export default class SandboxContentSection extends React.Component {
 
         <SandboxSection id="resource-group-section" title="Блок Resource group">
           <SandboxDemo>
-            <ResourceGroupSection group={data[0]}/>
+            <ResourceGroupSection group={group[0]}/>
           </SandboxDemo>
         </SandboxSection>
 
@@ -108,7 +108,7 @@ export default class SandboxContentSection extends React.Component {
                   <p>Документация API проекта «Новый проект»</p>
                 }
               >
-                <ResourceGroupSection group={data[0]}/>
+                <ResourceGroupSection group={group[0]}/>
               </MainContent>
             </Page>
             <ResourceGroupSection group={group[0]} />

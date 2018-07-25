@@ -1,9 +1,8 @@
 import RawContent from 'app/components/raw-content';
-import Link from 'app/components/link';
+import Anchor from 'app/components/anchor';
 
 const defaultTitle = 'Resource';
 const defaultContent = '';
-const hashFromTitle = title => title.split(' ').join('-');
 
 class Resource extends React.Component {
   render() {
@@ -19,10 +18,11 @@ class Resource extends React.Component {
       <section className="resource">
         <h3 className="resource__heading">
           {title}
-          <Link
+          <Anchor
             mix="resource__anchor"
-            to={{ hash: hashFromTitle(title), pathname: route.location.pathname }}
-          >¶</Link>
+            title={title}
+            pathname={route.location.pathname}
+          />
         </h3>
         <div className="resource__content">
           <RawContent>
