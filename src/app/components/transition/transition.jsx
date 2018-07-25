@@ -21,6 +21,9 @@ class Transition extends React.Component {
     };
 
     this.transitionAttributes = {};
+
+    this.availableRequests = [];
+    this.availableResponses = [];
   }
 
   componentWillMount() {
@@ -30,17 +33,32 @@ class Transition extends React.Component {
       Object.assign(this.transitionAttributes, attributes);
     }
 
-    if (this.props.transactions.length > 0) {
-      this.setState({ currentTransaction: transactions[0] });
+    if (transactions.length > 0) {
+      this.availableRequests = transactions.reduce((reqArray, transaction) => {
+        if (transaction.request) reqArray.push(transaction.request);
+
+        return reqArray;
+      }, []);
+      this.availableResponses = transactions.reduce((respArray, transaction) => {
+        if (transaction.response) respArray.push(transaction.response);
+
+        return respArray;
+      }, []);
+
+      this.setState({
+        selectedRequest: this.availableRequests[0],
+        selectedResponse: this.availableResponses[0],
+      });
     }
   }
 
   render() {
     const {
-      currentTransaction,
+      selectedRequest,
+      selectedResponse,
     } = this.state;
 
-    if (!currentTransaction) return null;
+    if (!selectedRequest && !selectedResponse) return null;
 
     const { method, href } = this.transitionAttributes;
     const { pathname, query } = new URL(href, true);
@@ -60,8 +78,18 @@ class Transition extends React.Component {
           <span dangerouslySetInnerHTML={{ __html: formattedQuery }}/>
         </p>
 
-        <Transition__Content data={request} contentType={'Requests'}/>
-        <Transition__Content data={response} contentType={'Responses'}/>
+        <Transition__Content
+          availableData={this.availableRequests}
+          selectedData={selectedRequest}
+          contentType="request"
+          title="Requests"
+        />
+        <Transition__Content
+          availableData={this.availableResponses}
+          selectedData={selectedResponse}
+          contentType="response"
+          title="Responses"
+        />
       </Section>
     );
   }

@@ -1,6 +1,6 @@
 const Transition__ExampleNames = (props) => {
   const {
-    contentType,
+    title,
     options,
     onLabelClick,
   } = props;
@@ -8,13 +8,13 @@ const Transition__ExampleNames = (props) => {
   const onClick = (event) => {
     const labelId = event.target.dataset.id;
     if (onLabelClick) {
-      onLabelClick(contentType, labelId);
+      onLabelClick(labelId);
     }
   };
 
   return (
     <div className={b('transition__example-names', props)}>
-      {contentType}
+      {title}
 
       <ul className="transition__example-list">
         {options.map((option, index) => (
@@ -31,7 +31,7 @@ const Transition__ExampleNames = (props) => {
 };
 
 Transition__ExampleNames.propTypes = {
-  contentType: PropTypes.oneOf(['Requests', 'Responses']),
+  title: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.shape({
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     selected: PropTypes.bool,

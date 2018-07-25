@@ -9,15 +9,21 @@ const formatHeaders = arrayOfHeaders => arrayOfHeaders.reduce((res, h) => {
 }, '');
 
 const Transition__Content = (props) => {
-  const { data, contentType } = props;
+  const {
+    selectedData,
+    availableData,
+    contentType,
+    title,
+  } = props;
 
-  if (Object.keys(data).length === 0) return null;
+  if (Object.keys(selectedData).length === 0) return null;
 
-  const { headers, attributes, body, description, schema } = data;
+  const { headers, attributes, body, description, schema } = selectedData;
+
   return (
     <div className="transition__content">
       <Transition__ExampleNames
-        contentType={contentType}
+        title={title}
       />
 
       {!!description && (
@@ -81,7 +87,7 @@ const Transition__Content = (props) => {
 };
 
 Transition__Content.propTypes = {
-  data: PropTypes.oneOfType([
+  selectedData: PropTypes.oneOfType([
     PropTypes.shape({
       headers: PropTypes.arrayOf(PropTypes.object),
       attributes: PropTypes.arrayOf(PropTypes.object),
@@ -96,7 +102,9 @@ Transition__Content.propTypes = {
       schema: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     }),
   ]),
-  contentType: PropTypes.oneOf(['Requests', 'Responses']),
+  availableData: PropTypes.array,
+  contentType: PropTypes.oneOf(['request', 'response']),
+  title: PropTypes.string,
 };
 
 export default Transition__Content;
