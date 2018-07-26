@@ -1,0 +1,7 @@
+.page__layout {
+  display: flex;
+
+  > .page__body {
+    flex-grow: 1;
+  }
+}
