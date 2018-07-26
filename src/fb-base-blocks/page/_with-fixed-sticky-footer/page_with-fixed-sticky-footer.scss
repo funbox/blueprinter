@@ -1,0 +1,11 @@
+.page_with-fixed-sticky-footer {
+  position: relative;
+  min-height: 100%;
+
+  .page__footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
