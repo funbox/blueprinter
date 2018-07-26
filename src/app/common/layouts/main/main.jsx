@@ -1,4 +1,5 @@
 import Page, { Page__Body, Page__Aside, Page__Navigation, Page__Layout } from 'app/components/page';
+import Resizable from 'app/components/resizable';
 import SideMenu from 'app/components/side-menu';
 import MainContent from 'app/components/main-content';
 import Transition from 'app/components/transition';
@@ -12,9 +13,15 @@ export default class Main extends React.Component {
     return (
       <Page>
         <Page__Layout>
-          <Page__Navigation>
-            <SideMenu data={groups}/>
-          </Page__Navigation>
+          <Resizable
+            mix="page__resizable"
+            direction="right"
+            minWidth="10%"
+          >
+            <Page__Navigation>
+              <SideMenu data={groups}/>
+            </Page__Navigation>
+          </Resizable>
 
           <Page__Body>
             <MainContent
@@ -25,12 +32,18 @@ export default class Main extends React.Component {
             </MainContent>
           </Page__Body>
 
-          <Page__Aside>
-            <Transition
-              transactions={request.content}
-              attributes={request.attributes}
-            />
-          </Page__Aside>
+          <Resizable
+            mix="page__resizable"
+            direction="left"
+            minWidth="10%"
+          >
+            <Page__Aside>
+              <Transition
+                transactions={request.content}
+                attributes={request.attributes}
+              />
+            </Page__Aside>
+          </Resizable>
         </Page__Layout>
       </Page>
     );
