@@ -3,7 +3,9 @@ import SandboxDemo from 'sandbox/components/sandbox-demo';
 import SandboxParagraph from 'sandbox/components/sandbox-paragraph';
 
 import RawContent from 'app/components/raw-content';
+import Page from 'app/components/page';
 import ResourceGroupSection from 'app/components/resource-group-section';
+import MainContent from 'app/components/main-content';
 
 import data from 'app/mocks/data';
 
@@ -91,7 +93,22 @@ export default class SandboxContentSection extends React.Component {
 
         <SandboxSection id="resource-group-section" title="Блок Resource group">
           <SandboxDemo>
-            <ResourceGroupSection group={data[0]} />
+            <ResourceGroupSection group={data[0]}/>
+          </SandboxDemo>
+        </SandboxSection>
+
+        <SandboxSection id="main-content" title="Блок основного контента страницы">
+          <SandboxDemo>
+            <Page>
+              <MainContent
+                title="API Blueprint"
+                description={
+                  <p>Документация API проекта «Новый проект»</p>
+                }
+              >
+                <ResourceGroupSection group={data[0]}/>
+              </MainContent>
+            </Page>
           </SandboxDemo>
         </SandboxSection>
       </div>
