@@ -4,6 +4,7 @@ const Resizable = (props) => {
   const {
     direction,
     children,
+    initialSize,
     minWidth,
     maxWidth,
   } = props;
@@ -35,6 +36,7 @@ const Resizable = (props) => {
       className={b('resizable', props)}
       minWidth={minWidth}
       maxWidth={maxWidth}
+      defaultSize={{ ...initialSize }}
     >
       {props.children}
     </_Resizable>
@@ -51,6 +53,10 @@ Resizable.propTypes = {
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.string,
   ]),
+  initialSize: PropTypes.shape({
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }),
   minWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };

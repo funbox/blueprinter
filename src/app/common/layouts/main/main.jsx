@@ -16,6 +16,7 @@ export default class Main extends React.Component {
           <Resizable
             mix="page__resizable"
             direction="right"
+            initialSize={{ width: '16.5%' }}
             minWidth="10%"
           >
             <Page__Navigation>
@@ -35,6 +36,7 @@ export default class Main extends React.Component {
           <Resizable
             mix="page__resizable"
             direction="left"
+            initialSize={{ width: '500px' }}
             minWidth="10%"
           >
             <Page__Aside>
