@@ -41,6 +41,12 @@ export default class Main extends React.Component {
           >
             <Page__Aside>
               <Transition
+                mods={{ for: 'page-aside' }}
+                transactions={request.content}
+                attributes={request.attributes}
+              />
+              <Transition
+                mods={{ for: 'page-aside' }}
                 transactions={request.content}
                 attributes={request.attributes}
               />

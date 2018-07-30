@@ -17,3 +17,5 @@ require('./_type/_options/transition_type_options.scss');
 require('./_type/_patch/transition_type_patch.scss');
 require('./_type/_post/transition_type_post.scss');
 require('./_type/_put/transition_type_put.scss');
+
+require('./_for/_page-aside/transition_for_page-aside.scss');

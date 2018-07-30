@@ -80,7 +80,7 @@ class Transition extends React.Component {
       <Section
         title={`Структура ответов на запрос ${method} ${href}`}
         titleTag="h4"
-        mix={[b('transition', { mods: { type: method.toLowerCase() } })]}
+        mix={[b('transition', { mods: { ...this.props.mods, type: method.toLowerCase() } })]}
         mods={{ hiddenTitle: true }}
       >
         <p className="transition__definition">
@@ -116,6 +116,7 @@ Transition.defaultProps = {
     href: '',
     method: '',
   },
+  mods: {},
 };
 
 Transition.propTypes = {
@@ -129,6 +130,7 @@ Transition.propTypes = {
     href: PropTypes.string,
     method: PropTypes.string,
   }),
+  mods: PropTypes.object,
 };
 
 export default Transition;
