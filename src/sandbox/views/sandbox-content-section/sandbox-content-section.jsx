@@ -111,7 +111,6 @@ export default class SandboxContentSection extends React.Component {
                 <ResourceGroupSection group={group[0]}/>
               </MainContent>
             </Page>
-            <ResourceGroupSection group={group[0]} />
           </SandboxDemo>
         </SandboxSection>
 
