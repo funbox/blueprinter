@@ -1,0 +1,19 @@
+.page__content_for_transition {
+  &:not(:first-child) {
+    padding-top: $basePadding;
+  }
+
+  &:not(:last-child) {
+    padding-bottom: $basePadding;
+
+    &::after {
+      content: '';
+      display: block;
+      position: relative;
+      bottom: -$basePadding;
+      width: 100%;
+      height: 1px;
+      background-image: linear-gradient(to right, rgba($grayExtraLight, .5) 0%, #333 90%);
+    }
+  }
+}

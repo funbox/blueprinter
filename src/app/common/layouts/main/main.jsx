@@ -1,4 +1,4 @@
-import Page, { Page__Body, Page__Aside, Page__Navigation, Page__Layout } from 'app/components/page';
+import Page, { Page__Body, Page__Aside, Page__Navigation, Page__Layout, Page__Content } from 'app/components/page';
 import Resizable from 'app/components/resizable';
 import SideMenu from 'app/components/side-menu';
 import MainContent from 'app/components/main-content';
@@ -40,16 +40,21 @@ export default class Main extends React.Component {
             minWidth="10%"
           >
             <Page__Aside>
-              <Transition
-                mods={{ for: 'page-aside' }}
-                transactions={request.content}
-                attributes={request.attributes}
-              />
-              <Transition
-                mods={{ for: 'page-aside' }}
-                transactions={request.content}
-                attributes={request.attributes}
-              />
+              <Page__Content mods={{ for: 'transition' }}>
+                <Transition
+                  mods={{ for: 'page-aside' }}
+                  transactions={request.content}
+                  attributes={request.attributes}
+                />
+              </Page__Content>
+
+              <Page__Content mods={{ for: 'transition' }}>
+                <Transition
+                  mods={{ for: 'page-aside' }}
+                  transactions={request.content}
+                  attributes={request.attributes}
+                />
+              </Page__Content>
             </Page__Aside>
           </Resizable>
         </Page__Layout>
