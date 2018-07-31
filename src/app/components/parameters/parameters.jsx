@@ -1,5 +1,7 @@
-const Fragment = React.Fragment;
+import { SlideToggle } from 'react-slide-toggle';
 import RawContent from 'app/components/raw-content';
+import PropTypes from 'prop-types';
+import Button from 'fb-base-blocks/button';
 
 class Parameters extends React.Component {
   constructor(props) {
@@ -19,47 +21,71 @@ class Parameters extends React.Component {
 
     return (
       params.length > 0 ?
-        <section>
-          <div className="parameters__title">
-            <strong>URI Parameters</strong>
-            <div className="collapse-button" onClick={this.toggleClass}>
-              {this.state.collapsed ? 'Show' : 'Hide'}
-            </div>
-          </div>
-          <div className={b('parameters__content', { mods: { collapsed } })}>
-            <dl>
-              {params.map((param, index) => (
-                <Fragment key={index * 2}>
-                  <dt className="parameters__item-title" key={index * 2}>{param.content.key.content}</dt>
-                  <dd className="parameters__item" key={index * 2 + 1}>
-                    <RawContent>
-                      <code>{param.meta.title || 'string'}</code>
-                      &nbsp;
-                      {param.attributes.typeAttributes.map((attr, attrIndex) => (
-                        <span key={attrIndex}>({attr})</span>
-                      ))}
-                      &nbsp;
-                      {param.content.value.content &&
-                        <span className="parameters__example">
-                          <strong>Example:</strong>
-                          <span>{param.content.value.content}</span>
-                        </span>
-                      }
-                      &nbsp;
-                      <p>{param.meta.description}</p>
-                    </RawContent>
-                  </dd>
-                </Fragment>
-              ))}
-            </dl>
-          </div>
-        </section> : null
+        <SlideToggle
+          bestPerformance
+          onCollapsed={this.toggleClass}
+          onExpanding={this.toggleClass}
+        >
+          {({ onToggle, setCollapsibleElement }) => (
+            <section className={b('parameters', { mods: { collapsed } })}>
+              <div className="parameters__heading">
+                <h5 className="parameters__title">URI Parameters</h5>
+                <Button mix={['parameters__collapse-button']} onClick={onToggle}>
+                  {this.state.collapsed ? 'Show' : 'Hide'}
+                </Button>
+              </div>
+              <div className="parameters__content" ref={setCollapsibleElement}>
+                {params.map((param, index) => (
+                  <div className="parameters__item" key={index * 2}>
+                    <div className="parameters__item-title" key={index * 2}>{param.content.key.content}</div>
+                    <div className="parameters__item-content" key={index * 2 + 1}>
+                      <RawContent>
+                        <code>{param.meta.title || 'string'}</code>
+                        &nbsp;
+                        {param.attributes.typeAttributes.map((attr, attrIndex) => (
+                          <span key={attrIndex}>({attr})</span>
+                        ))}
+                        &nbsp;
+                        {param.content.value.content &&
+                          <span className="parameters__example">
+                            <strong>Example:</strong>
+                            <span>{param.content.value.content}</span>
+                          </span>
+                        }
+                        &nbsp;
+                        <p>{param.meta.description}</p>
+                      </RawContent>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+        </SlideToggle> : null
     );
   }
 }
 
 Parameters.propTypes = {
-  params: PropTypes.array,
+  params: PropTypes.arrayOf(PropTypes.shape({
+    meta: PropTypes.shape({
+      description: PropTypes.string,
+      title: PropTypes.string,
+    }),
+    attributes: PropTypes.shape({
+      typeAttributes: PropTypes.arrayOf(PropTypes.string),
+    }),
+    content: PropTypes.shape({
+      key: PropTypes.shape({
+        element: PropTypes.string,
+        content: PropTypes.string,
+      }),
+      value: PropTypes.shape({
+        element: PropTypes.string,
+        content: PropTypes.string,
+      }),
+    }),
+  })),
 };
 
 export default Parameters;

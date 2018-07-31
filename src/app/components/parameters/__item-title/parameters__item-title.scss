@@ -1,8 +1,7 @@
 .parameters__item-title {
-  float: left;
-  clear: left;
   overflow: hidden;
   width: 130px;
+  min-width: 130px;
   text-align: right;
   text-overflow: ellipsis;
   white-space: nowrap;
