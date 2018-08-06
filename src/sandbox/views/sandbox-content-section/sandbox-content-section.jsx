@@ -1,6 +1,7 @@
 import SandboxSection from 'sandbox/components/sandbox-section';
 import SandboxDemo from 'sandbox/components/sandbox-demo';
 import SandboxParagraph from 'sandbox/components/sandbox-paragraph';
+import Button from 'sandbox/components/button';
 
 import RawContent from 'app/components/raw-content';
 import Page from 'app/components/page';
@@ -9,12 +10,23 @@ import ResourceGroupSection from 'app/components/resource-group-section';
 import MainContent from 'app/components/main-content';
 import Resource from 'app/components/resource';
 import Parameters from 'app/components/parameters';
+import ActionCard from 'app/components/action-card';
 
 import resource from 'app/mocks/resource';
 import group from 'app/mocks/resource-group';
 import hrefVariables from 'app/mocks/hrefVariables';
 
+const httpMethods = ['delete', 'get', 'head', 'options', 'patch', 'post', 'put'];
+
 export default class SandboxContentSection extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      actionCardMethod: 'delete',
+    };
+  }
+
   render() {
     return (
       <div>
@@ -122,11 +134,35 @@ export default class SandboxContentSection extends React.Component {
             <Resource resource={resource} />
           </SandboxDemo>
         </SandboxSection>
-      
 
         <SandboxSection id="parameters" title="Блок параметров">
           <SandboxDemo>
             <Parameters params={hrefVariables.content} />
+          </SandboxDemo>
+        </SandboxSection>
+
+        <SandboxSection id="action" title="Блок Action">
+          <SandboxDemo
+            mods={{ for: 'action-toggle' }}
+          >
+            {httpMethods.map(method => (
+              <Button
+                key={`action-button-${method}`}
+                mods={{ theme: 'sandbox' }}
+                onClick={() => { this.setState({ actionCardMethod: method }); }}
+              >
+                {method.toUpperCase()}
+              </Button>
+            ))}
+          </SandboxDemo>
+
+          <SandboxDemo>
+            <ActionCard
+              method={this.state.actionCardMethod}
+              action={resource.content[0]}
+            >
+              <Parameters params={hrefVariables.content}/>
+            </ActionCard>
           </SandboxDemo>
         </SandboxSection>
       </div>
