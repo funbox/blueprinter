@@ -1,5 +1,6 @@
 import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
+import { get } from 'app/common/utils/helpers';
 
 const defaultTitle = 'Resource';
 const defaultContent = '';
@@ -8,11 +9,9 @@ class Resource extends React.Component {
   render() {
     const { route } = this.context.router;
     const { resource } = this.props;
-    const hasContent = !!resource.content && resource.content.length > 0;
-    const hasTitle = !!resource.meta && !!resource.meta.title && !!resource.meta.title.content;
 
-    const title = hasTitle ? resource.meta.title.content : defaultTitle;
-    const content = hasContent ? resource.meta.text.content : defaultContent;
+    const title = get('meta', 'title', 'content').from(resource) || defaultTitle;
+    const content = get('meta', 'text', 'content').from(resource) || defaultContent;
 
     return (
       <section className="resource">

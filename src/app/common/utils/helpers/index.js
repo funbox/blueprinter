@@ -24,8 +24,8 @@ const extractAttributeData = (attribute, disabledExample = false) => {
     attributeExample = (!disabledExample && attribute.content) || null;
   }
 
-  const attributeDescription = (!!attribute.meta && attribute.meta.description.content) || null;
-  const attributeProps = (!!attribute.attributes && attribute.attributes.typeAttributes[0].content) || null;
+  const attributeDescription = get('meta', 'description', 'content').from(attribute);
+  const attributeProps = get('attributes', 'typeAttributes', '0', 'content').from(attribute);
 
   return { attributeKey, attributeType, attributeExample, attributeDescription, attributeProps };
 };

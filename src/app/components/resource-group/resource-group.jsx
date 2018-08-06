@@ -1,5 +1,5 @@
 import { SlideToggle } from 'react-slide-toggle';
-import { extractTransactionMethod as extractMethod } from 'app/common/utils/helpers/';
+import { extractTransactionMethod as extractMethod, get } from 'app/common/utils/helpers/';
 
 import Link from 'app/components/link';
 import Menu, { Menu__Item } from 'app/components/menu';
@@ -58,9 +58,8 @@ class ResourceGroup extends React.Component {
     const { group } = this.props;
     const { collapsed } = this.state;
     const hasContent = !!group.content && group.content.length > 0;
-    const hasTitle = !!group.meta && !!group.meta.title && !!group.meta.title.content;
 
-    const title = hasTitle ? group.meta.title.content : defaultTitle;
+    const title = get('meta', 'title', 'content').from(group) || defaultTitle;
 
     return (
       <SlideToggle
