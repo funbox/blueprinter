@@ -1,0 +1,22 @@
+.button_theme_sandbox {
+  padding: $basePadding / 2 $basePadding;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: $grayDark;
+  color: #fff;
+
+  &:focus,
+  &:hover {
+    outline: none;
+    background: rgba(0, 0, 0, .75);
+  }
+
+  &:active {
+    background: rgba(0, 0, 0, .5);
+  }
+
+  &.button_disabled {
+    background: rgba(0, 0, 0, .2);
+    color: rgba(0, 0, 0, .5);
+  }
+}
