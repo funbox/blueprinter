@@ -1,3 +1,10 @@
+const get = (...path) => {
+  const from = (source) =>
+    path.reduce((xs, x) => ((xs && xs[x]) ? xs[x] : null), source);
+
+  return { from };
+};
+
 const extractTransactionMethod = transition => (
   transition.content[0].content[0].attributes.method.content
 );
@@ -44,4 +51,5 @@ export {
   extractTransactionMethod,
   extractAttributeData,
   getAttributeChildren,
+  get,
 };
