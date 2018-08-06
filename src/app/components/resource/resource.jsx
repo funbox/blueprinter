@@ -3,15 +3,14 @@ import Anchor from 'app/components/anchor';
 import { get } from 'app/common/utils/helpers';
 
 const defaultTitle = 'Resource';
-const defaultContent = '';
 
 class Resource extends React.Component {
   render() {
     const { route } = this.context.router;
-    const { resource } = this.props;
+    const { resource, children } = this.props;
 
     const title = get('meta', 'title', 'content').from(resource) || defaultTitle;
-    const content = get('meta', 'text', 'content').from(resource) || defaultContent;
+    const description = get('meta', 'text', 'content').from(resource);
 
     return (
       <section className="resource">
@@ -23,10 +22,16 @@ class Resource extends React.Component {
             pathname={route.location.pathname}
           />
         </h3>
-        <div className="resource__content">
-          <RawContent>
-            {content}
-          </RawContent>
+        <div className="resource__body">
+          {!!description && (
+            <RawContent mix="resource__description">
+              {description}
+            </RawContent>
+          )}
+
+          <div className="resource__content">
+            {children}
+          </div>
         </div>
       </section>
     );
@@ -44,6 +49,7 @@ Resource.propTypes = {
     meta: PropTypes.object,
     content: PropTypes.array,
   }),
+  children: PropTypes.node,
 };
 
 Resource.contextTypes = {
