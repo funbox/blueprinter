@@ -3,15 +3,14 @@ import Anchor from 'app/components/anchor';
 import { get } from 'app/common/utils/helpers';
 
 const defaultTitle = 'Resource Group';
-const defaultContent = '';
 
 class ResourceGroupSection extends React.Component {
   render() {
     const { route } = this.context.router;
-    const { group } = this.props;
+    const { group, children } = this.props;
 
     const title = get('meta', 'title', 'content').from(group) || defaultTitle;
-    const content = get('meta', 'text', 'content').from(group) || defaultContent;
+    const description = get('meta', 'text', 'content').from(group);
 
     return (
       <section className="resource-group-section">
@@ -23,10 +22,16 @@ class ResourceGroupSection extends React.Component {
             pathname={route.location.pathname}
           />
         </h2>
-        <div className="resource-group-section__content">
-          <RawContent>
-            {content}
-          </RawContent>
+        <div className="resource-group-section__body">
+          {!!description && (
+            <RawContent mix="resource-group-section__description">
+              {description}
+            </RawContent>
+          )}
+
+          <div className="resource-group-section__content">
+            {children}
+          </div>
         </div>
       </section>
     );
@@ -43,6 +48,7 @@ ResourceGroupSection.propTypes = {
     meta: PropTypes.object,
     content: PropTypes.array,
   }),
+  children: PropTypes.node,
 };
 
 ResourceGroupSection.contextTypes = {
