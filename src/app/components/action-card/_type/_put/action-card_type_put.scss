@@ -1,0 +1,16 @@
+.action-card_type_put {
+  border-color: #faebcc;
+
+  .action-card__heading {
+    border-color: #faebcc;
+    background-color: $orangeLight;
+  }
+
+  .action-card__title {
+    color: $orange;
+  }
+
+  .action-card__method {
+    background-color: $orange;
+  }
+}

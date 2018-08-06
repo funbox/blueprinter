@@ -1,0 +1,16 @@
+.action-card_type_head {
+  border-color: #bce8f1;
+
+  .action-card__heading {
+    border-color: #bce8f1;
+    background-color: $blueLight;
+  }
+
+  .action-card__title {
+    color: $blueDark;
+  }
+
+  .action-card__method {
+    background-color: $blueDark;
+  }
+}

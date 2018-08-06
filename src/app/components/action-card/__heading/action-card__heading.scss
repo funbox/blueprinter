@@ -1,0 +1,9 @@
+.action-card__heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: $baseMargin;
+  padding: $basePadding / 2 $basePadding;
+  border-bottom: 1px solid $gray;
+  background-color: $grayLight;
+}
