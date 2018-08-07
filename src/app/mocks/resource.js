@@ -15,6 +15,11 @@ const resource = {
     },
   },
   content: [getUsers, deleteUser],
+  attributes: {
+    href: {
+      content: '/user',
+    },
+  },
 };
 
 export default resource;
