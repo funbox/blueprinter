@@ -8,7 +8,7 @@
     "build-production": "funbox-build-production",
     "dev": "funbox-dev",
     "lint:sass": "sass-lint -c node_modules/sass-lint-config-funbox/lib/.sass-lint.yml \"src/**/*.sass\" -v",
-    "lint:scss": "stylelint \"src/**/*.scss\" --syntax scss --fix --config node_modules/funbox-scss-lint-config/.stylelintrc --cache",
+    "lint:scss": "stylelint \"src/**/*.scss\" --syntax scss --fix --config .stylelintrc --cache",
     "lint:js:app": "eslint --cache -c .eslintrc_react --ext .jsx,.js src/app",
     "lint:js:tests": "eslint -c node_modules/eslint-config-funbox/.eslintrc.test.only src/tests",
     "lint:js": "npm run -s lint:js:app && npm run -s lint:js:tests",
