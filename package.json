@@ -41,7 +41,7 @@
     "eslint-config-funbox": "1.2.0",
     "funbox-frontend-env-webpack": "10.2.0",
     "funbox-scss-imports-loader": "1.0.0",
-    "funbox-scss-lint-config": "1.0.1",
+    "funbox-scss-lint-config": "1.0.2",
     "funbox-scss-vars-loader": "1.0.0",
     "lodash": "4.17.4",
     "node-sass": "4.7.2",
