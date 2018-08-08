@@ -19,7 +19,7 @@
   }
 
   .menu__item_level_2 {
-    border-top: 1px solid $gray;
+    border-top: 1px solid $stroke-color--primary;
   }
 
   .menu__item_level_3 {
@@ -31,7 +31,7 @@
     }
 
     &:not(:last-child) {
-      border-bottom: 1px solid $gray;
+      border-bottom: 1px solid $stroke-color--primary;
     }
   }
 
@@ -53,7 +53,7 @@
       }
 
       &:not(:only-child) {
-        border-bottom: 1px solid $gray;
+        border-bottom: 1px solid $stroke-color--primary;
       }
     }
 

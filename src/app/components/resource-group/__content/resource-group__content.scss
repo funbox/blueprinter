@@ -4,6 +4,6 @@
   &:empty {
     box-sizing: border-box;
     height: 10px;
-    border-top: 1px solid $gray;
+    border-top: 1px solid $stroke-color--primary;
   }
 }

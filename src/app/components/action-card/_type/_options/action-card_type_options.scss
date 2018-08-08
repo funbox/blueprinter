@@ -1,16 +1,16 @@
 .action-card_type_options {
-  border-color: #bce8f1;
+  border-color: darken($options-method-color--secondary, 5%);
 
   .action-card__heading {
-    border-color: #bce8f1;
-    background-color: $blueLight;
+    border-color: darken($options-method-color--secondary, 5%);
+    background-color: $options-method-color--secondary;
   }
 
   .action-card__title {
-    color: $blueDark;
+    color: $options-method-color--primary;
   }
 
   .action-card__method {
-    background-color: $blueDark;
+    background-color: $options-method-color--primary;
   }
 }

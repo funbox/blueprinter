@@ -1,16 +1,16 @@
 .action-card_type_get {
-  border-color: #bce8f1;
+  border-color: darken($get-method-color--secondary, 5%);
 
   .action-card__heading {
-    border-color: #bce8f1;
-    background-color: $blueLight;
+    border-color: darken($get-method-color--secondary, 5%);
+    background-color: $get-method-color--secondary;
   }
 
   .action-card__title {
-    color: $blueDark;
+    color: $get-method-color--primary;
   }
 
   .action-card__method {
-    background-color: $blueDark;
+    background-color: $get-method-color--primary;
   }
 }

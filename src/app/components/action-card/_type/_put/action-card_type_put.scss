@@ -1,16 +1,16 @@
 .action-card_type_put {
-  border-color: #faebcc;
+  border-color: darken($put-method-color--secondary, 5%);
 
   .action-card__heading {
-    border-color: #faebcc;
-    background-color: $orangeLight;
+    border-color: darken($put-method-color--secondary, 5%);
+    background-color: $put-method-color--secondary;
   }
 
   .action-card__title {
-    color: $orange;
+    color: $put-method-color--primary;
   }
 
   .action-card__method {
-    background-color: $orange;
+    background-color: $put-method-color--primary;
   }
 }
