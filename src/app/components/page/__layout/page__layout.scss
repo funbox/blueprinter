@@ -4,4 +4,8 @@
   > .page__body {
     flex-grow: 1;
   }
+
+  > .page__resizable {
+    flex-shrink: 0;
+  }
 }
