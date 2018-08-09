@@ -10,7 +10,7 @@ class ResourceGroupSection extends React.Component {
     const { group, children } = this.props;
 
     const title = get('meta', 'title', 'content').from(group) || defaultTitle;
-    const description = get('meta', 'text', 'content').from(group);
+    const description = group.content[0].element === 'copy' ? group.content[0].content : null;
 
     return (
       <section className="resource-group-section">

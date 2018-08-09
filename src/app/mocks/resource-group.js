@@ -7,11 +7,12 @@ const resourceGroup = groupName => (
       title: {
         content: groupName,
       },
-      text: {
-        content: 'Resource Group content',
-      },
     },
-    content: [resource, resource],
+    content: [
+      { element: 'copy', content: 'Resource Group content' },
+      resource,
+      resource,
+    ],
   }
 );
 

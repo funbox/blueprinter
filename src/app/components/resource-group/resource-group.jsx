@@ -22,7 +22,7 @@ class ResourceGroup extends React.Component {
     const { route } = this.context.router;
     if (level > maxNestingLevel) return null;
 
-    const menuItems = content.map((item, index) => {
+    const menuItems = content.filter(item => item.element !== 'copy').map((item, index) => {
       const itemType = item.element;
       const title = item.meta.title.content;
       const nextLevel = level + 1;
