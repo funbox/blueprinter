@@ -12,7 +12,7 @@ const ActionCard = (props) => {
   } = props;
 
   const description = get('meta', 'text', 'content').from(action);
-  const href = get('attributes', 'href', 'content').from(action);
+  const href = props.href || get('attributes', 'href', 'content').from(action);
   const hrefVariables = get('attributes', 'hrefVariables', 'content').from(action);
   const title = get('meta', 'title', 'content').from(action);
   const method = props.method || extractTransactionMethod(action);
@@ -58,6 +58,7 @@ ActionCard.propTypes = {
     content: PropTypes.array,
     attributes: PropTypes.object,
   }),
+  href: PropTypes.string,
   method: PropTypes.string,
   location: PropTypes.object,
 };

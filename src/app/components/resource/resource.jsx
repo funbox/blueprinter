@@ -10,6 +10,7 @@ class Resource extends React.Component {
     const { resource, children } = this.props;
 
     const title = get('meta', 'title', 'content').from(resource) || defaultTitle;
+    const href = get('attributes', 'href', 'content').from(resource);
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
 
     return (
@@ -30,7 +31,7 @@ class Resource extends React.Component {
           )}
 
           <div className="resource__content">
-            {children}
+            {React.Children.map(children, (child) => React.cloneElement(child, { href }))}
           </div>
         </div>
       </section>
