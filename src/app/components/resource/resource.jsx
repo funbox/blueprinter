@@ -10,7 +10,7 @@ class Resource extends React.Component {
     const { resource, children } = this.props;
 
     const title = get('meta', 'title', 'content').from(resource) || defaultTitle;
-    const description = get('meta', 'text', 'content').from(resource);
+    const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
 
     return (
       <section className="resource">

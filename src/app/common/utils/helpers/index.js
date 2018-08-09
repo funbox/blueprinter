@@ -20,7 +20,7 @@ const get = (...path) => {
 };
 
 const extractTransactionMethod = transition => (
-  transition.content[0].content[0].attributes.method.content
+  transition.content.filter(i => i.element !== 'copy')[0].content[0].attributes.method.content
 );
 
 const extractAttributeData = (attribute, disabledExample = false) => {

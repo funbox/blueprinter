@@ -10,11 +10,12 @@ const resource = {
     title: {
       content: 'Users',
     },
-    text: {
-      content: 'Users resource content',
-    },
   },
-  content: [getUsers, deleteUser],
+  content: [
+    { element: 'copy', content: 'Users resource content' },
+    getUsers,
+    deleteUser,
+  ],
   attributes: {
     href: {
       content: '/user',

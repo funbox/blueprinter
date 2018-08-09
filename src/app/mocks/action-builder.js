@@ -7,11 +7,11 @@ const actionBuilder = (title, content) => (
       title: {
         content: title,
       },
-      text: {
-        content: 'Action description',
-      },
     },
-    content: [content],
+    content: [
+      { element: 'copy', content: 'Action description' },
+      content,
+    ],
     attributes: {
       href: {
         content: '/user',
