@@ -1,3 +1,17 @@
+import parser from 'html-react-parser';
+import showdown from 'showdown';
+
+const converter = new showdown.Converter();
+
+const htmlFromText = (text, wrap = 'no-wrap', Tag = 'div') => {
+  const htmlString = converter.makeHtml(text);
+  if (wrap === 'wrap') {
+    return <Tag dangerouslySetInnerHTML={{ __html: htmlString }}/>;
+  }
+
+  return <React.Fragment>{parser(htmlString)}</React.Fragment>;
+};
+
 const get = (...path) => {
   const from = (source) =>
     path.reduce((xs, x) => ((xs && xs[x]) ? xs[x] : null), source);
@@ -52,4 +66,5 @@ export {
   extractAttributeData,
   getAttributeChildren,
   get,
+  htmlFromText,
 };
