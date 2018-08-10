@@ -3,18 +3,60 @@ import Resizable from 'app/components/resizable';
 import SideMenu from 'app/components/side-menu';
 import MainContent from 'app/components/main-content';
 import Transition from 'app/components/transition';
+import TransitionContainer from 'app/components/transition-container';
 import ResourceGroupSection from 'app/components/resource-group-section';
-import Resource from 'app/components/resource';
+import Resource, { Resource__Action } from 'app/components/resource';
 import ActionCard from 'app/components/action-card';
 import ApiHost from 'app/components/api-host';
 
 import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
+import uniqid from 'uniqid';
 
 import source from 'app/mocks/main';
 
 const { topLevelMeta, groups, actions } = parseSourceFile(source);
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.transitions = new Map();
+
+    actions.forEach((action) => {
+      this.transitions.set(action.id, React.createRef());
+    });
+
+    this.synchronizeDimensions = this.synchronizeDimensions.bind(this);
+  }
+
+  componentDidMount() {
+    // вызов через таймаут нужен для того,
+    // чтобы применились все стили и функция получила
+    // актуальную информацию о высоте нужных элементов
+    setTimeout(this.synchronizeDimensions, 1);
+  }
+
+  componentDidUpdate() {
+    this.synchronizeDimensions();
+  }
+
+  synchronizeDimensions() {
+    this.transitions.forEach((ref, id) => {
+      const transition = ref.current;
+
+      const actionCard = document.querySelector(`[data-id=action-${id}]`);
+      const actionCardHeight = actionCard.offsetHeight;
+      const transitionCardHeight = transition.offsetHeight;
+
+      const requiredHeight = Math.max(actionCardHeight, transitionCardHeight);
+      transition.style.setProperty('min-height', `${requiredHeight}px`);
+      actionCard.style.setProperty('min-height', `${requiredHeight}px`);
+
+      const difference = actionCard.offsetTop - transition.offsetTop;
+      transition.style.paddingTop = `${difference}px`;
+    });
+  }
+
   render() {
     return (
       <Page>
@@ -36,15 +78,17 @@ export default class Home extends React.Component {
               description={topLevelMeta.description}
             >
               {groups.map(group => (
-                <ResourceGroupSection group={group}>
+                <ResourceGroupSection group={group} key={uniqid.time()}>
                   {group.content
                     .filter(gItem => gItem.element !== 'copy')
                     .map(resource => (
-                      <Resource resource={resource}>
+                      <Resource resource={resource} key={uniqid.time()}>
                         {resource.content
                           .filter(rItem => rItem.element !== 'copy')
                           .map(action => (
-                            <ActionCard action={action}/>
+                            <Resource__Action id={action.id} key={uniqid.time()}>
+                              <ActionCard action={action} key={uniqid.time()}/>
+                            </Resource__Action>
                           ))
                         }
                       </Resource>
@@ -72,12 +116,16 @@ export default class Home extends React.Component {
 
               {
                 actions.map(action => (
-                  <Page__Content mods={{ for: 'transition' }}>
-                    <Transition
-                      mods={{ for: 'page-aside' }}
-                      transactions={action.content}
-                      attributes={action.attributes}
-                    />
+                  <Page__Content mods={{ for: 'transition' }} key={uniqid.time()}>
+                    <TransitionContainer
+                      myRef={this.transitions.get(action.id)}
+                    >
+                      <Transition
+                        mods={{ for: 'page-aside' }}
+                        transactions={action.content}
+                        attributes={action.attributes}
+                      />
+                    </TransitionContainer>
                   </Page__Content>
                 ))
               }

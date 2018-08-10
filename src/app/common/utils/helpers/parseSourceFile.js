@@ -1,4 +1,5 @@
 import { get, htmlFromText } from './index';
+import uniqid from 'uniqid';
 
 const refactorHeader = header => ({
   key: get('content', 'key', 'content').from(header),
@@ -56,6 +57,7 @@ const refactorAction = action => {
       href: action.attributes.href.content,
       method,
     },
+    id: action.id,
     content: transactions,
   };
 };
@@ -119,6 +121,7 @@ const parseSourceFile = ({ content }) => {
         if (!action.attributes) {
           action.attributes = resource.attributes;
         }
+        action.id = uniqid.time();
         actions.push(action);
       });
     });

@@ -1,8 +1,4 @@
 .page__content_for_transition {
-  &:not(:first-child) {
-    padding-top: $basePadding;
-  }
-
   &:not(:last-child) {
     padding-bottom: $basePadding;
 
