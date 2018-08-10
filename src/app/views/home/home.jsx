@@ -61,6 +61,8 @@ export default class Home extends React.Component {
             minWidth="10%"
           >
             <Page__Aside>
+              <Page__Content mods={{ for: 'aside-placeholder' }}/>
+
               {
                 actions.map(action => (
                   <Page__Content mods={{ for: 'transition' }}>

@@ -1,0 +1,9 @@
+:root {
+  --main-content-padding: 0;
+}
+
+.page__content_for_aside-placeholder {
+  box-sizing: border-box;
+  height: var(--main-content-padding);
+  color: $white;
+}
