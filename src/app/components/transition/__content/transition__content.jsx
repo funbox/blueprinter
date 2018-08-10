@@ -17,7 +17,7 @@ const Transition__Content = (props) => {
     onLabelClick,
   } = props;
 
-  if (Object.keys(selectedData).length === 0) return null;
+  if (!selectedData) return null;
 
   const isEmpty = Object.keys(selectedData).length === 1 && (!!selectedData.statusCode || !!selectedData.title);
 

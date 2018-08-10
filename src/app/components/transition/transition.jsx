@@ -20,7 +20,10 @@ class Transition extends React.Component {
       currentTransaction: null,
     };
 
-    this.transitionAttributes = {};
+    this.transitionAttributes = {
+      href: '',
+      method: '',
+    };
 
     this.availableRequests = [];
     this.availableResponses = [];
@@ -38,12 +41,16 @@ class Transition extends React.Component {
 
     if (transactions.length > 0) {
       this.availableRequests = transactions.reduce((reqArray, transaction) => {
-        if (transaction.request) reqArray.push(transaction.request);
+        if (Object.values(transaction.request).some(value => !!value)) {
+          reqArray.push(transaction.request);
+        }
 
         return reqArray;
       }, []);
       this.availableResponses = transactions.reduce((respArray, transaction) => {
-        if (transaction.response) respArray.push(transaction.response);
+        if (Object.values(transaction.response).some(value => !!value)) {
+          respArray.push(transaction.response);
+        }
 
         return respArray;
       }, []);
@@ -87,7 +94,7 @@ class Transition extends React.Component {
           <span className="transition__method">{method.toUpperCase()}</span>
           {' '}
           {pathname}
-          {'?'}
+          {!!formattedQuery && '?'}
           <span dangerouslySetInnerHTML={{ __html: formattedQuery }}/>
         </p>
 
