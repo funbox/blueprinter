@@ -7,9 +7,11 @@ import ResourceGroupSection from 'app/components/resource-group-section';
 import Resource from 'app/components/resource';
 import ActionCard from 'app/components/action-card';
 
-import groups from 'app/mocks/resource-group';
-import request from 'app/mocks/request';
-import resource from 'app/mocks/resource';
+import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
+
+import source from 'app/mocks/main';
+
+const { topLevelMeta, groups, actions } = parseSourceFile(source);
 
 export default class Home extends React.Component {
   render() {
@@ -29,14 +31,26 @@ export default class Home extends React.Component {
 
           <Page__Body>
             <MainContent
-              title="API Blueprint"
-              description={<p>Документация проекта "Новый проект"</p>}
+              title={topLevelMeta.title}
+              description={topLevelMeta.description}
             >
-              <ResourceGroupSection group={groups[0]}>
-                <Resource resource={resource}>
-                  <ActionCard action={resource.content[0]}/>
-                </Resource>
-              </ResourceGroupSection>
+              {groups.map(group => (
+                <ResourceGroupSection group={group}>
+                  {group.content
+                    .filter(gItem => gItem.element !== 'copy')
+                    .map(resource => (
+                      <Resource resource={resource}>
+                        {resource.content
+                          .filter(rItem => rItem.element !== 'copy')
+                          .map(action => (
+                            <ActionCard action={action}/>
+                          ))
+                        }
+                      </Resource>
+                    ))
+                  }
+                </ResourceGroupSection>
+              ))}
             </MainContent>
           </Page__Body>
 
@@ -47,21 +61,17 @@ export default class Home extends React.Component {
             minWidth="10%"
           >
             <Page__Aside>
-              <Page__Content mods={{ for: 'transition' }}>
-                <Transition
-                  mods={{ for: 'page-aside' }}
-                  transactions={request.content}
-                  attributes={request.attributes}
-                />
-              </Page__Content>
-
-              <Page__Content mods={{ for: 'transition' }}>
-                <Transition
-                  mods={{ for: 'page-aside' }}
-                  transactions={request.content}
-                  attributes={request.attributes}
-                />
-              </Page__Content>
+              {
+                actions.map(action => (
+                  <Page__Content mods={{ for: 'transition' }}>
+                    <Transition
+                      mods={{ for: 'page-aside' }}
+                      transactions={action.content}
+                      attributes={action.attributes}
+                    />
+                  </Page__Content>
+                ))
+              }
             </Page__Aside>
           </Resizable>
         </Page__Layout>
