@@ -3,6 +3,8 @@ import RawContent from 'app/components/raw-content';
 import PropTypes from 'prop-types';
 import Button from 'fb-base-blocks/button';
 
+import { get } from 'app/common/utils/helpers';
+
 class Parameters extends React.Component {
   constructor(props) {
     super(props);
@@ -35,35 +37,43 @@ class Parameters extends React.Component {
                 </Button>
               </div>
               <div className="parameters__content" ref={setCollapsibleElement}>
-                {params.map((param, index) => (
-                  <div className="parameters__item" key={index * 2}>
-                    <div className="parameters__item-title" key={index * 2}>{param.content.key.content}</div>
-                    <div className="parameters__item-content" key={index * 2 + 1}>
-                      <RawContent>
-                        <code>{param.meta.title || 'string'}</code>
-                        &nbsp;
-                        {param.attributes.typeAttributes.map((attr, attrIndex) => (
-                          <span key={attrIndex}>({attr})</span>
-                        ))}
-                        &nbsp;
-                        {param.content.value.attributes.default.content &&
-                          <span className="parameters__default">
-                            <strong>Default: </strong>
-                            <span>{param.content.value.attributes.default.content}</span>
-                          </span>
-                        }
-                        {param.content.value.content &&
-                          <span className="parameters__example">
-                            <strong>Example:</strong>
-                            <span>{param.content.value.content}</span>
-                          </span>
-                        }
-                        &nbsp;
-                        <p>{param.meta.description}</p>
-                      </RawContent>
+                {params.map((param, index) => {
+                  const title = get('meta', 'title', 'content').from(param);
+                  const description = get('meta', 'description', 'content').from(param);
+                  const defaultValue = get('content', 'value', 'attributes', 'default', 'content').from(param);
+                  const example = get('content', 'value', 'content').from(param);
+
+                  return (
+                    <div className="parameters__item" key={index * 2}>
+                      <div className="parameters__item-title" key={index * 2}>{param.content.key.content}</div>
+                      <div className="parameters__item-content" key={index * 2 + 1}>
+                        <RawContent>
+                          <code>{title || 'string'}</code>
+                          &nbsp;
+                          {param.attributes.typeAttributes.map((attr, attrIndex) => (
+                            <span key={attrIndex}>({attr.content})</span>
+                          ))}
+                          &nbsp;
+                          {defaultValue &&
+                            <span className="parameters__default">
+                              <strong>Default: </strong>
+                              <span>{defaultValue}</span>
+                            </span>
+                          }
+                          &nbsp;
+                          {example &&
+                            <span className="parameters__example">
+                              <strong>Example: </strong>
+                              <span>{example}</span>
+                            </span>
+                          }
+                          &nbsp;
+                          {description && <p>{description}</p>}
+                        </RawContent>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </section>
           )}
@@ -75,11 +85,20 @@ class Parameters extends React.Component {
 Parameters.propTypes = {
   params: PropTypes.arrayOf(PropTypes.shape({
     meta: PropTypes.shape({
-      description: PropTypes.string,
-      title: PropTypes.string,
+      description: PropTypes.shape({
+        element: PropTypes.string,
+        content: PropTypes.string,
+      }),
+      title: PropTypes.shape({
+        element: PropTypes.string,
+        content: PropTypes.string,
+      }),
     }),
     attributes: PropTypes.shape({
-      typeAttributes: PropTypes.arrayOf(PropTypes.string),
+      typeAttributes: PropTypes.arrayOf(PropTypes.shape({
+        element: PropTypes.string,
+        content: PropTypes.string,
+      })),
     }),
     content: PropTypes.shape({
       key: PropTypes.shape({
