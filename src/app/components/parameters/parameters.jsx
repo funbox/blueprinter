@@ -46,6 +46,12 @@ class Parameters extends React.Component {
                           <span key={attrIndex}>({attr})</span>
                         ))}
                         &nbsp;
+                        {param.content.value.attributes.default.content &&
+                          <span className="parameters__default">
+                            <strong>Default: </strong>
+                            <span>{param.content.value.attributes.default.content}</span>
+                          </span>
+                        }
                         {param.content.value.content &&
                           <span className="parameters__example">
                             <strong>Example:</strong>
