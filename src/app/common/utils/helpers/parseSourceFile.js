@@ -6,6 +6,58 @@ const refactorHeader = header => ({
   value: get('content', 'value', 'content').from(header),
 });
 
+const categories = {
+  dataStructuresArray: [],
+  messageBodyArray: [],
+  resourceGroupArray: [],
+  resourcePrototypesArray: [],
+};
+
+const resolveInheritance = (valueMember, parent) => {
+  const type = valueMember.element;
+  const referencedDataStructure = categories.dataStructuresArray.find(ds => {
+    const dsContent = ds.content.meta.id.content;
+    return type === 'ref' ? dsContent === valueMember.content : dsContent === valueMember.element;
+  });
+
+  if (referencedDataStructure) {
+    referencedDataStructure.content.content.forEach(item => resolveInheritance(item, referencedDataStructure.content));
+    const referencedObjectContent = [...referencedDataStructure.content.content]; // get('content', 'content').from(referencedDataStructure);
+
+    if (type === 'ref') {
+      const refMemberIndex = parent.content.indexOf(valueMember);
+      const refilledArray = parent.content.slice(0, refMemberIndex)
+        .concat(referencedObjectContent)
+        .concat(parent.content.slice(refMemberIndex + 1));
+      parent.content = [...refilledArray];
+    } else {
+      if (!Array.isArray(valueMember.content)) valueMember.content = [];
+      valueMember.content.push(...referencedObjectContent);
+      valueMember.element = 'object';
+    }
+  }
+
+  const contentMap = {
+    object: (item) => item.content,
+    member: (item) => item.content.value.content,
+  };
+
+  const parentMap = {
+    member: (item) => item.content.value,
+  };
+
+  const innerContent = contentMap[type] && contentMap[type](valueMember) || valueMember.content;
+  const innerContentItemParent = parentMap[type] && parentMap[type](valueMember) || valueMember;
+
+  if (Array.isArray(innerContent)) {
+    innerContent.map(item => resolveInheritance(item, innerContentItemParent));
+  } else if (innerContent && innerContent.value) {
+    resolveInheritance(innerContent.value, valueMember);
+  }
+
+  return valueMember;
+};
+
 const refactorAction = action => {
   let method = '';
 
@@ -24,7 +76,12 @@ const refactorAction = action => {
     const getDataAttributes = httpSource => {
       const index = dataStructureIndex(httpSource);
 
-      return (index > -1) ? httpSource.content[index].content.content : null;
+      if (index === -1) return null;
+
+      const valueMember = httpSource.content[index].content;
+      resolveInheritance(valueMember, httpSource.content[index]);
+
+      return valueMember.content;
     };
 
     const request = {
@@ -65,12 +122,6 @@ const refactorAction = action => {
 
 const parseSourceFile = ({ content }) => {
   const source = content[0];
-  const categories = {
-    dataStructuresArray: [],
-    messageBodyArray: [],
-    resourceGroupArray: [],
-    resourcePrototypesArray: [],
-  };
 
   const groupForStandaloneResources = {
     element: 'category',
@@ -127,6 +178,10 @@ const parseSourceFile = ({ content }) => {
       });
     });
   });
+
+  if (categories.dataStructuresArray[0]) {
+    categories.dataStructuresArray = [...categories.dataStructuresArray[0].content];
+  }
 
   const refactoredActions = actions.map(refactorAction);
 
