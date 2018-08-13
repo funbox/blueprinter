@@ -23,7 +23,7 @@ const Transition__ExampleNames = (props) => {
             data-id={index}
             className={b('transition__example-label', { mods: { selected: option.selected } })}
             onClick={option.selected ? null : onClick}
-          >{option.content}</li>
+          >{option.content || `Example ${index + 1}`}</li>
         ))}
       </ul>
     </div>

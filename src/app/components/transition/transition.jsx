@@ -1,4 +1,5 @@
 import URL from 'url-parse';
+import formatHref from 'app/common/utils/helpers/formatHref';
 
 import Section from 'app/components/section';
 import Transition__Content from './__content';
@@ -80,8 +81,10 @@ class Transition extends React.Component {
 
     if (!selectedRequest && !selectedResponse) return null;
 
-    const { method, href } = this.transitionAttributes;
-    const { pathname, query } = new URL(href, true);
+    const { method, href, hrefVariables } = this.transitionAttributes;
+    const formattedHref = hrefVariables ? formatHref(href, hrefVariables) : href;
+
+    const { pathname, query } = new URL(formattedHref, true);
     const formattedQuery = highlightQuery(query);
     return (
       <Section

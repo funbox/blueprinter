@@ -55,6 +55,7 @@ const refactorAction = action => {
   return {
     attributes: {
       href: action.attributes.href.content,
+      hrefVariables: get('attributes', 'hrefVariables', 'content').from(action),
       method,
     },
     id: action.id,
