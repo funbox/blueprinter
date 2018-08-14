@@ -13,6 +13,14 @@ const categories = {
   resourcePrototypesArray: [],
 };
 
+const removeEmpty = object =>
+  Object.keys(object).reduce((res, key) => {
+    if (object[key]) {
+      res[key] = object[key];
+    }
+    return res;
+  }, {});
+
 const resolveInheritance = (valueMember, parent) => {
   const type = valueMember.element;
   const referencedDataStructure = categories.dataStructuresArray.find(ds => {
@@ -104,8 +112,8 @@ const refactorAction = action => {
     method = get('attributes', 'method', 'content').from(sourceRequest);
 
     return {
-      request,
-      response,
+      request: removeEmpty(request),
+      response: removeEmpty(response),
     };
   });
 
