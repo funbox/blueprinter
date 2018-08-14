@@ -42,6 +42,11 @@ class Parameters extends React.Component {
                   const description = get('meta', 'description', 'content').from(param);
                   const defaultValue = get('content', 'value', 'attributes', 'default', 'content').from(param);
                   const example = get('content', 'value', 'content').from(param);
+                  let choices;
+
+                  if (title === 'enum') {
+                    choices = get('content', 'value', 'attributes', 'enumerations', 'content').from(param);
+                  }
 
                   return (
                     <div className="parameters__item" key={index * 2}>
@@ -50,7 +55,7 @@ class Parameters extends React.Component {
                         <RawContent>
                           <code>{title || 'string'}</code>
                           &nbsp;
-                          {param.attributes.typeAttributes.map((attr, attrIndex) => (
+                          {param.attributes.typeAttributes.content.map((attr, attrIndex) => (
                             <span key={attrIndex}>({attr.content})</span>
                           ))}
                           &nbsp;
@@ -64,11 +69,22 @@ class Parameters extends React.Component {
                           {example &&
                             <span className="parameters__example">
                               <strong>Example: </strong>
-                              <span>{example}</span>
+                              <span>{example.content || example}</span>
                             </span>
                           }
                           &nbsp;
                           {description && <p>{description}</p>}
+                          {choices && choices.length > 0 && (
+                            <p>
+                              <strong>Choices: </strong>
+                              {choices.map(choice =>
+                                <span key={`enum-member-${choice.content}`}>
+                                  {' '}
+                                  <code>{choice.content}</code>
+                                </span>
+                              )}
+                            </p>
+                          )}
                         </RawContent>
                       </div>
                     </div>
@@ -95,10 +111,13 @@ Parameters.propTypes = {
       }),
     }),
     attributes: PropTypes.shape({
-      typeAttributes: PropTypes.arrayOf(PropTypes.shape({
+      typeAttributes: PropTypes.shape({
         element: PropTypes.string,
-        content: PropTypes.string,
-      })),
+        content: PropTypes.arrayOf(PropTypes.shape({
+          element: PropTypes.string,
+          content: PropTypes.string,
+        })),
+      }),
     }),
     content: PropTypes.shape({
       key: PropTypes.shape({

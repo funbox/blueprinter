@@ -30,7 +30,7 @@ const formatHref = (href, variables) => {
     if (!value) {
       definedValue = type ? defaultValues[type] : name;
     } else {
-      definedValue = value;
+      definedValue = value.content || value;
     }
 
     if (Array.isArray(paramKeys) && paramKeys.includes(name)) {
