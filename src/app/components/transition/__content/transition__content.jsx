@@ -8,6 +8,8 @@ const formatHeaders = arrayOfHeaders => arrayOfHeaders.reduce((res, h) => {
   return res;
 }, '');
 
+const isString = s => (typeof s === 'string' || s instanceof String);
+
 const Transition__Content = (props) => {
   const {
     selectedData,
@@ -83,7 +85,7 @@ const Transition__Content = (props) => {
           mods={{ for: 'transition' }}
         >
           <CodeSnippet>
-            {body instanceof String ? body : JSON.stringify(body, null, 2)}
+            {isString(body) ? body.trim() : JSON.stringify(body, null, 2)}
           </CodeSnippet>
         </Section>
       )}
@@ -95,7 +97,7 @@ const Transition__Content = (props) => {
           mods={{ for: 'transition' }}
         >
           <CodeSnippet>
-            {schema instanceof String ? schema : JSON.stringify(schema, null, 2)}
+            {isString(schema) ? schema : JSON.stringify(schema, null, 2)}
           </CodeSnippet>
         </Section>
       )}
