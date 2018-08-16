@@ -1,6 +1,6 @@
 import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
-import { get } from 'app/common/utils/helpers';
+import { get, htmlFromText } from 'app/common/utils/helpers';
 
 const defaultTitle = 'Resource';
 
@@ -26,7 +26,7 @@ class Resource extends React.Component {
         <div className="resource__body">
           {!!description && (
             <RawContent mix="resource__description">
-              {description}
+              {htmlFromText(description)}
             </RawContent>
           )}
 

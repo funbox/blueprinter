@@ -1,6 +1,6 @@
 import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
-import { get } from 'app/common/utils/helpers';
+import { get, htmlFromText } from 'app/common/utils/helpers';
 
 const defaultTitle = 'Resource Group';
 
@@ -25,7 +25,7 @@ class ResourceGroupSection extends React.Component {
         <div className="resource-group-section__body">
           {!!description && (
             <RawContent mix="resource-group-section__description">
-              {description}
+              {htmlFromText(description)}
             </RawContent>
           )}
 

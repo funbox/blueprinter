@@ -67,22 +67,21 @@ const resolveInheritance = (valueMember, parent) => {
 };
 
 const refactorAction = action => {
+  const getSourceElementIndexByType = (source, type) => source.content.findIndex(item => item.element === type);
   let method = '';
 
   const transactions = action.content.filter(item => item.element !== 'copy').map(transaction => {
     const sourceRequest = transaction.content.find(tItem => tItem.element === 'httpRequest');
     const sourceResponse = transaction.content.find(tItem => tItem.element === 'httpResponse');
 
-    const bodyIndex = httpSource => httpSource.content.findIndex(item => item.element === 'asset');
     const getBody = httpSource => {
-      const index = bodyIndex(httpSource);
+      const index = getSourceElementIndexByType(httpSource, 'asset');
 
       return (index > -1) ? httpSource.content[index].content : null;
     };
 
-    const dataStructureIndex = httpSource => httpSource.content.findIndex(item => item.element === 'dataStructure');
     const getDataAttributes = httpSource => {
-      const index = dataStructureIndex(httpSource);
+      const index = getSourceElementIndexByType(httpSource, 'dataStructure');
 
       if (index === -1) return null;
 
@@ -92,10 +91,18 @@ const refactorAction = action => {
       return valueMember.content;
     };
 
+    const getDescription = httpSource => {
+      const index = getSourceElementIndexByType(httpSource, 'copy');
+
+      if (index === -1) return null;
+
+      return httpSource.content[index].content;
+    };
+
     const request = {
       attributes: getDataAttributes(sourceRequest),
       body: getBody(sourceRequest),
-      description: null,
+      description: getDescription(sourceRequest),
       headers: sourceRequest.attributes.headers ? sourceRequest.attributes.headers.content.map(refactorHeader) : null,
       title: get('meta', 'title', 'content').from(sourceRequest),
     };
@@ -103,7 +110,7 @@ const refactorAction = action => {
     const response = {
       attributes: getDataAttributes(sourceResponse),
       body: getBody(sourceResponse),
-      description: null,
+      description: getDescription(sourceResponse),
       headers: sourceResponse.attributes.headers ? sourceResponse.attributes.headers.content.map(refactorHeader) : null,
       schema: null,
       statusCode: get('attributes', 'statusCode', 'content').from(sourceResponse),
