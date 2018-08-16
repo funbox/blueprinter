@@ -1,4 +1,10 @@
-import Page, { Page__Body, Page__Aside, Page__Navigation, Page__Layout, Page__Content } from 'app/components/page';
+import Page, {
+  Page__Body,
+  Page__Aside,
+  Page__Navigation,
+  Page__Layout,
+  Page__Stripe,
+} from 'app/components/page';
 import Resizable from 'app/components/resizable';
 import SideMenu from 'app/components/side-menu';
 import MainContent from 'app/components/main-content';
@@ -106,17 +112,17 @@ export default class Home extends React.Component {
             minWidth="10%"
           >
             <Page__Aside>
-              <Page__Content mods={{ for: 'aside-placeholder' }}/>
+              <Page__Stripe mods={{ for: 'aside-placeholder' }}/>
 
               {topLevelMeta.host && (
-                <Page__Content mods={{ for: 'api-host' }}>
+                <Page__Stripe mods={{ for: 'api-host' }}>
                   <ApiHost host={topLevelMeta.host}/>
-                </Page__Content>
+                </Page__Stripe>
               )}
 
               {
                 actions.map(action => (
-                  <Page__Content mods={{ for: 'transition' }} key={uniqid.time()}>
+                  <Page__Stripe mods={{ for: 'transition' }} key={uniqid.time()}>
                     <TransitionContainer
                       myRef={this.transitions.get(action.id)}
                     >
@@ -126,7 +132,7 @@ export default class Home extends React.Component {
                         attributes={action.attributes}
                       />
                     </TransitionContainer>
-                  </Page__Content>
+                  </Page__Stripe>
                 ))
               }
             </Page__Aside>
