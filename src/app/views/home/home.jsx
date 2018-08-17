@@ -84,7 +84,11 @@ export default class Home extends React.Component {
               description={topLevelMeta.description}
             >
               {groups.map(group => (
-                <ResourceGroupSection group={group} key={uniqid.time()}>
+                <ResourceGroupSection
+                  group={group}
+                  key={uniqid.time()}
+                  mix="main-content__resource-group"
+                >
                   {group.content
                     .filter(gItem => gItem.element !== 'copy')
                     .map(resource => (

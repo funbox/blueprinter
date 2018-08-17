@@ -13,7 +13,7 @@ class ResourceGroupSection extends React.Component {
     const description = group.content[0].element === 'copy' ? group.content[0].content : null;
 
     return (
-      <section className="resource-group-section">
+      <section className={b('resource-group-section', this.props)}>
         <h2 className="resource-group-section__heading">
           {title}
           <Anchor
