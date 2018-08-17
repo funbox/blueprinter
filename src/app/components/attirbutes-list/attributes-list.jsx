@@ -7,7 +7,7 @@ const AttributesList = (props) => {
   const renderAttributes = (attrs) => {
     const items = attrs.map((a, i) => {
       const nestedAttrs = getAttributeChildren(a);
-      const hasChildren = !!nestedAttrs.length && nestedAttrs.length > 0;
+      const hasChildren = !!nestedAttrs && !!nestedAttrs.length && nestedAttrs.length > 0;
 
       return (
         <li className="attributes-list__item" key={`attr-${i}`}>

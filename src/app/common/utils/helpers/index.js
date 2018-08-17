@@ -24,7 +24,12 @@ const extractTransactionMethod = transition => (
 );
 
 const extractAttributeData = (attribute, disabledExample = false) => {
-  const { key, value } = attribute.content;
+  const typeAlias = {
+    select: 'One of',
+  };
+
+  const key = get('content', 'key').from(attribute);
+  const value = get('content', 'value').from(attribute);
   let attributeKey;
   let attributeType;
   let attributeExample;
@@ -34,7 +39,7 @@ const extractAttributeData = (attribute, disabledExample = false) => {
     attributeType = value.element || null;
     attributeExample = (!disabledExample && value.content) || null;
   } else {
-    attributeType = attribute.element || null;
+    attributeType = typeAlias[attribute.element] || attribute.element || null;
     attributeExample = (!disabledExample && attribute.content) || null;
   }
 
@@ -45,19 +50,22 @@ const extractAttributeData = (attribute, disabledExample = false) => {
 };
 
 const getAttributeChildren = attribute => {
-  const complexTypes = ['array', 'enum', 'object'];
+  const complexTypes = ['array', 'enum', 'object', 'select', 'option'];
   const childrenByType = {
     array: (attr) => (Array.isArray(attr.content) ? attr.content : attr.content.value.content),
     enum: (attr) => attr.content.value.attributes.enumerations.content,
     object: (attr) => (Array.isArray(attr.content) ? attr.content : attr.content.value.content),
+    select: (attr) => (attr.content),
+    option: (attr) => (attr.content),
   };
 
-  const { value } = attribute.content;
-  const attributeType = value ? value.element : attribute.element;
+  const value = (attribute.content && attribute.content.value) || attribute.content;
+  const attributeType = (value && value.element) ? value.element : attribute.element;
 
-  if (!complexTypes.includes(attributeType)) {
+  if (!complexTypes.includes(attributeType) || !attribute.content) {
     return [];
   }
+
   return childrenByType[attributeType](attribute);
 };
 
