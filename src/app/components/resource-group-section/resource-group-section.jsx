@@ -1,6 +1,6 @@
 import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
-import { get, htmlFromText } from 'app/common/utils/helpers';
+import { get, hashFromTitle, htmlFromText } from 'app/common/utils/helpers';
 
 const defaultTitle = 'Resource Group';
 
@@ -13,7 +13,7 @@ class ResourceGroupSection extends React.Component {
     const description = group.content[0].element === 'copy' ? group.content[0].content : null;
 
     return (
-      <section className={b('resource-group-section', this.props)}>
+      <section className={b('resource-group-section', this.props)} id={hashFromTitle(title)}>
         <h2 className="resource-group-section__heading">
           {title}
           <Anchor

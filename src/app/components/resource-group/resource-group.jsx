@@ -28,11 +28,13 @@ class ResourceGroup extends React.Component {
       const hasSubmenu = level < maxNestingLevel && !!item.content && item.content.length > 0;
       let title = item.meta.title.content;
       let badge = null;
+      let hash = hashFromTitle(title);
 
       if (itemType === 'transition') {
         const method = extractMethod(item);
         badge = <MethodBadge method={method} mix="menu__item-icon"/>;
         title = title || `${method.toUpperCase()} ${get('attributes', 'href', 'content').from(item)}`;
+        hash = hashFromTitle(`${title} ${method.toLowerCase()}`);
       }
 
       return (
@@ -40,7 +42,7 @@ class ResourceGroup extends React.Component {
           mods={level ? { level, submenu: true } : {}}
           key={`${itemType}-${index}`}
           text={title}
-          to={{ hash: hashFromTitle(title), pathname: route.location.pathname }}
+          to={{ hash, pathname: route.location.pathname }}
           submenu={hasSubmenu ? this.buildContentList(item.content, { level: nextLevel }) : null}
         >{badge}</Menu__Item>
       );
@@ -64,6 +66,12 @@ class ResourceGroup extends React.Component {
     const hasContent = !!group.content && group.content.length > 0;
 
     const title = get('meta', 'title', 'content').from(group) || defaultTitle;
+    const hash = hashFromTitle(title);
+
+    const needJumpToGroup = () => {
+      const currentHash = decodeURIComponent(route.location.hash);
+      return currentHash !== `#${hash}`;
+    };
 
     return (
       <SlideToggle
@@ -75,11 +83,14 @@ class ResourceGroup extends React.Component {
           <div className={b('resource-group', { mods: { collapsed } })}>
             <h3
               className="resource-group__heading"
-              onClick={onToggle}
+              onClick={() => {
+                const need = needJumpToGroup();
+                return need ? undefined : onToggle();
+              }}
             >
               <Link
                 mix="resource-group__title"
-                to={{ hash: hashFromTitle(title), pathname: route.location.pathname }}
+                to={{ hash, pathname: route.location.pathname }}
               >{title}</Link>
             </h3>
 

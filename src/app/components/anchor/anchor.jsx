@@ -1,6 +1,6 @@
 import Link from 'app/components/link';
 
-const hashFromTitle = title => title.split(' ').join('-');
+import { hashFromTitle } from 'app/common/utils/helpers';
 
 const Anchor = (props) => {
   const { title, pathname } = props;

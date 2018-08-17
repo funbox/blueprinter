@@ -1,9 +1,7 @@
 import RawContent from 'app/components/raw-content';
 import Link from 'app/components/link';
 import Parameters from 'app/components/parameters';
-import { get, extractTransactionMethod, htmlFromText } from 'app/common/utils/helpers';
-
-const hashFromTitle = title => title.split(' ').join('-');
+import { get, extractTransactionMethod, hashFromTitle, htmlFromText } from 'app/common/utils/helpers';
 
 const ActionCard = (props) => {
   const {
@@ -18,11 +16,14 @@ const ActionCard = (props) => {
   const method = props.method || extractTransactionMethod(action);
 
   return (
-    <div className={b('action-card', { mods: { type: method } })}>
+    <div
+      className={b('action-card', { mods: { type: method } })}
+      id={hashFromTitle(`${title} ${method.toLowerCase()}`)}
+    >
       <div className="action-card__heading">
         <Link
           mix="action-card__method"
-          to={{ hash: hashFromTitle(`${title} ${method}`), pathname: location.pathname }}
+          to={{ hash: hashFromTitle(`${title} ${method.toLowerCase()}`), pathname: location.pathname }}
         >
           {method}
         </Link>

@@ -1,6 +1,6 @@
 import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
-import { get, htmlFromText } from 'app/common/utils/helpers';
+import { get, hashFromTitle, htmlFromText } from 'app/common/utils/helpers';
 
 const defaultTitle = 'Resource';
 
@@ -14,7 +14,7 @@ class Resource extends React.Component {
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
 
     return (
-      <section className="resource">
+      <section className="resource" id={hashFromTitle(title)}>
         <h3 className="resource__heading">
           {title}
           <Anchor

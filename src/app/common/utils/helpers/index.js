@@ -69,10 +69,13 @@ const getAttributeChildren = attribute => {
   return childrenByType[attributeType](attribute);
 };
 
+const hashFromTitle = title => title.split(' ').join('-');
+
 export {
   extractTransactionMethod,
   extractAttributeData,
   getAttributeChildren,
   get,
+  hashFromTitle,
   htmlFromText,
 };
