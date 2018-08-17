@@ -1,5 +1,6 @@
 import { get, htmlFromText } from './index';
 import uniqid from 'uniqid';
+import deepEqual from 'deep-equal';
 
 const refactorHeader = header => ({
   key: get('content', 'key', 'content').from(header),
@@ -124,6 +125,21 @@ const refactorAction = action => {
     };
   });
 
+  const filteredTransactions = transactions.map((trans, i, oldArray) => {
+    if (i === 0) {
+      return {
+        request: trans.request,
+        response: trans.response,
+      };
+    }
+
+    const isRequestUnique = oldArray.some(t => !deepEqual(t.request, trans.request));
+    return {
+      request: isRequestUnique ? trans.request : {},
+      response: trans.response,
+    };
+  });
+
   return {
     attributes: {
       href: action.attributes.href.content,
@@ -131,7 +147,7 @@ const refactorAction = action => {
       method,
     },
     id: action.id,
-    content: transactions,
+    content: filteredTransactions,
   };
 };
 
