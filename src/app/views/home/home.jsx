@@ -40,6 +40,7 @@ export default class Home extends React.Component {
     // чтобы применились все стили и функция получила
     // актуальную информацию о высоте нужных элементов
     setTimeout(this.synchronizeDimensions, 1);
+    window.addEventListener('resize', this.synchronizeDimensions);
   }
 
   componentDidUpdate() {
@@ -51,8 +52,14 @@ export default class Home extends React.Component {
       const transition = ref.current;
 
       const actionCard = document.querySelector(`[data-id=action-${id}]`);
-      const actionCardHeight = actionCard.offsetHeight;
-      const transitionCardHeight = transition.offsetHeight;
+
+      const actionCardStyle = getComputedStyle(actionCard);
+      const transitionCardStyle = getComputedStyle(transition);
+
+      const transitionCardPaddingTop = parseInt(transitionCardStyle.getPropertyValue('padding-top'), 10) || 0;
+      const actionCardPaddingTop = parseInt(actionCardStyle.getPropertyValue('padding-top'), 10) || 0;
+      const actionCardHeight = actionCard.offsetHeight - actionCardPaddingTop;
+      const transitionCardHeight = transition.offsetHeight - transitionCardPaddingTop;
 
       const requiredHeight = Math.max(actionCardHeight, transitionCardHeight);
       transition.style.setProperty('min-height', `${requiredHeight}px`);
@@ -72,6 +79,7 @@ export default class Home extends React.Component {
             direction="right"
             initialSize={{ width: '16.5%' }}
             minWidth="10%"
+            onResizeStop={this.synchronizeDimensions}
           >
             <Page__Navigation>
               <SideMenu data={groups}/>
@@ -114,6 +122,7 @@ export default class Home extends React.Component {
             direction="left"
             initialSize={{ width: '500px' }}
             minWidth="10%"
+            onResizeStop={this.synchronizeDimensions}
           >
             <Page__Aside>
               <Page__Stripe mods={{ for: 'aside-placeholder' }}/>

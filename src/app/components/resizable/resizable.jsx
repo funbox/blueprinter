@@ -7,6 +7,7 @@ const Resizable = (props) => {
     initialSize,
     minWidth,
     maxWidth,
+    onResizeStop,
   } = props;
 
   const permittedDirections = {
@@ -37,6 +38,7 @@ const Resizable = (props) => {
       minWidth={minWidth}
       maxWidth={maxWidth}
       defaultSize={{ ...initialSize }}
+      onResizeStop={onResizeStop}
     >
       {props.children}
     </_Resizable>
