@@ -1,3 +1,3 @@
-const source = require('./source/simple.json');
+const source = require('./source/mmoney.json');
 
 export default source;
