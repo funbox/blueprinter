@@ -19,6 +19,7 @@ class Attribute extends React.Component {
   render() {
     const {
       attribute,
+      parentType,
       nestedAttributes,
       mods = {},
       mix = [],
@@ -41,6 +42,7 @@ class Attribute extends React.Component {
           <div className={b('attribute', { mods, mix })}>
             <Attribute__Row
               attribute={attribute}
+              parentType={parentType}
               disabledExample={!!nestedAttributes}
               onClick={onToggle}
             />
@@ -64,6 +66,7 @@ Attribute.propTypes = {
       PropTypes.string,
     ]),
   }),
+  parentType: PropTypes.string,
   nestedAttributes: PropTypes.node,
   mods: PropTypes.object,
   mix: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),

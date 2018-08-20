@@ -1,7 +1,7 @@
 import { extractAttributeData } from 'app/common/utils/helpers';
 
 const Attribute__Row = (props) => {
-  const { attribute, disabledExample } = props;
+  const { attribute, parentType, disabledExample } = props;
   const {
     attributeKey,
     attributeType,
@@ -10,18 +10,29 @@ const Attribute__Row = (props) => {
     attributeDescription,
   } = extractAttributeData(attribute, disabledExample);
 
+  const enumMember = parentType === 'enum';
+  const oneOfMember = parentType === 'One of';
+  const oneOfElement = attributeType === 'One of';
+
+  const attributeKeyByType = {
+    enum: attributeExample,
+    'One of': attributeType,
+  };
+
   return (
     <dl className={b('attribute__row', props)} onClick={props.onClick}>
       <dt className="attribute__key">
-        {attributeKey}
+        {attributeKeyByType[parentType] || attributeKeyByType[attributeType] || attributeKey}
         {attributeProps &&
           <small className="attribute__props">{attributeProps}</small>
         }
       </dt>
       <dd className="attribute__description-container">
-        {attributeType && <p className="attribute__type">{attributeType}</p>}
+        {attributeType && !oneOfElement && !oneOfMember &&
+          <p className="attribute__type">{attributeType}</p>
+        }
         {attributeDescription && <p className="attribute__description">{attributeDescription}</p>}
-        {attributeExample && <p className="attribute__example">{attributeExample}</p>}
+        {attributeExample && !enumMember && <p className="attribute__example">{attributeExample}</p>}
       </dd>
     </dl>
   );
@@ -36,6 +47,7 @@ Attribute__Row.propTypes = {
       PropTypes.string,
     ]),
   }),
+  parentType: PropTypes.string,
   disabledExample: PropTypes.bool,
   onClick: PropTypes.func,
 };
