@@ -11,8 +11,7 @@ import MainContent from 'app/components/main-content';
 import Transition from 'app/components/transition';
 import TransitionContainer from 'app/components/transition-container';
 import ResourceGroupSection from 'app/components/resource-group-section';
-import Resource, { Resource__Action } from 'app/components/resource';
-import ActionCard from 'app/components/action-card';
+import Resource from 'app/components/resource';
 import ApiHost from 'app/components/api-host';
 
 import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
@@ -100,18 +99,11 @@ export default class Home extends React.Component {
                   {group.content
                     .filter(gItem => gItem.element !== 'copy')
                     .map(resource => (
-                      <Resource resource={resource} key={uniqid.time()}>
-                        {resource.content
-                          .filter(rItem => rItem.element !== 'copy')
-                          .map(action => (
-                            <Resource__Action id={action.id} key={uniqid.time()}>
-                              <ActionCard action={action} key={uniqid.time()}/>
-                            </Resource__Action>
-                          ))
-                        }
-                      </Resource>
-                    ))
-                  }
+                      <Resource
+                        resource={resource}
+                        key={uniqid.time()}
+                      />
+                  ))}
                 </ResourceGroupSection>
               ))}
             </MainContent>

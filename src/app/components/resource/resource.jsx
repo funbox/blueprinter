@@ -1,14 +1,19 @@
 import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
+import ActionCard from 'app/components/action-card';
+import Resource__Action from './__action';
+
 import { get, hashFromTitle, htmlFromText } from 'app/common/utils/helpers';
+import uniqid from 'uniqid';
 
 const defaultTitle = 'Resource';
 
 class Resource extends React.Component {
   render() {
     const { route } = this.context.router;
-    const { resource, children } = this.props;
+    const { resource } = this.props;
 
+    const { content } = resource;
     const title = get('meta', 'title', 'content').from(resource) || defaultTitle;
     const href = get('attributes', 'href', 'content').from(resource);
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
@@ -31,7 +36,18 @@ class Resource extends React.Component {
           )}
 
           <div className="resource__content">
-            {React.Children.map(children, (child) => React.cloneElement(child, { href }))}
+            {content
+              .filter(rItem => rItem.element !== 'copy')
+              .map(action => (
+                <Resource__Action id={action.id} key={uniqid.time()}>
+                  <ActionCard
+                    action={action}
+                    key={uniqid.time()}
+                    href={href}
+                  />
+                </Resource__Action>
+              ))
+            }
           </div>
         </div>
       </section>
