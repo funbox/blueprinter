@@ -6,6 +6,7 @@ import Transition from 'app/components/transition';
 import ResourceGroupSection from 'app/components/resource-group-section';
 import Resource from 'app/components/resource';
 import ActionCard from 'app/components/action-card';
+import ApiHost from 'app/components/api-host';
 
 import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
 
@@ -62,6 +63,12 @@ export default class Home extends React.Component {
           >
             <Page__Aside>
               <Page__Content mods={{ for: 'aside-placeholder' }}/>
+
+              {topLevelMeta.host && (
+                <Page__Content mods={{ for: 'api-host' }}>
+                  <ApiHost host={topLevelMeta.host}/>
+                </Page__Content>
+              )}
 
               {
                 actions.map(action => (
