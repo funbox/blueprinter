@@ -1,3 +1,8 @@
+:root {
+  --page-description-height: 0;
+}
+
 .page__description {
+  min-height: var(--page-description-height);
   margin-bottom: $baseMargin * 2;
 }
