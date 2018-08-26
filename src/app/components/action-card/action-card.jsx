@@ -1,7 +1,7 @@
 import RawContent from 'app/components/raw-content';
 import Link from 'app/components/link';
 import Parameters from 'app/components/parameters';
-import { get, extractTransactionMethod, hashFromTitle, htmlFromText } from 'app/common/utils/helpers';
+import { get, extractTransactionMethod, hashFromTitle, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
 
 const ActionCard = (props) => {
   const {
@@ -38,7 +38,7 @@ const ActionCard = (props) => {
           <RawContent
             mix="action-card__description"
           >
-            {htmlFromText(description)}
+            {withHeaderAnchors(htmlFromText(description))}
           </RawContent>
         )}
 
