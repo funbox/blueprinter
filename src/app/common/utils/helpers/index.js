@@ -1,6 +1,8 @@
 import parser from 'html-react-parser';
 import showdown from 'showdown';
 
+import Anchor from 'app/components/anchor';
+
 const converter = new showdown.Converter();
 
 const htmlFromText = (text, wrap = 'no-wrap', Tag = 'div') => {
@@ -71,6 +73,25 @@ const getAttributeChildren = attribute => {
 
 const hashFromTitle = title => title.split(' ').join('-');
 
+const withHeaderAnchors = (description) => {
+  const modifiedChildren = React.Children.map(description.props.children, textElement => {
+    if (textElement.type && /^h\d$/.exec(textElement.type)) {
+      const text = textElement.props.children.toLowerCase();
+      const title = `header-${text}`;
+      const childrenArray = React.Children.toArray(textElement.props.children);
+
+      childrenArray[0] = childrenArray[0].concat(' ');
+      childrenArray.push(<Anchor title={title} mods={{ for: 'description' }} key={`anchor-of-${text}`}/>);
+
+      return React.cloneElement(textElement, { id: hashFromTitle(title) }, childrenArray);
+    }
+
+    return textElement;
+  });
+
+  return React.cloneElement(description, {}, modifiedChildren);
+};
+
 export {
   extractTransactionMethod,
   extractAttributeData,
@@ -78,4 +99,5 @@ export {
   get,
   hashFromTitle,
   htmlFromText,
+  withHeaderAnchors,
 };
