@@ -3,7 +3,7 @@ import Anchor from 'app/components/anchor';
 import ActionCard from 'app/components/action-card';
 import Resource__Action from './__action';
 
-import { get, hashFromTitle, htmlFromText } from 'app/common/utils/helpers';
+import { get, hashFromTitle, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
 import uniqid from 'uniqid';
 
 const defaultTitle = 'Resource';
@@ -31,7 +31,7 @@ class Resource extends React.Component {
         <div className="resource__body">
           {!!description && (
             <RawContent mix="resource__description">
-              {htmlFromText(description)}
+              {withHeaderAnchors(htmlFromText(description))}
             </RawContent>
           )}
 
