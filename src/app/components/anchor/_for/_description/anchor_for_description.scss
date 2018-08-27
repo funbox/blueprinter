@@ -1,0 +1,11 @@
+.anchor {
+  &.anchor_for_description {
+    &:hover, &:focus {
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: auto 5px -webkit-focus-ring-color;
+    }
+  }
+}
