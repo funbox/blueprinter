@@ -21,9 +21,10 @@ const get = (...path) => {
   return { from };
 };
 
-const extractTransactionMethod = transition => (
-  transition.content.filter(i => i.element !== 'copy')[0].content[0].attributes.method.content
-);
+const extractTransactionMethod = transition => {
+  const method = transition.content.filter(i => i.element !== 'copy')[0].content[0].attributes.method;
+  return method.content || method;
+};
 
 const extractAttributeData = (attribute, disabledExample = false) => {
   const typeAlias = {
@@ -45,8 +46,8 @@ const extractAttributeData = (attribute, disabledExample = false) => {
     attributeExample = (!disabledExample && attribute.content) || null;
   }
 
-  const attributeDescription = get('meta', 'description', 'content').from(attribute);
-  const attributeProps = get('attributes', 'typeAttributes', 'content', '0', 'content').from(attribute);
+  const attributeDescription = get('meta', 'description').from(attribute);
+  const attributeProps = get('attributes', 'typeAttributes', '0').from(attribute);
 
   return { attributeKey, attributeType, attributeExample, attributeDescription, attributeProps };
 };
@@ -55,7 +56,7 @@ const getAttributeChildren = attribute => {
   const complexTypes = ['array', 'enum', 'object', 'select', 'option'];
   const childrenByType = {
     array: (attr) => (Array.isArray(attr.content) ? attr.content : attr.content.value.content),
-    enum: (attr) => attr.content.value.attributes.enumerations.content,
+    enum: (attr) => attr.content.value.content,
     object: (attr) => (Array.isArray(attr.content) ? attr.content : attr.content.value.content),
     select: (attr) => (attr.content),
     option: (attr) => (attr.content),

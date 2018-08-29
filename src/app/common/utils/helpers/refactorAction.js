@@ -19,13 +19,15 @@ const removeEmpty = object =>
 const resolveInheritance = (valueMember, parent) => {
   const type = valueMember.element;
   const referencedDataStructure = categories.dataStructuresArray.find(ds => {
-    const dsContent = ds.content.meta.id.content;
-    return type === 'ref' ? dsContent === valueMember.content : dsContent === valueMember.element;
+    const dsContent = Array.isArray(ds.content) ? ds.content[0].meta.id : ds.content.meta.id;
+    return type === 'ref' ? dsContent === valueMember.content.href : dsContent === valueMember.element;
   });
 
   if (referencedDataStructure) {
-    referencedDataStructure.content.content.forEach(item => resolveInheritance(item, referencedDataStructure.content));
-    const referencedObjectContent = [...referencedDataStructure.content.content]; // get('content', 'content').from(referencedDataStructure);
+    const refDSContent = Array.isArray(referencedDataStructure.content)
+      ? referencedDataStructure.content[0].content : referencedDataStructure.content.content;
+    refDSContent.forEach(item => resolveInheritance(item, referencedDataStructure.content[0]));
+    const referencedObjectContent = [...refDSContent];
 
     if (type === 'ref') {
       const refMemberIndex = parent.content.indexOf(valueMember);
@@ -87,7 +89,7 @@ const refactorAction = action => {
 
       if (index === -1) return null;
 
-      const valueMember = httpSource.content[index].content;
+      const valueMember = httpSource.content[index].content[0];
       resolveInheritance(valueMember, httpSource.content[index]);
 
       return valueMember.content;
@@ -115,10 +117,10 @@ const refactorAction = action => {
       description: getDescription(sourceResponse),
       headers: sourceResponse.attributes.headers ? sourceResponse.attributes.headers.content.map(refactorHeader) : null,
       schema: getSchema(sourceResponse),
-      statusCode: get('attributes', 'statusCode', 'content').from(sourceResponse),
+      statusCode: get('attributes', 'statusCode').from(sourceResponse),
     };
 
-    method = get('attributes', 'method', 'content').from(sourceRequest);
+    method = get('attributes', 'method').from(sourceRequest);
 
     return {
       request: removeEmpty(request),

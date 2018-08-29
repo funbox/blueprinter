@@ -26,7 +26,7 @@ class ResourceGroup extends React.Component {
       const itemType = item.element;
       const nextLevel = level + 1;
       const hasSubmenu = level < maxNestingLevel && !!item.content && item.content.length > 0;
-      let title = item.meta.title.content;
+      let title = item.meta.title.content || item.meta.title;
       let badge = null;
       let hash = hashFromTitle(title);
 
@@ -65,7 +65,7 @@ class ResourceGroup extends React.Component {
     const { collapsed } = this.state;
     const hasContent = !!group.content && group.content.length > 0;
 
-    const title = get('meta', 'title', 'content').from(group) || defaultTitle;
+    const title = get('meta', 'title').from(group) || defaultTitle;
     const hash = hashFromTitle(title);
 
     const needJumpToGroup = () => {

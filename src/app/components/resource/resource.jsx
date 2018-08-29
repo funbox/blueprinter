@@ -14,8 +14,8 @@ class Resource extends React.Component {
     const { resource } = this.props;
 
     const { content } = resource;
-    const title = get('meta', 'title', 'content').from(resource) || defaultTitle;
-    const href = get('attributes', 'href', 'content').from(resource);
+    const title = get('meta', 'title').from(resource) || defaultTitle;
+    const href = get('attributes', 'href').from(resource);
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
 
     return (

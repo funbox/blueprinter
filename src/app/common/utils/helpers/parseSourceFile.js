@@ -13,8 +13,8 @@ const parseSourceFile = ({ content }) => {
   };
 
   const getHost = () => {
-    const hostMetaElement = get('attributes', 'metadata', 'content').from(source)
-      .find(item => item.content.key.content === 'HOST');
+    const metadata = get('attributes', 'metadata', 'content').from(source);
+    const hostMetaElement = metadata && metadata.find(item => item.content.key.content === 'HOST');
     return hostMetaElement ? hostMetaElement.content.value.content : null;
   };
 
@@ -25,7 +25,7 @@ const parseSourceFile = ({ content }) => {
   const topLevelContentItems = source.content;
 
   const topLevelMeta = {
-    title: get('meta', 'title', 'content').from(source),
+    title: get('meta', 'title').from(source),
     description: topLevelDescriptionElement,
     host: getHost(),
   };

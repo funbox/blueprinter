@@ -38,9 +38,9 @@ class Parameters extends React.Component {
               </div>
               <div className="parameters__content" ref={setCollapsibleElement}>
                 {params.map((param, index) => {
-                  const title = get('meta', 'title', 'content').from(param);
-                  const description = get('meta', 'description', 'content').from(param);
-                  const defaultValue = get('content', 'value', 'attributes', 'default', 'content').from(param);
+                  const title = get('meta', 'title').from(param);
+                  const description = get('meta', 'description').from(param);
+                  const defaultValue = get('content', 'value', 'attributes', 'default').from(param);
                   const example = get('content', 'value', 'content').from(param);
                   let choices;
 
@@ -55,8 +55,8 @@ class Parameters extends React.Component {
                         <RawContent>
                           <code>{title || 'string'}</code>
                           &nbsp;
-                          {param.attributes.typeAttributes.content.map((attr, attrIndex) => (
-                            <span key={attrIndex}>({attr.content})</span>
+                          {param.attributes.typeAttributes.map((attr, attrIndex) => (
+                            <span key={attrIndex}>({attr})</span>
                           ))}
                           &nbsp;
                           {defaultValue &&
@@ -101,23 +101,13 @@ class Parameters extends React.Component {
 Parameters.propTypes = {
   params: PropTypes.arrayOf(PropTypes.shape({
     meta: PropTypes.shape({
-      description: PropTypes.shape({
-        element: PropTypes.string,
-        content: PropTypes.string,
-      }),
-      title: PropTypes.shape({
-        element: PropTypes.string,
-        content: PropTypes.string,
-      }),
+      description: PropTypes.string,
+      title: PropTypes.string,
     }),
     attributes: PropTypes.shape({
-      typeAttributes: PropTypes.shape({
-        element: PropTypes.string,
-        content: PropTypes.arrayOf(PropTypes.shape({
-          element: PropTypes.string,
-          content: PropTypes.string,
-        })),
-      }),
+      typeAttributes: PropTypes.arrayOf(
+        PropTypes.string
+      ),
     }),
     content: PropTypes.shape({
       key: PropTypes.shape({

@@ -9,9 +9,9 @@ const ActionCard = (props) => {
     location,
   } = props;
 
-  const href = props.href || get('attributes', 'href', 'content').from(action);
+  const href = props.href || get('attributes', 'href').from(action);
   const hrefVariables = get('attributes', 'hrefVariables', 'content').from(action);
-  const title = get('meta', 'title', 'content').from(action);
+  const title = get('meta', 'title').from(action);
   const description = action.content[0].element === 'copy' ? action.content[0].content : null;
   const method = props.method || extractTransactionMethod(action);
 
@@ -28,9 +28,9 @@ const ActionCard = (props) => {
           {method}
         </Link>
 
-        <span className="action-card__href">{href}</span>
+        <span className="action-card__href">{href.content || href}</span>
 
-        {!!title && <h4 className="action-card__title">{title}</h4>}
+        {!!title && <h4 className="action-card__title">{title.content || title}</h4>}
       </div>
 
       {(!!description || !!hrefVariables) && (
