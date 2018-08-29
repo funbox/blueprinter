@@ -75,6 +75,13 @@ const refactorAction = action => {
       return (index > -1) ? httpSource.content[index].content : null;
     };
 
+    const getSchema = httpSource => {
+      const index = httpSource.content.findIndex(item =>
+        item.element === 'asset' && item.meta.classes[0] === 'messageBodySchema');
+
+      return (index > -1) ? httpSource.content[index].content : null;
+    };
+
     const getDataAttributes = httpSource => {
       const index = getSourceElementIndexByType(httpSource, 'dataStructure');
 
@@ -107,7 +114,7 @@ const refactorAction = action => {
       body: getBody(sourceResponse),
       description: getDescription(sourceResponse),
       headers: sourceResponse.attributes.headers ? sourceResponse.attributes.headers.content.map(refactorHeader) : null,
-      schema: null,
+      schema: getSchema(sourceResponse),
       statusCode: get('attributes', 'statusCode', 'content').from(sourceResponse),
     };
 
@@ -136,7 +143,7 @@ const refactorAction = action => {
 
   return {
     attributes: {
-      href: action.attributes.href.content,
+      href: action.attributes.href.content || action.attributes.href,
       hrefVariables: get('attributes', 'hrefVariables', 'content').from(action),
       method,
     },
