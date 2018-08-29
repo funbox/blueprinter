@@ -7,6 +7,8 @@ const path = require('path');
 const frontendEnv = require('funbox-frontend-env-webpack');
 const webpack = frontendEnv.webpack;
 
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+
 const Csso = require('csso-webpack-plugin').default;
 
 module.exports = options => {
@@ -20,7 +22,7 @@ module.exports = options => {
   const config = frontendEnv.webpackConfigurationBuilder(options);
 
   config.entry = {
-    app: './src/app/app.entry.js',
+    app: `${__dirname}/../src/app/app.entry.js`,
   };
 
   config.resolve.extensions = ['.js', '.jsx'];
@@ -74,6 +76,37 @@ module.exports = options => {
       new RegExp('^./(json|http)$')
     ),
   ]);
+
+  if (options.inlineSource) {
+    // При сборке проекта из APIB-доки инлайним скрипты, стили и шрифты в html,
+    // чтобы получить один файл
+
+    config.plugins
+      .map(plugin => {
+        if (plugin.constructor.name === 'HtmlWebpackPlugin') {
+          plugin.options.inlineSource = '.(js|css)$';
+        }
+      });
+
+    config.plugins = config.plugins.concat([
+      new HtmlWebpackInlineSourcePlugin(),
+    ]);
+
+    // Удаляем woff-шрифты из file-loader и используем для них inline-loader
+    config.module.rules
+      .map(rule => {
+        if (rule.loader && rule.loader.startsWith('file-loader') && rule.test.toString().includes('|woff')) {
+          rule.test = /\.(ttf|otf|eot)$/;
+        }
+      });
+
+    config.module.rules = config.module.rules.concat([
+      {
+        test: /\.(woff|woff2)$/,
+        loader: 'base64-inline-loader?name=[name].[ext]',
+      },
+    ]);
+  }
 
   if (!options.disableCssExtracting) {
     // Меняем в настройках плагина для экстракции CSS в файл, шаблон имени файла.
