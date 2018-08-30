@@ -10,13 +10,20 @@ const webpack = frontendEnv.webpack;
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const Csso = require('csso-webpack-plugin').default;
+const BASE_PATH = `${__dirname}/..`;
 
 module.exports = options => {
   _defaultsDeep(options, {
     appVersion: require('./webpack.app.version'),
     //proxyApiTarget: 'http://example.com/api/',
-    projectBasePath: `${__dirname}/..`,
+    projectBasePath: BASE_PATH,
     sassImports: require('./webpack.app.sassImports'),
+    htmlEntries: [
+      {
+        inputFile: `${BASE_PATH}/src/index.jade`,
+        chunksOrder: ['vendor', 'app'],
+      },
+    ],
   });
 
   const config = frontendEnv.webpackConfigurationBuilder(options);
@@ -48,7 +55,7 @@ module.exports = options => {
           : []
         ),
       },
-      exclude: absPath => absPath.match(/node_modules/),
+      exclude: /node_modules[\\/](?!(blueprinter-frontend)[\\/]).*/,
     },
   ]);
 
@@ -157,7 +164,7 @@ module.exports = options => {
     {
       loader: 'funbox-scss-imports-loader',
       options: {
-        paths: require('./webpack.app.scssImports'),
+        paths: require('./webpack.app.scssImports').map(scssPath => `${BASE_PATH.replace(/\\/g, '/')}/src/${scssPath}`),
       },
     },
     'funbox-scss-vars-loader',
