@@ -17,7 +17,7 @@ import ApiHost from 'app/components/api-host';
 import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
 import uniqid from 'uniqid';
 
-import source from 'app/mocks/main';
+import source from 'app/source';
 
 const { topLevelMeta, groups, actions } = parseSourceFile(source);
 
@@ -53,6 +53,8 @@ export default class Home extends React.Component {
       const transition = ref.current;
 
       const actionCard = document.querySelector(`[data-id=action-${id}]`);
+
+      if (!transition || !actionCard) return;
 
       const actionCardStyle = getComputedStyle(actionCard);
       const transitionCardStyle = getComputedStyle(transition);
