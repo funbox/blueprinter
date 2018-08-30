@@ -30,6 +30,10 @@ const parseSourceFile = ({ content }) => {
     host: getHost(),
   };
 
+  Object.values(categories).forEach(itemArray => {
+    if (itemArray.length > 0) itemArray.length = 0;
+  });
+
   topLevelContentItems.forEach(item => {
     if (item.element === 'category') {
       const categoryType = Array.isArray(item.meta.classes) ?
