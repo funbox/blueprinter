@@ -14,12 +14,11 @@ import ResourceGroupSection from 'app/components/resource-group-section';
 import Resource from 'app/components/resource';
 import ApiHost from 'app/components/api-host';
 
-import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
 import uniqid from 'uniqid';
 
 import source from 'app/source';
 
-const { topLevelMeta, groups, actions } = parseSourceFile(source);
+const { topLevelMeta, groups, actions } = source;
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -54,7 +53,12 @@ export default class Home extends React.Component {
 
       const actionCard = document.querySelector(`[data-id=action-${id}]`);
 
-      if (!transition || !actionCard) return;
+      if (id && !actionCard) {
+        // После обновления refract-источника (json) для транзакций создаются новые id и вызывается componentDidUpdate
+        // однако ссылки (ref) на элементы не меняются, они создаются только во время выполнения конструктора
+        // В этом случае надо перезагрузить страницу, чтобы пересоздать ref для блоков транзакций по новым id
+        window.location.reload();
+      }
 
       const actionCardStyle = getComputedStyle(actionCard);
       const transitionCardStyle = getComputedStyle(transition);

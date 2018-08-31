@@ -1,3 +1,6 @@
-const source = require('./refract.json');
+import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
 
-export default source;
+const source = require('./refract.json');
+const parsedSource = parseSourceFile(source);
+
+export default parsedSource;
