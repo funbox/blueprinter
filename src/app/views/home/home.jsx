@@ -40,6 +40,8 @@ export default class Home extends React.Component {
     // актуальную информацию о высоте нужных элементов
     setTimeout(this.synchronizeDimensions, 1);
     window.addEventListener('resize', this.synchronizeDimensions);
+
+    document.title = topLevelMeta.title || 'API Blueprint';
   }
 
   componentDidUpdate() {
