@@ -33,21 +33,23 @@ const ActionCard = (props) => {
         {!!title && <h4 className="action-card__title">{title}</h4>}
       </div>
 
-      <div className="action-card__body">
-        {!!description && (
-          <RawContent
-            mix="action-card__description"
-          >
-            {withHeaderAnchors(htmlFromText(description))}
-          </RawContent>
-        )}
+      {(!!description || !!hrefVariables) && (
+        <div className="action-card__body">
+          {!!description && (
+            <RawContent
+              mix="action-card__description"
+            >
+              {withHeaderAnchors(htmlFromText(description))}
+            </RawContent>
+          )}
 
-        {!!hrefVariables && (
-          <div className="action-card__content">
-            <Parameters params={hrefVariables}/>
-          </div>
-        )}
-      </div>
+          {!!hrefVariables && (
+            <div className="action-card__content">
+              <Parameters params={hrefVariables}/>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
