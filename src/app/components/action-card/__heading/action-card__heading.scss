@@ -5,4 +5,9 @@
   padding: $basePadding / 2 $basePadding;
   border-bottom: 1px solid $stroke-color--primary;
   background-color: $grayLight;
+
+  &:only-child {
+    border-bottom: none;
+    border-radius: 6px;
+  }
 }
