@@ -1,6 +1,6 @@
 {
   "name": "apib-blueprinter",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Replacement of Aglio library for rendering generated AST as HTML page.",
   "scripts": {
     "start": "npm run dev",
