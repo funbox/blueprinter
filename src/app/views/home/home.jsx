@@ -14,10 +14,10 @@ import ResourceGroupSection from 'app/components/resource-group-section';
 import Resource from 'app/components/resource';
 import ApiHost from 'app/components/api-host';
 import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
-
+import sourceMock from 'app/source';
 import uniqid from 'uniqid';
 
-const source = window.refract;
+const source = window.refract || sourceMock;
 const parsedSource = parseSourceFile(source);
 
 const { topLevelMeta, groups, actions } = parsedSource;
