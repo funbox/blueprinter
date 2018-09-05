@@ -5,4 +5,5 @@ module.exports = require('./webpack.app.config')({
   build: true,
   test: false,
   inlineSource: true,
+  publicFolder: 'static',
 });

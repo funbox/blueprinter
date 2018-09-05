@@ -6,6 +6,7 @@
     "start": "npm run dev",
     "build": "funbox-build",
     "build-production": "funbox-build-production",
+    "build-static": "node ./bin/build-static.js",
     "dev": "funbox-dev",
     "lint:sass": "sass-lint -c node_modules/sass-lint-config-funbox/lib/.sass-lint.yml \"src/**/*.sass\" -v",
     "lint:scss": "stylelint \"src/**/*.scss\" --syntax scss --fix --config .stylelintrc --cache",
@@ -13,7 +14,8 @@
     "lint:js:tests": "eslint -c node_modules/eslint-config-funbox/.eslintrc.test.only src/tests",
     "lint:js": "npm run -s lint:js:app && npm run -s lint:js:tests",
     "lint": "npm run -s lint:scss && npm run -s lint:sass && npm run -s lint:js",
-    "prebuild": "npm run lint"
+    "prebuild": "npm run lint",
+    "prepublishOnly": "npm run build-static"
   },
   "dependencies": {
     "browser-sync": "2.24.7",
