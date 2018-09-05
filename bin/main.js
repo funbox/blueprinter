@@ -33,7 +33,11 @@ const sendStaticFile = async (outputFileName) => {
   const htmlData = await readFile(staticFileLocation, { encoding: 'utf-8' });
   const refractData = await readFile(refractFileLocation, { encoding: 'utf-8' });
 
-  const htmlWithRefract = htmlData.replace('<script src="./refract.js"></script>', `<script>${refractData}</script>`);
+  const htmlWithRefract = htmlData
+    .replace('<script src="./refract.js"></script>', `<script>${refractData}</script>`)
+    .replace(/\/favicon/g, `${BASE_PATH}/static$&`)
+    .replace(/\/safari-pinned-tab/, `${BASE_PATH}/static$&`)
+    .replace(/\/apple-touch-icon/, `${BASE_PATH}/static$&`);
   try {
     await writeFile(outputFileName, htmlWithRefract);
   } catch (error) {
