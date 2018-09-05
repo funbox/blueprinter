@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
 const protagonist = require('protagonist');
-const webpack = require('webpack');
 
 const { errMessage } = require('./utils');
 
@@ -15,26 +14,8 @@ const defaultOptions = {
 };
 
 const BASE_PATH = `${__dirname}/..`;
-const buildConfig = require(path.resolve(BASE_PATH, 'config/webpack.app.doc.js'));
-buildConfig.bail = true;
 
 const filterSource = source => source.replace(/\r\n?/g, '\n').replace(/\t/g, '    ');
-
-const buildFile = () => (
-  new Promise((resolve, reject) => {
-    const compiler = webpack(buildConfig);
-
-    compiler.run((err, stats) => {
-      if (err || stats.hasErrors()) {
-        console.log('Webpack compiling error');
-        console.log(err ? err.message : stats.toJson().errors);
-        return reject();
-      }
-      console.log('Done compiling');
-      resolve();
-    });
-  })
-);
 
 const createRefract = source => promisify(protagonist.parse)(source, {})
   .then(res => {
@@ -46,8 +27,8 @@ const createRefract = source => promisify(protagonist.parse)(source, {})
     }
   });
 
-const sendRenderedFile = (outputFileName) => {
-  const renderedFileLocation = path.resolve(BASE_PATH, 'public/index.html');
+const sendStaticFile = (outputFileName) => {
+  const renderedFileLocation = path.resolve(BASE_PATH, 'static/index.html');
   fs.copyFileSync(renderedFileLocation, outputFileName);
 };
 
@@ -73,8 +54,7 @@ const renderRefract = async (inputFileName, opts, callback) => {
 const renderAndBuild = async (inputFileName, outputFileName, opts, callback) => {
   try {
     await renderRefract(inputFileName, opts, callback);
-    await buildFile();
-    sendRenderedFile(outputFileName);
+    sendStaticFile(outputFileName);
     return callback();
   } catch (error) {
     return callback(error);
