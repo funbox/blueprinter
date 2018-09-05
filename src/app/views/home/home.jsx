@@ -13,12 +13,14 @@ import TransitionContainer from 'app/components/transition-container';
 import ResourceGroupSection from 'app/components/resource-group-section';
 import Resource from 'app/components/resource';
 import ApiHost from 'app/components/api-host';
+import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
 
 import uniqid from 'uniqid';
 
-import source from 'app/source';
+const source = window.refract;
+const parsedSource = parseSourceFile(source);
 
-const { topLevelMeta, groups, actions } = source;
+const { topLevelMeta, groups, actions } = parsedSource;
 
 export default class Home extends React.Component {
   constructor(props) {
