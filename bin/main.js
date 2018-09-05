@@ -27,9 +27,18 @@ const createRefract = source => promisify(protagonist.parse)(source, {})
     }
   });
 
-const sendStaticFile = (outputFileName) => {
-  const renderedFileLocation = path.resolve(BASE_PATH, 'static/index.html');
-  fs.copyFileSync(renderedFileLocation, outputFileName);
+const sendStaticFile = async (outputFileName) => {
+  const staticFileLocation = path.resolve(BASE_PATH, 'static/index.html');
+  const refractFileLocation = path.resolve(BASE_PATH, 'static/refract.js');
+  const htmlData = await readFile(staticFileLocation, { encoding: 'utf-8' });
+  const refractData = await readFile(refractFileLocation, { encoding: 'utf-8' });
+
+  const htmlWithRefract = htmlData.replace('<script src="./refract.js"></script>', `<script>${refractData}</script>`);
+  try {
+    await writeFile(outputFileName, htmlWithRefract);
+  } catch (error) {
+    throw errMessage('Error writing rendered html', error);
+  }
 };
 
 const renderRefract = async (inputFileName, opts, callback) => {
@@ -43,7 +52,8 @@ const renderRefract = async (inputFileName, opts, callback) => {
     const refract = await createRefract(filteredInput)
       .catch(error => callback(errMessage('Error parsing input', error)));
 
-    await writeFile(`${BASE_PATH}/src/app/source/refract.json`, refract)
+    const data = `refract = ${refract};`;
+    await writeFile(`${BASE_PATH}/static/refract.js`, data)
       .catch(error => callback(errMessage('Error writing refracted output', error)));
 
   } catch (error) {
@@ -54,7 +64,8 @@ const renderRefract = async (inputFileName, opts, callback) => {
 const renderAndBuild = async (inputFileName, outputFileName, opts, callback) => {
   try {
     await renderRefract(inputFileName, opts, callback);
-    sendStaticFile(outputFileName);
+    await sendStaticFile(outputFileName);
+    console.log(`Rendering done. Open "${outputFileName}" to see result.`);
     return callback();
   } catch (error) {
     return callback(error);
