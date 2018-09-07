@@ -14,7 +14,7 @@ argsParser
 
 const argv = argsParser.argv;
 
-const errorHandler = (err) => {
+const exit = (err) => {
   if (err) {
     console.log(err.message);
     process.exit(1);
@@ -31,9 +31,12 @@ const argvError = () => {
 if (argv.s) {
   if (!argv.i) argvError();
 
-  renderAndServe(argv.i, argv.p, argv.h, argv, errorHandler);
+  renderAndServe(argv.i, argv.p, argv.h, argv)
+    .catch(error => exit(error));
 } else {
   if (!argv.i || !argv.o) argvError();
 
-  renderAndBuild(argv.i, argv.o, argv, errorHandler);
+  renderAndBuild(argv.i, argv.o, argv)
+    .then(() => exit())
+    .catch(error => exit(error));
 }

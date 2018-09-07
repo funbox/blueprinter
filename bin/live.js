@@ -9,28 +9,24 @@ const serverParams = {
   injectChanges: false,
 };
 
-const renderAndServe = async (inputFileName, port, host, options, callback) => {
+const renderAndServe = async (inputFileName, port, host, options) => {
   const watchSource = (fileName) => {
     const watcher = browserSync.watch(fileName);
 
     watcher.on('change', (path) => {
       console.log(`Updated ${path}`);
-      renderRefract(inputFileName, options, callback).then(() => browserSync.reload());
+      renderRefract(inputFileName, options).then(() => browserSync.reload());
     })
   };
 
-  try {
-    await renderRefract(inputFileName, options, callback);
-    const isFree = await isPortFree(port);
+  await renderRefract(inputFileName, options);
+  const isFree = await isPortFree(port);
 
-    if (!isFree) {
-      return callback(new Error(`Error starting server. Port ${port} is busy`));
-    }
-
-    startServer(port, host).then(() => watchSource(inputFileName));
-  } catch (error) {
-    return callback(error);
+  if (!isFree) {
+    throw new Error(`Error starting server. Port ${port} is busy`);
   }
+
+  await startServer(port, host).then(() => watchSource(inputFileName));
 };
 
 function startServer(port, host) {

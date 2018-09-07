@@ -45,35 +45,26 @@ const sendStaticFile = async (outputFileName) => {
   }
 };
 
-const renderRefract = async (inputFileName, opts, callback) => {
+const renderRefract = async (inputFileName, opts) => {
   const options = { ...defaultOptions, ...opts };
 
-  try {
-    const filteredInput = await readFile(inputFileName, { encoding: 'utf-8' })
-      .then(input => options.filterInput ? filterSource(input) : input)
-      .catch(error => callback(errMessage('Error reading file', error)));
+  const filteredInput = await readFile(inputFileName, { encoding: 'utf-8' })
+    .then(input => options.filterInput ? filterSource(input) : input)
+    .catch(error => Promise.reject(errMessage('Error reading file', error)));
 
-    const refract = await createRefract(filteredInput)
-      .catch(error => callback(errMessage('Error parsing input', error)));
+  const refract = await createRefract(filteredInput)
+    .catch(error => Promise.reject(errMessage('Error parsing input', error)));
 
-    const data = `refract = ${refract};`;
-    await writeFile(`${BASE_PATH}/static/refract.js`, data)
-      .catch(error => callback(errMessage('Error writing refracted output', error)));
+  const data = `refract = ${refract};`;
 
-  } catch (error) {
-    callback(error);
-  }
+  await writeFile(`${BASE_PATH}/static/refract.js`, data)
+    .catch(error => Promise.reject(errMessage('Error writing refracted output', error)));
 };
 
-const renderAndBuild = async (inputFileName, outputFileName, opts, callback) => {
-  try {
-    await renderRefract(inputFileName, opts, callback);
-    await sendStaticFile(outputFileName);
-    console.log(`Rendering done. Open "${outputFileName}" to see result.`);
-    return callback();
-  } catch (error) {
-    return callback(error);
-  }
+const renderAndBuild = async (inputFileName, outputFileName, opts) => {
+  await renderRefract(inputFileName, opts);
+  await sendStaticFile(outputFileName);
+  console.log(`Rendering done. Open "${outputFileName}" to see result.`);
 };
 
 module.exports = {
