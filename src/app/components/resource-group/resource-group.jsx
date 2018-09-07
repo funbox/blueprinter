@@ -1,5 +1,5 @@
 import { SlideToggle } from 'react-slide-toggle';
-import { extractTransactionMethod as extractMethod, get } from 'app/common/utils/helpers/';
+import { extractTransactionMethod as extractMethod, get, hashFromTitle } from 'app/common/utils/helpers/';
 
 import Link from 'app/components/link';
 import Menu, { Menu__Item } from 'app/components/menu';
@@ -7,7 +7,6 @@ import MethodBadge from 'app/components/method-badge';
 
 const maxNestingLevel = 3;
 const defaultTitle = 'Resource Group';
-const hashFromTitle = title => title.split(' ').join('-');
 
 class ResourceGroup extends React.Component {
   constructor(props) {
