@@ -47,6 +47,31 @@ class ResourceGroup extends React.Component {
       );
     });
 
+    const descriptionSection = content.find(item => item.element === 'copy');
+
+    if (level === 2 && descriptionSection) {
+      const descriptionHeaders = [];
+      const regex = /#{2,}\s?(.+)\n/g;
+      let match = regex.exec(descriptionSection.content);
+      while (match) {
+        descriptionHeaders.push(match[1]);
+        match = regex.exec(descriptionSection.content);
+      }
+      const headerItems = descriptionHeaders.map(header => {
+        const hash = hashFromTitle(`header-${header.toLowerCase()}`);
+        return (
+          <Menu__Item
+            mods={{ level: 2, submenu: true }}
+            key={`header-${header}`}
+            text={header}
+            to={{ hash, pathname: route.location.pathname }}
+          />
+        );
+      });
+
+      menuItems.unshift(...headerItems);
+    }
+
     return (
       <Menu mods={{ type: 'side' }} mix="resource-group__nested">
         {menuItems}
