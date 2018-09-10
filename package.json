@@ -60,6 +60,7 @@
     "showdown": "1.8.6",
     "style-loader": "0.20.1",
     "stylelint": "8.4.0",
+    "suppress-chunks-webpack-plugin": "0.0.4",
     "uniqid": "5.0.3",
     "url-parse": "1.4.1"
   },
