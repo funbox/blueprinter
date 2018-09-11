@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1 (11.09.2018)
+
+* Fix render errors in React components
+
 ## 1.2.0 (10.09.2018)
 
 * Update build process of static HTML
