@@ -59,16 +59,21 @@ const parseSourceFile = ({ content }) => {
         if (action.element === 'copy') return;
 
         if (!action.attributes) {
-          action.attributes = resource.attributes;
+          action.attributes = {};
         }
+
+        action.attributes = { ...resource.attributes, ...action.attributes };
         action.id = uniqid.time();
         actions.push(action);
       });
     });
   });
 
-  if (categories.dataStructuresArray[0]) {
-    categories.dataStructuresArray = [...categories.dataStructuresArray[0].content];
+  if (categories.dataStructuresArray.length > 0) {
+    categories.dataStructuresArray = categories.dataStructuresArray.reduce((res, dsItem) => {
+      res.push(...dsItem.content);
+      return res;
+    }, []);
   }
 
   const refactoredActions = actions.map(refactorAction);
