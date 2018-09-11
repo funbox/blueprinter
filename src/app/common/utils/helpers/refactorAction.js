@@ -27,7 +27,7 @@ const resolveInheritance = (valueMember, parent) => {
     const refDSContent = Array.isArray(referencedDataStructure.content)
       ? referencedDataStructure.content[0].content : referencedDataStructure.content.content;
     refDSContent.forEach(item => resolveInheritance(item, referencedDataStructure.content[0]));
-    const referencedObjectContent = [...refDSContent];
+    const referencedObjectContent = [...referencedDataStructure.content[0].content];
 
     if (type === 'ref') {
       const refMemberIndex = parent.content.indexOf(valueMember);
