@@ -7,6 +7,7 @@ import MethodBadge from 'app/components/method-badge';
 
 const maxNestingLevel = 3;
 const defaultTitle = 'Resource Group';
+let prevHash = '';
 
 class ResourceGroup extends React.Component {
   constructor(props) {
@@ -93,8 +94,10 @@ class ResourceGroup extends React.Component {
     const hash = hashFromTitle(title);
 
     const needJumpToGroup = () => {
-      const currentHash = decodeURIComponent(route.location.hash);
-      return currentHash !== `#${hash}`;
+      const currentHash = decodeURIComponent(window.location.hash);
+      const need = currentHash !== prevHash;
+      prevHash = currentHash;
+      return need;
     };
 
     return (
