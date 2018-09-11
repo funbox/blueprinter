@@ -41,12 +41,17 @@ class Parameters extends React.Component {
                   const title = get('meta', 'title').from(param);
                   const description = get('meta', 'description').from(param);
                   const defaultValue = get('content', 'value', 'attributes', 'default').from(param);
-                  const example = get('content', 'value', 'content').from(param);
+                  const valueType = get('content', 'value', 'element').from(param);
+                  let example = get('content', 'value', 'content').from(param);
                   let choices;
+                  let exampleValue;
 
-                  if (title === 'enum') {
-                    choices = get('content', 'value', 'attributes', 'enumerations', 'content').from(param);
+                  if (valueType === 'enum') {
+                    choices = example;
+                    example = get('attributes', 'samples').from(param);
                   }
+
+                  exampleValue = Array.isArray(example) ? example.map(exItem => exItem.content).join(', ') : example;
 
                   return (
                     <div className="parameters__item" key={index * 2}>
@@ -69,7 +74,7 @@ class Parameters extends React.Component {
                           {example &&
                             <span className="parameters__example">
                               <strong>Example: </strong>
-                              <span>{example.content || example}</span>
+                              <span>{exampleValue}</span>
                             </span>
                           }
                           &nbsp;
@@ -116,7 +121,10 @@ Parameters.propTypes = {
       }),
       value: PropTypes.shape({
         element: PropTypes.string,
-        content: PropTypes.string,
+        content: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.array,
+        ]),
       }),
     }),
   })),
