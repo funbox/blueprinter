@@ -45,6 +45,7 @@ Attribute__Row.propTypes = {
       PropTypes.object,
       PropTypes.array,
       PropTypes.string,
+      PropTypes.number,
     ]),
   }),
   parentType: PropTypes.string,
