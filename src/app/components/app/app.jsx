@@ -17,9 +17,8 @@ export default class App extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    const { location } = this.props;
-
+  componentWillReceiveProps(nextProps) {
+    const { location } = nextProps;
     const currentHash = decodeURIComponent(location.hash);
     const elementId = currentHash.replace('#', '');
     const element = document.getElementById(elementId);
