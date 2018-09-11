@@ -45,6 +45,14 @@ export default class Home extends React.Component {
     document.title = topLevelMeta.title || 'API Blueprint';
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { location } = this.props;
+    const nextLocation = nextProps.location;
+    const currentHash = decodeURIComponent(location.hash);
+    const nextHash = decodeURIComponent(nextLocation.hash);
+    return currentHash === nextHash;
+  }
+
   componentDidUpdate() {
     this.synchronizeDimensions();
   }
@@ -157,3 +165,9 @@ export default class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+  }),
+};
