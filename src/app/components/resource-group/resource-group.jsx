@@ -17,6 +17,15 @@ class ResourceGroup extends React.Component {
     this.toggleClass = this.toggleClass.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    const { group } = nextProps;
+    const { route } = nextContext.router;
+    const title = get('meta', 'title').from(group) || defaultTitle;
+    const hash = hashFromTitle(title);
+    return `#${hash}` === route.location.hash;
+  }
+
+
   buildContentList(content, options = {}) {
     const { level } = options;
     const { route } = this.context.router;
