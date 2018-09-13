@@ -4,7 +4,6 @@ import ActionCard from 'app/components/action-card';
 import Resource__Action from './__action';
 
 import { get, hashFromTitle, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
-import uniqid from 'uniqid';
 
 const defaultTitle = 'Resource';
 
@@ -39,10 +38,10 @@ class Resource extends React.Component {
             {content
               .filter(rItem => rItem.element !== 'copy')
               .map(action => (
-                <Resource__Action id={action.id} key={uniqid.time()}>
+                <Resource__Action id={action.id} key={`resource-action-${action.id}`}>
                   <ActionCard
                     action={action}
-                    key={uniqid.time()}
+                    key={`action-${action.id}`}
                     href={href}
                   />
                 </Resource__Action>

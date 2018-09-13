@@ -15,7 +15,6 @@ import Resource from 'app/components/resource';
 import ApiHost from 'app/components/api-host';
 import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
 import sourceMock from 'app/source';
-import uniqid from 'uniqid';
 
 const source = window.refract || sourceMock;
 const parsedSource = parseSourceFile(source);
@@ -111,7 +110,7 @@ export default class Home extends React.Component {
               {groups.map(group => (
                 <ResourceGroupSection
                   group={group}
-                  key={uniqid.time()}
+                  key={`group-${group.meta.title}`}
                   mix="main-content__resource-group"
                 >
                   {group.content
@@ -119,7 +118,7 @@ export default class Home extends React.Component {
                     .map(resource => (
                       <Resource
                         resource={resource}
-                        key={uniqid.time()}
+                        key={`resource-${resource.meta.title}`}
                       />
                   ))}
                 </ResourceGroupSection>
@@ -145,7 +144,7 @@ export default class Home extends React.Component {
 
               {
                 actions.map(action => (
-                  <Page__Stripe mods={{ for: 'transition' }} key={uniqid.time()}>
+                  <Page__Stripe mods={{ for: 'transition' }} key={`transition-${action.id}`}>
                     <TransitionContainer
                       myRef={this.transitions.get(action.id)}
                     >
