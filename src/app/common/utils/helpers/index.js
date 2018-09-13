@@ -3,7 +3,7 @@ import showdown from 'showdown';
 
 import Anchor from 'app/components/anchor';
 
-const converter = new showdown.Converter();
+const converter = new showdown.Converter({ disableForced4SpacesIndentedSublists: true });
 
 const htmlFromText = (text, wrap = 'no-wrap', Tag = 'div') => {
   const htmlString = converter.makeHtml(text);
