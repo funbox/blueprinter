@@ -17,8 +17,8 @@ class Transition extends React.Component {
     super(props);
 
     this.state = {
-      transactions: [],
-      currentTransaction: null,
+      selectedRequest: null,
+      selectedResponse: null,
     };
 
     this.transitionAttributes = {
