@@ -4,7 +4,7 @@ import { get, hashFromTitle, htmlFromText, withHeaderAnchors } from 'app/common/
 
 const defaultTitle = 'Resource Group';
 
-class ResourceGroupSection extends React.Component {
+class ResourceGroupSection extends React.PureComponent {
   render() {
     const { route } = this.context.router;
     const { group, children } = this.props;

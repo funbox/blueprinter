@@ -1,4 +1,4 @@
-class TransitionContainer extends React.Component {
+class TransitionContainer extends React.PureComponent {
   render() {
     return (
       <div
