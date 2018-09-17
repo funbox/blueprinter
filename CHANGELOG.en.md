@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0 (17.09.2018)
+
+* Optimize sections repaint during manipulations with menu
+
 ## 1.2.2 (17.09.2018)
 
 * Exclude redundant files from the published package
