@@ -21,7 +21,7 @@ const parsedSource = parseSourceFile(source);
 
 const { topLevelMeta, groups, actions } = parsedSource;
 
-export default class Home extends React.Component {
+export default class Home extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -42,14 +42,6 @@ export default class Home extends React.Component {
     window.addEventListener('resize', this.synchronizeDimensions);
 
     document.title = topLevelMeta.title || 'API Blueprint';
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const { location } = this.props;
-    const nextLocation = nextProps.location;
-    const currentHash = decodeURIComponent(location.hash);
-    const nextHash = decodeURIComponent(nextLocation.hash);
-    return currentHash === nextHash;
   }
 
   componentDidUpdate() {
@@ -164,9 +156,3 @@ export default class Home extends React.Component {
     );
   }
 }
-
-Home.propTypes = {
-  location: PropTypes.shape({
-    hash: PropTypes.string,
-  }),
-};
