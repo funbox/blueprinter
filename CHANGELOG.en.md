@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2 (17.09.2018)
+
+* Exclude redundant files from the published package
+
 ## 1.2.1 (11.09.2018)
 
 * Fix render errors in React components
