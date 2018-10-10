@@ -60,7 +60,7 @@
     "react-highlight": "0.12.0",
     "react-router-dom": "4.2.2",
     "react-slide-toggle": "0.1.13",
-    "sass-lint": "1.10.2-fb-1.8.1",
+    "@funbox/sass-lint": "1.10.2-fb-2.0.1",
     "sass-lint-config-funbox": "1.4.1",
     "sass-loader": "6.0.6",
     "showdown": "1.8.6",
