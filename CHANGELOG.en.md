@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.1 (10.10.2018)
+
+* Update @funbox/sass-lint to version 1.10.2-fb-2.0.1.
+* Update @funbox/protagonist to version 1.6.8-fb-2.0.0.
+
 ## 1.3.0 (17.09.2018)
 
 * Optimize sections repaint during manipulations with menu
