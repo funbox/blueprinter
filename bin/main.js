@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
-const protagonist = require('protagonist');
+const protagonist = require('@funbox/protagonist');
 
 const { errMessage } = require('./utils');
 
