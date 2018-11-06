@@ -56,7 +56,7 @@ const getAttributeChildren = attribute => {
   const complexTypes = ['array', 'enum', 'object', 'select', 'option'];
   const childrenByType = {
     array: (attr) => (Array.isArray(attr.content) ? attr.content : attr.content.value.content),
-    enum: (attr) => attr.content.value.content,
+    enum: (attr) => (Array.isArray(attr.content) ? attr.content : attr.content.value.content),
     object: (attr) => (Array.isArray(attr.content) ? attr.content : attr.content.value.content),
     select: (attr) => (attr.content),
     option: (attr) => (attr.content),
