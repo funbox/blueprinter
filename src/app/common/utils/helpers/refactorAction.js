@@ -3,7 +3,7 @@ import deepEqual from 'deep-equal';
 
 import categories from './categories';
 
-const standardTypes = ['array', 'enum', 'object'];
+const standardTypes = ['number', 'string', 'boolean', 'array', 'enum', 'object'];
 
 const refactorHeader = header => ({
   key: get('content', 'key', 'content').from(header),
@@ -40,27 +40,24 @@ const resolveInheritance = (valueMember, parent) => {
       parent.content = [...refilledArray];
     } else {
       if (!Array.isArray(valueMember.content)) valueMember.content = [];
-      valueMember.content.push(...referencedObjectContent);
+      valueMember.content.unshift(...referencedObjectContent);
       valueMember.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
     }
   }
 
-  const contentMap = {
-    object: (item) => item.content,
-    member: (item) => item.content.value.content,
-  };
+  let childElement;
+  if (type === 'member') {
+    const elementType = valueMember.content.value.element;
+    childElement = standardTypes.includes(elementType) ? valueMember.content.value : valueMember;
+  } else {
+    childElement = valueMember;
+  }
+  const childElementContent = childElement.content;
 
-  const parentMap = {
-    member: (item) => item.content.value,
-  };
-
-  const innerContent = contentMap[type] && contentMap[type](valueMember) || valueMember.content;
-  const innerContentItemParent = parentMap[type] && parentMap[type](valueMember) || valueMember;
-
-  if (Array.isArray(innerContent)) {
-    innerContent.map(item => resolveInheritance(item, innerContentItemParent));
-  } else if (innerContent && innerContent.value) {
-    resolveInheritance(innerContent.value, valueMember);
+  if (Array.isArray(childElementContent)) {
+    childElementContent.map(item => resolveInheritance(item, childElement));
+  } else if (childElementContent && childElementContent.value) {
+    resolveInheritance(childElementContent.value, valueMember);
   }
 
   return valueMember;
