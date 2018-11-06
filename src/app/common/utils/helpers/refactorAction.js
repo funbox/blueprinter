@@ -3,6 +3,8 @@ import deepEqual from 'deep-equal';
 
 import categories from './categories';
 
+const standardTypes = ['array', 'enum', 'object'];
+
 const refactorHeader = header => ({
   key: get('content', 'key', 'content').from(header),
   value: get('content', 'value', 'content').from(header),
@@ -28,6 +30,7 @@ const resolveInheritance = (valueMember, parent) => {
       ? referencedDataStructure.content[0].content : referencedDataStructure.content.content;
     refDSContent.forEach(item => resolveInheritance(item, referencedDataStructure.content[0]));
     const referencedObjectContent = [...referencedDataStructure.content[0].content];
+    const referencedObjectType = referencedDataStructure.content[0].element;
 
     if (type === 'ref') {
       const refMemberIndex = parent.content.indexOf(valueMember);
@@ -38,7 +41,7 @@ const resolveInheritance = (valueMember, parent) => {
     } else {
       if (!Array.isArray(valueMember.content)) valueMember.content = [];
       valueMember.content.push(...referencedObjectContent);
-      valueMember.element = 'object';
+      valueMember.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
     }
   }
 
