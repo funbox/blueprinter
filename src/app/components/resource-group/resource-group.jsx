@@ -34,15 +34,23 @@ class ResourceGroup extends React.Component {
     const menuItems = content.filter(item => item.element !== 'copy').map((item, index) => {
       const itemType = item.element;
       const nextLevel = level + 1;
-      const hasSubmenu = level < maxNestingLevel && !!item.content && item.content.length > 0;
+      let hasSubmenu = level < maxNestingLevel && !!item.content && item.content.length > 0;
+      const hasOnlyChild = !!item.content && item.content.length === 1;
       let title = item.meta.title.content || item.meta.title;
       let badge = null;
       let hash = hashFromTitle(title);
 
+      if (itemType === 'resource' && hasOnlyChild) {
+        hasSubmenu = false;
+        const method = extractMethod(item.content[0]);
+        badge = <MethodBadge method={method} mix="menu__item-icon"/>;
+      }
+
       if (itemType === 'transition') {
         const method = extractMethod(item);
         badge = <MethodBadge method={method} mix="menu__item-icon"/>;
-        title = title || `${method.toUpperCase()} ${get('attributes', 'href', 'content').from(item)}`;
+        const href = get('attributes', 'href', 'content').from(item) || get('attributes', 'href').from(item);
+        title = title || `${method.toUpperCase()} ${href}`;
         hash = hashFromTitle(`${title} ${method.toLowerCase()}`);
       }
 
