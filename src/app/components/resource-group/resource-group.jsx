@@ -54,9 +54,14 @@ class ResourceGroup extends React.Component {
         hash = hashFromTitle(`${title} ${method.toLowerCase()}`);
       }
 
+      const itemMods = {
+        ...(level ? { level, submenu: true } : {}),
+        badged: !!badge,
+      };
+
       return (
         <Menu__Item
-          mods={level ? { level, submenu: true } : {}}
+          mods={itemMods}
           key={`${itemType}-${index}`}
           text={title}
           to={{ hash, pathname: route.location.pathname }}

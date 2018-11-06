@@ -25,13 +25,20 @@
   .menu__item_level_3 {
     > .menu__item-content {
       > .menu__item-text {
-        padding-right: $basePadding * 3;
         padding-left: $basePadding;
       }
     }
 
     &:not(:last-child) {
       border-bottom: 1px solid $stroke-color--primary;
+    }
+  }
+
+  .menu__item_badged {
+    > .menu__item-content {
+      > .menu__item-text {
+        padding-right: $basePadding * 3;
+      }
     }
   }
 
