@@ -18,12 +18,12 @@ const ActionCard = (props) => {
   return (
     <div
       className={b('action-card', { mods: { type: method } })}
-      id={hashFromTitle(`${title} ${method.toLowerCase()}`)}
+      id={hashFromTitle(`${title || props.title} ${method.toLowerCase()}`)}
     >
       <div className="action-card__heading">
         <Link
           mix="action-card__method"
-          to={{ hash: hashFromTitle(`${title} ${method.toLowerCase()}`), pathname: location.pathname }}
+          to={{ hash: hashFromTitle(`${title || props.title} ${method.toLowerCase()}`), pathname: location.pathname }}
         >
           {method}
         </Link>
@@ -62,6 +62,7 @@ ActionCard.propTypes = {
     attributes: PropTypes.object,
   }),
   href: PropTypes.string,
+  title: PropTypes.string,
   method: PropTypes.string,
   location: PropTypes.object,
 };

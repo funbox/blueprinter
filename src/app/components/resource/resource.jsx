@@ -43,6 +43,7 @@ class Resource extends React.Component {
                     action={action}
                     key={`action-${action.id}`}
                     href={href}
+                    title={title}
                   />
                 </Resource__Action>
               ))
