@@ -23,14 +23,14 @@ const formatHref = (href, variables) => {
   variables.forEach(variable => {
     const name = get('content', 'key', 'content').from(variable);
     const value = get('content', 'value', 'content').from(variable);
-    const type = get('meta', 'title', 'content').from(variable);
+    const type = get('meta', 'title', 'content').from(variable) || get('meta', 'title').from(variable);
 
     let definedValue;
 
     if (!value) {
       definedValue = type ? defaultValues[type] : name;
     } else {
-      definedValue = value.content || value;
+      definedValue = (Array.isArray(value) && value[0]) ? value[0].content : (value.content || value);
     }
 
     if (Array.isArray(paramKeys) && paramKeys.includes(name)) {
