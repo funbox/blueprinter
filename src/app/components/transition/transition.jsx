@@ -98,7 +98,7 @@ class Transition extends React.Component {
           {' '}
           {pathname}
           {!!formattedQuery && '?'}
-          <span dangerouslySetInnerHTML={{ __html: formattedQuery }}/>
+          <span className="transition__query" dangerouslySetInnerHTML={{ __html: formattedQuery }}/>
         </p>
 
         <Transition__Content

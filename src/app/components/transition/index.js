@@ -8,6 +8,7 @@ require('./__example-label/transition__example-label.scss');
 require('./__example-label/_selected/transition__example-label_selected.scss');
 require('./__example-list/transition__example-list.scss');
 require('./__method/transition__method.scss');
+require('./__query/transition__query.scss');
 require('./__no-content-notice/transition__no-content-notice.scss');
 
 require('./_type/_delete/transition_type_delete.scss');
