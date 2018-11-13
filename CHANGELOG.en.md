@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.3.2 (13.11.2018)
+
+* Fix line break within href parameters.
+* Fix href parameters containing enum elements.
+* Increase spacing of a menu element containing a method label.
+* Pass a title of a resource to the nested unnamed transaction.
+* Merge menu elements containing a resource and its only transaction.
+* Fix inheritance resolving of a member node with some content.
+* Set correct type of a structure during inheritance resolving.
+* Fix processing of an enum attribute content.
+
+
 ## 1.3.1 (10.10.2018)
 
 * Update @funbox/sass-lint to version 1.10.2-fb-2.0.1.
