@@ -9,7 +9,7 @@ const ActionCard = (props) => {
     location,
   } = props;
 
-  const href = props.href || get('attributes', 'href').from(action);
+  const href = get('attributes', 'href').from(action) || props.href;
   const hrefVariables = get('attributes', 'hrefVariables', 'content').from(action);
   const title = get('meta', 'title').from(action);
   const description = action.content[0].element === 'copy' ? action.content[0].content : null;
