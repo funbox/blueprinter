@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.3 (15.11.2018)
+
+* Fix rendering of a url parameter with curly braces.
+
 ## 1.3.2 (13.11.2018)
 
 * Fix line break within href parameters.
@@ -10,7 +14,6 @@
 * Fix inheritance resolving of a member node with some content.
 * Set correct type of a structure during inheritance resolving.
 * Fix processing of an enum attribute content.
-
 
 ## 1.3.1 (10.10.2018)
 
