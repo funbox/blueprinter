@@ -1,5 +1,5 @@
-import { get, htmlFromText } from './index';
 import uniqid from 'uniqid';
+import { get, htmlFromText } from './index';
 
 import categories from './categories';
 import refactorAction from './refactorAction';

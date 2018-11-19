@@ -1,5 +1,5 @@
-import { get } from './index';
 import deepEqual from 'deep-equal';
+import { get } from './index';
 
 import categories from './categories';
 
