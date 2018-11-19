@@ -22,8 +22,8 @@ class Parameters extends React.Component {
     const { collapsed } = this.state;
 
     return (
-      params.length > 0 ?
-        <SlideToggle
+      params.length > 0
+        ? <SlideToggle
           bestPerformance
           onCollapsed={this.toggleClass}
           onExpanding={this.toggleClass}
@@ -64,15 +64,15 @@ class Parameters extends React.Component {
                             <span key={attrIndex}>({attr})</span>
                           ))}
                           &nbsp;
-                          {defaultValue &&
-                            <span className="parameters__default">
+                          {defaultValue
+                            && <span className="parameters__default">
                               <strong>Default: </strong>
                               <span>{defaultValue}</span>
                             </span>
                           }
                           &nbsp;
-                          {example &&
-                            <span className="parameters__example">
+                          {example
+                            && <span className="parameters__example">
                               <strong>Example: </strong>
                               <span>{exampleValue}</span>
                             </span>

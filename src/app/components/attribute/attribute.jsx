@@ -47,8 +47,8 @@ class Attribute extends React.Component {
               onClick={onToggle}
             />
 
-            {!!nestedAttributes &&
-              <div className="attribute__children" ref={setCollapsibleElement}>{nestedAttributes}</div>
+            {!!nestedAttributes
+              && <div className="attribute__children" ref={setCollapsibleElement}>{nestedAttributes}</div>
             }
           </div>
         )}

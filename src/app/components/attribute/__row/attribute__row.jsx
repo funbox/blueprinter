@@ -23,13 +23,15 @@ const Attribute__Row = (props) => {
     <dl className={b('attribute__row', props)} onClick={props.onClick}>
       <dt className="attribute__key">
         {attributeKeyByType[parentType] || attributeKeyByType[attributeType] || attributeKey}
-        {attributeProps &&
-          <small className="attribute__props">{attributeProps}</small>
+        {attributeProps
+          && <small className="attribute__props">{attributeProps}</small>
         }
       </dt>
       <dd className="attribute__description-container">
-        {attributeType && !oneOfElement && !oneOfMember &&
-          <p className="attribute__type">{attributeType}</p>
+        {attributeType
+          && !oneOfElement
+          && !oneOfMember
+          && <p className="attribute__type">{attributeType}</p>
         }
         {attributeDescription && <p className="attribute__description">{attributeDescription}</p>}
         {attributeExample && !enumMember && <p className="attribute__example">{attributeExample}</p>}

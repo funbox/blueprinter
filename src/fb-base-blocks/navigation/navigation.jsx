@@ -23,13 +23,13 @@ const Navigation = (props) => {
         {title}
       </TitleTag>
 
-      {!mods.dropdown &&
-        <div className="navigation__menu">
+      {!mods.dropdown
+        && <div className="navigation__menu">
           {children}
         </div>
       }
-      {!!mods.dropdown &&
-        <Dropdown
+      {!!mods.dropdown
+        && <Dropdown
           {...dropdownProps}
         >
           {children}

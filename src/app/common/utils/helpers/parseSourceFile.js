@@ -36,8 +36,9 @@ const parseSourceFile = ({ content }) => {
 
   topLevelContentItems.forEach(item => {
     if (item.element === 'category') {
-      const categoryType = Array.isArray(item.meta.classes) ?
-        item.meta.classes[0] : item.meta.classes.content[0].content;
+      const categoryType = Array.isArray(item.meta.classes)
+        ? item.meta.classes[0]
+        : item.meta.classes.content[0].content;
 
       categories[`${categoryType}Array`].push(item);
     }

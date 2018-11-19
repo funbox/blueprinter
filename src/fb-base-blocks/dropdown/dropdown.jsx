@@ -152,8 +152,8 @@ class Dropdown extends React.Component {
         onKeyDown={this.controlByKeys}
         ref={r => { this.dropdown = r; }}
       >
-        {mods.handle !== 'link' &&
-          <Button
+        {mods.handle !== 'link'
+          && <Button
             mods={handleMods}
             mix={['dropdown__handle', ...handleMix]}
             onClick={this.toggle}
@@ -165,8 +165,8 @@ class Dropdown extends React.Component {
             {!handleText && handle.content}
           </Button>
         }
-        {mods.handle === 'link' &&
-          <Link
+        {mods.handle === 'link'
+          && <Link
             mods={handleMods}
             mix={['dropdown__handle', ...handleMix]}
             role="button"
