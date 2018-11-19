@@ -10,13 +10,13 @@ const refactorHeader = header => ({
   value: get('content', 'value', 'content').from(header),
 });
 
-const removeEmpty = object =>
+const removeEmpty = object => (
   Object.keys(object).reduce((res, key) => {
     if (object[key]) {
       res[key] = object[key];
     }
     return res;
-  }, {});
+  }, {}));
 
 const resolveInheritance = (valueMember, parent) => {
   const type = valueMember.element;
@@ -78,8 +78,8 @@ const refactorAction = action => {
     };
 
     const getSchema = httpSource => {
-      const index = httpSource.content.findIndex(item =>
-        item.element === 'asset' && item.meta.classes[0] === 'messageBodySchema');
+      const index = httpSource.content.findIndex(item => (
+        item.element === 'asset' && item.meta.classes[0] === 'messageBodySchema'));
 
       return (index > -1) ? httpSource.content[index].content : null;
     };

@@ -15,8 +15,7 @@ const htmlFromText = (text, wrap = 'no-wrap', Tag = 'div') => {
 };
 
 const get = (...path) => {
-  const from = (source) =>
-    path.reduce((xs, x) => ((xs && xs[x]) ? xs[x] : null), source);
+  const from = (source) => path.reduce((xs, x) => ((xs && xs[x]) ? xs[x] : null), source);
 
   return { from };
 };

@@ -12,14 +12,14 @@ export default class SandboxNavigation extends React.Component {
           Навигация по песочнице
         </h2>
         <ul>
-          {views.map((item, index) =>
+          {views.map((item, index) => (
             <li
               key={index}
             >
               {!!item.to && <Link to={item.to}>{item.name}</Link>}
               {!item.to && <span>{item.name}</span>}
             </li>
-          )}
+          ))}
         </ul>
       </nav>
     );

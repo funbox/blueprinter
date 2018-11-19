@@ -82,12 +82,12 @@ class Parameters extends React.Component {
                           {choices && choices.length > 0 && (
                             <p>
                               <strong>Choices: </strong>
-                              {choices.map(choice =>
+                              {choices.map(choice => (
                                 <span key={`enum-member-${choice.content}`}>
                                   {' '}
                                   <code>{choice.content}</code>
                                 </span>
-                              )}
+                              ))}
                             </p>
                           )}
                         </RawContent>
