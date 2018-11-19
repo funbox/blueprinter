@@ -24,16 +24,20 @@ const Navigation = (props) => {
       </TitleTag>
 
       {!mods.dropdown
-        && <div className="navigation__menu">
-          {children}
-        </div>
+        && (
+          <div className="navigation__menu">
+            {children}
+          </div>
+        )
       }
       {!!mods.dropdown
-        && <Dropdown
-          {...dropdownProps}
-        >
-          {children}
-        </Dropdown>
+        && (
+          <Dropdown
+            {...dropdownProps}
+          >
+            {children}
+          </Dropdown>
+        )
       }
     </nav>
   );

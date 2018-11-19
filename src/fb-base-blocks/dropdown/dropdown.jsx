@@ -153,30 +153,34 @@ class Dropdown extends React.Component {
         ref={r => { this.dropdown = r; }}
       >
         {mods.handle !== 'link'
-          && <Button
-            mods={handleMods}
-            mix={['dropdown__handle', ...handleMix]}
-            onClick={this.toggle}
-            aria-haspopup="true"
-            aria-expanded={opened}
-            {...handleProps}
-            {...(!!handleText ? { text: handleText } : {})}
-          >
-            {!handleText && handle.content}
-          </Button>
+          && (
+            <Button
+              mods={handleMods}
+              mix={['dropdown__handle', ...handleMix]}
+              onClick={this.toggle}
+              aria-haspopup="true"
+              aria-expanded={opened}
+              {...handleProps}
+              {...(!!handleText ? { text: handleText } : {})}
+            >
+              {!handleText && handle.content}
+            </Button>
+          )
         }
         {mods.handle === 'link'
-          && <Link
-            mods={handleMods}
-            mix={['dropdown__handle', ...handleMix]}
-            role="button"
-            onClick={this.handleLink}
-            aria-haspopup="true"
-            aria-expanded={opened}
-            {...handleProps}
-          >
-            {handle.content}
-          </Link>
+          && (
+            <Link
+              mods={handleMods}
+              mix={['dropdown__handle', ...handleMix]}
+              role="button"
+              onClick={this.handleLink}
+              aria-haspopup="true"
+              aria-expanded={opened}
+              {...handleProps}
+            >
+              {handle.content}
+            </Link>
+          )
         }
 
         <div className="dropdown__popup-context">

@@ -23,11 +23,12 @@ class Parameters extends React.Component {
 
     return (
       params.length > 0
-        ? <SlideToggle
-          bestPerformance
-          onCollapsed={this.toggleClass}
-          onExpanding={this.toggleClass}
-        >
+        ? (
+          <SlideToggle
+            bestPerformance
+            onCollapsed={this.toggleClass}
+            onExpanding={this.toggleClass}
+          >
           {({ onToggle, setCollapsibleElement }) => (
             <section className={b('parameters', { mods: { collapsed } })}>
               <div className="parameters__heading">
@@ -65,17 +66,21 @@ class Parameters extends React.Component {
                           ))}
                           &nbsp;
                           {defaultValue
-                            && <span className="parameters__default">
-                              <strong>Default: </strong>
-                              <span>{defaultValue}</span>
-                            </span>
+                            && (
+                              <span className="parameters__default">
+                                <strong>Default: </strong>
+                                <span>{defaultValue}</span>
+                              </span>
+                            )
                           }
                           &nbsp;
                           {example
-                            && <span className="parameters__example">
-                              <strong>Example: </strong>
-                              <span>{exampleValue}</span>
-                            </span>
+                            && (
+                              <span className="parameters__example">
+                                <strong>Example: </strong>
+                                <span>{exampleValue}</span>
+                              </span>
+                            )
                           }
                           &nbsp;
                           {description && <p>{description}</p>}
@@ -98,7 +103,9 @@ class Parameters extends React.Component {
               </div>
             </section>
           )}
-        </SlideToggle> : null
+        </SlideToggle>
+        )
+        : null
     );
   }
 }
