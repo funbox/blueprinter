@@ -5,11 +5,13 @@
 const _defaultsDeep = require('lodash/defaultsDeep');
 const path = require('path');
 const frontendEnv = require('funbox-frontend-env-webpack');
+
 const webpack = frontendEnv.webpack;
 
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const Csso = require('csso-webpack-plugin').default;
+
 const BASE_PATH = `${__dirname}/..`;
 
 module.exports = options => {

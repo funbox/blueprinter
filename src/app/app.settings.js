@@ -3,6 +3,7 @@ const settings = {
 };
 
 const settingsEnv = require('app.settings.env');
+
 Object.assign(settings, settingsEnv.default);
 
 export default settings;
