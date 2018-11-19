@@ -14,9 +14,7 @@
     "dev": "funbox-dev",
     "lint:sass": "sass-lint -c node_modules/sass-lint-config-funbox/lib/.sass-lint.yml \"src/**/*.sass\" -v",
     "lint:scss": "stylelint \"src/**/*.scss\" --syntax scss --fix --config .stylelintrc --cache",
-    "lint:js:app": "eslint --cache -c .eslintrc_react --ext .jsx,.js src/app",
-    "lint:js:tests": "eslint -c node_modules/eslint-config-funbox/.eslintrc.test.only src/tests",
-    "lint:js": "npm run -s lint:js:app && npm run -s lint:js:tests",
+    "lint:js": "eslint --cache -c .eslintrc.js --ext .jsx,.js src config",
     "lint": "npm run -s lint:scss && npm run -s lint:sass && npm run -s lint:js",
     "prebuild": "npm run lint",
     "prepublishOnly": "npm run build-static"
@@ -29,6 +27,7 @@
   },
   "devDependencies": {
     "@babel/polyfill": "7.0.0-beta.51",
+    "@funbox/eslint-config": "4.12.0",
     "autoprefixer": "7.2.5",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-plugin-transform-react-constant-elements": "6.23.0",
@@ -41,8 +40,7 @@
     "css-loader": "0.28.9",
     "csso-webpack-plugin": "1.0.0-beta.10",
     "deep-equal": "1.0.1",
-    "eslint": "2.9.0",
-    "eslint-config-funbox": "1.2.0",
+    "eslint": "5.8.0",
     "funbox-frontend-env-webpack": "10.2.0",
     "funbox-scss-imports-loader": "1.0.0",
     "funbox-scss-lint-config": "1.0.2",
