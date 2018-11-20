@@ -34,6 +34,7 @@ class Dropdown extends React.Component {
       this.open();
     }
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.mods && nextProps.mods.opened !== undefined) {
       this.setState({
