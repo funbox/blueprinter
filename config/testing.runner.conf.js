@@ -1,4 +1,6 @@
+const path = require('path');
+
 module.exports = {
-  projectBasePath: __dirname + '/..',
+  projectBasePath: path.join(__dirname, '/..'),
   runners: ['unit', 'e2e'],
 };
