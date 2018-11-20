@@ -1,5 +1,4 @@
 const SandboxTable = (props) => {
-
   const buildTableData = () => {
     return props.data.map((row, i) => {
       return (
