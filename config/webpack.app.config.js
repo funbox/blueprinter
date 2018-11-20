@@ -90,7 +90,7 @@ module.exports = options => {
     // чтобы получить один файл
 
     config.plugins
-      .map(plugin => {
+      .forEach(plugin => {
         if (plugin.constructor.name === 'HtmlWebpackPlugin') {
           plugin.options.inlineSource = '.(js|css)$';
         }
@@ -102,7 +102,7 @@ module.exports = options => {
 
     // Удаляем woff-шрифты из file-loader и используем для них inline-loader
     config.module.rules
-      .map(rule => {
+      .forEach(rule => {
         if (rule.loader && rule.loader.startsWith('file-loader') && rule.test.toString().includes('|woff')) {
           rule.test = /\.(ttf|otf|eot)$/;
         }
@@ -121,7 +121,7 @@ module.exports = options => {
     // Вместо дефолтного для рабочего окружения chunkhash, используем contenthash.
     // Чтобы при правках CSS и JS кода хэши для соответствующих файлов менялись независимо.
     config.plugins
-      .map(plugin => {
+      .forEach(plugin => {
         if (plugin.constructor.name === 'ExtractTextPlugin' && `${plugin.filename}`.indexOf('.css') > 0) {
           plugin.filename = '[name].[contenthash:16].css'
         }
