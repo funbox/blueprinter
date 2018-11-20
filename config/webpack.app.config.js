@@ -54,8 +54,7 @@ module.exports = options => {
         ].concat(!options.disableHmre && !options.build ? 'react-hmre' : []),
         plugins: ['transform-object-rest-spread'].concat(options.build
           ? ['transform-react-constant-elements', 'transform-react-remove-prop-types']
-          : [],
-        ),
+          : []),
       },
       exclude: /node_modules[\\/](?!(blueprinter-frontend)[\\/]).*/,
     },
