@@ -2,6 +2,7 @@ import parser from 'html-react-parser';
 import showdown from 'showdown';
 
 import Anchor from 'app/components/anchor';
+import hashFromTitle from './hashFromTitle';
 
 const converter = new showdown.Converter({ disableForced4SpacesIndentedSublists: true });
 
@@ -71,8 +72,6 @@ const getAttributeChildren = attribute => {
   return childrenByType[attributeType](attribute);
 };
 
-const hashFromTitle = title => title.split(' ').join('-');
-
 const withHeaderAnchors = (description) => {
   const modifiedChildren = React.Children.map(description.props.children, textElement => {
     if (textElement.type && /^h\d$/.exec(textElement.type)) {
@@ -97,7 +96,6 @@ export {
   extractAttributeData,
   getAttributeChildren,
   get,
-  hashFromTitle,
   htmlFromText,
   withHeaderAnchors,
 };

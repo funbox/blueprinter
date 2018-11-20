@@ -1,5 +1,6 @@
 import { SlideToggle } from 'react-slide-toggle';
-import { extractTransactionMethod as extractMethod, get, hashFromTitle } from 'app/common/utils/helpers/';
+import { extractTransactionMethod as extractMethod, get } from 'app/common/utils/helpers/';
+import hashFromTitle from 'app/common/utils/helpers/hashFromTitle';
 
 import Link from 'app/components/link';
 import Menu, { Menu__Item } from 'app/components/menu';

@@ -1,7 +1,8 @@
 import RawContent from 'app/components/raw-content';
 import Link from 'app/components/link';
 import Parameters from 'app/components/parameters';
-import { get, extractTransactionMethod, hashFromTitle, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
+import { get, extractTransactionMethod, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
+import hashFromTitle from 'app/common/utils/helpers/hashFromTitle';
 
 const ActionCard = (props) => {
   const {

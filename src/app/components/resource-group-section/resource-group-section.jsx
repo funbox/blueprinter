@@ -1,6 +1,7 @@
 import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
-import { get, hashFromTitle, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
+import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
+import hashFromTitle from 'app/common/utils/helpers/hashFromTitle';
 
 const defaultTitle = 'Resource Group';
 
