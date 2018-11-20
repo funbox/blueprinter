@@ -123,7 +123,7 @@ module.exports = options => {
     config.plugins
       .forEach(plugin => {
         if (plugin.constructor.name === 'ExtractTextPlugin' && `${plugin.filename}`.indexOf('.css') > 0) {
-          plugin.filename = '[name].[contenthash:16].css'
+          plugin.filename = '[name].[contenthash:16].css';
         }
       });
 
