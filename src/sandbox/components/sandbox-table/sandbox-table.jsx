@@ -18,7 +18,7 @@ const SandboxTable = (props) => {
   return (
     <table className={b('sandbox-table', props)}>
       <tbody>
-      {buildTableData()}
+        {buildTableData()}
       </tbody>
     </table>
   );

@@ -29,81 +29,81 @@ class Parameters extends React.Component {
             onCollapsed={this.toggleClass}
             onExpanding={this.toggleClass}
           >
-          {({ onToggle, setCollapsibleElement }) => (
-            <section className={b('parameters', { mods: { collapsed } })}>
-              <div className="parameters__heading">
-                <h5 className="parameters__title">URI Parameters</h5>
-                <Button mix={['parameters__collapse-button']} onClick={onToggle}>
-                  {this.state.collapsed ? 'Show' : 'Hide'}
-                </Button>
-              </div>
-              <div className="parameters__content" ref={setCollapsibleElement}>
-                {params.map((param, index) => {
-                  const title = get('meta', 'title').from(param);
-                  const description = get('meta', 'description').from(param);
-                  const defaultValue = get('content', 'value', 'attributes', 'default').from(param);
-                  const valueType = get('content', 'value', 'element').from(param);
-                  let example = get('content', 'value', 'content').from(param);
-                  let choices;
-                  let exampleValue;
+            {({ onToggle, setCollapsibleElement }) => (
+              <section className={b('parameters', { mods: { collapsed } })}>
+                <div className="parameters__heading">
+                  <h5 className="parameters__title">URI Parameters</h5>
+                  <Button mix={['parameters__collapse-button']} onClick={onToggle}>
+                    {this.state.collapsed ? 'Show' : 'Hide'}
+                  </Button>
+                </div>
+                <div className="parameters__content" ref={setCollapsibleElement}>
+                  {params.map((param, index) => {
+                    const title = get('meta', 'title').from(param);
+                    const description = get('meta', 'description').from(param);
+                    const defaultValue = get('content', 'value', 'attributes', 'default').from(param);
+                    const valueType = get('content', 'value', 'element').from(param);
+                    let example = get('content', 'value', 'content').from(param);
+                    let choices;
+                    let exampleValue;
 
-                  if (valueType === 'enum') {
-                    choices = example;
-                    example = get('attributes', 'samples').from(param);
-                  }
+                    if (valueType === 'enum') {
+                      choices = example;
+                      example = get('attributes', 'samples').from(param);
+                    }
 
-                  exampleValue = Array.isArray(example) ? example.map(exItem => exItem.content).join(', ') : example;
+                    exampleValue = Array.isArray(example) ? example.map(exItem => exItem.content).join(', ') : example;
 
-                  return (
-                    <div className="parameters__item" key={index * 2}>
-                      <div className="parameters__item-title" key={index * 2}>{param.content.key.content}</div>
-                      <div className="parameters__item-content" key={index * 2 + 1}>
-                        <RawContent>
-                          <code>{title || 'string'}</code>
-                          &nbsp;
-                          {param.attributes.typeAttributes.map((attr, attrIndex) => (
-                            <span key={attrIndex}>({attr})</span>
-                          ))}
-                          &nbsp;
-                          {defaultValue
-                            && (
-                              <span className="parameters__default">
-                                <strong>Default: </strong>
-                                <span>{defaultValue}</span>
-                              </span>
-                            )
-                          }
-                          &nbsp;
-                          {example
-                            && (
-                              <span className="parameters__example">
-                                <strong>Example: </strong>
-                                <span>{exampleValue}</span>
-                              </span>
-                            )
-                          }
-                          &nbsp;
-                          {description && <p>{description}</p>}
-                          {choices && choices.length > 0 && (
-                            <p>
-                              <strong>Choices: </strong>
-                              {choices.map(choice => (
-                                <span key={`enum-member-${choice.content}`}>
-                                  {' '}
-                                  <code>{choice.content}</code>
+                    return (
+                      <div className="parameters__item" key={index * 2}>
+                        <div className="parameters__item-title" key={index * 2}>{param.content.key.content}</div>
+                        <div className="parameters__item-content" key={index * 2 + 1}>
+                          <RawContent>
+                            <code>{title || 'string'}</code>
+                            &nbsp;
+                            {param.attributes.typeAttributes.map((attr, attrIndex) => (
+                              <span key={attrIndex}>({attr})</span>
+                            ))}
+                            &nbsp;
+                            {defaultValue
+                              && (
+                                <span className="parameters__default">
+                                  <strong>Default: </strong>
+                                  <span>{defaultValue}</span>
                                 </span>
-                              ))}
-                            </p>
-                          )}
-                        </RawContent>
+                              )
+                            }
+                            &nbsp;
+                            {example
+                              && (
+                                <span className="parameters__example">
+                                  <strong>Example: </strong>
+                                  <span>{exampleValue}</span>
+                                </span>
+                              )
+                            }
+                            &nbsp;
+                            {description && <p>{description}</p>}
+                            {choices && choices.length > 0 && (
+                              <p>
+                                <strong>Choices: </strong>
+                                {choices.map(choice => (
+                                  <span key={`enum-member-${choice.content}`}>
+                                    {' '}
+                                    <code>{choice.content}</code>
+                                  </span>
+                                ))}
+                              </p>
+                            )}
+                          </RawContent>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </section>
-          )}
-        </SlideToggle>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
+          </SlideToggle>
         )
         : null
     );
