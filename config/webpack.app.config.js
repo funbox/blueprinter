@@ -17,7 +17,7 @@ const BASE_PATH = `${__dirname}/..`;
 module.exports = options => {
   defaultsDeep(options, {
     appVersion: require('./webpack.app.version'),
-    //proxyApiTarget: 'http://example.com/api/',
+    // proxyApiTarget: 'http://example.com/api/',
     projectBasePath: BASE_PATH,
     sassImports: require('./webpack.app.sassImports'),
     htmlEntries: [
