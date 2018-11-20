@@ -1,18 +1,16 @@
 const SandboxTable = (props) => {
-  const buildTableData = () => {
-    return props.data.map((row, i) => {
-      return (
-        <tr key={`row-${i}`} className="sandbox-table__row">
-          {row.map((cell, j) => (
-            <td
-              key={`cell-${i}${j}`}
-              className="sandbox-table__cell"
-            >{cell}</td>
-          ))}
-        </tr>
-      )
-    });
-  };
+  const buildTableData = () => (
+    props.data.map((row, i) => (
+      <tr key={`row-${i}`} className="sandbox-table__row">
+        {row.map((cell, j) => (
+          <td
+            key={`cell-${i}${j}`}
+            className="sandbox-table__cell"
+          >{cell}</td>
+        ))}
+      </tr>
+    ))
+  );
 
   return (
     <table className={b('sandbox-table', props)}>
