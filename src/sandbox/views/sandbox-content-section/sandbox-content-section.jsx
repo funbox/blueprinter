@@ -131,13 +131,13 @@ export default class SandboxContentSection extends React.Component {
 
         <SandboxSection id="resource" title="Блок Resource">
           <SandboxDemo>
-            <Resource resource={resource} />
+            <Resource resource={resource}/>
           </SandboxDemo>
         </SandboxSection>
 
         <SandboxSection id="parameters" title="Блок параметров">
           <SandboxDemo>
-            <Parameters params={hrefVariables.content} />
+            <Parameters params={hrefVariables.content}/>
           </SandboxDemo>
         </SandboxSection>
 
