@@ -161,7 +161,7 @@ class Dropdown extends React.Component {
               aria-haspopup="true"
               aria-expanded={opened}
               {...handleProps}
-              {...(!!handleText ? { text: handleText } : {})}
+              {...(handleText ? { text: handleText } : {})}
             >
               {!handleText && handle.content}
             </Button>

@@ -45,7 +45,7 @@ const Button = React.forwardRef((props, ref) => {
   return (
     <Tag
       className={b('button', props)}
-      {...(!!mods['only-icon'] ? { title } : {})}
+      {...(mods['only-icon'] ? { title } : {})}
       {...localProps}
       onClick={onClick}
       ref={ref}
