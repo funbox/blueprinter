@@ -2,7 +2,7 @@
  * Общая конфигурация Webpack.
  */
 
-const _defaultsDeep = require('lodash/defaultsDeep');
+const defaultsDeep = require('lodash/defaultsDeep');
 const path = require('path');
 const frontendEnv = require('funbox-frontend-env-webpack');
 
@@ -15,7 +15,7 @@ const Csso = require('csso-webpack-plugin').default;
 const BASE_PATH = `${__dirname}/..`;
 
 module.exports = options => {
-  _defaultsDeep(options, {
+  defaultsDeep(options, {
     appVersion: require('./webpack.app.version'),
     //proxyApiTarget: 'http://example.com/api/',
     projectBasePath: BASE_PATH,
@@ -36,7 +36,7 @@ module.exports = options => {
 
   config.resolve.extensions = ['.js', '.jsx'];
 
-  _defaultsDeep(config.resolve.alias, {
+  defaultsDeep(config.resolve.alias, {
     'app.envDeps.env': path.resolve(__dirname, `../src/app/app.envDeps.${frontendEnv.envName}`),
   });
 
