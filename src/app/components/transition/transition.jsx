@@ -134,7 +134,7 @@ Transition.propTypes = {
     PropTypes.shape({
       request: PropTypes.object,
       response: PropTypes.object,
-    })
+    }),
   ),
   attributes: PropTypes.shape({
     href: PropTypes.string,

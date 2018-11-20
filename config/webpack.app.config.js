@@ -54,7 +54,7 @@ module.exports = options => {
         ].concat(!options.disableHmre && !options.build ? 'react-hmre' : []),
         plugins: ['transform-object-rest-spread'].concat(options.build
           ? ['transform-react-constant-elements', 'transform-react-remove-prop-types']
-          : []
+          : [],
         ),
       },
       exclude: /node_modules[\\/](?!(blueprinter-frontend)[\\/]).*/,
@@ -82,7 +82,7 @@ module.exports = options => {
     }),
     new webpack.ContextReplacementPlugin(
       /highlight.js[\\/]lib[\\/]languages$/,
-      new RegExp('^./(json|http)$')
+      new RegExp('^./(json|http)$'),
     ),
   ]);
 

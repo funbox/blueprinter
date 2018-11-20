@@ -117,7 +117,7 @@ Parameters.propTypes = {
     }),
     attributes: PropTypes.shape({
       typeAttributes: PropTypes.arrayOf(
-        PropTypes.string
+        PropTypes.string,
       ),
     }),
     content: PropTypes.shape({
