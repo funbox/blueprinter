@@ -49,7 +49,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
           <SandboxParagraph>
             Для подсветки http-заголовков можно использовать свойство
             {' '}
-            <InlineCode>{'syntax="http"'}</InlineCode>:
+            <InlineCode>syntax=&quot;http&quot;</InlineCode>:
           </SandboxParagraph>
           <SandboxDemo>
             <CodeSnippet syntax="http">
