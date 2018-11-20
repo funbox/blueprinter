@@ -65,7 +65,6 @@ Resource.propTypes = {
     meta: PropTypes.object,
     content: PropTypes.array,
   }),
-  children: PropTypes.node,
 };
 
 Resource.contextTypes = {
