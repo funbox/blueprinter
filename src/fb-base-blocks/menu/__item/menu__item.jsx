@@ -10,7 +10,7 @@ const Menu__Item = (props) => {
     submenu,
   } = props;
   const isCurrent = mods ? mods.current : false;
-  const Tag = tag ? tag : (isCurrent ? 'span' : Link);
+  const Tag = tag || (isCurrent ? 'span' : Link);
 
   const localProps = Object.assign({}, props);
 
