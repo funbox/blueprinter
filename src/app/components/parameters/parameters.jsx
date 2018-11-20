@@ -45,14 +45,13 @@ class Parameters extends React.Component {
                     const valueType = get('content', 'value', 'element').from(param);
                     let example = get('content', 'value', 'content').from(param);
                     let choices;
-                    let exampleValue;
 
                     if (valueType === 'enum') {
                       choices = example;
                       example = get('attributes', 'samples').from(param);
                     }
 
-                    exampleValue = Array.isArray(example) ? example.map(exItem => exItem.content).join(', ') : example;
+                    const exampleValue = Array.isArray(example) ? example.map(exItem => exItem.content).join(', ') : example;
 
                     return (
                       <div className="parameters__item" key={index * 2}>
