@@ -4,8 +4,6 @@ const views = require('sandbox/views/sandbox-views-list').views;
 
 export default class SandboxNavigation extends React.Component {
   render() {
-    const router = this.context.router;
-
     return (
       views.length > 0 && (
         <nav className="sandbox-navigation">
