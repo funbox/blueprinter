@@ -24,7 +24,7 @@ export default class SandboxSideMenu extends React.Component {
 
         <SandboxSection id="method-bage" title="Бейдж http-метода">
           <SandboxParagraph>
-            <InlineCode>mods={"{{ type: method }}"}</InlineCode>, где method - один из методов из таблицы ниже.
+            <InlineCode>mods={'{{ type: method }}'}</InlineCode>, где method - один из методов из таблицы ниже.
           </SandboxParagraph>
           <SandboxDemo mods={{ theme: 'air' }}>
             <SandboxTable
