@@ -112,7 +112,7 @@ export default class Home extends React.PureComponent {
                         resource={resource}
                         key={`resource-${resource.meta.title}`}
                       />
-                  ))}
+                    ))}
                 </ResourceGroupSection>
               ))}
             </MainContent>
