@@ -1,5 +1,6 @@
 import URL from 'url-parse';
 import formatHref from 'app/common/utils/helpers/formatHref';
+import parser from 'html-react-parser';
 
 import Section from 'app/components/section';
 import Transition__Content from './__content';
@@ -98,7 +99,7 @@ class Transition extends React.Component {
           {' '}
           {pathname}
           {!!formattedQuery && '?'}
-          <span className="transition__query" dangerouslySetInnerHTML={{ __html: formattedQuery }}/>
+          <span className="transition__query">{parser(formattedQuery)}</span>
         </p>
 
         <Transition__Content
