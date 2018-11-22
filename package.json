@@ -41,6 +41,7 @@
     "csso-webpack-plugin": "1.0.0-beta.10",
     "deep-equal": "1.0.1",
     "eslint": "5.8.0",
+    "extract-text-webpack-plugin": "2.1.2",
     "funbox-frontend-env-webpack": "10.2.0",
     "funbox-scss-imports-loader": "1.0.0",
     "funbox-scss-lint-config": "1.0.2",
