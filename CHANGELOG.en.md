@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.4 (26.11.2018)
+
+* Fix linter warnings.
+
 ## 1.3.3 (15.11.2018)
 
 * Fix rendering of a url parameter with curly braces.
