@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
-const protagonist = require('@funbox/protagonist');
+const crafter = require('@funbox/crafter');
 
 const { errMessage } = require('./utils');
 
@@ -17,10 +17,10 @@ const BASE_PATH = `${__dirname}/..`;
 
 const filterSource = source => source.replace(/\r\n?/g, '\n').replace(/\t/g, '    ');
 
-const createRefract = source => promisify(protagonist.parse)(source, {})
+const createRefract = source => promisify(crafter.parse)(source, {})
   .then(res => {
     try {
-      const ast = JSON.stringify(res);
+      const ast = JSON.stringify(res.toRefract());
       return Promise.resolve(ast);
     } catch (e) {
       return Promise.reject();
