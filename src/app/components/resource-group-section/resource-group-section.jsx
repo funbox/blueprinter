@@ -3,14 +3,17 @@ import Anchor from 'app/components/anchor';
 import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
 import { hashFromTitle } from 'app/common/utils/helpers/hash';
 
-const defaultTitle = 'Resource Group';
+export const DEFAULT_TITLE = 'Resource Group';
 
 class ResourceGroupSection extends React.PureComponent {
   render() {
     const { route } = this.context.router;
     const { group, children } = this.props;
 
-    const title = get('meta', 'title').from(group) || defaultTitle;
+    // TODO: Здесь используется get().from(), чтобы избежать ошибки, если meta === undefined.
+    // Но в некоторых частях кода проекта, используется прямое обращение. Как стоит
+    // разрешить это?
+    const title = get('meta', 'title').from(group) || DEFAULT_TITLE;
     const description = group.content[0].element === 'copy' ? group.content[0].content : null;
 
     return (

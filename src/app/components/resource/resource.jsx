@@ -10,20 +10,22 @@ const defaultTitle = 'Resource';
 class Resource extends React.Component {
   render() {
     const { route } = this.context.router;
-    const { resource } = this.props;
+    const { resource, parentTitle } = this.props;
 
     const { content } = resource;
     const title = get('meta', 'title').from(resource) || defaultTitle;
     const href = get('attributes', 'href').from(resource);
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
+    const hash = hashFromTitle(title, parentTitle);
 
     return (
-      <section className="resource" id={hashFromTitle(title)}>
+      <section className="resource" id={hash}>
         <h3 className="resource__heading">
           {title}
           <Anchor
             mix="resource__anchor"
             title={title}
+            hash={hash}
             pathname={route.location.pathname}
           />
         </h3>
@@ -42,6 +44,7 @@ class Resource extends React.Component {
                   <ActionCard
                     action={action}
                     key={`action-${action.id}`}
+                    parentHash={hash}
                     href={href}
                     title={title}
                   />
@@ -66,6 +69,7 @@ Resource.propTypes = {
     meta: PropTypes.object,
     content: PropTypes.array,
   }),
+  parentTitle: PropTypes.string,
 };
 
 Resource.contextTypes = {

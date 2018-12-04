@@ -8,6 +8,7 @@ const ActionCard = (props) => {
   const {
     action,
     location,
+    parentHash,
   } = props;
 
   const href = get('attributes', 'href').from(action) || props.href;
@@ -16,15 +17,18 @@ const ActionCard = (props) => {
   const description = action.content[0].element === 'copy' ? action.content[0].content : null;
   const method = props.method || extractTransactionMethod(action);
 
+  const actionHash = hashFromTitle(`${title || props.title} ${method.toLowerCase()}`);
+  const hash = combineHashes(parentHash, actionHash);
+
   return (
     <div
       className={b('action-card', { mods: { type: method } })}
-      id={hashFromTitle(`${title || props.title} ${method.toLowerCase()}`)}
+      id={hash}
     >
       <div className="action-card__heading">
         <Link
           mix="action-card__method"
-          to={{ hash: hashFromTitle(`${title || props.title} ${method.toLowerCase()}`), pathname: location.pathname }}
+          to={{ hash, pathname: location.pathname }}
         >
           {method}
         </Link>
@@ -66,6 +70,7 @@ ActionCard.propTypes = {
   title: PropTypes.string,
   method: PropTypes.string,
   location: PropTypes.object,
+  parentHash: PropTypes.string.isRequired,
 };
 
 export default ActionCard;
