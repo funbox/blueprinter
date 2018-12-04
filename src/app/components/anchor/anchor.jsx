@@ -1,6 +1,6 @@
 import Link from 'app/components/link';
 
-import hashFromTitle from 'app/common/utils/helpers/hashFromTitle';
+import { hashFromTitle } from 'app/common/utils/helpers/hash';
 
 const Anchor = (props) => {
   const { title, pathname } = props;

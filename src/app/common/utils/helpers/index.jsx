@@ -2,7 +2,7 @@ import parser from 'html-react-parser';
 import showdown from 'showdown';
 
 import Anchor from 'app/components/anchor';
-import hashFromTitle from './hashFromTitle';
+import { hashFromTitle } from './hash';
 
 const converter = new showdown.Converter({ disableForced4SpacesIndentedSublists: true });
 

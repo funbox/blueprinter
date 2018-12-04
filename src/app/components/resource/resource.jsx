@@ -2,7 +2,7 @@ import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
 import ActionCard from 'app/components/action-card';
 import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
-import hashFromTitle from 'app/common/utils/helpers/hashFromTitle';
+import { hashFromTitle } from 'app/common/utils/helpers/hash';
 import Resource__Action from './__action';
 
 const defaultTitle = 'Resource';
