@@ -28,7 +28,7 @@ class ResourceGroup extends React.Component {
 
 
   buildContentList(content, options = {}) {
-    const { level } = options;
+    const { level, parentHash = '' } = options;
     const { route } = this.context.router;
     if (level > maxNestingLevel) return null;
 
@@ -39,7 +39,7 @@ class ResourceGroup extends React.Component {
       const hasOnlyChild = !!item.content && item.content.length === 1;
       let title = item.meta.title.content || item.meta.title;
       let badge = null;
-      let hash = hashFromTitle(title);
+      let groupHash;
 
       if (itemType === 'resource' && hasOnlyChild) {
         hasSubmenu = false;
@@ -52,8 +52,13 @@ class ResourceGroup extends React.Component {
         badge = <MethodBadge method={method} mix="menu__item-icon"/>;
         const href = get('attributes', 'href', 'content').from(item) || get('attributes', 'href').from(item);
         title = title || `${method.toUpperCase()} ${href}`;
-        hash = hashFromTitle(`${title} ${method.toLowerCase()}`);
+        groupHash = hashFromTitle(`${title} ${method.toLowerCase()}`);
+      } else {
+        groupHash = hashFromTitle(title);
       }
+
+      const hash = combineHashes(parentHash, groupHash);
+      console.log(hash);
 
       const itemMods = {
         ...(level ? { level, submenu: true } : {}),
@@ -66,7 +71,12 @@ class ResourceGroup extends React.Component {
           key={`${itemType}-${index}`}
           text={title}
           to={{ hash, pathname: route.location.pathname }}
-          submenu={hasSubmenu ? this.buildContentList(item.content, { level: nextLevel }) : null}
+          submenu={hasSubmenu
+            ? this.buildContentList(item.content, {
+              level: nextLevel,
+              parentHash: hash,
+            })
+            : null}
         >{badge}</Menu__Item>
       );
     });
@@ -115,6 +125,7 @@ class ResourceGroup extends React.Component {
 
     const title = get('meta', 'title').from(group) || defaultTitle;
     const hash = hashFromTitle(title);
+    console.log(hash);
 
     const needJumpToGroup = () => {
       const currentHash = decodeURIComponent(window.location.hash);
@@ -145,7 +156,7 @@ class ResourceGroup extends React.Component {
             </h3>
 
             <div className="resource-group__content" ref={setCollapsibleElement}>
-              {hasContent ? this.buildContentList(group.content, { level: 2 }) : null}
+              {hasContent ? this.buildContentList(group.content, { level: 2, parentHash: hash }) : null}
             </div>
           </div>
         )}
