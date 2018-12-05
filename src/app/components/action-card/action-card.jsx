@@ -17,8 +17,8 @@ const ActionCard = (props) => {
   const description = action.content[0].element === 'copy' ? action.content[0].content : null;
   const method = props.method || extractTransactionMethod(action);
 
-  const actionHash = hashFromTitle(`${title || props.title} ${method.toLowerCase()}`);
-  const hash = combineHashes(parentHash, actionHash);
+  const mainHash = hashFromTitle(`${title || props.title} ${method.toLowerCase()}`);
+  const hash = combineHashes(parentHash, mainHash);
 
   return (
     <div
