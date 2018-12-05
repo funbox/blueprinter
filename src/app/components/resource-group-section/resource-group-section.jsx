@@ -14,15 +14,16 @@ class ResourceGroupSection extends React.PureComponent {
     // Но в некоторых частях кода проекта, используется прямое обращение. Как стоит
     // разрешить это?
     const title = get('meta', 'title').from(group) || DEFAULT_TITLE;
+    const hash = hashFromTitle(title);
     const description = group.content[0].element === 'copy' ? group.content[0].content : null;
 
     return (
-      <section className={b('resource-group-section', this.props)} id={hashFromTitle(title)}>
+      <section className={b('resource-group-section', this.props)} id={hash}>
         <h2 className="resource-group-section__heading">
           {title}
           <Anchor
             mix="resource-group-section__anchor"
-            title={title}
+            hash={hash}
             pathname={route.location.pathname}
           />
         </h2>
