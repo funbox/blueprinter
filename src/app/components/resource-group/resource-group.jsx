@@ -39,7 +39,7 @@ class ResourceGroup extends React.Component {
       const hasOnlyChild = !!item.content && item.content.length === 1;
       let title = item.meta.title.content || item.meta.title;
       let badge = null;
-      let groupHash;
+      let mainHash = hashFromTitle(title);
 
       if (itemType === 'resource' && hasOnlyChild) {
         hasSubmenu = false;
@@ -52,13 +52,10 @@ class ResourceGroup extends React.Component {
         badge = <MethodBadge method={method} mix="menu__item-icon"/>;
         const href = get('attributes', 'href', 'content').from(item) || get('attributes', 'href').from(item);
         title = title || `${method.toUpperCase()} ${href}`;
-        groupHash = hashFromTitle(`${title} ${method.toLowerCase()}`);
-      } else {
-        groupHash = hashFromTitle(title);
+        mainHash = hashFromTitle(`${title} ${method}`);
       }
 
-      const hash = combineHashes(parentHash, groupHash);
-      console.log(hash);
+      const hash = combineHashes(parentHash, mainHash);
 
       const itemMods = {
         ...(level ? { level, submenu: true } : {}),
