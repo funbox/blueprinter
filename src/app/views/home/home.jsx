@@ -109,7 +109,6 @@ export default class Home extends React.PureComponent {
                     .filter(gItem => gItem.element !== 'copy')
                     .map(resource => (
                       <Resource
-                        parentTitle={group.meta.title}
                         resource={resource}
                         key={`resource-${resource.meta.title}`}
                       />

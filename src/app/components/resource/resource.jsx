@@ -2,7 +2,7 @@ import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
 import ActionCard from 'app/components/action-card';
 import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
-import { hashFromTitle } from 'app/common/utils/helpers/hash';
+import { hashFromTitle, combineHashes } from 'app/common/utils/helpers/hash';
 import Resource__Action from './__action';
 
 const defaultTitle = 'Resource';
@@ -10,13 +10,14 @@ const defaultTitle = 'Resource';
 class Resource extends React.Component {
   render() {
     const { route } = this.context.router;
-    const { resource, parentTitle } = this.props;
+    const { resource, parentHash } = this.props;
 
     const { content } = resource;
-    const title = get('meta', 'title').from(resource) || defaultTitle;
     const href = get('attributes', 'href').from(resource);
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
-    const hash = hashFromTitle(title, parentTitle);
+    const title = get('meta', 'title').from(resource) || defaultTitle;
+
+    const hash = combineHashes(parentHash, hashFromTitle(title));
 
     return (
       <section className="resource" id={hash}>
@@ -24,7 +25,6 @@ class Resource extends React.Component {
           {title}
           <Anchor
             mix="resource__anchor"
-            title={title}
             hash={hash}
             pathname={route.location.pathname}
           />
@@ -69,7 +69,7 @@ Resource.propTypes = {
     meta: PropTypes.object,
     content: PropTypes.array,
   }),
-  parentTitle: PropTypes.string,
+  parentHash: PropTypes.string.isRequired,
 };
 
 Resource.contextTypes = {

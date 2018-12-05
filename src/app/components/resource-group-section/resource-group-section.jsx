@@ -17,6 +17,10 @@ class ResourceGroupSection extends React.PureComponent {
     const hash = hashFromTitle(title);
     const description = group.content[0].element === 'copy' ? group.content[0].content : null;
 
+    const childrenWithParentHash = children.map(child => React.cloneElement(child, {
+      parentHash: hash,
+    }));
+
     return (
       <section className={b('resource-group-section', this.props)} id={hash}>
         <h2 className="resource-group-section__heading">
@@ -35,7 +39,7 @@ class ResourceGroupSection extends React.PureComponent {
           )}
 
           <div className="resource-group-section__content">
-            {children}
+            {childrenWithParentHash}
           </div>
         </div>
       </section>
