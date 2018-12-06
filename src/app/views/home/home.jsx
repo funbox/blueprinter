@@ -11,7 +11,6 @@ import MainContent from 'app/components/main-content';
 import Transition from 'app/components/transition';
 import TransitionContainer from 'app/components/transition-container';
 import ResourceGroupSection from 'app/components/resource-group-section';
-import Resource from 'app/components/resource';
 import ApiHost from 'app/components/api-host';
 import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
 import sourceMock from 'app/source';
@@ -104,17 +103,7 @@ export default class Home extends React.PureComponent {
                   group={group}
                   key={`group-${group.meta.title}`}
                   mix="main-content__resource-group"
-                >
-                  {({ parentHash }) => group.content
-                    .filter(gItem => gItem.element !== 'copy')
-                    .map(resource => (
-                      <Resource
-                        parentHash={parentHash}
-                        resource={resource}
-                        key={`resource-${resource.meta.title}`}
-                      />
-                    ))}
-                </ResourceGroupSection>
+                />
               ))}
             </MainContent>
           </Page__Body>

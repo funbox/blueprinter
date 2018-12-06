@@ -2,13 +2,14 @@ import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
 import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
 import { hashFromTitle } from 'app/common/utils/helpers/hash';
+import Resource from 'app/components/resource/resource';
 
 const DEFAULT_TITLE = 'Resource Group';
 
 class ResourceGroupSection extends React.PureComponent {
   render() {
     const { route } = this.context.router;
-    const { group, children } = this.props;
+    const { group } = this.props;
 
     const title = get('meta', 'title').from(group) || DEFAULT_TITLE;
     const hash = hashFromTitle(title);
@@ -32,7 +33,15 @@ class ResourceGroupSection extends React.PureComponent {
           )}
 
           <div className="resource-group-section__content">
-            {children({ parentHash: hash })}
+            {group.content
+              .filter(gItem => gItem.element !== 'copy')
+              .map(resource => (
+                <Resource
+                  parentHash={hash}
+                  resource={resource}
+                  key={`resource-${resource.meta.title}`}
+                />
+              ))}
           </div>
         </div>
       </section>
@@ -50,7 +59,6 @@ ResourceGroupSection.propTypes = {
     meta: PropTypes.object,
     content: PropTypes.array,
   }),
-  children: PropTypes.func,
 };
 
 ResourceGroupSection.contextTypes = {
