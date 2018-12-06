@@ -105,10 +105,11 @@ export default class Home extends React.PureComponent {
                   key={`group-${group.meta.title}`}
                   mix="main-content__resource-group"
                 >
-                  {group.content
+                  {({ parentHash }) => group.content
                     .filter(gItem => gItem.element !== 'copy')
                     .map(resource => (
                       <Resource
+                        parentHash={parentHash}
                         resource={resource}
                         key={`resource-${resource.meta.title}`}
                       />
