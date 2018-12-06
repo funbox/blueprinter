@@ -10,9 +10,6 @@ class ResourceGroupSection extends React.PureComponent {
     const { route } = this.context.router;
     const { group, children } = this.props;
 
-    // TODO: Здесь используется get().from(), чтобы избежать ошибки, если meta === undefined.
-    // Но в некоторых частях кода проекта, используется прямое обращение. Как стоит
-    // разрешить это?
     const title = get('meta', 'title').from(group) || DEFAULT_TITLE;
     const hash = hashFromTitle(title);
     const description = group.content[0].element === 'copy' ? group.content[0].content : null;
