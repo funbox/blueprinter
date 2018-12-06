@@ -3,7 +3,7 @@ import Anchor from 'app/components/anchor';
 import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
 import { hashFromTitle } from 'app/common/utils/helpers/hash';
 
-export const DEFAULT_TITLE = 'Resource Group';
+const DEFAULT_TITLE = 'Resource Group';
 
 class ResourceGroupSection extends React.PureComponent {
   render() {
