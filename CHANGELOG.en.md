@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.5 (06.12.2018)
+
+* Change the way hash links are built.
+
 ## 1.3.4 (26.11.2018)
 
 * Fix linter warnings.
