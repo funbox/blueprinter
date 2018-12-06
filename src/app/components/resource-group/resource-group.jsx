@@ -6,8 +6,9 @@ import Link from 'app/components/link';
 import Menu, { Menu__Item } from 'app/components/menu';
 import MethodBadge from 'app/components/method-badge';
 
-const maxNestingLevel = 3;
-const defaultTitle = 'Resource Group';
+const MAX_NESTING_LEVEL = 3;
+const DEFAULT_TITLE = 'Resource Group';
+
 let prevHash = '';
 
 class ResourceGroup extends React.Component {
@@ -21,7 +22,7 @@ class ResourceGroup extends React.Component {
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     const { group } = nextProps;
     const { route } = nextContext.router;
-    const title = get('meta', 'title').from(group) || defaultTitle;
+    const title = get('meta', 'title').from(group) || DEFAULT_TITLE;
     const hash = hashFromTitle(title);
     return `#${hash}` === route.location.hash;
   }
@@ -30,12 +31,12 @@ class ResourceGroup extends React.Component {
   buildContentList(content, options = {}) {
     const { level, parentHash = '' } = options;
     const { route } = this.context.router;
-    if (level > maxNestingLevel) return null;
+    if (level > MAX_NESTING_LEVEL) return null;
 
     const menuItems = content.filter(item => item.element !== 'copy').map((item, index) => {
       const itemType = item.element;
       const nextLevel = level + 1;
-      let hasSubmenu = level < maxNestingLevel && !!item.content && item.content.length > 0;
+      let hasSubmenu = level < MAX_NESTING_LEVEL && !!item.content && item.content.length > 0;
       const hasOnlyChild = !!item.content && item.content.length === 1;
       let title = item.meta.title.content || item.meta.title;
       let badge = null;
@@ -120,7 +121,7 @@ class ResourceGroup extends React.Component {
     const { collapsed } = this.state;
     const hasContent = !!group.content && group.content.length > 0;
 
-    const title = get('meta', 'title').from(group) || defaultTitle;
+    const title = get('meta', 'title').from(group) || DEFAULT_TITLE;
     const hash = hashFromTitle(title);
     console.log(hash);
 

@@ -5,7 +5,7 @@ import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
 import { hashFromTitle, combineHashes } from 'app/common/utils/helpers/hash';
 import Resource__Action from './__action';
 
-const defaultTitle = 'Resource';
+const DEFAULT_TITLE = 'Resource';
 
 class Resource extends React.Component {
   render() {
@@ -15,7 +15,7 @@ class Resource extends React.Component {
     const { content } = resource;
     const href = get('attributes', 'href').from(resource);
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
-    const title = get('meta', 'title').from(resource) || defaultTitle;
+    const title = get('meta', 'title').from(resource) || DEFAULT_TITLE;
 
     const hash = combineHashes(parentHash, hashFromTitle(title));
 
