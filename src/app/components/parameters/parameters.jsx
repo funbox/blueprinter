@@ -3,7 +3,7 @@ import RawContent from 'app/components/raw-content';
 import PropTypes from 'prop-types';
 import Button from 'fb-base-blocks/button';
 
-import { get } from 'app/common/utils/helpers';
+import { get, htmlFromText } from 'app/common/utils/helpers';
 
 class Parameters extends React.Component {
   constructor(props) {
@@ -82,7 +82,7 @@ class Parameters extends React.Component {
                               )
                             }
                             &nbsp;
-                            {description && <p>{description}</p>}
+                            {description && htmlFromText(description)}
                             {choices && choices.length > 0 && (
                               <p>
                                 <strong>Choices: </strong>
@@ -94,6 +94,7 @@ class Parameters extends React.Component {
                                 ))}
                               </p>
                             )}
+                            &nbsp;
                           </RawContent>
                         </div>
                       </div>
