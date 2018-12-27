@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.0 (27.12.2018)
+
+* Use commonmarkjs instead of showdown to render HTML.
+
 ## 1.3.5 (06.12.2018)
 
 * Change the way hash links are built.
