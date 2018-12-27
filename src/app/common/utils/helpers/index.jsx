@@ -1,13 +1,16 @@
 import parser from 'html-react-parser';
-import showdown from 'showdown';
-
 import Anchor from 'app/components/anchor';
 import { hashFromTitle } from './hash';
 
-const converter = new showdown.Converter({ disableForced4SpacesIndentedSublists: true });
+const commonmark = require('commonmark');
+
+const markdownParser = new commonmark.Parser();
+const htmlRenderer = new commonmark.HtmlRenderer();
 
 const htmlFromText = (text, wrap = 'no-wrap', Tag = 'div') => {
-  const htmlString = converter.makeHtml(text);
+  const parsedMarkdown = markdownParser.parse(text);
+  const htmlString = htmlRenderer.render(parsedMarkdown);
+
   if (wrap === 'wrap') {
     return <Tag dangerouslySetInnerHTML={{ __html: htmlString }}/>;
   }
