@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.1 (28.12.2018)
+
+* Process markdown markup in description of URI parameters.
+
 ## 1.4.0 (27.12.2018)
 
 * Use commonmarkjs instead of showdown to render HTML.
