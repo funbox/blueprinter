@@ -94,7 +94,6 @@ class Parameters extends React.Component {
                                 ))}
                               </p>
                             )}
-                            &nbsp;
                           </RawContent>
                         </div>
                       </div>
