@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.0 (09.01.2019)
+
+* Add node.js 10 support.
+
 ## 1.4.1 (28.12.2018)
 
 * Process markdown markup in description of URI parameters.
