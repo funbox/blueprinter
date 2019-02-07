@@ -26,7 +26,14 @@ const Attribute__Row = (props) => {
         {attributeProps && (
           <span className="attribute__props">
             {attributeProps.map(prop => (
-              <small className="attribute__prop">{prop}</small>
+              <small
+                key={`${prop}_attr`}
+                className={b('attribute__prop', {
+                  mods: (prop === 'required' ? { highlighted: true } : {}),
+                })}
+              >
+                {prop}
+              </small>
             ))}
           </span>
         )}

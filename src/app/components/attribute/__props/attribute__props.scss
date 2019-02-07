@@ -1,4 +1,7 @@
 .attribute__props {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-top: 4px;
   font-weight: 400;
 }
