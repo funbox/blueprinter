@@ -23,9 +23,13 @@ const Attribute__Row = (props) => {
     <dl className={b('attribute__row', props)} onClick={props.onClick}>
       <dt className="attribute__key">
         {attributeKeyByType[parentType] || attributeKeyByType[attributeType] || attributeKey}
-        {attributeProps
-          && <small className="attribute__props">{attributeProps}</small>
-        }
+        {attributeProps && (
+          <span className="attribute__props">
+            {attributeProps.map(prop => (
+              <small className="attribute__prop">{prop}</small>
+            ))}
+          </span>
+        )}
       </dt>
       <dd className="attribute__description-container">
         {attributeType

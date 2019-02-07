@@ -50,7 +50,7 @@ const extractAttributeData = (attribute, disabledExample = false) => {
   }
 
   const attributeDescription = get('meta', 'description').from(attribute);
-  const attributeProps = get('attributes', 'typeAttributes', '0').from(attribute);
+  const attributeProps = get('attributes', 'typeAttributes').from(attribute);
 
   return { attributeKey, attributeType, attributeExample, attributeDescription, attributeProps };
 };
