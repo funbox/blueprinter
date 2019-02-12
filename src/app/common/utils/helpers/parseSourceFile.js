@@ -25,7 +25,7 @@ const parseSourceFile = ({ content }) => {
   const topLevelContentItems = source.content;
 
   const topLevelMeta = {
-    title: get('meta', 'title').from(source),
+    title: get('meta', 'title', 'content').from(source),
     description: topLevelDescriptionElement,
     host: getHost(),
   };

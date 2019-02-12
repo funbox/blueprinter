@@ -39,16 +39,19 @@ class Parameters extends React.Component {
                 </div>
                 <div className="parameters__content" ref={setCollapsibleElement}>
                   {params.map((param, index) => {
-                    const title = get('meta', 'title').from(param);
-                    const description = get('meta', 'description').from(param);
-                    const defaultValue = get('content', 'value', 'attributes', 'default').from(param);
+                    let title = get('meta', 'title', 'content').from(param);
+                    const description = get('meta', 'description', 'content').from(param);
+                    const defaultValue = get('content', 'value', 'attributes', 'default', 'content').from(param);
                     const valueType = get('content', 'value', 'element').from(param);
                     let example = get('content', 'value', 'content').from(param);
-                    let choices;
+                    const choices = get('content', 'value', 'attributes', 'enumerations', 'content').from(param);
 
                     if (valueType === 'enum') {
-                      choices = example;
                       example = get('attributes', 'samples').from(param);
+                    }
+
+                    if (title === 'array' && choices) {
+                      title = `${title}[enum]`;
                     }
 
                     const exampleValue = Array.isArray(example) ? example.map(exItem => exItem.content).join(', ') : example;
@@ -60,8 +63,8 @@ class Parameters extends React.Component {
                           <RawContent>
                             <code>{title || 'string'}</code>
                             &nbsp;
-                            {param.attributes.typeAttributes.map((attr, attrIndex) => (
-                              <span key={attrIndex}>({attr})</span>
+                            {param.attributes.typeAttributes.content.map((attr, attrIndex) => (
+                              <span key={attrIndex}>({attr.content})</span>
                             ))}
                             &nbsp;
                             {defaultValue
@@ -112,13 +115,20 @@ class Parameters extends React.Component {
 Parameters.propTypes = {
   params: PropTypes.arrayOf(PropTypes.shape({
     meta: PropTypes.shape({
-      description: PropTypes.string,
-      title: PropTypes.string,
+      description: PropTypes.shape({
+        element: PropTypes.string,
+        content: PropTypes.string,
+      }),
+      title: PropTypes.shape({
+        element: PropTypes.string,
+        content: PropTypes.string,
+      }),
     }),
     attributes: PropTypes.shape({
-      typeAttributes: PropTypes.arrayOf(
-        PropTypes.string,
-      ),
+      typeAttributes: PropTypes.shape({
+        element: PropTypes.string,
+        content: PropTypes.array,
+      }),
     }),
     content: PropTypes.shape({
       key: PropTypes.shape({
@@ -130,6 +140,14 @@ Parameters.propTypes = {
         content: PropTypes.oneOfType([
           PropTypes.string,
           PropTypes.array,
+          PropTypes.shape({
+            attributes: PropTypes.shape({
+              enumerations: PropTypes.shape({
+                element: PropTypes.string,
+                content: PropTypes.array,
+              }),
+            }),
+          }),
         ]),
       }),
     }),

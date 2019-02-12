@@ -11,7 +11,7 @@ class ResourceGroupSection extends React.PureComponent {
     const { route } = this.context.router;
     const { group } = this.props;
 
-    const title = get('meta', 'title').from(group) || DEFAULT_TITLE;
+    const title = get('meta', 'title', 'content').from(group) || DEFAULT_TITLE;
     const hash = hashFromTitle(title);
     const description = group.content[0].element === 'copy' ? group.content[0].content : null;
 
@@ -39,7 +39,7 @@ class ResourceGroupSection extends React.PureComponent {
                 <Resource
                   parentHash={hash}
                   resource={resource}
-                  key={`resource-${resource.meta.title}`}
+                  key={`resource-${resource.meta.title.content}`}
                 />
               ))}
           </div>

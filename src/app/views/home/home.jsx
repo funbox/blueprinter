@@ -101,7 +101,7 @@ export default class Home extends React.PureComponent {
               {groups.map(group => (
                 <ResourceGroupSection
                   group={group}
-                  key={`group-${group.meta.title}`}
+                  key={`group-${group.meta.title.content}`}
                   mix="main-content__resource-group"
                 />
               ))}

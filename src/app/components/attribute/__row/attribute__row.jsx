@@ -25,16 +25,19 @@ const Attribute__Row = (props) => {
         {attributeKeyByType[parentType] || attributeKeyByType[attributeType] || attributeKey}
         {attributeProps && (
           <span className="attribute__props">
-            {attributeProps.map(prop => (
-              <small
-                key={`${prop}_attr`}
-                className={b('attribute__prop', {
-                  mods: (prop === 'required' ? { highlighted: true } : {}),
-                })}
-              >
-                {prop}
-              </small>
-            ))}
+            {attributeProps.map(prop => {
+              const propContent = prop.content;
+              return (
+                <small
+                  key={`${propContent}_attr`}
+                  className={b('attribute__prop', {
+                    mods: (propContent === 'required' ? { highlighted: true } : {}),
+                  })}
+                >
+                  {propContent}
+                </small>
+              );
+            })}
           </span>
         )}
       </dt>

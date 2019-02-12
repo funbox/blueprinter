@@ -49,8 +49,8 @@ const extractAttributeData = (attribute, disabledExample = false) => {
     attributeExample = (!disabledExample && attribute.content) || null;
   }
 
-  const attributeDescription = get('meta', 'description').from(attribute);
-  const attributeProps = get('attributes', 'typeAttributes').from(attribute);
+  const attributeDescription = get('meta', 'description', 'content').from(attribute);
+  const attributeProps = get('attributes', 'typeAttributes', 'content').from(attribute);
 
   return { attributeKey, attributeType, attributeExample, attributeDescription, attributeProps };
 };
@@ -59,7 +59,7 @@ const getAttributeChildren = attribute => {
   const complexTypes = ['array', 'enum', 'object', 'select', 'option'];
   const childrenByType = {
     array: (attr) => (Array.isArray(attr.content) ? attr.content : attr.content.value.content),
-    enum: (attr) => (Array.isArray(attr.content) ? attr.content : attr.content.value.content),
+    enum: (attr) => (Array.isArray(attr.content) ? attr.content : attr.content.value.attributes.enumerations.content),
     object: (attr) => (Array.isArray(attr.content) ? attr.content : attr.content.value.content),
     select: (attr) => (attr.content),
     option: (attr) => (attr.content),

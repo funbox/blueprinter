@@ -11,9 +11,9 @@ const ActionCard = (props) => {
     parentHash,
   } = props;
 
-  const href = get('attributes', 'href').from(action) || props.href;
+  const href = get('attributes', 'href', 'content').from(action) || props.href;
   const hrefVariables = get('attributes', 'hrefVariables', 'content').from(action);
-  const title = get('meta', 'title').from(action);
+  const title = get('meta', 'title', 'content').from(action);
   const description = action.content[0].element === 'copy' ? action.content[0].content : null;
   const method = props.method || extractTransactionMethod(action);
 

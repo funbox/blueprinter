@@ -13,9 +13,9 @@ class Resource extends React.Component {
     const { resource, parentHash } = this.props;
 
     const { content } = resource;
-    const href = get('attributes', 'href').from(resource);
+    const href = get('attributes', 'href', 'content').from(resource);
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
-    const title = get('meta', 'title').from(resource) || DEFAULT_TITLE;
+    const title = get('meta', 'title', 'content').from(resource) || DEFAULT_TITLE;
 
     const hash = combineHashes(parentHash, hashFromTitle(title));
 

@@ -121,7 +121,7 @@ class ResourceGroup extends React.Component {
     const { collapsed } = this.state;
     const hasContent = !!group.content && group.content.length > 0;
 
-    const title = get('meta', 'title').from(group) || DEFAULT_TITLE;
+    const title = get('meta', 'title', 'content').from(group) || DEFAULT_TITLE;
     const hash = hashFromTitle(title);
 
     const needJumpToGroup = () => {
