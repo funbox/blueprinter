@@ -123,7 +123,6 @@ class ResourceGroup extends React.Component {
 
     const title = get('meta', 'title').from(group) || DEFAULT_TITLE;
     const hash = hashFromTitle(title);
-    console.log(hash);
 
     const needJumpToGroup = () => {
       const currentHash = decodeURIComponent(window.location.hash);
