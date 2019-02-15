@@ -11,8 +11,8 @@ const buildConfig = require(path.resolve(BASE_PATH, 'config/webpack.app.doc.js')
 buildConfig.plugins.push(
   new SuppressEntryChunksPlugin(
     ['app', 'vendor'],
-    { filter: /\.(js|css|map|json)$/ } // оставляем в папке static только index.html и favicon
-  )
+    { filter: /\.(js|css|map|json)$/ }, // оставляем в папке static только index.html и favicon
+  ),
 );
 buildConfig.bail = true;
 

@@ -16,7 +16,7 @@ const renderAndServe = async (inputFileName, port, host, options) => {
     watcher.on('change', (path) => {
       console.log(`Updated ${path}`);
       renderRefract(inputFileName, options).then(() => browserSync.reload());
-    })
+    });
   };
 
   await renderRefract(inputFileName, options);

@@ -49,7 +49,7 @@ const renderRefract = async (inputFileName, opts) => {
   const options = { ...defaultOptions, ...opts };
 
   const filteredInput = await readFile(inputFileName, { encoding: 'utf-8' })
-    .then(input => options.filterInput ? filterSource(input) : input)
+    .then(input => (options.filterInput ? filterSource(input) : input))
     .catch(error => Promise.reject(errMessage('Error reading file', error)));
 
   const refract = await createRefract(filteredInput)
