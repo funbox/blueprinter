@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.1 (16.02.2019)
+
+* Fix error of a missing script.
+
 ## 1.5.0 (09.01.2019)
 
 * Add node.js 10 support.
