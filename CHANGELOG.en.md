@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.0 (21.02.2019)
+
+* Highlight `required` attributes.
+
 ## 1.5.1 (16.02.2019)
 
 * Fix error of a missing script.
