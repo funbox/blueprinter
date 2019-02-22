@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0 (22.02.2019)
+
+* Replace drafter with crafter.
+
 ## 1.6.0 (21.02.2019)
 
 * Highlight `required` attributes.
