@@ -83,15 +83,20 @@ class Parameters extends React.Component {
                             &nbsp;
                             {description && htmlFromText(description)}
                             {choices && choices.length > 0 && (
-                              <p>
+                              <div>
                                 <strong>Choices: </strong>
-                                {choices.map(choice => (
-                                  <span key={`enum-member-${choice.content}`}>
-                                    {' '}
-                                    <code>{choice.content}</code>
-                                  </span>
-                                ))}
-                              </p>
+                                <ul>
+                                  {choices.map(choice => {
+                                    const choiceDescription = get('meta', 'description', 'content').from(choice);
+                                    return (
+                                      <li key={`enum-member-${choice.content}`}>
+                                        <code>{choice.content}</code>
+                                        {choiceDescription && ` \u2014 ${choiceDescription}`}
+                                      </li>
+                                    );
+                                  })}
+                                </ul>
+                              </div>
                             )}
                           </RawContent>
                         </div>
