@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1 (26.02.2019)
+
+* Process nested elements of a href parameter as a description.
+
 ## 2.0.0 (22.02.2019)
 
 * Replace drafter with crafter.
