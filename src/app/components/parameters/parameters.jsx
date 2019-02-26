@@ -39,7 +39,7 @@ class Parameters extends React.Component {
                 </div>
                 <div className="parameters__content" ref={setCollapsibleElement}>
                   {params.map((param, index) => {
-                    let title = get('meta', 'title', 'content').from(param);
+                    const title = get('meta', 'title', 'content').from(param);
                     const description = get('meta', 'description', 'content').from(param);
                     const defaultValue = get('content', 'value', 'attributes', 'default', 'content').from(param);
                     const valueType = get('content', 'value', 'element').from(param);
@@ -48,10 +48,6 @@ class Parameters extends React.Component {
 
                     if (valueType === 'enum') {
                       example = get('attributes', 'samples').from(param);
-                    }
-
-                    if (title === 'array' && choices) {
-                      title = `${title}[enum]`;
                     }
 
                     const exampleValue = Array.isArray(example) ? example.map(exItem => exItem.content).join(', ') : example;
