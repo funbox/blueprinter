@@ -48,3 +48,19 @@ const formatHref = (href, variables) => {
 };
 
 export default formatHref;
+
+function resolveType(type) {
+  const result = {
+    type,
+    nestedTypes: [],
+  };
+
+  const matchData = /^(.*?)\s*(\[(.*)])?$/.exec(type);
+  const resolvedType = matchData[1];
+  result.type = resolvedType;
+  if (matchData[3]) {
+    result.nestedTypes = matchData[3].split(',').map(rawType => rawType.trim()).filter(t => !!t);
+  }
+
+  return result;
+}
