@@ -6,6 +6,9 @@ const defaultValues = {
   string: 'hello',
   boolean: 'true',
   number: '1',
+  array: 'hello',
+  enum: 'hello',
+  object: encodeURIComponent('{}'),
 };
 
 const formatHref = (href, variables) => {
@@ -23,7 +26,9 @@ const formatHref = (href, variables) => {
   variables.forEach(variable => {
     const name = get('content', 'key', 'content').from(variable);
     const value = get('content', 'value', 'content').from(variable);
-    const type = get('meta', 'title', 'content').from(variable) || get('meta', 'title').from(variable);
+    const rawType = get('meta', 'title', 'content').from(variable) || get('meta', 'title').from(variable);
+    const resolvedType = resolveType(rawType);
+    const type = resolvedType.nestedTypes[0] ? resolvedType.nestedTypes[0] : resolvedType.type;
 
     let definedValue;
 
