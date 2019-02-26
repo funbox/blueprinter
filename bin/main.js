@@ -8,22 +8,15 @@ const { errMessage } = require('./utils');
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 
-const defaultOptions = {
-  filterInput: true,
-  includePath: process.cwd(),
-};
-
 const BASE_PATH = `${__dirname}/..`;
 
-const filterSource = source => source.replace(/\r\n?/g, '\n').replace(/\t/g, '    ');
-
-const createRefract = source => promisify(crafter.parse)(source, {})
+const createRefract = inputFileName => promisify(crafter.parseFile)(inputFileName, {})
   .then(res => {
     try {
       const ast = JSON.stringify(res.toRefract());
       return Promise.resolve(ast);
     } catch (e) {
-      return Promise.reject();
+      return Promise.reject(e);
     }
   });
 
@@ -45,14 +38,8 @@ const sendStaticFile = async (outputFileName) => {
   }
 };
 
-const renderRefract = async (inputFileName, opts) => {
-  const options = { ...defaultOptions, ...opts };
-
-  const filteredInput = await readFile(inputFileName, { encoding: 'utf-8' })
-    .then(input => (options.filterInput ? filterSource(input) : input))
-    .catch(error => Promise.reject(errMessage('Error reading file', error)));
-
-  const refract = await createRefract(filteredInput)
+const renderRefract = async (inputFileName) => {
+  const refract = await createRefract(inputFileName)
     .catch(error => Promise.reject(errMessage('Error parsing input', error)));
 
   const data = `refract = ${refract};`;
