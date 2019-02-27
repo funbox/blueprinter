@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.3 (27.02.2019)
+
+* Extract value of a URI parameter in case of a complex type.
+
 ## 2.0.2 (26.02.2019)
 
 * Fix import processing.
