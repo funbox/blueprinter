@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1 (27.02.2019)
+
+* Process an enumerable URI parameter with missing `+ Members` keyword.
+
 ## 2.1.0 (27.02.2019)
 
 * Improve rendering parameters with enum values.
