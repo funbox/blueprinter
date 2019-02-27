@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0 (27.02.2019)
+
+* Improve rendering parameters with enum values.
+
 ## 2.0.3 (27.02.2019)
 
 * Extract value of a URI parameter in case of a complex type.
