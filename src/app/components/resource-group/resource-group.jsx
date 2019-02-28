@@ -38,7 +38,7 @@ class ResourceGroup extends React.Component {
       const nextLevel = level + 1;
       let hasSubmenu = level < MAX_NESTING_LEVEL && !!item.content && item.content.length > 0;
       const hasOnlyChild = !!item.content && item.content.length === 1;
-      let title = item.meta.title.content || item.meta.title;
+      let title = item.meta.title.content;
       let badge = null;
       let mainHash = hashFromTitle(title);
 

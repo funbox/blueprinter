@@ -13,7 +13,8 @@ class ResourceGroupSection extends React.PureComponent {
 
     const title = get('meta', 'title', 'content').from(group) || DEFAULT_TITLE;
     const hash = hashFromTitle(title);
-    const description = group.content[0].element === 'copy' ? group.content[0].content : null;
+    const descriptionEl = group.content.find(el => el.element === 'copy');
+    const description = get('content').from(descriptionEl);
 
     return (
       <section className={b('resource-group-section', this.props)} id={hash}>

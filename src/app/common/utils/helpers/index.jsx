@@ -25,7 +25,8 @@ const get = (...path) => {
 };
 
 const extractTransactionMethod = transition => {
-  const method = transition.content.filter(i => i.element !== 'copy')[0].content[0].attributes.method;
+  const transactions = transition.content.filter(i => i.element !== 'copy');
+  const method = transactions.length > 0 ? transactions[0].content[0].attributes.method : '';
   return method.content || method;
 };
 
