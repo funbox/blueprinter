@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.2 (01.03.2019)
+
+* Fix parsing of named endpoints.
+
 ## 2.1.1 (27.02.2019)
 
 * Process an enumerable URI parameter with missing `+ Members` keyword.
