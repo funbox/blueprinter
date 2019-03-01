@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.3 (01.03.2019)
+
+* Fix rendering of an empty action.
+
 ## 2.1.2 (01.03.2019)
 
 * Fix parsing of named endpoints.
