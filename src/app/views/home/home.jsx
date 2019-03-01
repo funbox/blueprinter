@@ -14,6 +14,7 @@ import ResourceGroupSection from 'app/components/resource-group-section';
 import ApiHost from 'app/components/api-host';
 import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
 import sourceMock from 'app/source';
+import { get } from 'app/common/utils/helpers/';
 
 const source = window.refract || sourceMock;
 const parsedSource = parseSourceFile(source);
@@ -101,7 +102,7 @@ export default class Home extends React.PureComponent {
               {groups.map(group => (
                 <ResourceGroupSection
                   group={group}
-                  key={`group-${group.meta.title.content}`}
+                  key={`group-${get('meta', 'title', 'content').from(group)}`}
                   mix="main-content__resource-group"
                 />
               ))}
