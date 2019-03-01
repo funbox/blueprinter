@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.4 (01.03.2019)
+
+* Fix rendering a documentation without any resource group.
+
 ## 2.1.3 (01.03.2019)
 
 * Fix rendering of an empty action.
