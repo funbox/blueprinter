@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.5 (07.03.2019)
+
+* Improve Default section and allow to include Default and Sample into primitives.
+* Fix attributes parsing.
+* Show a warning if action has no responses.
+* Fix processing of named primitive types.
+
 ## 2.1.4 (01.03.2019)
 
 * Fix rendering a documentation without any resource group.
