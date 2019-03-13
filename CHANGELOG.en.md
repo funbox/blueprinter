@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.6 (13.03.2019)
+
+* Use default values in body and JSON schema.
+
 ## 2.1.5 (07.03.2019)
 
 * Improve Default section and allow to include Default and Sample into primitives.
