@@ -51,7 +51,7 @@
     "html-react-parser": "0.4.6",
     "html-webpack-inline-source-plugin": "0.0.10",
     "lodash": "4.17.4",
-    "node-sass": "4.7.2",
+    "node-sass": "4.9.0",
     "postcss-loader": "2.0.10",
     "postcss-url": "7.3.0",
     "prop-types": "15.6.0",
