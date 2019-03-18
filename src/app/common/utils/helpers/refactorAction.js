@@ -108,6 +108,7 @@ const refactorAction = action => {
       body: getBody(sourceRequest),
       description: getDescription(sourceRequest),
       headers: sourceRequest.attributes.headers ? sourceRequest.attributes.headers.content.map(refactorHeader) : null,
+      schema: getSchema(sourceRequest),
       title: get('meta', 'title', 'content').from(sourceRequest),
     };
 
