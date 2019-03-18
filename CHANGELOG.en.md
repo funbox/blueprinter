@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.7 (18.03.2019)
+
+* Render request schema.
+
 ## 2.1.6 (13.03.2019)
 
 * Use default values in body and JSON schema.
