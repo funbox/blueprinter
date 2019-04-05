@@ -1,4 +1,4 @@
-import { extractAttributeData } from 'app/common/utils/helpers';
+import { extractAttributeData, get } from 'app/common/utils/helpers';
 
 const Attribute__Row = (props) => {
   const { attribute, parentType, disabledExample } = props;
@@ -26,7 +26,7 @@ const Attribute__Row = (props) => {
         {attributeProps && (
           <span className="attribute__props">
             {attributeProps.map(prop => {
-              const propContent = prop.content;
+              const propContent = getAttributePropContent(prop);
               return (
                 <small
                   key={`${propContent}_attr`}
@@ -68,5 +68,18 @@ Attribute__Row.propTypes = {
   disabledExample: PropTypes.bool,
   onClick: PropTypes.func,
 };
+
+function getAttributePropContent(prop) {
+  const { content } = prop;
+  const isParametrized = typeof content === 'object';
+
+  if (!isParametrized) {
+    return content;
+  }
+
+  const attrName = get('key', 'content').from(content);
+  const attrValue = get('value', 'content').from(content);
+  return `${attrName}=${attrValue}`;
+}
 
 export default Attribute__Row;

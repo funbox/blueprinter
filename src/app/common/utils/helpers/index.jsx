@@ -51,7 +51,15 @@ const extractAttributeData = (attribute, disabledExample = false) => {
   }
 
   const attributeDescription = get('meta', 'description', 'content').from(attribute);
-  const attributeProps = get('attributes', 'typeAttributes', 'content').from(attribute);
+  let attributeProps = get('attributes', 'typeAttributes', 'content').from(attribute);
+
+  if (value) {
+    const valueAttributes = get('attributes', 'typeAttributes', 'content').from(value);
+    if (Array.isArray(valueAttributes)) {
+      attributeProps = attributeProps || [];
+      attributeProps = attributeProps.concat(valueAttributes);
+    }
+  }
 
   return { attributeKey, attributeType, attributeExample, attributeDescription, attributeProps };
 };
