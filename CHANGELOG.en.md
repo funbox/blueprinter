@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0 (06.04.2019)
+
+* Display parameterized attributes in the right column.
+
 ## 2.1.7 (18.03.2019)
 
 * Render request schema.
