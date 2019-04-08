@@ -1,9 +1,5 @@
 .parameters__item-title {
-  overflow: hidden;
-  width: 130px;
-  min-width: 130px;
-  text-align: right;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-all;
   font-weight: 700;
 }
