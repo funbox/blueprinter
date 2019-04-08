@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0 (08.04.2019)
+
+* Delete `fixed-type` keyword from array definition.
+
 ## 2.2.0 (06.04.2019)
 
 * Display parameterized attributes in the right column.
