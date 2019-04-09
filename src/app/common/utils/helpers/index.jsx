@@ -77,11 +77,11 @@ const getAttributeChildren = attribute => {
   const value = (attribute.content && attribute.content.value) || attribute.content;
   const attributeType = (value && value.element) ? value.element : attribute.element;
 
-  if (!complexTypes.includes(attributeType) || !attribute.content) {
-    return [];
+  if (complexTypes.includes(attributeType) && attribute.content) {
+    return childrenByType[attributeType](attribute);
   }
 
-  return childrenByType[attributeType](attribute);
+  return (attributeType === 'enum' && get('attributes', 'enumerations', 'content').from(attribute)) || [];
 };
 
 const withHeaderAnchors = (description) => {
