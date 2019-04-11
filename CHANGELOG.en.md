@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.3.1 (11.04.2019)
+
+* Fix inheritance from enumerables.
+* Fix inheritance from named types.
+
 ## 2.3.0 (08.04.2019)
 
 * Delete `fixed-type` keyword from array definition.
