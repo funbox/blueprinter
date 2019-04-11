@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.2 (11.04.2019)
+
+* Fix generation of a set of enumerable values of an array.
+
 ## 2.3.1 (11.04.2019)
 
 * Fix inheritance from enumerables.
