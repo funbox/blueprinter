@@ -31,9 +31,15 @@ class ResourceGroup extends React.Component {
   buildContentList(content, options = {}) {
     const { level, parentHash = '' } = options;
     const { route } = this.context.router;
+    let descriptionSection;
     if (level > MAX_NESTING_LEVEL) return null;
 
-    const menuItems = content.filter(item => item.element !== 'copy').map((item, index) => {
+    const menuItems = content.reduce((acc, item, index) => {
+      if (item.element === 'copy') {
+        if (!descriptionSection) descriptionSection = item;
+        return acc;
+      }
+
       const itemType = item.element;
       const nextLevel = level + 1;
       let hasSubmenu = level < MAX_NESTING_LEVEL && !!item.content && item.content.length > 0;
@@ -63,7 +69,7 @@ class ResourceGroup extends React.Component {
         badged: !!badge,
       };
 
-      return (
+      const menuItem = (
         <Menu__Item
           mods={itemMods}
           key={`${itemType}-${index}`}
@@ -77,9 +83,9 @@ class ResourceGroup extends React.Component {
             : null}
         >{badge}</Menu__Item>
       );
-    });
-
-    const descriptionSection = content.find(item => item.element === 'copy');
+      acc.push(menuItem);
+      return acc;
+    }, []);
 
     if (level === 2 && descriptionSection) {
       const descriptionHeaders = [];
