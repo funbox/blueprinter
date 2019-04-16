@@ -1,4 +1,4 @@
-import _Resizable from 're-resizable';
+import { Resizable as _Resizable } from 're-resizable';
 
 const Resizable = (props) => {
   const {
