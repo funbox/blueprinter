@@ -2,7 +2,7 @@ import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
 import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
 import { hashFromTitle } from 'app/common/utils/helpers/hash';
-import Resource from 'app/components/resource/resource';
+import Resource from 'app/components/resource';
 
 const DEFAULT_TITLE = 'Resource Group';
 
