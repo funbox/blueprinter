@@ -20,13 +20,14 @@ class Attribute extends React.Component {
     const {
       attribute,
       parentType,
-      nestedAttributes,
+      renderNestedAttrs,
       mods = {},
       mix = [],
     } = this.props;
 
-    if (nestedAttributes) {
-      mods.hasChildren = true;
+    const { hasChildren } = mods;
+
+    if (hasChildren) {
       mods.collapsed = this.state.collapsed;
     }
 
@@ -43,12 +44,12 @@ class Attribute extends React.Component {
             <Attribute__Row
               attribute={attribute}
               parentType={parentType}
-              disabledExample={!!nestedAttributes}
+              disabledExample={hasChildren}
               onClick={onToggle}
             />
 
-            {!!nestedAttributes && (!this.state.collapsed)
-              && <div className="attribute__children" ref={setCollapsibleElement}>{nestedAttributes}</div>
+            {!!hasChildren && (!this.state.collapsed)
+              && <div className="attribute__children" ref={setCollapsibleElement}>{renderNestedAttrs()}</div>
             }
           </div>
         )}
@@ -68,7 +69,7 @@ Attribute.propTypes = {
     ]),
   }),
   parentType: PropTypes.string,
-  nestedAttributes: PropTypes.node,
+  renderNestedAttrs: PropTypes.func,
   mods: PropTypes.object,
   mix: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
 };

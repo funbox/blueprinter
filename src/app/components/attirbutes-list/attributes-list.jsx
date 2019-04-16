@@ -9,13 +9,17 @@ const AttributesList = (props) => {
       const { attributeType } = extractAttributeData(a);
       const nestedAttrs = getAttributeChildren(a);
       const hasChildren = !!nestedAttrs && !!nestedAttrs.length && nestedAttrs.length > 0;
+      const renderNestedAttrs = hasChildren
+        ? (() => renderAttributes(nestedAttrs, attributeType))
+        : (() => null);
 
       return (
         <li className="attributes-list__item" key={`attr-${i}`}>
           <Attribute
+            mods={{ hasChildren }}
             attribute={a}
             parentType={parentType}
-            nestedAttributes={hasChildren ? renderAttributes(nestedAttrs, attributeType) : null}
+            renderNestedAttrs={renderNestedAttrs}
           />
         </li>
       );
