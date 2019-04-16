@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.0 (16.04.2019)
+
+* Improve parameter name display.
+
 ## 2.3.2 (11.04.2019)
 
 * Fix generation of a set of enumerable values of an array.
