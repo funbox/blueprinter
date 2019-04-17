@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.5.0 (17.04.2019)
+
+* Optimize page first render.
+
 ## 2.4.0 (16.04.2019)
 
 * Improve parameter name display.
