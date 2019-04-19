@@ -131,7 +131,7 @@ export default class SandboxContentSection extends React.Component {
 
         <SandboxSection id="resource" title="Блок Resource">
           <SandboxDemo>
-            <Resource resource={resource}/>
+            <Resource resource={resource} parentHash=""/>
           </SandboxDemo>
         </SandboxSection>
 
@@ -159,7 +159,8 @@ export default class SandboxContentSection extends React.Component {
           <SandboxDemo>
             <ActionCard
               method={this.state.actionCardMethod}
-              action={resource.content[0]}
+              action={resource.content[1]}
+              parentHash=""
             >
               <Parameters params={hrefVariables.content}/>
             </ActionCard>
