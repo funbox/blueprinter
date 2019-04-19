@@ -23,12 +23,15 @@ export default [
       },
     },
     attributes: {
-      typeAttributes: [
-        {
-          element: 'string',
-          content: 'required',
-        },
-      ],
+      typeAttributes: {
+        element: 'array',
+        content: [
+          {
+            element: 'string',
+            content: 'required',
+          },
+        ],
+      },
     },
   },
   {
@@ -44,12 +47,15 @@ export default [
       },
     },
     attributes: {
-      typeAttributes: [
-        {
-          element: 'string',
-          content: 'optional',
-        },
-      ],
+      typeAttributes: {
+        element: 'array',
+        content: [
+          {
+            element: 'string',
+            content: 'optional',
+          },
+        ],
+      },
     },
   },
   {

@@ -35,6 +35,7 @@ const transaction2 = {
 };
 
 const transaction3 = {
+  request: {},
   response: {
     statusCode: 201,
   },

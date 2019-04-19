@@ -4,13 +4,19 @@ const resourceGroup = groupName => (
   {
     element: 'category',
     meta: {
+      classes: [
+        'resourceGroup',
+      ],
       title: {
+        element: 'string',
         content: groupName,
       },
     },
     content: [
-      { element: 'copy', content: 'Resource Group content' },
-      resource,
+      {
+        element: 'copy',
+        content: 'Resource Group content',
+      },
       resource,
     ],
   }

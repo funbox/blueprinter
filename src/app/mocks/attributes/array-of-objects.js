@@ -7,12 +7,15 @@ export default {
     },
   },
   attributes: {
-    typeAttributes: [
-      {
-        element: 'string',
-        content: 'required',
-      },
-    ],
+    typeAttributes: {
+      element: 'array',
+      content: [
+        {
+          element: 'string',
+          content: 'required',
+        },
+      ],
+    },
   },
   content: {
     key: {

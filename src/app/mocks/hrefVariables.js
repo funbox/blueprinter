@@ -3,15 +3,6 @@ const hrefVariables = {
   content: [
     {
       element: 'member',
-      meta: {
-        description: 'количество записей N, которое нужно возвратить. Максимальное значение - 100; если передано большее значение, нужно возвратить 100 записей.',
-        title: 'number',
-      },
-      attributes: {
-        typeAttributes: [
-          'optional',
-        ],
-      },
       content: {
         key: {
           element: 'string',
@@ -21,18 +12,30 @@ const hrefVariables = {
           element: 'string',
         },
       },
+      meta: {
+        description: {
+          element: 'string',
+          content: 'количество записей N, которое нужно возвратить. Максимальное значение - 100; если передано большее значение, нужно возвратить 100 записей.',
+        },
+        title: {
+          element: 'string',
+          content: 'number',
+        },
+      },
+      attributes: {
+        typeAttributes: {
+          element: 'array',
+          content: [
+            {
+              element: 'string',
+              content: 'optional',
+            },
+          ],
+        },
+      },
     },
     {
       element: 'member',
-      meta: {
-        description: 'возвратить N новостей, опубликованных после новости с id=xxx',
-        title: 'string',
-      },
-      attributes: {
-        typeAttributes: [
-          'required',
-        ],
-      },
       content: {
         key: {
           element: 'string',
@@ -41,6 +44,27 @@ const hrefVariables = {
         value: {
           element: 'string',
           content: 'xxx',
+        },
+      },
+      meta: {
+        description: {
+          element: 'string',
+          content: 'возвратить N новостей, опубликованных после новости с id=xxx',
+        },
+        title: {
+          element: 'string',
+          content: 'string',
+        },
+      },
+      attributes: {
+        typeAttributes: {
+          element: 'array',
+          content: [
+            {
+              element: 'string',
+              content: 'required',
+            },
+          ],
         },
       },
     },
