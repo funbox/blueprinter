@@ -40,7 +40,7 @@ class CodeSnippet extends React.Component {
       <div className={b('code-snippet', this.props)} ref={this.el}>
         {
           useHighlight ? (
-            <Highlight languages={languages} className={disabledSyntax ? 'nohighlight' : preferredSyntax}>
+            <Highlight languages={languages} className={disabledSyntax ? 'plaintext' : preferredSyntax}>
               {this.props.children}
             </Highlight>
           ) : (

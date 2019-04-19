@@ -81,7 +81,7 @@ module.exports = options => {
     }),
     new webpack.ContextReplacementPlugin(
       /highlight.js[\\/]lib[\\/]languages$/,
-      new RegExp('^./(json|http)$'),
+      new RegExp('^./(json|http|plaintext)$'),
     ),
   ]);
 
