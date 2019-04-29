@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.6.0 (29.04.2019)
+
+* Improve ResourcePrototype section processing.
+* Improve check for identical attributes during inheritance resolving.
+* Improve attributes check during attributes comparison.
+* Improve passing `fixed-type` attribute to nested elements.
+* Display blocks in description.
+* Convert nested elements of an enum.
+
 ## 2.5.0 (17.04.2019)
 
 * Optimize page first render.
