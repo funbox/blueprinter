@@ -7,8 +7,15 @@ const commonmark = require('commonmark');
 const markdownParser = new commonmark.Parser();
 const htmlRenderer = new commonmark.HtmlRenderer();
 
+const customFenceRegex = /:{3}\s?(note|warning)/;
+
 const htmlFromText = (text, wrap = 'no-wrap', Tag = 'div') => {
-  const parsedMarkdown = markdownParser.parse(text);
+  let parsedMarkdown;
+  if (customFenceRegex.test(text)) {
+    parsedMarkdown = parseTextWithCustomBlocks(text);
+  } else {
+    parsedMarkdown = markdownParser.parse(text);
+  }
   const htmlString = htmlRenderer.render(parsedMarkdown);
 
   if (wrap === 'wrap') {
@@ -102,6 +109,75 @@ const withHeaderAnchors = (description) => {
 
   return React.cloneElement(description, {}, modifiedChildren);
 };
+
+function parseTextWithCustomBlocks(text) {
+  const splitChar = '\n';
+  const lines = text.split(splitChar);
+  const fenceStartRegex = customFenceRegex;
+  const fenceEndRegex = /:{3}$/;
+
+  let uniqueId = 0;
+  let fencedBlocks = [];
+  let currentFencedBlock = null;
+
+  const replacedLines = lines.map(line => {
+    if (!currentFencedBlock && fenceStartRegex.test(line)) {
+      const type = fenceStartRegex.exec(line)[1];
+      const id = uniqueId++;
+      currentFencedBlock = {
+        id,
+        type,
+        contentLines: [],
+      };
+      return '```'.concat(`${type}${id}`);
+    }
+    if (currentFencedBlock && fenceEndRegex.test(line)) {
+      fencedBlocks.push(currentFencedBlock);
+      currentFencedBlock = null;
+      return '```';
+    }
+    if (currentFencedBlock) {
+      currentFencedBlock.contentLines.push(line);
+    }
+    return line;
+  });
+
+  const replacedText = replacedLines.join(splitChar);
+  const parsedMarkdown = markdownParser.parse(replacedText);
+
+  fencedBlocks = fencedBlocks.map(block => {
+    const contentText = block.contentLines.join(splitChar);
+    const parsedContent = markdownParser.parse(contentText);
+    const openingTag = new commonmark.Node('html_block');
+    const closingTag = new commonmark.Node('html_block');
+    openingTag.literal = `<div class="${b('information', { mods: { type: block.type } })}">`;
+    closingTag.literal = '</div>';
+    parsedContent.prependChild(openingTag);
+    parsedContent.appendChild(closingTag);
+    return {
+      ...block,
+      contentText,
+      parsedContent,
+    };
+  });
+
+  const walker = parsedMarkdown.walker();
+  let event = walker.next();
+  let node;
+
+  while (event) {
+    node = event.node;
+    if (node.type === 'code_block' && (/^(note|warning)\d+/.test(node.info))) {
+      const [, type, id] = /^(note|warning)(\d+)/.exec(node.info);
+      const correspondingBlock = fencedBlocks.find(block => (Number(block.id) === Number(id) && block.type === type));
+      node.insertBefore(correspondingBlock.parsedContent);
+      node.unlink();
+    }
+    event = walker.next();
+  }
+
+  return parsedMarkdown;
+}
 
 export {
   extractTransactionMethod,
