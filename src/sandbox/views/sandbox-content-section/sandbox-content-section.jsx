@@ -12,7 +12,7 @@ import Resource from 'app/components/resource';
 import Parameters from 'app/components/parameters';
 import ActionCard from 'app/components/action-card';
 
-import resource from 'app/mocks/resource';
+import resource, { resourceWithNote } from 'app/mocks/resource';
 import group from 'app/mocks/resource-group';
 import hrefVariables from 'app/mocks/hrefVariables';
 
@@ -164,6 +164,12 @@ export default class SandboxContentSection extends React.Component {
             >
               <Parameters params={hrefVariables.content}/>
             </ActionCard>
+          </SandboxDemo>
+        </SandboxSection>
+
+        <SandboxSection id="note-warning-sections" title="Секции Note и Warning">
+          <SandboxDemo>
+            <Resource resource={resourceWithNote} parentHash=""/>
           </SandboxDemo>
         </SandboxSection>
       </div>
