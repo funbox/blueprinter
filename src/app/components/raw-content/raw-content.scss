@@ -41,6 +41,14 @@
     }
   }
 
+  div {
+    margin: 0 0 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
   a {
     text-decoration: none;
     color: $blueDark;
