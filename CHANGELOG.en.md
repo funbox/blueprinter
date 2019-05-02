@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.1 (02.05.2019)
+
+* Fix rendering of long URLs.
+
 ## 2.7.0 (02.05.2019)
 
 * Update sandbox.
