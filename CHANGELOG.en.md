@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.0 (02.05.2019)
+
+* Update sandbox.
+
 ## 2.6.0 (29.04.2019)
 
 * Improve ResourcePrototype section processing.
