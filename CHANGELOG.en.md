@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.0 (07.05.2019)
+
+* Display `:::note` and `:::warning` sections in documentation.
+
 ## 2.7.1 (02.05.2019)
 
 * Fix rendering of long URLs.
