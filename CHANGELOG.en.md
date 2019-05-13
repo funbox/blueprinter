@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.9.0 (13.05.2019)
+
+* Convert values of untyped elements of an array.
+* Fix JSON schema generated for fixed and fixed-type elements.
+* Fix parsing of code block in a block description.
+
 ## 2.8.0 (07.05.2019)
 
 * Display `:::note` and `:::warning` sections in documentation.
