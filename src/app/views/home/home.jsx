@@ -74,7 +74,11 @@ export default class Home extends React.PureComponent {
       actionCard.style.setProperty('min-height', `${requiredHeight}px`);
 
       const difference = actionCard.offsetTop - transition.offsetTop;
-      transition.style.paddingTop = `${difference}px`;
+      if (difference > 0) {
+        transition.style.paddingTop = `${difference}px`;
+      } else {
+        transition.style.marginTop = `${difference}px`;
+      }
     });
   }
 
