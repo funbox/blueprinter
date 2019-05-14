@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.9.1 (14.05.2019)
+
+* Fix negative margins applied to Action and Transition cards.
+
 ## 2.9.0 (13.05.2019)
 
 * Convert values of untyped elements of an array.
