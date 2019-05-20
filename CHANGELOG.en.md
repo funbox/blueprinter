@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.9.2 (20.05.2019)
+
+* Fix parsing of a URI parameter with star (*) operator.
+
 ## 2.9.1 (14.05.2019)
 
 * Fix negative margins applied to Action and Transition cards.
