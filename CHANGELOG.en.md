@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.10.1 (25.05.2019)
+
+* Fix missing indentation of code block.
+
 ## 2.10.0 (23.05.2019)
 
 * Add installation and usage info to readme.
