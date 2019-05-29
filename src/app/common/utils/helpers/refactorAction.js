@@ -34,8 +34,12 @@ const resolveInheritance = (valueMember, parent) => {
     }
     const referencedObjectType = refDSContent.element;
     const usefulContent = isEnum ? enumContent : refDSContent;
-    usefulContent.content.forEach(item => resolveInheritance(item, usefulContent));
-    const referencedObjectContent = [...usefulContent.content];
+
+    let referencedObjectContent;
+    if (Array.isArray(usefulContent.content)) {
+      usefulContent.content.forEach(item => resolveInheritance(item, usefulContent));
+      referencedObjectContent = [...usefulContent.content];
+    }
 
     if (type === 'ref') {
       const refMemberIndex = parent.content.indexOf(valueMember);
@@ -49,10 +53,14 @@ const resolveInheritance = (valueMember, parent) => {
       valueMember.attributes.enumerations.content = valueMember.attributes.enumerations.content || [];
       valueMember.attributes.enumerations.content.unshift(...referencedObjectContent);
       valueMember.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
+    } else if (!referencedObjectContent) {
+      valueMember.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
+      valueMember.attributes = usefulContent.attributes;
     } else {
       if (!Array.isArray(valueMember.content)) valueMember.content = [];
       valueMember.content.unshift(...referencedObjectContent);
       valueMember.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
+      valueMember.attributes = usefulContent.attributes;
     }
   }
 
