@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.10.2 (29.05.2019)
+
+* Fix parsing of attributes of named types.
+
 ## 2.10.1 (25.05.2019)
 
 * Fix missing indentation of code block.
