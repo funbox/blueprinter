@@ -64,6 +64,7 @@ class ResourceGroup extends React.Component {
 
       if (itemType === 'message') {
         hasSubmenu = false;
+        badge = <MethodBadge mods={{ type: 'message' }} mix="menu__item-icon"/>;
       }
 
       const hash = combineHashes(parentHash, mainHash);

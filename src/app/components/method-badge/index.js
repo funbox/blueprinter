@@ -9,3 +9,4 @@ require('./_type/_options/method-badge_type_options.scss');
 require('./_type/_patch/method-badge_type_patch.scss');
 require('./_type/_post/method-badge_type_post.scss');
 require('./_type/_put/method-badge_type_put.scss');
+require('./_type/_message/method-badge_type_message.scss');
