@@ -11,10 +11,12 @@ import MainContent from 'app/components/main-content';
 import Resource from 'app/components/resource';
 import Parameters from 'app/components/parameters';
 import ActionCard from 'app/components/action-card';
+import MessageCard from 'app/components/message-card';
 
 import resource, { resourceWithNote } from 'app/mocks/resource';
 import group from 'app/mocks/resource-group';
 import hrefVariables from 'app/mocks/hrefVariables';
+import message from 'app/mocks/message';
 
 const httpMethods = ['delete', 'get', 'head', 'options', 'patch', 'post', 'put'];
 
@@ -164,6 +166,15 @@ export default class SandboxContentSection extends React.Component {
             >
               <Parameters params={hrefVariables.content}/>
             </ActionCard>
+          </SandboxDemo>
+        </SandboxSection>
+
+        <SandboxSection id="message" title="Блок Message">
+          <SandboxDemo>
+            <MessageCard
+              parentHash=""
+              message={message}
+            />
           </SandboxDemo>
         </SandboxSection>
 
