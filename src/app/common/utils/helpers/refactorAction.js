@@ -77,6 +77,14 @@ const resolveInheritance = (valueMember, parent) => {
   return valueMember;
 };
 
+const refactorMessage = (message) => ({
+  id: message.id,
+  type: 'message',
+  attributes: getDataAttributes(message),
+  body: getBody(message),
+  title: get('meta', 'title', 'content').from(message),
+});
+
 const refactorAction = action => {
   let method = '';
 
@@ -133,10 +141,15 @@ const refactorAction = action => {
     },
     id: action.id,
     content: filteredTransactions,
+    type: 'transaction',
   };
 };
 
-export default refactorAction;
+const refactorSource = (source) => (
+  source.element === 'message' ? refactorMessage(source) : refactorAction(source)
+);
+
+export default refactorSource;
 
 function extractHeaderData(header) {
   return {

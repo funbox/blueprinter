@@ -55,6 +55,11 @@ const parseSourceFile = ({ content }) => {
   categories.resourceGroupArray.forEach(group => {
     group.content.forEach(groupChild => {
       if (groupChild.element === 'copy') return;
+      if (groupChild.element === 'message') {
+        groupChild.id = uniqid.time();
+        actions.push(groupChild);
+        return;
+      }
 
       groupChild.content.forEach(resourceChild => {
         if (resourceChild.element === 'copy') return;
