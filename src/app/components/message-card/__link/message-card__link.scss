@@ -1,0 +1,10 @@
+.message-card__link {
+  margin-right: $baseMargin;
+  padding: $basePadding / 2 $basePadding;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 3px;
+  background-color: $white;
+  color: $grayDark;
+}

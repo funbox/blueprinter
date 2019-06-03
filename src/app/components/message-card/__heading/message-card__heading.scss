@@ -1,0 +1,13 @@
+.message-card__heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: $basePadding / 2 $basePadding;
+  border-bottom: 1px solid darken($get-method-color--secondary, 5%);
+  background-color: $get-method-color--secondary;
+
+  &:only-child {
+    border-bottom: none;
+    border-radius: 6px;
+  }
+}
