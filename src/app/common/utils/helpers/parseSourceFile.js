@@ -53,19 +53,19 @@ const parseSourceFile = ({ content }) => {
   }
 
   categories.resourceGroupArray.forEach(group => {
-    group.content.forEach(resource => {
-      if (resource.element === 'copy') return;
+    group.content.forEach(groupChild => {
+      if (groupChild.element === 'copy') return;
 
-      resource.content.forEach(action => {
-        if (action.element === 'copy') return;
+      groupChild.content.forEach(resourceChild => {
+        if (resourceChild.element === 'copy') return;
 
-        if (!action.attributes) {
-          action.attributes = {};
+        if (!resourceChild.attributes) {
+          resourceChild.attributes = {};
         }
 
-        action.attributes = { ...resource.attributes, ...action.attributes };
-        action.id = uniqid.time();
-        actions.push(action);
+        resourceChild.attributes = { ...groupChild.attributes, ...resourceChild.attributes };
+        resourceChild.id = uniqid.time();
+        actions.push(resourceChild);
       });
     });
   });
