@@ -5,11 +5,6 @@ import categories from './categories';
 
 const standardTypes = ['number', 'string', 'boolean', 'array', 'enum', 'object'];
 
-const refactorHeader = header => ({
-  key: get('content', 'key', 'content').from(header),
-  value: get('content', 'value', 'content').from(header),
-});
-
 const removeEmpty = object => (
   Object.keys(object).reduce((res, key) => {
     if (object[key]) {
@@ -83,50 +78,17 @@ const resolveInheritance = (valueMember, parent) => {
 };
 
 const refactorAction = action => {
-  const getSourceElementIndexByType = (source, type) => source.content.findIndex(item => item.element === type);
   let method = '';
 
   const transactions = action.content.filter(item => item.element !== 'copy').map(transaction => {
     const sourceRequest = transaction.content.find(tItem => tItem.element === 'httpRequest');
     const sourceResponse = transaction.content.find(tItem => tItem.element === 'httpResponse');
 
-    const getBody = httpSource => {
-      const index = getSourceElementIndexByType(httpSource, 'asset');
-
-      return (index > -1) ? httpSource.content[index].content : null;
-    };
-
-    const getSchema = httpSource => {
-      const index = httpSource.content.findIndex(item => (
-        item.element === 'asset' && item.meta.classes[0] === 'messageBodySchema'));
-
-      return (index > -1) ? httpSource.content[index].content : null;
-    };
-
-    const getDataAttributes = httpSource => {
-      const index = getSourceElementIndexByType(httpSource, 'dataStructure');
-
-      if (index === -1) return null;
-
-      const valueMember = httpSource.content[index].content;
-      resolveInheritance(valueMember, httpSource.content[index]);
-
-      return valueMember.content;
-    };
-
-    const getDescription = httpSource => {
-      const index = getSourceElementIndexByType(httpSource, 'copy');
-
-      if (index === -1) return null;
-
-      return httpSource.content[index].content;
-    };
-
     const request = {
       attributes: getDataAttributes(sourceRequest),
       body: getBody(sourceRequest),
       description: getDescription(sourceRequest),
-      headers: sourceRequest.attributes.headers ? sourceRequest.attributes.headers.content.map(refactorHeader) : null,
+      headers: sourceRequest.attributes.headers ? sourceRequest.attributes.headers.content.map(extractHeaderData) : null,
       schema: getSchema(sourceRequest),
       title: get('meta', 'title', 'content').from(sourceRequest),
     };
@@ -135,7 +97,7 @@ const refactorAction = action => {
       attributes: getDataAttributes(sourceResponse),
       body: getBody(sourceResponse),
       description: getDescription(sourceResponse),
-      headers: sourceResponse.attributes.headers ? sourceResponse.attributes.headers.content.map(refactorHeader) : null,
+      headers: sourceResponse.attributes.headers ? sourceResponse.attributes.headers.content.map(extractHeaderData) : null,
       schema: getSchema(sourceResponse),
       statusCode: get('attributes', 'statusCode', 'content').from(sourceResponse),
     };
@@ -175,3 +137,46 @@ const refactorAction = action => {
 };
 
 export default refactorAction;
+
+function extractHeaderData(header) {
+  return {
+    key: get('content', 'key', 'content').from(header),
+    value: get('content', 'value', 'content').from(header),
+  };
+}
+
+function getSourceElementIndexByType(source, type) {
+  return source.content.findIndex(item => item.element === type);
+}
+
+function getBody(httpSource) {
+  const index = getSourceElementIndexByType(httpSource, 'asset');
+
+  return (index > -1) ? httpSource.content[index].content : null;
+}
+
+function getSchema(httpSource) {
+  const index = httpSource.content.findIndex(item => (
+    item.element === 'asset' && item.meta.classes[0] === 'messageBodySchema'));
+
+  return (index > -1) ? httpSource.content[index].content : null;
+}
+
+function getDataAttributes(httpSource) {
+  const index = getSourceElementIndexByType(httpSource, 'dataStructure');
+
+  if (index === -1) return null;
+
+  const valueMember = httpSource.content[index].content;
+  resolveInheritance(valueMember, httpSource.content[index]);
+
+  return valueMember.content;
+}
+
+function getDescription(httpSource) {
+  const index = getSourceElementIndexByType(httpSource, 'copy');
+
+  if (index === -1) return null;
+
+  return httpSource.content[index].content;
+}
