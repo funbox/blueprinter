@@ -4,4 +4,10 @@
     font-size: $baseFontSize;
     font-weight: 400;
   }
+
+  &:first-child {
+    .section__title {
+      margin-top: 0;
+    }
+  }
 }

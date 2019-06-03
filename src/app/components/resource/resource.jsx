@@ -1,6 +1,7 @@
 import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
 import ActionCard from 'app/components/action-card';
+import MessageCard from 'app/components/message-card';
 import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
 import { hashFromTitle, combineHashes } from 'app/common/utils/helpers/hash';
 import Resource__Action from './__action';
@@ -39,16 +40,29 @@ class Resource extends React.Component {
           <div className="resource__content">
             {content
               .filter(rItem => rItem.element !== 'copy')
-              .map(action => (
-                <Resource__Action id={action.id} key={`resource-action-${action.id}`}>
-                  <ActionCard
-                    action={action}
-                    key={`action-${action.id}`}
-                    parentHash={hash}
-                    href={href}
-                    title={title}
-                  />
-                </Resource__Action>
+              .map(rItem => (
+                rItem.element === 'message'
+                  ? (
+                    <Resource__Action id={rItem.id} key={`resource-action-${rItem.id}`}>
+                      <MessageCard
+                        message={rItem}
+                        key={`message-${rItem.id}`}
+                        parentHash={hash}
+                        href={href}
+                        title={title}
+                      />
+                    </Resource__Action>
+                  ) : (
+                    <Resource__Action id={rItem.id} key={`resource-action-${rItem.id}`}>
+                      <ActionCard
+                        action={rItem}
+                        key={`action-${rItem.id}`}
+                        parentHash={hash}
+                        href={href}
+                        title={title}
+                      />
+                    </Resource__Action>
+                  )
               ))
             }
           </div>

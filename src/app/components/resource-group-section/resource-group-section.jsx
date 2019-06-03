@@ -3,6 +3,8 @@ import Anchor from 'app/components/anchor';
 import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
 import { hashFromTitle } from 'app/common/utils/helpers/hash';
 import Resource from 'app/components/resource';
+import MessageCard from 'app/components/message-card';
+import ResourceGroupSection__Message from './__message';
 
 const DEFAULT_TITLE = 'Resource Group';
 
@@ -36,12 +38,25 @@ class ResourceGroupSection extends React.PureComponent {
           <div className="resource-group-section__content">
             {group.content
               .filter(gItem => gItem.element !== 'copy')
-              .map(resource => (
-                <Resource
-                  parentHash={hash}
-                  resource={resource}
-                  key={`resource-${resource.meta.title.content}`}
-                />
+              .map(gItem => (
+                gItem.element === 'message' ? (
+                  <ResourceGroupSection__Message
+                    id={gItem.id}
+                    key={`resource-group-message-${gItem.id}`}
+                  >
+                    <MessageCard
+                      message={gItem}
+                      parentHash={hash}
+                      title={title}
+                    />
+                  </ResourceGroupSection__Message>
+                ) : (
+                  <Resource
+                    parentHash={hash}
+                    resource={gItem}
+                    key={`resource-${gItem.meta.title.content}`}
+                  />
+                )
               ))}
           </div>
         </div>

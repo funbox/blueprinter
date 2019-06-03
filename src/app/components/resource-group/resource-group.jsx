@@ -62,6 +62,10 @@ class ResourceGroup extends React.Component {
         mainHash = hashFromTitle(`${title} ${method}`);
       }
 
+      if (itemType === 'message') {
+        hasSubmenu = false;
+      }
+
       const hash = combineHashes(parentHash, mainHash);
 
       const itemMods = {

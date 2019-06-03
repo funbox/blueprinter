@@ -10,6 +10,7 @@ import SideMenu from 'app/components/side-menu';
 import MainContent from 'app/components/main-content';
 import Transition from 'app/components/transition';
 import TransitionContainer from 'app/components/transition-container';
+import MessageContent from 'app/components/message-content';
 import ResourceGroupSection from 'app/components/resource-group-section';
 import ApiHost from 'app/components/api-host';
 import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
@@ -135,11 +136,17 @@ export default class Home extends React.PureComponent {
                     <TransitionContainer
                       myRef={this.transitions.get(action.id)}
                     >
-                      <Transition
-                        mods={{ for: 'page-aside' }}
-                        transactions={action.content}
-                        attributes={action.attributes}
-                      />
+                      {action.type === 'message' ? (
+                        <MessageContent
+                          message={action}
+                        />
+                      ) : (
+                        <Transition
+                          mods={{ for: 'page-aside' }}
+                          transactions={action.content}
+                          attributes={action.attributes}
+                        />
+                      )}
                     </TransitionContainer>
                   </Page__Stripe>
                 ))
