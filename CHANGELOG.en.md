@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.10.3 (04.06.2019)
+
+* Fix parsing of an empty response body in Crafter.
+
 ## 2.10.2 (29.05.2019)
 
 * Fix parsing of attributes of named types.
