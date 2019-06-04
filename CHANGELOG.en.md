@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.11.0 (04.06.2019)
+
+* Display SubGroup and Message sections.
+
 ## 2.10.3 (04.06.2019)
 
 * Fix parsing of an empty response body in Crafter.
