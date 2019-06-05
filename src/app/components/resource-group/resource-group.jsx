@@ -50,8 +50,10 @@ class ResourceGroup extends React.Component {
 
       if (itemType === 'resource' && hasOnlyChild) {
         hasSubmenu = false;
-        const method = extractMethod(item.content[0]);
-        badge = <MethodBadge method={method} mix="menu__item-icon"/>;
+        if (item.content[0].element !== 'copy') {
+          const method = extractMethod(item.content[0]);
+          badge = <MethodBadge method={method} mix="menu__item-icon"/>;
+        }
       }
 
       if (itemType === 'transition') {
@@ -94,7 +96,7 @@ class ResourceGroup extends React.Component {
 
     if (level === 2 && descriptionSection) {
       const descriptionHeaders = [];
-      const regex = /#{2,}\s?(.+)\n/g;
+      const regex = /#{2,}\s?(.+)\n?/g;
       let match = regex.exec(descriptionSection.content);
       while (match) {
         descriptionHeaders.push(match[1]);
