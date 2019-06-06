@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.11.1 (06.06.2019)
+
+* Fix rendering of menu with resources which contain only a description.
+
 ## 2.11.0 (04.06.2019)
 
 * Display SubGroup and Message sections.
