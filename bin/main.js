@@ -3,7 +3,7 @@ const path = require('path');
 const { promisify } = require('util');
 const crafter = require('@funbox/crafter');
 
-const { errMessage } = require('./utils');
+const { errMessage, astHasError } = require('./utils');
 
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
@@ -14,6 +14,11 @@ const createRefract = inputFileName => promisify(crafter.parseFile)(inputFileNam
   .then(res => {
     try {
       const ast = JSON.stringify(res.toRefract());
+      const [hasError, error] = astHasError(res);
+      if (hasError) {
+        console.error(`Crafter error: ${error}`);
+        return Promise.resolve(ast);
+      }
       return Promise.resolve(ast);
     } catch (e) {
       return Promise.reject(e);
