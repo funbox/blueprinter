@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.11.2 (08.06.2019)
+
+* Generate correct body for a primitive type that lacks sample.
+
 ## 2.11.1 (06.06.2019)
 
 * Fix rendering of menu with resources which contain only a description.
