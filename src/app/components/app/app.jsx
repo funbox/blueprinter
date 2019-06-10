@@ -1,4 +1,10 @@
+import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
+import sourceMock from 'app/source';
+
 import Home from 'app/views/home';
+
+const source = window.refract || sourceMock;
+const parsedSource = parseSourceFile(source);
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -26,7 +32,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <Home/>;
+    return (
+      <Home parsedSource={parsedSource}/>
+    );
   }
 }
 

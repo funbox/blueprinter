@@ -13,19 +13,29 @@ import TransitionContainer from 'app/components/transition-container';
 import MessageContent from 'app/components/message-content';
 import ResourceGroupSection from 'app/components/resource-group-section';
 import ApiHost from 'app/components/api-host';
-import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
-import sourceMock from 'app/source';
-import { get } from 'app/common/utils/helpers/';
+import { get } from 'app/common/utils/helpers';
 
-const source = window.refract || sourceMock;
-const parsedSource = parseSourceFile(source);
-
-const { topLevelMeta, groups, actions } = parsedSource;
+const propTypes = {
+  parsedSource: PropTypes.shape({
+    topLevelMeta: PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      host: PropTypes.string,
+    }),
+    groups: PropTypes.arrayOf(PropTypes.object),
+    actions: PropTypes.arrayOf(PropTypes.object),
+  }),
+};
 
 export default class Home extends React.PureComponent {
   constructor(props) {
     super(props);
 
+    const { topLevelMeta, groups, actions } = props.parsedSource;
+
+    this.topLevelMeta = topLevelMeta;
+    this.groups = groups;
+    this.actions = actions;
     this.transitions = new Map();
 
     actions.forEach((action) => {
@@ -42,7 +52,7 @@ export default class Home extends React.PureComponent {
     setTimeout(this.synchronizeDimensions, 1);
     window.addEventListener('resize', this.synchronizeDimensions);
 
-    document.title = topLevelMeta.title || 'API Blueprint';
+    document.title = this.topLevelMeta.title || 'API Blueprint';
   }
 
   componentDidUpdate() {
@@ -95,16 +105,16 @@ export default class Home extends React.PureComponent {
             onResizeStop={this.synchronizeDimensions}
           >
             <Page__Navigation>
-              <SideMenu data={groups}/>
+              <SideMenu data={this.groups}/>
             </Page__Navigation>
           </Resizable>
 
           <Page__Body>
             <MainContent
-              title={topLevelMeta.title}
-              description={topLevelMeta.description}
+              title={this.topLevelMeta.title}
+              description={this.topLevelMeta.description}
             >
-              {groups.map(group => (
+              {this.groups.map(group => (
                 <ResourceGroupSection
                   group={group}
                   key={`group-${get('meta', 'title', 'content').from(group)}`}
@@ -124,14 +134,14 @@ export default class Home extends React.PureComponent {
             <Page__Aside>
               <Page__Stripe mods={{ for: 'aside-placeholder' }}/>
 
-              {topLevelMeta.host && (
+              {this.topLevelMeta.host && (
                 <Page__Stripe mods={{ for: 'api-host' }}>
-                  <ApiHost host={topLevelMeta.host}/>
+                  <ApiHost host={this.topLevelMeta.host}/>
                 </Page__Stripe>
               )}
 
               {
-                actions.map(action => (
+                this.actions.map(action => (
                   <Page__Stripe mods={{ for: 'transition' }} key={`transition-${action.id}`}>
                     <TransitionContainer
                       myRef={this.transitions.get(action.id)}
@@ -158,3 +168,5 @@ export default class Home extends React.PureComponent {
     );
   }
 }
+
+Home.propTypes = propTypes;
