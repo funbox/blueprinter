@@ -5,6 +5,17 @@ import categories from './categories';
 import refactorAction from './refactorAction';
 
 const parseSourceFile = ({ content }) => {
+  const [error, warnings] = detectErrorsAndWarnings(content);
+
+  if (error) {
+    return {
+      topLevelMeta: {
+        error,
+        warnings,
+      },
+    };
+  }
+
   const source = content[0];
 
   const groupForStandaloneResources = {
@@ -28,6 +39,7 @@ const parseSourceFile = ({ content }) => {
     title: get('meta', 'title', 'content').from(source),
     description: topLevelDescriptionElement,
     host: getHost(),
+    warnings,
   };
 
   Object.values(categories).forEach(itemArray => {
@@ -92,3 +104,46 @@ const parseSourceFile = ({ content }) => {
 };
 
 export default parseSourceFile;
+
+function detectErrorsAndWarnings(content) {
+  let eAnnotation;
+  const warnings = [];
+  const annotationType = (source) => get('meta', 'classes', 'content', '0', 'content').from(source);
+  const isAnnotationOfType = (item, type) => {
+    if (item.element !== 'annotation') return false;
+    return annotationType(item) === type;
+  };
+  content.forEach(item => {
+    if (isAnnotationOfType(item, 'error')) {
+      eAnnotation = item;
+      return;
+    }
+    if (isAnnotationOfType(item, 'warning')) {
+      warnings.push(item);
+    }
+  });
+
+  const consumableWarnings = warnings.map(extractAnnotationInfo);
+
+  if (!eAnnotation) {
+    return [undefined, consumableWarnings];
+  }
+
+  const consumableError = extractAnnotationInfo(eAnnotation);
+
+  return [consumableError, consumableWarnings];
+}
+
+function extractAnnotationInfo(annotation) {
+  const text = annotation.content;
+  const sourceMap = annotation.attributes.sourceMap.content[0];
+  const startPositionSourceMap = sourceMap.content[0];
+  const sourceFile = sourceMap.file;
+  const positionAttributes = startPositionSourceMap.content[0].attributes;
+  const positionDetails = {
+    line: positionAttributes.line.content,
+    column: positionAttributes.column.content,
+    file: sourceFile,
+  };
+  return { text, details: positionDetails, id: uniqid.time() };
+}
