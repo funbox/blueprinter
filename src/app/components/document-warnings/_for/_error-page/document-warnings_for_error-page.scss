@@ -1,0 +1,35 @@
+.document-warnings_for_error-page {
+  .document-warnings__title {
+    position: relative;
+    padding: 7px;
+    padding-left: 70px;
+    font-family: $headingFontStack;
+    font-size: 30px;
+    line-height: 36px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 50px;
+      background: transparent url('./document-warnings_for_error-page.svg') no-repeat center;
+      background-size: contain;
+    }
+  }
+
+  .document-warnings__summary {
+    display: none;
+  }
+
+  .document-warnings__list {
+    max-height: none;
+    padding-left: 0;
+  }
+
+  .document-warnings__item {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}

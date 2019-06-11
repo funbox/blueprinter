@@ -36,6 +36,7 @@ export default class App extends React.Component {
     return parsedSource.topLevelMeta.error ? (
       <Error
         error={parsedSource.topLevelMeta.error}
+        warnings={parsedSource.topLevelMeta.warnings}
       />
     ) : (
       <Home parsedSource={parsedSource}/>

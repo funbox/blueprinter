@@ -5,3 +5,5 @@ require('./__list/document-warnings__list.scss');
 require('./__title/document-warnings__title.scss');
 
 require('./document-warnings.scss');
+
+require('./_for/_error-page/document-warnings_for_error-page.scss');
