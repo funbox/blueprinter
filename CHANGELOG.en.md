@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.12.0 (11.06.2019)
+
+* Display errors and warnings from Crafter.
+
 ## 2.11.2 (08.06.2019)
 
 * Generate correct body for a primitive type that lacks sample.
