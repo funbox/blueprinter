@@ -1,0 +1,14 @@
+.notification__close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: url('./notification__close-button.svg') 50% no-repeat;
+  background-size: 12px;
+
+  &:hover,
+  &:focus {
+    background-image: url('./notification__close-button--focused.svg');
+  }
+}
