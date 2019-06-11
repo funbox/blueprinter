@@ -12,6 +12,8 @@ import Transition from 'app/components/transition';
 import TransitionContainer from 'app/components/transition-container';
 import MessageContent from 'app/components/message-content';
 import ResourceGroupSection from 'app/components/resource-group-section';
+import Notification from 'app/components/notification';
+import DocumentWarnings from 'app/components/document-warnings';
 import ApiHost from 'app/components/api-host';
 import { get } from 'app/common/utils/helpers';
 
@@ -19,7 +21,7 @@ const propTypes = {
   parsedSource: PropTypes.shape({
     topLevelMeta: PropTypes.shape({
       title: PropTypes.string,
-      description: PropTypes.string,
+      description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
       host: PropTypes.string,
     }),
     groups: PropTypes.arrayOf(PropTypes.object),
@@ -37,12 +39,18 @@ export default class Home extends React.PureComponent {
     this.groups = groups;
     this.actions = actions;
     this.transitions = new Map();
+    this.warnings = topLevelMeta.warnings;
+
+    this.state = {
+      isWarningNotificationOpen: this.warnings.length > 0,
+    };
 
     actions.forEach((action) => {
       this.transitions.set(action.id, React.createRef());
     });
 
     this.synchronizeDimensions = this.synchronizeDimensions.bind(this);
+    this.closeNotification = this.closeNotification.bind(this);
   }
 
   componentDidMount() {
@@ -90,6 +98,12 @@ export default class Home extends React.PureComponent {
       } else {
         transition.style.marginTop = `${difference}px`;
       }
+    });
+  }
+
+  closeNotification() {
+    this.setState({
+      isWarningNotificationOpen: false,
     });
   }
 
@@ -164,6 +178,12 @@ export default class Home extends React.PureComponent {
             </Page__Aside>
           </Resizable>
         </Page__Layout>
+
+        {this.state.isWarningNotificationOpen && (
+          <Notification onClose={this.closeNotification}>
+            <DocumentWarnings warnings={this.warnings}/>
+          </Notification>
+        )}
       </Page>
     );
   }
