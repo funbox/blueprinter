@@ -82,6 +82,7 @@ const refactorMessage = (message) => ({
   type: 'message',
   attributes: getDataAttributes(message),
   body: getBody(message),
+  schema: getSchema(message),
   title: get('meta', 'title', 'content').from(message),
 });
 

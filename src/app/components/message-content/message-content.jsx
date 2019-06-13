@@ -7,10 +7,11 @@ const MessageContent = (props) => {
     message: {
       attributes,
       body,
+      schema,
     },
   } = props;
 
-  const isEmpty = !attributes && !body;
+  const isEmpty = !attributes && !body && !schema;
   const isString = s => (typeof s === 'string' || s instanceof String);
 
   return (
@@ -39,6 +40,18 @@ const MessageContent = (props) => {
         >
           <CodeSnippet>
             {isString(body) ? body.trim() : JSON.stringify(body, null, 2)}
+          </CodeSnippet>
+        </Section>
+      )}
+
+      {!!schema && (
+        <Section
+          title="Schema"
+          titleTag="h5"
+          mods={{ for: 'transition' }}
+        >
+          <CodeSnippet>
+            {isString(schema) ? schema.trim() : JSON.stringify(schema, null, 2)}
           </CodeSnippet>
         </Section>
       )}
