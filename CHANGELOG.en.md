@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.13.0 (14.06.2019)
+
+* Display JSON schema of Message sections.
+
 ## 2.12.0 (11.06.2019)
 
 * Display errors and warnings from Crafter.
