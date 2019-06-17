@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.14.0 (17.06.2019)
+
+* Add attributes `non-nullable` and `optional` to object fields.
+
 ## 2.13.0 (14.06.2019)
 
 * Display JSON schema of Message sections.
