@@ -38,7 +38,7 @@ const formatHref = (href, variables) => {
       definedValue = (Array.isArray(value) && value[0]) ? value[0].content : (value.content || value);
     }
 
-    if (Array.isArray(paramKeys) && paramKeys.includes(name)) {
+    if (Array.isArray(paramKeys) && (paramKeys.includes(name) || paramKeys.includes(`${name}*`))) {
       constructedParams.push(`${name}=${definedValue}`);
     }
 

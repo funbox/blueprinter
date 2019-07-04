@@ -5,11 +5,23 @@ import parser from 'html-react-parser';
 import Section from 'app/components/section';
 import Transition__Content from './__content';
 
-const highlightQuery = queryObj => (
+const highlightQuery = (queryKey, queryValue) => {
+  const key = `<span class="hljs-attr">${queryKey}</span>`;
+  const value = `<span class="hljs-literal">${queryValue}</span>`;
+
+  return `${key}=${value}`;
+};
+
+const getFormattedQuery = queryObj => (
   Object.keys(queryObj).map(qKey => {
-    const key = `<span class="hljs-attr">${qKey}</span>`;
-    const value = `<span class="hljs-literal">${queryObj[qKey]}</span>`;
-    return `${key}=${value}`;
+    if (queryObj[qKey].includes(',')) {
+      return queryObj[qKey]
+        .split(',')
+        .map(qValue => highlightQuery(qKey, qValue.trim()))
+        .join('&');
+    }
+
+    return highlightQuery(qKey, queryObj[qKey]);
   }).join('&')
 );
 
@@ -84,9 +96,9 @@ class Transition extends React.Component {
 
     const { method, href, hrefVariables } = this.transitionAttributes;
     const formattedHref = hrefVariables ? formatHref(href, hrefVariables) : href;
-
     const { pathname, query } = new URL(formattedHref, true);
-    const formattedQuery = highlightQuery(query);
+    const formattedQuery = getFormattedQuery(query);
+
     return (
       <Section
         title={`Структура ответов на запрос ${method} ${href}`}
