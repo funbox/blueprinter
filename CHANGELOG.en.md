@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.14.1 (08.07.2019)
+
+* Render URI parameters with star modifier in the resulting url.
+
 ## 2.14.0 (17.06.2019)
 
 * Add attributes `non-nullable` and `optional` to object fields.
