@@ -7,6 +7,7 @@ const { errMessage, astHasError } = require('./utils');
 
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
+const mkdir = promisify(fs.mkdir);
 
 const BASE_PATH = `${__dirname}/..`;
 
@@ -37,6 +38,7 @@ const sendStaticFile = async (outputFileName) => {
     .replace(/\/safari-pinned-tab/, `${BASE_PATH}/static$&`)
     .replace(/\/apple-touch-icon/, `${BASE_PATH}/static$&`);
   try {
+    await mkdir(path.dirname(outputFileName), { recursive: true });
     await writeFile(outputFileName, htmlWithRefract);
   } catch (error) {
     throw errMessage('Error writing rendered html', error);
