@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "@funbox/crafter": "1.16.0",
+    "@funbox/free-port-finder": "2.0.1",
     "browser-sync": "2.24.7",
-    "funbox-free-port-finder": "1.2.0",
     "yargs": "12.0.1"
   },
   "devDependencies": {
