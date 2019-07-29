@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.15.2 (29.07.2019)
+
+* Correctly require @funbox/free-port-finder lib.
+
 ## 2.15.1 (29.07.2019)
 
 * Update version of @funbox/free-port-finder.
