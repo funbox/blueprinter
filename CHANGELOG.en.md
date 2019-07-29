@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.15.1 (29.07.2019)
+
+* Update version of @funbox/free-port-finder.
+
+## 2.15.0 (23.07.2019)
+
+* Create a directory for the output file.
+
 ## 2.14.1 (08.07.2019)
 
 * Render URI parameters with star modifier in the resulting url.
