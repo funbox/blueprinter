@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.15.3 (30.07.2019)
+
+* Fix generation of URI parameters description.
+
 ## 2.15.2 (29.07.2019)
 
 * Correctly require @funbox/free-port-finder lib.
