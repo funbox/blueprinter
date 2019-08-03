@@ -10,23 +10,26 @@ const serverParams = {
 };
 
 const renderAndServe = async (inputFileName, port, host, options) => {
-  const watchSource = (fileName) => {
-    const watcher = browserSync.watch(fileName);
+  const watchSource = (filePaths) => {
+    const watcher = browserSync.watch(filePaths);
 
-    watcher.on('change', (path) => {
+    watcher.on('change', async (path) => {
       console.log(`Updated ${path}`);
-      renderRefract(inputFileName, options).then(() => browserSync.reload());
+      const filePaths = await renderRefract(inputFileName, options);
+      browserSync.reload();
+      watcher.close();
+      watchSource([inputFileName, ...filePaths]);
     });
   };
 
-  await renderRefract(inputFileName, options);
+  const filePaths = await renderRefract(inputFileName);
   const isFree = await isPortFree(port);
 
   if (!isFree) {
     throw new Error(`Error starting server. Port ${port} is busy`);
   }
 
-  await startServer(port, host).then(() => watchSource(inputFileName));
+  await startServer(port, host).then(() => watchSource([inputFileName, ...filePaths]));
 };
 
 function startServer(port, host) {

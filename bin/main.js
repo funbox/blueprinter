@@ -14,13 +14,14 @@ const BASE_PATH = `${__dirname}/..`;
 const createRefract = inputFileName => promisify(crafter.parseFile)(inputFileName, {})
   .then(res => {
     try {
-      const ast = JSON.stringify(res.toRefract());
-      const [hasError, error] = astHasError(res);
+      const [result, filePaths] = res;
+      const ast = JSON.stringify(result.toRefract());
+      const [hasError, error] = astHasError(result);
       if (hasError) {
         console.error(`Crafter error: ${error}`);
         return Promise.resolve(ast);
       }
-      return Promise.resolve(ast);
+      return Promise.resolve([ast, filePaths]);
     } catch (e) {
       return Promise.reject(e);
     }
@@ -46,17 +47,19 @@ const sendStaticFile = async (outputFileName) => {
 };
 
 const renderRefract = async (inputFileName) => {
-  const refract = await createRefract(inputFileName)
+  const [refract, filePaths] = await createRefract(inputFileName)
     .catch(error => Promise.reject(errMessage('Error parsing input', error)));
 
-  const data = `refract = ${refract};`;
+  const refractData = `refract = ${refract}`;
 
-  await writeFile(`${BASE_PATH}/static/refract.js`, data)
+  await writeFile(`${BASE_PATH}/static/refract.js`, refractData)
     .catch(error => Promise.reject(errMessage('Error writing refracted output', error)));
+
+  return filePaths;
 };
 
-const renderAndBuild = async (inputFileName, outputFileName, opts) => {
-  await renderRefract(inputFileName, opts);
+const renderAndBuild = async (inputFileName, outputFileName) => {
+  await renderRefract(inputFileName);
   await sendStaticFile(outputFileName);
   console.log(`Rendering done. Open "${outputFileName}" to see result.`);
 };
