@@ -4,7 +4,9 @@ import Page, {
   Page__Navigation,
   Page__Layout,
   Page__Stripe,
+  Page__Title,
 } from 'app/components/page';
+import PageTitle from 'app/components/page-title';
 import Resizable from 'app/components/resizable';
 import SideMenu from 'app/components/side-menu';
 import MainContent from 'app/components/main-content';
@@ -32,6 +34,8 @@ const propTypes = {
     hash: PropTypes.string,
   }),
 };
+
+const defaultTitle = 'API';
 
 export default class Home extends React.PureComponent {
   constructor(props) {
@@ -139,14 +143,23 @@ export default class Home extends React.PureComponent {
             minWidth="10%"
             onResizeStop={this.synchronizeDimensions}
           >
-            <Page__Navigation>
-              <SideMenu data={this.groups}/>
-            </Page__Navigation>
+            <Page__Aside mods={{ for: 'navigation' }}>
+              <Page__Title>
+                <PageTitle
+                  mods={{ for: 'main-content' }}
+                >
+                  {this.topLevelMeta.title || defaultTitle}
+                </PageTitle>
+              </Page__Title>
+
+              <Page__Navigation>
+                <SideMenu data={this.groups}/>
+              </Page__Navigation>
+            </Page__Aside>
           </Resizable>
 
           <Page__Body>
             <MainContent
-              title={this.topLevelMeta.title}
               description={this.topLevelMeta.description}
             >
               {this.groups.map(group => (
@@ -166,7 +179,7 @@ export default class Home extends React.PureComponent {
             minWidth="10%"
             onResizeStop={this.synchronizeDimensions}
           >
-            <Page__Aside>
+            <Page__Aside mods={{ for: 'transitions' }}>
               <Page__Stripe mods={{ for: 'aside-placeholder' }}/>
 
               {this.topLevelMeta.host && (

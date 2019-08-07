@@ -1,0 +1,9 @@
+.page__aside_for_navigation {
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 24px 0;
+  background-color: $grayLight;
+}

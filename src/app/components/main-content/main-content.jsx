@@ -1,6 +1,5 @@
 import RawContent from 'app/components/raw-content';
-import { Page__Main, Page__Title, Page__Content } from 'app/components/page';
-import PageTitle from 'app/components/page-title';
+import { Page__Main, Page__Content } from 'app/components/page';
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -22,19 +21,12 @@ class MainContent extends React.Component {
 
   render() {
     const {
-      title,
       description,
       children,
     } = this.props;
 
     return (
       <Page__Main>
-        <Page__Title>
-          <PageTitle
-            mods={{ for: 'main-content' }}
-          >{title}</PageTitle>
-        </Page__Title>
-
         <Page__Content myRef={this.mainContent}>
           <RawContent mix="page__description">
             {description}
@@ -49,17 +41,12 @@ class MainContent extends React.Component {
   }
 }
 
-MainContent.defaultProps = {
-  title: 'API',
-};
-
 MainContent.propTypes = {
   children: PropTypes.node,
   description: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.node,
   ]),
-  title: PropTypes.string,
 };
 
 export default MainContent;
