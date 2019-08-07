@@ -1,20 +1,27 @@
 const MethodBadge = (props = {}) => {
   const {
-    method,
     mods = {},
     mix = [],
   } = props;
 
-  if (method) {
+  const aliases = {
+    delete: 'del',
+    options: 'opt',
+    message: 'mes',
+  };
+  let method;
+
+  if (props.method) {
+    method = props.method.toLowerCase();
     mods.type = method;
   }
 
   return (
-    <p className={b('method-badge', { mods, mix })}>
+    <span className={b('method-badge', { mods, mix })}>
       {method && (
-        <span className="method-badge__text">{method.toUpperCase()}</span>
+        aliases[method] || method
       )}
-    </p>
+    </span>
   );
 };
 

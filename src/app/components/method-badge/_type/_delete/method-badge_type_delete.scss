@@ -1,5 +1,4 @@
 .method-badge_type_delete {
-  background-color: $delete-method-color--secondary;
-  background-image: url('./method-badge_type_delete.svg');
-  background-size: 10px;
+  border-color: $delete-method-color--primary;
+  color: $delete-method-color--primary;
 }

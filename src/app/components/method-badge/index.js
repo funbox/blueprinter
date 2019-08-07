@@ -1,7 +1,6 @@
 export { default } from './method-badge';
 
 require('./method-badge.scss');
-require('./__text/method-badge__text.scss');
 require('./_type/_delete/method-badge_type_delete.scss');
 require('./_type/_get/method-badge_type_get.scss');
 require('./_type/_head/method-badge_type_head.scss');
