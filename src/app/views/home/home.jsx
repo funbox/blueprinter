@@ -150,6 +150,12 @@ export default class Home extends React.PureComponent {
                 >
                   {this.topLevelMeta.title || defaultTitle}
                 </PageTitle>
+
+                {this.topLevelMeta.host && (
+                  <Page__Stripe mods={{ for: 'api-host' }}>
+                    <ApiHost host={this.topLevelMeta.host}/>
+                  </Page__Stripe>
+                )}
               </Page__Title>
 
               <Page__Navigation>
@@ -181,13 +187,6 @@ export default class Home extends React.PureComponent {
           >
             <Page__Aside mods={{ for: 'transitions' }}>
               <Page__Stripe mods={{ for: 'aside-placeholder' }}/>
-
-              {this.topLevelMeta.host && (
-                <Page__Stripe mods={{ for: 'api-host' }}>
-                  <ApiHost host={this.topLevelMeta.host}/>
-                </Page__Stripe>
-              )}
-
               {
                 this.actions.map(action => (
                   <Page__Stripe mods={{ for: 'transition' }} key={`transition-${action.id}`}>
