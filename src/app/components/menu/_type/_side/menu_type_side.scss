@@ -5,7 +5,7 @@
 
   .menu__item-content {
     text-decoration: none;
-    color: rgba($black, .7);
+    color: $black;
   }
 
   .menu__item-text {
@@ -23,6 +23,9 @@
   }
 
   .menu__item_level_3 {
+    font-size: 12px;
+    line-height: 16px;
+
     > .menu__item-content {
       > .menu__item-text {
         padding-left: $basePadding;
@@ -44,7 +47,7 @@
 
   .menu__item_submenu {
     position: relative;
-    font-size: 13px;
+    font-weight: 500;
 
     &:not(:last-child) {
       margin-bottom: 0;

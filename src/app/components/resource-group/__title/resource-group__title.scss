@@ -6,7 +6,7 @@
   text-overflow: ellipsis;
   vertical-align: top;
   white-space: nowrap;
-  color: rgba($black, .7);
+  color: $black;
 
   &::before {
     content: '';
