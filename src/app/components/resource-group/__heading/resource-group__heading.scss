@@ -1,27 +1,23 @@
 .resource-group__heading {
   position: relative;
   margin: 0;
-  padding: $basePadding;
-  padding-right: $basePadding * 2;
+  padding: 16px 46px 16px 30px;
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
-  border-radius: 6px 6px 0 0;
-  background-color: $grayLight;
 
   &:hover {
-    padding-left: $basePadding - 2px;
-    border-left: 2px solid $blueDark;
+    background-color: #eceef2;
   }
 
   &::before {
     content: '';
     position: absolute;
     top: 50%;
-    right: $basePadding;
+    right: 20px;
     transform: translateY(-50%);
-    width: 10px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
     background: transparent url('./resource-group__heading.svg') no-repeat center;
   }
 }

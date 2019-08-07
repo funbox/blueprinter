@@ -28,8 +28,9 @@ class ResourceGroup extends React.Component {
     const presetHash = descriptionEl && hashFromComment(descriptionEl.content);
     const hash = presetHash ? createHash(presetHash) : createHash(title);
     const hashWithPrefix = presetHash ? hash : combineHashes('group', hash);
+    const stateChanged = this.state.collapsed !== nextState.collapsed;
 
-    return `#${hashWithPrefix}` === route.location.hash;
+    return stateChanged || `#${hashWithPrefix}` === route.location.hash;
   }
 
   buildContentList(content, options = {}) {

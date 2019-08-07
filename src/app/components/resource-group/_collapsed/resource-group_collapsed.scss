@@ -1,6 +1,8 @@
 .resource-group_collapsed {
   .resource-group__heading {
-    border-radius: 6px;
+    &::before {
+      background-image: url('./resource-group__heading_collapsed.svg');
+    }
   }
 }
 
