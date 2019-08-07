@@ -6,10 +6,10 @@
   text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 30px;
-  font-weight: 200;
-  line-height: 36px;
+  font-size: 40px;
+  line-height: 48px;
   border: 1px solid $stroke-color--primary;
   border-radius: 6px 6px 0 0;
   background-color: $grayLight;
+  color: $color--heading;
 }
