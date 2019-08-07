@@ -135,7 +135,7 @@ export default class Home extends React.PureComponent {
           <Resizable
             mix="page__resizable"
             direction="right"
-            initialSize={{ width: '16.5%' }}
+            initialSize={{ width: '360px' }}
             minWidth="10%"
             onResizeStop={this.synchronizeDimensions}
           >
