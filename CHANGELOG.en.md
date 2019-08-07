@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.15.4 (07.08.2019)
+
+* Fix null values rendering when "minimum" parameter is used.
+
 ## 2.15.3 (30.07.2019)
 
 * Fix generation of URI parameters description.
