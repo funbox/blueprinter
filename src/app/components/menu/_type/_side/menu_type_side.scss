@@ -5,8 +5,9 @@
     font-weight: 500;
     color: $black;
 
-    &:hover {
-      background-color: #eceef2;
+    &:hover, &:focus {
+      outline: none;
+      background-color: $background-color--hover;
     }
   }
 

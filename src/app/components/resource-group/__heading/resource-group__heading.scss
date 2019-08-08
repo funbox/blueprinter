@@ -6,8 +6,8 @@
   font-weight: 500;
   line-height: 20px;
 
-  &:hover {
-    background-color: #eceef2;
+  &:hover, &:focus-within {
+    background-color: $background-color--hover;
   }
 
   &::before {
