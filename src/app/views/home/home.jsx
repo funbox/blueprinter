@@ -17,6 +17,7 @@ import ResourceGroupSection from 'app/components/resource-group-section';
 import Notification from 'app/components/notification';
 import DocumentWarnings from 'app/components/document-warnings';
 import ApiHost from 'app/components/api-host';
+import Link from 'app/components/link';
 import { get } from 'app/common/utils/helpers';
 import { combineHashes } from 'app/common/utils/helpers/hash';
 
@@ -148,7 +149,12 @@ export default class Home extends React.PureComponent {
                 <PageTitle
                   mods={{ for: 'main-content' }}
                 >
-                  {this.topLevelMeta.title || defaultTitle}
+                  <Link
+                    mix="page-title__link"
+                    to="/"
+                  >
+                    {this.topLevelMeta.title || defaultTitle}
+                  </Link>
                 </PageTitle>
 
                 {this.topLevelMeta.host && (
