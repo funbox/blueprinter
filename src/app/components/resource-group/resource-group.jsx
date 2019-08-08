@@ -102,7 +102,7 @@ class ResourceGroup extends React.Component {
       const hashWithPrefix = presetHash ? hash : combineHashes(prefix, hash);
 
       const itemMods = {
-        ...(level ? { level, nested: true } : {}),
+        ...(level ? { level } : {}),
         badged: !!badge,
         hasSubmenu,
       };
@@ -150,7 +150,7 @@ class ResourceGroup extends React.Component {
 
         return (
           <Menu__Item
-            mods={{ level: 2, submenu: true }}
+            mods={{ level: 2 }}
             key={`header-${item.title}`}
             text={item.title}
             to={{ hash, pathname: route.location.pathname }}
