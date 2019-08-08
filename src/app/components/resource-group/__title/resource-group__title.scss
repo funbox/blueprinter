@@ -1,12 +1,16 @@
 .resource-group__title {
-  display: inline-block;
+  display: -webkit-box; // stylelint-disable-line value-no-vendor-prefix
   overflow: hidden;
   max-width: 100%;
   text-decoration: none;
   text-overflow: ellipsis;
   vertical-align: top;
-  white-space: nowrap;
-  color: $black;
+  color: $color--body;
+
+  // https://github.com/postcss/autoprefixer/issues/776
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical; // stylelint-disable-line property-no-vendor-prefix
+  -webkit-line-clamp: 3; // stylelint-disable-line property-no-vendor-prefix
 
   &::before {
     content: '';
