@@ -45,7 +45,36 @@
     }
   }
 
-  .menu__item_submenu {
+  .menu__item_has-submenu {
+    .menu__item-content {
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        width: 13px;
+        height: 13px;
+        background: transparent url('./menu__item_has-submenu.svg') no-repeat center;
+      }
+    }
+
+    .menu__item-submenu {
+      overflow: hidden;
+    }
+  }
+
+  .menu__item_collapsed {
+    .menu__item-content {
+      &::before {
+        background-image: url('./menu__item_collapsed.svg');
+      }
+    }
+  }
+
+  .menu__item_nested {
     position: relative;
     font-weight: 500;
 

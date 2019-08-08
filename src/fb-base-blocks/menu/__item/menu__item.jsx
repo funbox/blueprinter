@@ -7,7 +7,8 @@ const Menu__Item = (props) => {
     icon,
     text,
     tag,
-    submenu,
+    submenu = {},
+    onClick,
   } = props;
   const isCurrent = mods ? mods.current : false;
   const Tag = tag || (isCurrent ? 'span' : Link);
@@ -29,13 +30,21 @@ const Menu__Item = (props) => {
         } : {
           className: 'menu__item-content',
         })}
+        onClick={onClick}
       >
         {!!icon && (<span className="menu__item-icon">{icon.content}</span>)}
         {!!text && (<span className="menu__item-text">{text}</span>)}
         {children}
       </Tag>
 
-      {!!submenu && (<div className="menu__item-submenu">{submenu}</div>)}
+      {!!submenu.content && (
+        <div
+          className="menu__item-submenu"
+          ref={submenu.ref}
+        >
+          {submenu.content}
+        </div>
+      )}
     </li>
   );
 };
@@ -46,7 +55,10 @@ Menu__Item.propTypes = {
   text: PropTypes.string,
   tag: PropTypes.string,
   children: PropTypes.node,
-  submenu: PropTypes.node,
+  submenu: PropTypes.shape({
+    content: PropTypes.node,
+    ref: PropTypes.func,
+  }),
 };
 
 export default Menu__Item;

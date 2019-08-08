@@ -2,6 +2,7 @@ import { SlideToggle } from 'react-slide-toggle';
 import { extractTransactionMethod as extractMethod, get } from 'app/common/utils/helpers/';
 import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 
+import CollapsibleMenuItem from 'app/components/collapsible-menu-item';
 import Link from 'app/components/link';
 import Menu, { Menu__Item } from 'app/components/menu';
 import MethodBadge from 'app/components/method-badge';
@@ -85,7 +86,7 @@ class ResourceGroup extends React.Component {
         message: () => {
           title = title || 'Message';
           hasSubmenu = false;
-          badge = <MethodBadge mods={{ type: 'message' }} mix="menu__item-icon"/>;
+          badge = <MethodBadge method="message" mix="menu__item-icon"/>;
           prefix = 'message';
         },
         category: () => {
@@ -101,24 +102,33 @@ class ResourceGroup extends React.Component {
       const hashWithPrefix = presetHash ? hash : combineHashes(prefix, hash);
 
       const itemMods = {
-        ...(level ? { level, submenu: true } : {}),
+        ...(level ? { level, nested: true } : {}),
         badged: !!badge,
+        hasSubmenu,
       };
 
-      const menuItem = (
-        <Menu__Item
-          mods={itemMods}
-          key={`${itemType}-${index}`}
-          text={title}
-          to={{ hash: hashWithPrefix, pathname: route.location.pathname }}
-          submenu={hasSubmenu
-            ? this.buildContentList(item.content, {
+      const menuItem = hasSubmenu
+        ? (
+          <CollapsibleMenuItem
+            mods={itemMods}
+            key={`${itemType}-${index}`}
+            text={title}
+            to={{ hash: hashWithPrefix, pathname: route.location.pathname }}
+            submenu={this.buildContentList(item.content, {
               level: nextLevel,
               parentHash: hash,
-            })
-            : null}
-        >{badge}</Menu__Item>
-      );
+            })}
+          />
+        ) : (
+          <Menu__Item
+            mods={itemMods}
+            key={`${itemType}-${index}`}
+            text={title}
+            to={{ hash: hashWithPrefix, pathname: route.location.pathname }}
+          >
+            {badge}
+          </Menu__Item>
+        );
       acc.push(menuItem);
       return acc;
     }, []);
