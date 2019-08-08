@@ -49,7 +49,6 @@ module.exports = options => {
         options: {
           presets: [
             ['@babel/preset-env', {
-              targets: ['> 1%', 'android >= 4.4.4', 'ios >= 9'],
               useBuiltIns: 'entry',
               corejs: 3,
             }],
@@ -157,9 +156,7 @@ module.exports = options => {
             url: 'inline',
             maxSize: 5,
           }),
-          require('autoprefixer')({
-            browsers: ['> 1%', 'android >= 4.4.4', 'ios >= 9'],
-          }),
+          require('autoprefixer'),
         ],
       },
     },
