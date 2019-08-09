@@ -86,38 +86,7 @@ export default class Home extends React.PureComponent {
   }
 
   synchronizeDimensions() {
-    this.transitions.forEach((ref, id) => {
-      const transition = ref.current;
-
-      const actionCard = document.querySelector(`[data-id=action-${id}]`);
-
-      if (id && !actionCard) {
-        // После обновления refract-источника (json) для транзакций создаются новые id и вызывается componentDidUpdate
-        // однако ссылки (ref) на элементы не меняются, они создаются только во время выполнения конструктора
-        // В этом случае надо перезагрузить страницу, чтобы пересоздать ref для блоков транзакций по новым id
-        window.location.reload();
-        return;
-      }
-
-      const actionCardStyle = getComputedStyle(actionCard);
-      const transitionCardStyle = getComputedStyle(transition);
-
-      const transitionCardPaddingTop = parseInt(transitionCardStyle.getPropertyValue('padding-top'), 10) || 0;
-      const actionCardPaddingTop = parseInt(actionCardStyle.getPropertyValue('padding-top'), 10) || 0;
-      const actionCardHeight = actionCard.offsetHeight - actionCardPaddingTop;
-      const transitionCardHeight = transition.offsetHeight - transitionCardPaddingTop;
-
-      const requiredHeight = Math.max(actionCardHeight, transitionCardHeight);
-      transition.style.setProperty('min-height', `${requiredHeight}px`);
-      actionCard.style.setProperty('min-height', `${requiredHeight}px`);
-
-      const difference = actionCard.offsetTop - transition.offsetTop;
-      if (difference > 0) {
-        transition.style.paddingTop = `${difference}px`;
-      } else {
-        transition.style.marginTop = `${difference}px`;
-      }
-    });
+    return null;
   }
 
   scrollToAnchor(getElementById) {
@@ -187,7 +156,7 @@ export default class Home extends React.PureComponent {
           <Resizable
             mix="page__resizable"
             direction="left"
-            initialSize={{ width: '500px' }}
+            initialSize={{ width: '400px' }}
             minWidth="10%"
             onResizeStop={this.synchronizeDimensions}
           >
