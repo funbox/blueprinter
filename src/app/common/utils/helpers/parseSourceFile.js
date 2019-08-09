@@ -2,7 +2,7 @@ import uniqid from 'uniqid';
 import { get, htmlFromText } from './index';
 
 import categories from './categories';
-import refactorAction from './refactorAction';
+import refactorSource, { refactorMessage } from './refactorAction';
 
 const parseSourceFile = ({ content }) => {
   const [error, warnings] = detectErrorsAndWarnings(content);
@@ -28,8 +28,6 @@ const parseSourceFile = ({ content }) => {
     const hostMetaElement = metadata && metadata.find(item => item.content.key.content === 'HOST');
     return hostMetaElement ? hostMetaElement.content.value.content : null;
   };
-
-  const actions = [];
 
   const topLevelDescription = source.content.find(i => i.element === 'copy');
   const topLevelDescriptionElement = topLevelDescription ? htmlFromText(topLevelDescription.content) : null;
@@ -60,33 +58,6 @@ const parseSourceFile = ({ content }) => {
     }
   });
 
-  if (groupForStandaloneResources.content.length > 0) {
-    categories.resourceGroupArray.unshift(groupForStandaloneResources);
-  }
-
-  categories.resourceGroupArray.forEach(group => {
-    group.content.forEach(groupChild => {
-      if (groupChild.element === 'copy') return;
-      if (groupChild.element === 'message') {
-        groupChild.id = uniqid.time();
-        actions.push(groupChild);
-        return;
-      }
-
-      groupChild.content.forEach(resourceChild => {
-        if (resourceChild.element === 'copy') return;
-
-        if (!resourceChild.attributes) {
-          resourceChild.attributes = {};
-        }
-
-        resourceChild.attributes = { ...groupChild.attributes, ...resourceChild.attributes };
-        resourceChild.id = uniqid.time();
-        actions.push(resourceChild);
-      });
-    });
-  });
-
   if (categories.dataStructuresArray.length > 0) {
     categories.dataStructuresArray = categories.dataStructuresArray.reduce((res, dsItem) => {
       res.push(...dsItem.content);
@@ -101,12 +72,38 @@ const parseSourceFile = ({ content }) => {
     }, []);
   }
 
-  const refactoredActions = actions.map(refactorAction);
+  if (groupForStandaloneResources.content.length > 0) {
+    categories.resourceGroupArray.unshift(groupForStandaloneResources);
+  }
+
+  const groups = categories.resourceGroupArray.map(group => {
+    group.content = group.content.map(groupChild => {
+      if (groupChild.element === 'copy') return groupChild;
+      if (groupChild.element === 'message') {
+        groupChild.id = uniqid.time();
+        return refactorMessage(groupChild);
+      }
+
+      groupChild.content = groupChild.content.map(resourceChild => {
+        if (resourceChild.element === 'copy') return resourceChild;
+        if (!resourceChild.attributes) {
+          resourceChild.attributes = {};
+        }
+
+        resourceChild.attributes = { ...groupChild.attributes, ...resourceChild.attributes };
+        resourceChild.id = uniqid.time();
+        return refactorSource(resourceChild);
+      });
+
+      return groupChild;
+    });
+
+    return group;
+  });
 
   return {
     topLevelMeta,
-    actions: refactoredActions,
-    groups: categories.resourceGroupArray,
+    groups,
   };
 };
 

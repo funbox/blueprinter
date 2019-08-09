@@ -88,21 +88,31 @@ const resolveInheritance = (valueMember, parent) => {
   return valueMember;
 };
 
-const refactorMessage = (message) => ({
+export const refactorMessage = (message) => ({
   id: message.id,
+  element: message.element,
+  meta: message.meta,
   type: 'message',
+  description: getDescription(message),
   attributes: getDataAttributes(message),
   body: getBody(message),
   schema: getSchema(message),
   title: get('meta', 'title', 'content').from(message),
 });
 
-const refactorAction = action => {
+export const refactorAction = (action) => {
   let method = '';
+  const copyElements = [];
 
-  const transactions = action.content.filter(item => item.element !== 'copy').map(transaction => {
-    const sourceRequest = transaction.content.find(tItem => tItem.element === 'httpRequest');
-    const sourceResponse = transaction.content.find(tItem => tItem.element === 'httpResponse');
+  const transactions = action.content.reduce((acc, trans) => {
+    if (trans.element === 'copy') {
+      copyElements.push(trans);
+      return acc;
+    }
+
+    const sourceRequest = trans.content.find(tItem => tItem.element === 'httpRequest');
+    const sourceResponse = trans.content.find(tItem => tItem.element === 'httpResponse');
+    method = get('attributes', 'method', 'content').from(sourceRequest);
 
     const request = {
       attributes: getDataAttributes(sourceRequest),
@@ -122,46 +132,41 @@ const refactorAction = action => {
       statusCode: get('attributes', 'statusCode', 'content').from(sourceResponse),
     };
 
-    method = get('attributes', 'method', 'content').from(sourceRequest);
-
-    return {
+    const formattedTransaction = {
       request: removeEmpty(request),
       response: removeEmpty(response),
     };
-  });
 
-  const filteredTransactions = transactions.map((trans, i, oldArray) => {
-    if (i === 0) {
-      return {
-        request: trans.request,
-        response: trans.response,
-      };
+    if (acc.length === 0) {
+      acc.push(formattedTransaction);
+      return acc;
     }
 
-    const isRequestUnique = oldArray.some(t => !deepEqual(t.request, trans.request));
-    return {
-      request: isRequestUnique ? trans.request : {},
-      response: trans.response,
-    };
-  });
+    const isRequestUnique = !acc.some(t => deepEqual(t.request, formattedTransaction.request));
+    acc.push({
+      request: isRequestUnique ? formattedTransaction.request : {},
+      response: formattedTransaction.response,
+    });
+    return acc;
+  }, []);
 
   return {
+    id: action.id,
+    meta: action.meta,
+    element: action.element,
     attributes: {
-      href: action.attributes.href.content || action.attributes.href,
+      href: get('attributes', 'href', 'content').from(action),
       hrefVariables: get('attributes', 'hrefVariables', 'content').from(action),
       method,
     },
-    id: action.id,
-    content: filteredTransactions,
+    content: copyElements.concat(transactions),
     type: 'transaction',
   };
 };
 
-const refactorSource = (source) => (
-  source.element === 'message' ? refactorMessage(source) : refactorAction(source)
-);
-
-export default refactorSource;
+export default function refactorSource(source) {
+  return source.element === 'message' ? refactorMessage(source) : refactorAction(source);
+}
 
 function extractHeaderData(header) {
   return {
