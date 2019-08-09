@@ -1,10 +1,7 @@
 .action-card {
-  border: 1px solid $stroke-color--primary;
-  border-radius: 6px;
-
   .action-card__heading {
     + .action-card__body {
-      margin-top: $baseMargin;
+      margin-top: 44px;
     }
   }
 }

@@ -1,10 +1,11 @@
 .action-card__href {
   min-width: 0;
-  margin-right: auto;
-  padding: 1px 4px;
+  padding: 3px 6px;
   word-wrap: break-word;
-  border: 1px solid #cfcfcf;
-  border-radius: 3px;
-  background-color: $grayLight;
-  color: $grayDark;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 16px;
+  border: 1px solid $stroke-color--primary;
+  border-radius: 4px;
+  background-color: $white;
 }

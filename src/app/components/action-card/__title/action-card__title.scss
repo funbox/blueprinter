@@ -1,4 +1,10 @@
 .action-card__title {
   margin: 0;
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+
+  + .action-card__method-href-container {
+    margin-top: 18px;
+  }
 }

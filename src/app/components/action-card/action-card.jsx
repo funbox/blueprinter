@@ -30,16 +30,26 @@ const ActionCard = (props) => {
       id={hashWithPrefix}
     >
       <div className="action-card__heading">
-        <Link
-          mix="action-card__method"
-          to={{ hash: hashWithPrefix, pathname: location.pathname }}
-        >
-          {method}
-        </Link>
+        {
+          !!title && (
+            <h4 className="action-card__title">
+              {title}
+            </h4>
+          )
+        }
 
-        <span className="action-card__href">{href.content || href}</span>
+        <div className="action-card__method-href-container">
+          <Link
+            mix="action-card__method"
+            to={{ hash: hashWithPrefix, pathname: location.pathname }}
+          >
+            {method}
+          </Link>
 
-        {!!title && <h4 className="action-card__title">{title.content || title}</h4>}
+          <span className="action-card__href">
+            {href}
+          </span>
+        </div>
       </div>
 
       {(!!description || !!hrefVariables) && (
