@@ -1,0 +1,7 @@
+.action-card__heading {
+  padding-top: 16px;
+
+  + .action-card__body {
+    margin-top: 44px;
+  }
+}

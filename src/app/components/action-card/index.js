@@ -4,7 +4,7 @@ import ActionCard from './action-card';
 
 export default withRouter(ActionCard);
 
-require('./action-card.scss');
+require('./__heading/action-card__heading.scss');
 require('./__description/action-card__description.scss');
 require('./__method-href-container/action-card__method-href-container.scss');
 require('./__href/action-card__href.scss');
