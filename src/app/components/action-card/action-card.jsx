@@ -3,6 +3,7 @@ import Link from 'app/components/link';
 import Parameters from 'app/components/parameters';
 import { get, extractTransactionMethod, withHeaderAnchors } from 'app/common/utils/helpers';
 import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
+import formatHref from 'app/common/utils/helpers/formatHref';
 
 const ActionCard = (props) => {
   const {
@@ -23,6 +24,7 @@ const ActionCard = (props) => {
   const mainHash = title ? createHash(`${title} ${method}`) : createHash(`${hashFriendlyHref} ${method}`);
   const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, mainHash);
   const hashWithPrefix = presetHash ? hash : combineHashes('action', hash);
+  const formattedHref = hrefVariables ? formatHref(href, hrefVariables) : href;
 
   return (
     <div
@@ -38,7 +40,7 @@ const ActionCard = (props) => {
           )
         }
 
-        <div className="action-card__method-href-container">
+        <p className="action-card__method-href-container">
           <Link
             mix="action-card__method"
             to={{ hash: hashWithPrefix, pathname: location.pathname }}
@@ -49,7 +51,13 @@ const ActionCard = (props) => {
           <span className="action-card__href">
             {href}
           </span>
-        </div>
+        </p>
+
+        {
+          <p className="action-card__formatted-href">
+            {formattedHref}
+          </p>
+        }
       </div>
 
       {(!!description || !!hrefVariables) && (
