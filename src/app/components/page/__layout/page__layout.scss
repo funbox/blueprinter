@@ -4,6 +4,7 @@
   > .page__body {
     flex-grow: 1;
     width: 0;
+    max-width: 800px;
   }
 
   > .page__resizable {
