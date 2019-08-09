@@ -1,5 +1,6 @@
 const MethodBadge = (props = {}) => {
   const {
+    method,
     mods = {},
     mix = [],
   } = props;
@@ -9,10 +10,8 @@ const MethodBadge = (props = {}) => {
     options: 'opt',
     message: 'mes',
   };
-  let method;
 
-  if (props.method) {
-    method = props.method.toLowerCase();
+  if (method) {
     mods.type = method;
   }
 
