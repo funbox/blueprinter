@@ -25,7 +25,7 @@ class Resource extends React.Component {
     const hashWithPrefix = presetHash ? hash : combineHashes(prefix, hash);
 
     return (
-      <section className="resource" id={hashWithPrefix}>
+      <section className={b('resource', this.props)} id={hashWithPrefix}>
         <h3 className="resource__heading">
           {title || DEFAULT_TITLE}
           <Anchor

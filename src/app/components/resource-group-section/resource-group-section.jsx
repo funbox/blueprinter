@@ -60,6 +60,7 @@ class ResourceGroupSection extends React.PureComponent {
                     resource={gItem}
                     index={gIndex}
                     key={`resource-${gItem.meta.title.content}`}
+                    mix="resource-group-section__resource"
                   />
                 )
               ))}
