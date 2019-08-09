@@ -1,0 +1,9 @@
+.parameters-table__row {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+
+  + .parameters-table__row {
+    border-top: 1px solid $stroke-color--primary;
+  }
+}

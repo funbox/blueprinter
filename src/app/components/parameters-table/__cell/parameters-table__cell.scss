@@ -1,0 +1,7 @@
+.parameters-table__cell {
+  flex-shrink: 0;
+
+  &_type_description {
+    flex-shrink: 1;
+  }
+}
