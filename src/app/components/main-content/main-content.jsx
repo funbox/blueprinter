@@ -28,9 +28,17 @@ class MainContent extends React.Component {
     return (
       <Page__Main>
         <Page__Content myRef={this.mainContent}>
-          <RawContent mix="page__description">
-            {description}
-          </RawContent>
+          {
+            description && (
+              <RawContent mix="page__description">
+                <h1>
+                  Общие сведения
+                </h1>
+
+                {description}
+              </RawContent>
+            )
+          }
         </Page__Content>
 
         <Page__Content>
