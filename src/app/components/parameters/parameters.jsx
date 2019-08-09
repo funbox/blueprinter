@@ -12,7 +12,9 @@ class Parameters extends React.Component {
     return (
       <section className={b('parameters', this.props)}>
         <div className="parameters__heading">
-          <h5 className="parameters__title">URI Parameters</h5>
+          <h5 className="parameters__title">
+            URI Parameters
+          </h5>
         </div>
         <div className="parameters__content">
           {params.map((param, index) => {
@@ -31,43 +33,60 @@ class Parameters extends React.Component {
 
             return (
               <div className="parameters__item" key={index * 2}>
-                <div className="parameters__item-title" key={index * 2}>{param.content.key.content}</div>
+                <div className="parameters__item-title" key={index * 2}>
+                  {param.content.key.content}
+                </div>
                 <div className="parameters__item-content" key={index * 2 + 1}>
                   <RawContent>
-                    <code>{title || 'string'}</code>
+                    <code>
+                      {title || 'string'}
+                    </code>
                     &nbsp;
                     {param.attributes.typeAttributes.content.map((attr, attrIndex) => (
-                      <span key={attrIndex}>({attr.content})</span>
+                      <span key={attrIndex}>
+                        ({attr.content})
+                      </span>
                     ))}
                     &nbsp;
-                    {defaultValue
-                    && (
+                    {defaultValue && (
                       <span className="parameters__default">
-                        <strong>Default: </strong>
-                        <span>{defaultValue}</span>
+                        <strong>
+                          Default:
+                        </strong>
+                        {' '}
+                        <span>
+                          {defaultValue}
+                        </span>
                       </span>
-                    )
-                    }
+                    )}
                     &nbsp;
-                    {example
-                    && (
+                    {example && (
                       <span className="parameters__example">
-                        <strong>Example: </strong>
-                        <span>{exampleValue}</span>
+                        <strong>
+                          Example:
+                        </strong>
+                        {' '}
+                        <span>
+                          {exampleValue}
+                        </span>
                       </span>
-                    )
-                    }
+                    )}
                     &nbsp;
                     {description && htmlFromText(description)}
                     {choices && choices.length > 0 && (
                       <div>
-                        <strong>Choices: </strong>
+                        <strong>
+                          Choices:
+                        </strong>
+                        {' '}
                         <ul>
                           {choices.map(choice => {
                             const choiceDescription = get('meta', 'description', 'content').from(choice);
                             return (
                               <li key={`enum-member-${choice.content}`}>
-                                <code>{choice.content}</code>
+                                <code>
+                                  {choice.content}
+                                </code>
                                 {choiceDescription && ` \u2014 ${choiceDescription}`}
                               </li>
                             );
