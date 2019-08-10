@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import Section from 'app/components/section';
 import ParametersTable, { parameterProps } from 'app/components/parameters-table';
 
 class Parameters extends React.Component {
@@ -8,16 +9,13 @@ class Parameters extends React.Component {
     if (params.length === 0) return null;
 
     return (
-      <section className={b('parameters', this.props)}>
-        <div className="parameters__heading">
-          <h5 className="parameters__title">
-            URI Parameters
-          </h5>
-        </div>
-        <div className="parameters__content">
-          <ParametersTable params={params}/>
-        </div>
-      </section>
+      <Section
+        title="URI Parameters"
+        titleTag="h5"
+        mods={{ for: 'uri-parameters' }}
+      >
+        <ParametersTable params={params}/>
+      </Section>
     );
   }
 }
