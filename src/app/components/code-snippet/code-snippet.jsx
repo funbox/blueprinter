@@ -1,17 +1,21 @@
 import Highlight from 'react-highlight/lib/optimized';
 
+const observerAvailable = 'IntersectionObserver' in window;
+
 class CodeSnippet extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      useHighlight: false,
+      useHighlight: !observerAvailable,
     };
 
     this.el = React.createRef();
   }
 
   componentDidMount() {
+    if (!observerAvailable) return;
+
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const { isIntersecting } = entry;
@@ -27,7 +31,9 @@ class CodeSnippet extends React.Component {
   }
 
   componentWillUnmount() {
-    this.observer.disconnect();
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 
   render() {
