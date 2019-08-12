@@ -26,7 +26,8 @@ const MessageContent = (props) => {
         <Section
           title="Attributes"
           titleTag="h5"
-          mods={{ for: 'transition' }}
+          mods={{ for: 'transition-content' }}
+          mix={b('message-content__section')}
         >
           <AttributesList attributes={attributes}/>
         </Section>
@@ -36,9 +37,10 @@ const MessageContent = (props) => {
         <Section
           title="Body"
           titleTag="h5"
-          mods={{ for: 'transition' }}
+          mods={{ for: 'transition-content' }}
+          mix={b('message-content__section')}
         >
-          <CodeSnippet>
+          <CodeSnippet mods={{ for: 'asset' }}>
             {isString(body) ? body.trim() : JSON.stringify(body, null, 2)}
           </CodeSnippet>
         </Section>
@@ -48,9 +50,10 @@ const MessageContent = (props) => {
         <Section
           title="Schema"
           titleTag="h5"
-          mods={{ for: 'transition' }}
+          mods={{ for: 'transition-content' }}
+          mix={b('message-content__section')}
         >
-          <CodeSnippet>
+          <CodeSnippet mods={{ for: 'asset' }}>
             {isString(schema) ? schema.trim() : JSON.stringify(schema, null, 2)}
           </CodeSnippet>
         </Section>
