@@ -10,9 +10,6 @@ import PageTitle from 'app/components/page-title';
 import Resizable from 'app/components/resizable';
 import SideMenu from 'app/components/side-menu';
 import MainContent from 'app/components/main-content';
-import Transition from 'app/components/transition';
-import TransitionContainer from 'app/components/transition-container';
-import MessageContent from 'app/components/message-content';
 import ResourceGroupSection from 'app/components/resource-group-section';
 import Notification from 'app/components/notification';
 import DocumentWarnings from 'app/components/document-warnings';
@@ -42,36 +39,22 @@ export default class Home extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    const { topLevelMeta, groups, actions } = props.parsedSource;
+    const { topLevelMeta, groups } = props.parsedSource;
 
     this.topLevelMeta = topLevelMeta;
     this.groups = groups;
-    this.actions = actions;
-    this.transitions = new Map();
     this.warnings = topLevelMeta.warnings;
 
     this.state = {
       isWarningNotificationOpen: this.warnings.length > 0,
     };
 
-    actions.forEach((action) => {
-      this.transitions.set(action.id, React.createRef());
-    });
-
-    this.synchronizeDimensions = this.synchronizeDimensions.bind(this);
     this.closeNotification = this.closeNotification.bind(this);
   }
 
   componentDidMount() {
     const elementFindingFunction = (id) => findElementById(document, id);
-    // вызов через таймаут нужен для того,
-    // чтобы применились все стили и функция получила
-    // актуальную информацию о высоте нужных элементов
-    setTimeout(() => {
-      this.synchronizeDimensions();
-      this.scrollToAnchor(elementFindingFunction);
-    }, 1);
-    window.addEventListener('resize', this.synchronizeDimensions);
+    this.scrollToAnchor(elementFindingFunction);
 
     document.title = this.topLevelMeta.title || 'API Blueprint';
   }
@@ -80,13 +63,7 @@ export default class Home extends React.PureComponent {
     if (prevProps.location !== this.props.location) {
       const elementFindingFunction = (id) => document.getElementById(id);
       this.scrollToAnchor(elementFindingFunction);
-    } else {
-      this.synchronizeDimensions();
     }
-  }
-
-  synchronizeDimensions() {
-    return null;
   }
 
   scrollToAnchor(getElementById) {
@@ -111,7 +88,6 @@ export default class Home extends React.PureComponent {
             direction="right"
             initialSize={{ width: '360px' }}
             minWidth="10%"
-            onResizeStop={this.synchronizeDimensions}
           >
             <Page__Aside mods={{ for: 'navigation' }}>
               <Page__Title>
@@ -152,39 +128,6 @@ export default class Home extends React.PureComponent {
               ))}
             </MainContent>
           </Page__Body>
-
-          <Resizable
-            mix="page__resizable"
-            direction="left"
-            initialSize={{ width: '400px' }}
-            minWidth="10%"
-            onResizeStop={this.synchronizeDimensions}
-          >
-            <Page__Aside mods={{ for: 'transitions' }}>
-              <Page__Stripe mods={{ for: 'aside-placeholder' }}/>
-              {
-                this.actions.map(action => (
-                  <Page__Stripe mods={{ for: 'transition' }} key={`transition-${action.id}`}>
-                    <TransitionContainer
-                      myRef={this.transitions.get(action.id)}
-                    >
-                      {action.type === 'message' ? (
-                        <MessageContent
-                          message={action}
-                        />
-                      ) : (
-                        <Transition
-                          mods={{ for: 'page-aside' }}
-                          transactions={action.content}
-                          attributes={action.attributes}
-                        />
-                      )}
-                    </TransitionContainer>
-                  </Page__Stripe>
-                ))
-              }
-            </Page__Aside>
-          </Resizable>
         </Page__Layout>
 
         {this.state.isWarningNotificationOpen && (
