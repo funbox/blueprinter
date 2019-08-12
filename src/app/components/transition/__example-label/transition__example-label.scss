@@ -1,0 +1,21 @@
+@import '../transition.vars';
+
+.transition__example-label {
+  position: relative;
+  overflow: hidden;
+  max-width: 200px;
+  margin: $label-margin-vertical $label-margin-horizontal;
+  margin-right: 0;
+  padding-bottom: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: $color--secondary;
+
+  &:hover {
+    color: $blueDark;
+    cursor: pointer;
+  }
+}

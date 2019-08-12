@@ -4,7 +4,7 @@ import ParametersTable, { parameterProps } from 'app/components/parameters-table
 
 class Parameters extends React.Component {
   render() {
-    const { params } = this.props;
+    const { params, mix } = this.props;
 
     if (params.length === 0) return null;
 
@@ -13,6 +13,7 @@ class Parameters extends React.Component {
         title="URI Parameters"
         titleTag="h5"
         mods={{ for: 'uri-parameters' }}
+        mix={mix}
       >
         <ParametersTable params={params}/>
       </Section>
@@ -22,6 +23,7 @@ class Parameters extends React.Component {
 
 Parameters.propTypes = {
   params: PropTypes.arrayOf(parameterProps),
+  mix: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 };
 
 export default Parameters;

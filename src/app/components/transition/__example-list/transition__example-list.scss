@@ -1,0 +1,20 @@
+@import '../transition.vars';
+
+.transition__example-list {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  list-style-type: none;
+  margin: -#{$label-margin-vertical} -#{$label-margin-horizontal};
+  padding: 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: $label-margin-vertical;
+    left: $label-margin-horizontal;
+    width: calc(100% - 2 * #{$label-margin-horizontal});
+    height: 1px;
+    background-color: $stroke-color--primary;
+  }
+}
