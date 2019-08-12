@@ -1,10 +1,11 @@
 // stylelint-disable selector-max-type
 
 .code-snippet {
-  padding: $basePadding;
-  border-radius: 6px;
-  background-color: #1d1f21;
-  color: #c5c8c6;
+  padding: 12px 40px 12px 20px;
+  font-size: 14px;
+  line-height: 24px;
+  border-radius: 3px;
+  background-color: $grayLight;
 
   pre {
     margin: 0;
