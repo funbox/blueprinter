@@ -5,7 +5,7 @@ import InlineCode from 'sandbox/components/inline-code';
 
 import CodeSnippet from 'app/components/code-snippet';
 import AttributesList from 'app/components/attirbutes-list';
-import Transition from 'app/components/transition';
+import TransitionContainer from 'app/components/transition-container';
 
 import { body, schema, rawBody } from 'app/mocks/json';
 import request from 'app/mocks/request';
@@ -52,7 +52,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
             <InlineCode>syntax=&quot;http&quot;</InlineCode>:
           </SandboxParagraph>
           <SandboxDemo>
-            <CodeSnippet syntax="http">
+            <CodeSnippet syntax="http" mods={{ for: 'headers' }}>
               Content-Type: application/json
               {'\n'}
               X-Auth-Token: Session token
@@ -98,7 +98,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
 
         <SandboxSection id="request-response-section" title="Запрос-ответ">
           <SandboxDemo mods={{ for: 'transition-block' }}>
-            <Transition
+            <TransitionContainer
               transactions={request.content}
               attributes={request.attributes}
             />
