@@ -1,0 +1,13 @@
+.section_for_transition-content {
+  > .section__header {
+    .section__title {
+      margin: 0;
+      font-size: 18px;
+      line-height: 26px;
+    }
+  }
+
+  > .section__body {
+    margin-top: 18px;
+  }
+}

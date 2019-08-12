@@ -1,13 +1,13 @@
 .section_for_transition {
-  .section__title {
-    margin: $baseMargin 0;
-    font-size: $baseFontSize;
-    font-weight: 400;
+  > .section__header {
+    .section__title {
+      margin: 0;
+      font-size: 24px;
+      line-height: 30px;
+    }
   }
 
-  &:first-child {
-    .section__title {
-      margin-top: 0;
-    }
+  > .section__body {
+    margin-top: 42px;
   }
 }
