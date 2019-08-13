@@ -1,0 +1,7 @@
+.attribute__prop {
+  font-size: 12px;
+
+  + .attribute__prop {
+    margin-top: 2px;
+  }
+}

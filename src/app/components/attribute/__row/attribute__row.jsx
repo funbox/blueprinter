@@ -31,7 +31,7 @@ const Attribute__Row = (props) => {
                 <small
                   key={`${propContent}_attr`}
                   className={b('attribute__prop', {
-                    mods: (propContent === 'required' ? { highlighted: true } : {}),
+                    mix: (propContent === 'required' ? ['attribute__code'] : []),
                   })}
                 >
                   {propContent}
@@ -42,13 +42,26 @@ const Attribute__Row = (props) => {
         )}
       </dt>
       <dd className="attribute__description-container">
-        {attributeType
+        {
+          attributeType
           && !oneOfElement
           && !oneOfMember
-          && <p className="attribute__type">{attributeType}</p>
+          && (
+            <p className={b('attribute__type', { mix: [b('attribute__code')] })}>
+              {attributeType}
+            </p>
+          )
         }
-        {attributeDescription && <p className="attribute__description">{attributeDescription}</p>}
-        {attributeExample !== null && !enumMember && <p className="attribute__example">{attributeExample.toString()}</p>}
+        {attributeDescription && (
+          <p className="attribute__description">
+            {attributeDescription}
+          </p>
+        )}
+        {attributeExample !== null && !enumMember && (
+          <p className="attribute__example">
+            {attributeExample.toString()}
+          </p>
+        )}
       </dd>
     </dl>
   );

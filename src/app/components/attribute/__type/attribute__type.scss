@@ -1,3 +1,11 @@
 .attribute__type {
   margin: 0;
+
+  + .attribute__description {
+    margin-top: 8px;
+  }
+
+  + .attribute__example {
+    margin-top: 8px;
+  }
 }

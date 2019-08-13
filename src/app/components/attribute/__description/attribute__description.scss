@@ -1,3 +1,9 @@
 .attribute__description {
   margin: 0;
+  font-size: 14px;
+  line-height: 22px;
+
+  + .attribute__example {
+    margin-top: 4px;
+  }
 }
