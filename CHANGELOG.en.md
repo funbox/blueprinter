@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.15.5 (15.08.2019)
+
+* Fix rendering of enum elements in Attributes section.
+
 ## 2.15.4 (07.08.2019)
 
 * Fix null values rendering when "minimum" parameter is used.
