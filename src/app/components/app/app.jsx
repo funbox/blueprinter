@@ -1,8 +1,9 @@
-import { Switch } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
 import sourceMock from 'app/source';
 
 import MainLayout from 'app/components/main-layout';
+import PageDescription from 'app/components/page-description';
 import GroupRoutes from 'app/views/groups';
 import ResourceRoutes from 'app/views/resources';
 import ActionRoutes from 'app/views/actions';
@@ -47,6 +48,17 @@ export default class App extends React.Component {
         groups={groups}
       >
         <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              topLevelMeta.description ? (
+                <PageDescription description={topLevelMeta.description}/>
+              ) : (
+                <Redirect to={routes[0].props.path}/>
+              )
+            )}
+          />
           {routes}
         </Switch>
       </MainLayout>
@@ -57,5 +69,8 @@ export default class App extends React.Component {
 App.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }),
 };
