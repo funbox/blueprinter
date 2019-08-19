@@ -1,0 +1,9 @@
+.action-card_type_patch {
+  .action-card__method {
+    background-color: $patch-method-color--primary;
+  }
+
+  .action-card__method-href-container {
+    background-color: rgba($patch-method-color--primary, .08);
+  }
+}

@@ -1,0 +1,9 @@
+.action-card_type_delete {
+  .action-card__method {
+    background-color: $delete-method-color--primary;
+  }
+
+  .action-card__method-href-container {
+    background-color: rgba($delete-method-color--primary, .08);
+  }
+}

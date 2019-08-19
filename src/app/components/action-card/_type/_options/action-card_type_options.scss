@@ -1,0 +1,9 @@
+.action-card_type_options {
+  .action-card__method {
+    background-color: $options-method-color--primary;
+  }
+
+  .action-card__method-href-container {
+    background-color: rgba($options-method-color--primary, .08);
+  }
+}
