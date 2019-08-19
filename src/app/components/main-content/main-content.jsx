@@ -31,9 +31,9 @@ class MainContent extends React.Component {
           {
             description && (
               <RawContent mix="page__description">
-                <h1>
+                <h2>
                   Общие сведения
-                </h1>
+                </h2>
 
                 {description}
               </RawContent>
