@@ -171,7 +171,7 @@ function getBody(httpSource) {
 
 function getSchema(httpSource) {
   const index = httpSource.content.findIndex(item => (
-    item.element === 'asset' && item.meta.classes[0] === 'messageBodySchema'));
+    item.element === 'asset' && item.meta.classes.content[0].content === 'messageBodySchema'));
 
   return (index > -1) ? httpSource.content[index].content : null;
 }
