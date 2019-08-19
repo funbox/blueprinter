@@ -8,6 +8,7 @@ import GroupRoutes from 'app/views/groups';
 import ResourceRoutes from 'app/views/resources';
 import ActionRoutes from 'app/views/actions';
 import Error from 'app/views/error';
+import ContentNotFound from 'app/views/404';
 
 const source = window.refract || sourceMock;
 const parsedSource = parseSourceFile(source);
@@ -41,6 +42,7 @@ export default class App extends React.Component {
     const actionRoutes = ActionRoutes(actions);
 
     const routes = groupRoutes.concat(resourceRoutes, actionRoutes);
+    const emptyApib = routes.length === 0;
 
     return (
       <MainLayout
@@ -55,11 +57,16 @@ export default class App extends React.Component {
               topLevelMeta.description ? (
                 <PageDescription description={topLevelMeta.description}/>
               ) : (
-                <Redirect to={routes[0].props.path}/>
+                <Redirect to={emptyApib ? '/404' : routes[0].props.path}/>
               )
             )}
           />
           {routes}
+          <Route
+            exact
+            path="/404"
+            component={ContentNotFound}
+          />
         </Switch>
       </MainLayout>
     );
