@@ -28,18 +28,22 @@ const MessageCard = (props) => {
       id={hashWithPrefix}
     >
       <div className="message-card__heading">
-        <Link
-          mix="message-card__link"
-          to={{ hash: hashWithPrefix, pathname: location.pathname }}
-        >
-          Message
-        </Link>
+        {
+          !!title && (
+            <h4 className="message-card__title">
+              {title}
+            </h4>
+          )
+        }
 
-        {title && (
-          <h4 className="message-card__title">
-            {title.content || title}
-          </h4>
-        )}
+        <p className="message-card__link-container">
+          <Link
+            mix="message-card__link"
+            to={{ hash: hashWithPrefix, pathname: location.pathname }}
+          >
+            Message
+          </Link>
+        </p>
       </div>
 
       <div className="message-card__body">
