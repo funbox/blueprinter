@@ -1,0 +1,5 @@
+.parameter__prop_for_choices {
+  &:not(:first-child) {
+    margin-top: 18px;
+  }
+}

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Section from 'app/components/section';
-import ParametersTable, { parameterProps } from 'app/components/parameters-table';
+import URIParameter, { parameterProps } from 'app/components/parameter';
 
 class Parameters extends React.Component {
   render() {
@@ -15,7 +15,18 @@ class Parameters extends React.Component {
         mods={{ for: 'uri-parameters' }}
         mix={mix}
       >
-        <ParametersTable params={params}/>
+        <ul className={b('parameters', this.props)}>
+          {
+            params.map((parameter, index) => (
+              <li
+                className={b('parameters__item')}
+                key={`parameter-${index}`}
+              >
+                <URIParameter parameter={parameter}/>
+              </li>
+            ))
+          }
+        </ul>
       </Section>
     );
   }

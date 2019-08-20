@@ -1,0 +1,7 @@
+.parameter__prop-title {
+  font-weight: 600;
+
+  + .parameter__prop-content {
+    margin-top: 8px;
+  }
+}

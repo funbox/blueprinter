@@ -1,0 +1,15 @@
+.parameter__prop_for_name {
+  margin-bottom: 6px;
+
+  .parameter__prop-content {
+    font-weight: 600;
+  }
+
+  .parameter__prop-title {
+    @include visually-hidden;
+
+    + .parameter__prop-content {
+      margin-top: 0;
+    }
+  }
+}
