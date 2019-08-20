@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.15.6 (20.08.2019)
+
+* Improve error message when expected block is not found.
+
 ## 2.15.5 (15.08.2019)
 
 * Fix rendering of enum elements in Attributes section.
