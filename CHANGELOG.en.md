@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.15.7 (23.08.2019)
+
+* Fix parsing of imported docs with the Headers section.
+
 ## 2.15.6 (20.08.2019)
 
 * Improve error message when expected block is not found.
