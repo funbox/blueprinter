@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.16.0 (30.08.2019)
+
+* Improve watching of files being used to build the doc.
+
 ## 2.15.7 (23.08.2019)
 
 * Fix parsing of imported docs with the Headers section.
