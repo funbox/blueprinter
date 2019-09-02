@@ -31,12 +31,12 @@ const argvError = () => {
 if (argv.s) {
   if (!argv.i) argvError();
 
-  renderAndServe(argv.i, argv.p, argv.h, argv)
+  renderAndServe(argv.i, argv.p, argv.h)
     .catch(error => exit(error));
 } else {
   if (!argv.i || !argv.o) argvError();
 
-  renderAndBuild(argv.i, argv.o, argv)
+  renderAndBuild(argv.i, argv.o)
     .then(() => exit())
     .catch(error => exit(error));
 }

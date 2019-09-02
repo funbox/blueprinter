@@ -9,13 +9,13 @@ const serverParams = {
   injectChanges: false,
 };
 
-const renderAndServe = async (inputFileName, port, host, options) => {
+const renderAndServe = async (inputFileName, port, host) => {
   const watchSource = (filePaths) => {
     const watcher = browserSync.watch(filePaths);
 
     watcher.on('change', async (path) => {
       console.log(`Updated ${path}`);
-      const filePaths = await renderRefract(inputFileName, options);
+      const filePaths = await renderRefract(inputFileName);
       browserSync.reload();
       watcher.close();
       watchSource([inputFileName, ...filePaths]);
