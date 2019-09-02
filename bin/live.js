@@ -15,10 +15,10 @@ const renderAndServe = async (inputFileName, port, host) => {
 
     watcher.on('change', async (path) => {
       console.log(`Updated ${path}`);
-      const filePaths = await renderRefract(inputFileName);
+      const newFilePaths = await renderRefract(inputFileName);
       browserSync.reload();
       watcher.close();
-      watchSource([inputFileName, ...filePaths]);
+      watchSource([inputFileName, ...newFilePaths]);
     });
   };
 
