@@ -10,6 +10,8 @@ const writeFile = promisify(fs.writeFile);
 const mkdir = promisify(fs.mkdir);
 
 const BASE_PATH = `${__dirname}/..`;
+const staticFileLocation = path.resolve(BASE_PATH, 'static/index.html');
+const refractFileLocation = path.resolve(BASE_PATH, 'static/refract.js');
 
 const createRefract = inputFileName => promisify(crafter.parseFile)(inputFileName, {})
   .then(res => {
@@ -28,8 +30,6 @@ const createRefract = inputFileName => promisify(crafter.parseFile)(inputFileNam
   });
 
 const sendStaticFile = async (outputFileName) => {
-  const staticFileLocation = path.resolve(BASE_PATH, 'static/index.html');
-  const refractFileLocation = path.resolve(BASE_PATH, 'static/refract.js');
   const htmlData = await readFile(staticFileLocation, { encoding: 'utf-8' });
   const refractData = await readFile(refractFileLocation, { encoding: 'utf-8' });
 
@@ -46,16 +46,21 @@ const sendStaticFile = async (outputFileName) => {
   }
 };
 
-const renderRefract = async (inputFileName) => {
+const basicRenderRefract = async (inputFileName, outputFileName, processResult) => {
   const [refract, filePaths] = await createRefract(inputFileName)
     .catch(error => Promise.reject(errMessage('Error parsing input', error)));
 
-  const refractData = `refract = ${refract}`;
+  const refractData = processResult ? processResult(refract) : refract;
 
-  await writeFile(`${BASE_PATH}/static/refract.js`, refractData)
+  await writeFile(outputFileName, refractData)
     .catch(error => Promise.reject(errMessage('Error writing refracted output', error)));
 
   return filePaths;
+};
+
+const renderRefract = async (inputFileName) => {
+  const processor = (refract) => `refract = ${refract};`;
+  return basicRenderRefract(inputFileName, refractFileLocation, processor);
 };
 
 const renderAndBuild = async (inputFileName, outputFileName) => {
@@ -66,6 +71,7 @@ const renderAndBuild = async (inputFileName, outputFileName) => {
 
 module.exports = {
   BASE_PATH,
+  basicRenderRefract,
   renderRefract,
   renderAndBuild,
 };
