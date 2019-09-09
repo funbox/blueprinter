@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.17.1 (03.09.2019)
+
+* Fix NGINX config.
+
 ## 2.17.0 (03.09.2019)
 
 * Use source apib file to generate refract stub.
