@@ -51,10 +51,12 @@ const extractAttributeData = (attribute, disabledExample = false) => {
   if (key && value) {
     attributeKey = key.content || null;
     attributeType = value.element || null;
-    attributeExample = (!disabledExample && value.content) || null;
+    attributeExample = disabledExample || value.content === undefined
+      ? null : value.content;
   } else {
     attributeType = typeAlias[attribute.element] || attribute.element || null;
-    attributeExample = (!disabledExample && attribute.content) || null;
+    attributeExample = disabledExample || attribute.content === undefined
+      ? null : attribute.content;
   }
 
   const attributeDescription = get('meta', 'description', 'content').from(attribute);

@@ -48,7 +48,7 @@ const Attribute__Row = (props) => {
           && <p className="attribute__type">{attributeType}</p>
         }
         {attributeDescription && <p className="attribute__description">{attributeDescription}</p>}
-        {attributeExample && !enumMember && <p className="attribute__example">{attributeExample}</p>}
+        {attributeExample !== null && !enumMember && <p className="attribute__example">{attributeExample.toString()}</p>}
       </dd>
     </dl>
   );
