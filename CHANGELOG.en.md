@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.17.2 (11.09.2019)
+
+* Fix server_name for https.
+
 ## 2.17.1 (03.09.2019)
 
 * Fix NGINX config.
