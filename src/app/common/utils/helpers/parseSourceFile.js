@@ -94,6 +94,13 @@ const parseSourceFile = ({ content }) => {
     }, []);
   }
 
+  if (categories.schemaStructuresArray.length > 0) {
+    categories.schemaStructuresArray = categories.schemaStructuresArray.reduce((res, ssItem) => {
+      res.push(...ssItem.content);
+      return res;
+    }, []);
+  }
+
   const refactoredActions = actions.map(refactorAction);
 
   return {

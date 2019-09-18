@@ -19,6 +19,10 @@ const resolveInheritance = (valueMember, parent) => {
     const dsContent = Array.isArray(ds.content) ? ds.content[0].meta.id.content : ds.content.meta.id.content;
     return type === 'ref' ? dsContent === valueMember.content : dsContent === valueMember.element;
   });
+  const referencedSchemaStructure = categories.schemaStructuresArray.find(ss => {
+    const ssContent = ss.meta.id.content;
+    return ssContent === valueMember.element;
+  });
 
   if (referencedDataStructure) {
     const refDSContent = referencedDataStructure.content;
@@ -56,6 +60,13 @@ const resolveInheritance = (valueMember, parent) => {
       valueMember.content.unshift(...referencedObjectContent);
       valueMember.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
       valueMember.attributes = usefulContent.attributes;
+    }
+  }
+
+  if (referencedSchemaStructure) {
+    const refSSContent = referencedSchemaStructure.content;
+    if (Array.isArray(refSSContent) && refSSContent.every(item => item.element === 'asset')) {
+      valueMember.element = 'schema type';
     }
   }
 
