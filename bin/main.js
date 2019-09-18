@@ -21,7 +21,7 @@ const createRefract = inputFileName => promisify(crafter.parseFile)(inputFileNam
       const [hasError, error] = astHasError(result);
       if (hasError) {
         console.error(`Crafter error: ${error}`);
-        return Promise.resolve(ast);
+        return Promise.resolve([ast, filePaths]);
       }
       return Promise.resolve([ast, filePaths]);
     } catch (e) {
