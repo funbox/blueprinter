@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.18.0 (19.09.2019)
+
+* Add parsing of Schema types.
+
 ## 2.17.2 (11.09.2019)
 
 * Fix server_name for https.
