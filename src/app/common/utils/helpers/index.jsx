@@ -2,7 +2,7 @@ import parser from 'html-react-parser';
 import Anchor from 'app/components/anchor';
 import { hashFromTitle } from './hash';
 
-const commonmark = require('commonmark');
+const commonmark = require('@funbox/commonmark');
 
 const markdownParser = new commonmark.Parser();
 const htmlRenderer = new commonmark.HtmlRenderer();
