@@ -1,7 +1,7 @@
 import RawContent from 'app/components/raw-content';
 import Link from 'app/components/link';
-import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
-import { hashFromTitle, combineHashes } from 'app/common/utils/helpers/hash';
+import { get, withHeaderAnchors } from 'app/common/utils/helpers';
+import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 
 const MessageCard = (props) => {
   const {
@@ -14,8 +14,8 @@ const MessageCard = (props) => {
   const descriptionEl = message.content.find(el => el.element === 'copy');
   const description = get('content').from(descriptionEl);
 
-  const mainHash = hashFromTitle(`${title || props.title}`);
-  const hash = combineHashes(parentHash, mainHash);
+  const presetHash = description && hashFromComment(description);
+  const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(title || props.title));
 
   return (
     <div
@@ -40,7 +40,7 @@ const MessageCard = (props) => {
       {description && (
         <div className="message-card__body">
           <RawContent mix="message-card__description">
-            {withHeaderAnchors(htmlFromText(description))}
+            {withHeaderAnchors(description)}
           </RawContent>
         </div>
       )}

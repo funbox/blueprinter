@@ -2,8 +2,8 @@ import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
 import ActionCard from 'app/components/action-card';
 import MessageCard from 'app/components/message-card';
-import { get, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
-import { hashFromTitle, combineHashes } from 'app/common/utils/helpers/hash';
+import { get, withHeaderAnchors } from 'app/common/utils/helpers';
+import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 import Resource__Action from './__action';
 
 const DEFAULT_TITLE = 'Resource';
@@ -18,7 +18,8 @@ class Resource extends React.Component {
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
     const title = get('meta', 'title', 'content').from(resource) || DEFAULT_TITLE;
 
-    const hash = combineHashes(parentHash, hashFromTitle(title));
+    const presetHash = description && hashFromComment(description);
+    const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(title));
 
     return (
       <section className="resource" id={hash}>
@@ -33,7 +34,7 @@ class Resource extends React.Component {
         <div className="resource__body">
           {!!description && (
             <RawContent mix="resource__description">
-              {withHeaderAnchors(htmlFromText(description))}
+              {withHeaderAnchors(description)}
             </RawContent>
           )}
 
@@ -71,7 +72,6 @@ class Resource extends React.Component {
     );
   }
 }
-
 
 Resource.defaultProps = {
   resource: {},

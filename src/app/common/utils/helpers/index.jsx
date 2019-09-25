@@ -1,6 +1,6 @@
 import parser from 'html-react-parser';
 import Anchor from 'app/components/anchor';
-import { hashFromTitle } from './hash';
+import { hashFromComment, createHash } from './hash';
 
 const commonmark = require('@funbox/commonmark');
 
@@ -92,22 +92,45 @@ const getAttributeChildren = attribute => {
 };
 
 const withHeaderAnchors = (description) => {
-  const modifiedChildren = React.Children.map(description.props.children, textElement => {
+  const descriptionHeaders = [];
+  const regex = /#{2,}\s?(.+)\n?/g;
+  let match = regex.exec(description);
+  while (match) {
+    descriptionHeaders.push({ title: match[1], index: match.index });
+    match = regex.exec(description);
+  }
+
+  const headers = descriptionHeaders.map((item, idx) => {
+    let headerDescriptionPart;
+    if (idx === descriptionHeaders.length - 1) {
+      headerDescriptionPart = description.slice(descriptionHeaders[idx].index, description.length);
+    } else {
+      headerDescriptionPart = description.slice(descriptionHeaders[idx].index, descriptionHeaders[idx + 1].index - 1);
+    }
+
+    const presetHash = headerDescriptionPart && hashFromComment(headerDescriptionPart);
+    const hash = presetHash ? createHash(presetHash) : createHash(`header-${item.title}`);
+    return { title: item.title, hash };
+  });
+
+  const html = htmlFromText(description);
+
+  const modifiedChildren = React.Children.map(html.props.children, textElement => {
     if (textElement.type && /^h\d$/.exec(textElement.type)) {
-      const text = textElement.props.children.toLowerCase();
-      const title = `header-${text}`;
+      const text = textElement.props.children;
+      const hash = headers.find(header => header.title === text).hash;
       const childrenArray = React.Children.toArray(textElement.props.children);
 
       childrenArray[0] = childrenArray[0].concat(' ');
-      childrenArray.push(<Anchor title={title} mods={{ for: 'description' }} key={`anchor-of-${text}`}/>);
+      childrenArray.push(<Anchor title={hash} mods={{ for: 'description' }} key={`anchor-of-${text}`}/>);
 
-      return React.cloneElement(textElement, { id: hashFromTitle(title) }, childrenArray);
+      return React.cloneElement(textElement, { id: createHash(hash) }, childrenArray);
     }
 
     return textElement;
   });
 
-  return React.cloneElement(description, {}, modifiedChildren);
+  return React.cloneElement(html, {}, modifiedChildren);
 };
 
 function parseTextWithCustomBlocks(text) {

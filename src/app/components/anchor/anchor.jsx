@@ -1,9 +1,9 @@
 import Link from 'app/components/link';
-import { hashFromTitle } from 'app/common/utils/helpers/hash';
+import { createHash } from 'app/common/utils/helpers/hash';
 
 const Anchor = (props) => {
   const { title, pathname } = props;
-  const hash = props.hash || hashFromTitle(title);
+  const hash = props.hash || createHash(title);
 
   return (
     <Link

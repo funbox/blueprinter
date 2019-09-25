@@ -1,6 +1,6 @@
 import { SlideToggle } from 'react-slide-toggle';
 import { extractTransactionMethod as extractMethod, get } from 'app/common/utils/helpers/';
-import { hashFromTitle, combineHashes } from 'app/common/utils/helpers/hash';
+import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 
 import Link from 'app/components/link';
 import Menu, { Menu__Item } from 'app/components/menu';
@@ -22,16 +22,22 @@ class ResourceGroup extends React.Component {
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     const { group } = nextProps;
     const { route } = nextContext.router;
-    const title = get('meta', 'title').from(group) || DEFAULT_TITLE;
-    const hash = hashFromTitle(title);
+    const title = get('meta', 'title', 'content').from(group) || DEFAULT_TITLE;
+
+    const descriptionEl = group.content.find(el => el.element === 'copy');
+    const presetHash = descriptionEl && hashFromComment(descriptionEl.content);
+    const hashBase = presetHash || title;
+    const hash = createHash(hashBase);
+
     return `#${hash}` === route.location.hash;
   }
-
 
   buildContentList(content, options = {}) {
     const { level, parentHash = '' } = options;
     const { route } = this.context.router;
+
     let descriptionSection;
+
     if (level > MAX_NESTING_LEVEL) return null;
 
     const menuItems = content.reduce((acc, item, index) => {
@@ -46,7 +52,20 @@ class ResourceGroup extends React.Component {
       const hasOnlyChild = !!item.content && item.content.length === 1;
       let title = item.meta.title.content;
       let badge = null;
-      let mainHash = hashFromTitle(title);
+
+      const descriptionEl = item.content.find(el => el.element === 'copy');
+      let description;
+      if (descriptionEl) {
+        const descriptionHeaders = this.getDescritionHeaders(descriptionEl.content);
+        if (descriptionHeaders.length > 0) {
+          description = descriptionEl.content.slice(0, descriptionHeaders[0].index - 1);
+        } else {
+          description = descriptionEl.content;
+        }
+      }
+      const presetHash = description && hashFromComment(description);
+      const hashBase = presetHash || title;
+      let mainHash = createHash(hashBase);
 
       if (itemType === 'resource' && hasOnlyChild) {
         hasSubmenu = false;
@@ -61,7 +80,7 @@ class ResourceGroup extends React.Component {
         badge = <MethodBadge method={method} mix="menu__item-icon"/>;
         const href = get('attributes', 'href', 'content').from(item) || get('attributes', 'href').from(item);
         title = title || `${method.toUpperCase()} ${href}`;
-        mainHash = hashFromTitle(`${title} ${method}`);
+        if (!presetHash) mainHash = createHash(`${hashBase} ${method}`);
       }
 
       if (itemType === 'message') {
@@ -69,7 +88,7 @@ class ResourceGroup extends React.Component {
         badge = <MethodBadge mods={{ type: 'message' }} mix="menu__item-icon"/>;
       }
 
-      const hash = combineHashes(parentHash, mainHash);
+      const hash = presetHash ? mainHash : combineHashes(parentHash, mainHash);
 
       const itemMods = {
         ...(level ? { level, submenu: true } : {}),
@@ -95,20 +114,25 @@ class ResourceGroup extends React.Component {
     }, []);
 
     if (level === 2 && descriptionSection) {
-      const descriptionHeaders = [];
-      const regex = /#{2,}\s?(.+)\n?/g;
-      let match = regex.exec(descriptionSection.content);
-      while (match) {
-        descriptionHeaders.push(match[1]);
-        match = regex.exec(descriptionSection.content);
-      }
-      const headerItems = descriptionHeaders.map(header => {
-        const hash = hashFromTitle(`header-${header.toLowerCase()}`);
+      const descriptionHeaders = this.getDescritionHeaders(descriptionSection.content);
+
+      const headerItems = descriptionHeaders.map((item, idx) => {
+        const description = descriptionSection.content;
+        let headerDescriptionPart;
+        if (idx === descriptionHeaders.length - 1) {
+          headerDescriptionPart = description.slice(descriptionHeaders[idx].index, description.length);
+        } else {
+          headerDescriptionPart = description.slice(descriptionHeaders[idx].index, descriptionHeaders[idx + 1].index - 1);
+        }
+
+        const presetHash = headerDescriptionPart && hashFromComment(headerDescriptionPart);
+        const hash = presetHash ? createHash(presetHash) : createHash(`header-${item.title}`);
+
         return (
           <Menu__Item
             mods={{ level: 2, submenu: true }}
-            key={`header-${header}`}
-            text={header}
+            key={`header-${item.title}`}
+            text={item.title}
             to={{ hash, pathname: route.location.pathname }}
           />
         );
@@ -124,6 +148,18 @@ class ResourceGroup extends React.Component {
     );
   }
 
+  getDescritionHeaders(description) {
+    const descriptionHeaders = [];
+    const regex = /#{2,}\s?(.+)\n?/g;
+    let match = regex.exec(description);
+    while (match) {
+      descriptionHeaders.push({ title: match[1], index: match.index });
+      match = regex.exec(description);
+    }
+
+    return descriptionHeaders;
+  }
+
   toggleClass() {
     this.setState(prevState => ({ ...prevState, collapsed: !prevState.collapsed }));
   }
@@ -135,7 +171,11 @@ class ResourceGroup extends React.Component {
     const hasContent = !!group.content && group.content.length > 0;
 
     const title = get('meta', 'title', 'content').from(group) || DEFAULT_TITLE;
-    const hash = hashFromTitle(title);
+
+    const descriptionEl = group.content.find(el => el.element === 'copy');
+    const presetHash = descriptionEl && hashFromComment(descriptionEl.content);
+    const hashBase = presetHash || title;
+    const hash = createHash(hashBase);
 
     const needJumpToGroup = () => {
       const currentHash = decodeURIComponent(window.location.hash);

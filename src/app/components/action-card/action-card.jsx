@@ -1,8 +1,8 @@
 import RawContent from 'app/components/raw-content';
 import Link from 'app/components/link';
 import Parameters from 'app/components/parameters';
-import { get, extractTransactionMethod, htmlFromText, withHeaderAnchors } from 'app/common/utils/helpers';
-import { hashFromTitle, combineHashes } from 'app/common/utils/helpers/hash';
+import { get, extractTransactionMethod, withHeaderAnchors } from 'app/common/utils/helpers';
+import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 
 const ActionCard = (props) => {
   const {
@@ -18,8 +18,8 @@ const ActionCard = (props) => {
   const description = get('content').from(descriptionEl);
   const method = props.method || extractTransactionMethod(action);
 
-  const mainHash = hashFromTitle(`${title || props.title} ${method.toLowerCase()}`);
-  const hash = combineHashes(parentHash, mainHash);
+  const presetHash = description && hashFromComment(description);
+  const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(`${title || props.title} ${method}`));
 
   return (
     <div
@@ -45,7 +45,7 @@ const ActionCard = (props) => {
             <RawContent
               mix="action-card__description"
             >
-              {withHeaderAnchors(htmlFromText(description))}
+              {withHeaderAnchors(description)}
             </RawContent>
           )}
 
