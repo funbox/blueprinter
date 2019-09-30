@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.19.0 (30.09.2019)
+
+* Use HTML comments to override anchors.
+
 ## 2.18.0 (19.09.2019)
 
 * Add parsing of Schema types.
