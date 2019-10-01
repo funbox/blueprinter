@@ -23,7 +23,8 @@
     "lint:js": "eslint --cache -c .eslintrc.js --ext .jsx,.js src config",
     "lint": "npm run -s lint:scss && npm run -s lint:sass && npm run -s lint:js",
     "prebuild": "npm run lint",
-    "prepublishOnly": "npm run build-static"
+    "prepublishOnly": "npm run build-static",
+    "postpublish": "bash ./build-docker.sh"
   },
   "dependencies": {
     "@funbox/commonmark": "0.29.0-fb-1.0.2",
