@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const argsParser = require('yargs');
 const { renderAndBuild } = require('./main');
 const { renderAndServe } = require('./live');

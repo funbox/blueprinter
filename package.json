@@ -6,6 +6,9 @@
     "/bin",
     "/static"
   ],
+  "bin": {
+    "blueprinter-frontend": "./bin/index.js"
+  },
   "scripts": {
     "start": "npm run dev",
     "build": "npm run make-stub && funbox-build",
