@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.20.0 (02.10.2019)
+
+* Add Dockerfile to build an image.
+
 ## 2.19.0 (30.09.2019)
 
 * Use HTML comments to override anchors.
