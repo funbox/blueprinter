@@ -58,8 +58,8 @@
     "funbox-scss-vars-loader": "1.0.0",
     "html-react-parser": "0.4.6",
     "html-webpack-inline-source-plugin": "0.0.10",
-    "lodash": "4.17.4",
-    "node-sass": "4.9.0",
+    "lodash": "4.17.15",
+    "node-sass": "4.12.0",
     "npm-run-all": "4.1.5",
     "postcss-loader": "2.0.10",
     "postcss-url": "7.3.0",
@@ -76,7 +76,7 @@
     "stylelint": "8.4.0",
     "suppress-chunks-webpack-plugin": "0.0.4",
     "uniqid": "5.0.3",
-    "url-parse": "1.4.1"
+    "url-parse": "1.4.7"
   },
   "pugLintConfig": {
     "extends": "funbox"
