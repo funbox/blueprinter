@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.20.1 (03.10.2019)
+
+* Fix display of "0" or "false" used as an example.
+
 ## 2.20.0 (02.10.2019)
 
 * Add Dockerfile to build an image.
