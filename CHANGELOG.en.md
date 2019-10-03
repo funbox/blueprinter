@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.21.0 (03.10.2019)
+
+* Update vulnerable dependencies.
+
 ## 2.20.1 (03.10.2019)
 
 * Fix display of "0" or "false" used as an example.
