@@ -11,7 +11,6 @@ const mkdir = promisify(fs.mkdir);
 
 const BASE_PATH = `${__dirname}/..`;
 const staticFileLocation = path.resolve(BASE_PATH, 'static/index.html');
-const refractFileLocation = path.resolve(BASE_PATH, 'static/refract.js');
 
 const createRefract = inputFileName => promisify(crafter.parseFile)(inputFileName, {})
   .then(res => {
@@ -29,9 +28,8 @@ const createRefract = inputFileName => promisify(crafter.parseFile)(inputFileNam
     }
   });
 
-const sendStaticFile = async (outputFileName) => {
+const sendStaticFile = async (outputFileName, refractData) => {
   const htmlData = await readFile(staticFileLocation, { encoding: 'utf-8' });
-  const refractData = await readFile(refractFileLocation, { encoding: 'utf-8' });
 
   const htmlWithRefract = htmlData
     .replace('<script src="./refract.js"></script>', `<script>${refractData}</script>`)
@@ -46,26 +44,23 @@ const sendStaticFile = async (outputFileName) => {
   }
 };
 
-const basicRenderRefract = async (inputFileName, outputFileName, processResult) => {
+const basicRenderRefract = async (inputFileName, processResult) => {
   const [refract, filePaths] = await createRefract(inputFileName)
     .catch(error => Promise.reject(errMessage('Error parsing input', error)));
 
   const refractData = processResult ? processResult(refract) : refract;
 
-  await writeFile(outputFileName, refractData)
-    .catch(error => Promise.reject(errMessage('Error writing refracted output', error)));
-
-  return filePaths;
+  return [refractData, filePaths];
 };
 
 const renderRefract = async (inputFileName) => {
   const processor = (refract) => `refract = ${refract};`;
-  return basicRenderRefract(inputFileName, refractFileLocation, processor);
+  return basicRenderRefract(inputFileName, processor);
 };
 
 const renderAndBuild = async (inputFileName, outputFileName) => {
-  await renderRefract(inputFileName);
-  await sendStaticFile(outputFileName);
+  const [refractData] = await renderRefract(inputFileName);
+  await sendStaticFile(outputFileName, refractData);
   console.log(`Rendering done. Open "${outputFileName}" to see result.`);
 };
 
