@@ -1,11 +1,18 @@
 const chokidar = require('chokidar');
+const fs = require('fs');
+const { promisify } = require('util');
 const { basicRenderRefract } = require('../bin/main');
 const {
   SOURCE_FILE,
   OUTPUT_FILE,
 } = require('./apib-mock-vars');
 
-const renderRefract = () => basicRenderRefract(SOURCE_FILE, OUTPUT_FILE);
+const writeFile = promisify(fs.writeFile);
+const renderRefract = async () => {
+  const [refractData, filePaths] = await basicRenderRefract(SOURCE_FILE);
+  await writeFile(OUTPUT_FILE, refractData);
+  return filePaths;
+};
 
 const watchSource = (filePaths) => {
   const watcher = chokidar.watch(filePaths);

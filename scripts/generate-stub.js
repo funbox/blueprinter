@@ -1,8 +1,18 @@
+const fs = require('fs');
+const { promisify } = require('util');
 const { basicRenderRefract } = require('../bin/main');
 const { SOURCE_FILE, OUTPUT_FILE } = require('./apib-mock-vars');
 
-basicRenderRefract(SOURCE_FILE, OUTPUT_FILE).then(() => {
-  console.log('Refract created.');
+const writeFile = promisify(fs.writeFile);
+
+basicRenderRefract(SOURCE_FILE).then(async ([refractData]) => {
+  try {
+    await writeFile(OUTPUT_FILE, refractData);
+    console.log('Refract created.');
+  } catch (e) {
+    console.error('Error writing refracted output');
+    throw e;
+  }
 }).catch(error => {
   console.error(error.message);
 });
