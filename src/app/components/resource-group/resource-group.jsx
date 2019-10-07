@@ -50,7 +50,8 @@ class ResourceGroup extends React.Component {
       const nextLevel = level + 1;
       let hasSubmenu = level < MAX_NESTING_LEVEL && !!item.content && item.content.length > 0;
       const hasOnlyChild = !!item.content && item.content.length === 1;
-      let title = item.meta.title.content;
+      const href = get('attributes', 'href', 'content').from(item);
+      let title = get('meta', 'title', 'content').from(item);
       let badge = null;
 
       const descriptionEl = item.content.find(el => el.element === 'copy');
@@ -67,25 +68,33 @@ class ResourceGroup extends React.Component {
       const hashBase = presetHash || title;
       let mainHash = createHash(hashBase);
 
-      if (itemType === 'resource' && hasOnlyChild) {
-        hasSubmenu = false;
-        if (item.content[0].element !== 'copy') {
-          const method = extractMethod(item.content[0]);
+      const typeSpecificModifier = {
+        resource: () => {
+          title = title || href;
+
+          if (hasOnlyChild) {
+            hasSubmenu = false;
+            if (item.content[0].element !== 'copy') {
+              const method = extractMethod(item.content[0]);
+              badge = <MethodBadge method={method} mix="menu__item-icon"/>;
+            }
+          }
+        },
+        transition: () => {
+          const method = extractMethod(item);
           badge = <MethodBadge method={method} mix="menu__item-icon"/>;
-        }
-      }
+          title = title || `${method.toUpperCase()} ${href}`;
+          if (!presetHash) mainHash = createHash(`${hashBase} ${method}`);
+        },
+        message: () => {
+          title = title || 'Message';
+          hasSubmenu = false;
+          badge = <MethodBadge mods={{ type: 'message' }} mix="menu__item-icon"/>;
+        },
+      };
 
-      if (itemType === 'transition') {
-        const method = extractMethod(item);
-        badge = <MethodBadge method={method} mix="menu__item-icon"/>;
-        const href = get('attributes', 'href', 'content').from(item) || get('attributes', 'href').from(item);
-        title = title || `${method.toUpperCase()} ${href}`;
-        if (!presetHash) mainHash = createHash(`${hashBase} ${method}`);
-      }
-
-      if (itemType === 'message') {
-        hasSubmenu = false;
-        badge = <MethodBadge mods={{ type: 'message' }} mix="menu__item-icon"/>;
+      if (typeSpecificModifier[itemType]) {
+        typeSpecificModifier[itemType]();
       }
 
       const hash = presetHash ? mainHash : combineHashes(parentHash, mainHash);
