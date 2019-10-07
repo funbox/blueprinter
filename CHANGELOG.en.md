@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.21.1 (07.10.2019)
+
+* Fix display of a resource without a title in the left column.
+
 ## 2.21.0 (03.10.2019)
 
 * Update vulnerable dependencies.
