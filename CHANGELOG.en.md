@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.22.0 (08.10.2019)
+
+* Keep generated refract in memory instead of an external file.
+
 ## 2.21.1 (07.10.2019)
 
 * Fix display of a resource without a title in the left column.
