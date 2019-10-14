@@ -49,7 +49,6 @@ class ResourceGroup extends React.Component {
       const itemType = item.element;
       const nextLevel = level + 1;
       let hasSubmenu = level < MAX_NESTING_LEVEL && !!item.content && item.content.length > 0;
-      const hasOnlyChild = !!item.content && item.content.length === 1;
       const href = get('attributes', 'href', 'content').from(item);
       let title = get('meta', 'title', 'content').from(item);
       let badge = null;
@@ -71,14 +70,6 @@ class ResourceGroup extends React.Component {
       const typeSpecificModifier = {
         resource: () => {
           title = title || href;
-
-          if (hasOnlyChild) {
-            hasSubmenu = false;
-            if (item.content[0].element !== 'copy') {
-              const method = extractMethod(item.content[0]);
-              badge = <MethodBadge method={method} mix="menu__item-icon"/>;
-            }
-          }
         },
         transition: () => {
           const method = extractMethod(item);
