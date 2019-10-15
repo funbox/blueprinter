@@ -78,6 +78,7 @@ export default class Home extends React.PureComponent {
         // однако ссылки (ref) на элементы не меняются, они создаются только во время выполнения конструктора
         // В этом случае надо перезагрузить страницу, чтобы пересоздать ref для блоков транзакций по новым id
         window.location.reload();
+        return;
       }
 
       const actionCardStyle = getComputedStyle(actionCard);

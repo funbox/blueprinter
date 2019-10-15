@@ -4,7 +4,7 @@
 
 const defaultsDeep = require('lodash/defaultsDeep');
 const path = require('path');
-const frontendEnv = require('funbox-frontend-env-webpack');
+const frontendEnv = require('@funbox/frontend-env-webpack');
 
 const webpack = frontendEnv.webpack;
 
@@ -31,13 +31,14 @@ module.exports = options => {
   const config = frontendEnv.webpackConfigurationBuilder(options);
 
   config.entry = {
-    app: `${__dirname}/../src/app/app.entry.js`,
+    app: ['react-hot-loader/patch', `${__dirname}/../src/app/app.entry.js`],
   };
 
   config.resolve.extensions = ['.js', '.jsx'];
 
   defaultsDeep(config.resolve.alias, {
     'app.envDeps.env': path.resolve(__dirname, `../src/app/app.envDeps.${frontendEnv.envName}`),
+    'react-dom': '@hot-loader/react-dom',
   });
 
   config.module.rules = config.module.rules.concat([
@@ -46,14 +47,14 @@ module.exports = options => {
       loader: 'babel-loader',
       query: {
         presets: [
-          ['env', {
+          ['@babel/preset-env', {
             targets: ['> 1%', 'android >= 4.4.4', 'ios >= 9'],
-            useBuiltIns: true,
+            useBuiltIns: 'entry',
           }],
-          'react',
-        ].concat(!options.disableHmre && !options.build ? 'react-hmre' : []),
-        plugins: ['transform-object-rest-spread'].concat(options.build
-          ? ['transform-react-constant-elements', 'transform-react-remove-prop-types']
+          '@babel/preset-react',
+        ],
+        plugins: ['react-hot-loader/babel', '@babel/plugin-proposal-object-rest-spread'].concat(options.build
+          ? ['@babel/plugin-transform-react-constant-elements', 'transform-react-remove-prop-types']
           : []),
       },
       exclude: /node_modules[\\/](?!(blueprinter-frontend)[\\/]).*/,
@@ -61,12 +62,6 @@ module.exports = options => {
   ]);
 
   config.plugins = config.plugins.concat([
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks({ userRequest }) {
-        return typeof userRequest === 'string' && userRequest.split('!').pop().includes('node_modules');
-      },
-    }),
     new webpack.ProvidePlugin({
       React: 'react',
       PropTypes: 'prop-types',
@@ -74,8 +69,6 @@ module.exports = options => {
       b: 'bem-react-helper',
     }),
     new webpack.DefinePlugin({
-      // для того, чтобы матчиться в коде
-      ENV: JSON.stringify(process.env.ENV),
       // для того, чтобы редаксы-реакты выкидывали ненужный код при минификации
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
@@ -84,6 +77,19 @@ module.exports = options => {
       new RegExp('^./(json|http|plaintext)$'),
     ),
   ]);
+
+  config.optimization = {
+    ...config.optimization,
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    },
+  };
 
   if (options.inlineSource) {
     // При сборке проекта из APIB-доки инлайним скрипты, стили и шрифты в html,
@@ -122,7 +128,7 @@ module.exports = options => {
     // Чтобы при правках CSS и JS кода хэши для соответствующих файлов менялись независимо.
     config.plugins
       .forEach(plugin => {
-        if (plugin.constructor.name === 'ExtractTextPlugin' && `${plugin.filename}`.indexOf('.css') > 0) {
+        if (plugin.constructor.name === 'MiniCssExtractPlugin' && `${plugin.filename}`.indexOf('.css') > 0) {
           plugin.filename = '[name].[contenthash:16].css';
         }
       });
@@ -163,12 +169,12 @@ module.exports = options => {
       },
     },
     {
-      loader: 'funbox-scss-imports-loader',
+      loader: '@funbox/scss-imports-loader',
       options: {
         paths: require('./webpack.app.scssImports').map(scssPath => `${BASE_PATH.replace(/\\/g, '/')}/src/${scssPath}`),
       },
     },
-    'funbox-scss-vars-loader',
+    '@funbox/scss-vars-loader',
   ];
 
   const cssFromScssDevLoaders = ['style-loader'].concat(cssFromScssCommonLoaders);
@@ -184,10 +190,10 @@ module.exports = options => {
     config.module.rules = config.module.rules.concat([
       {
         test: /\.scss$/,
-        use: require('extract-text-webpack-plugin').extract({
-          fallback: 'style-loader',
-          use: cssFromScssCommonLoaders,
-        }),
+        use: [
+          require('mini-css-extract-plugin').loader,
+          ...cssFromScssCommonLoaders,
+        ],
       },
     ]);
   }

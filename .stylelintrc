@@ -1,5 +1,5 @@
 {
-  "extends": "funbox-scss-lint-config",
+  "extends": "@funbox/scss-lint-config",
   "rules": {
     "scss/dollar-variable-pattern": null
   }
