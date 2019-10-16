@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.23.0 (08.10.2019)
+
+* Update dependencies.
+
 ## 2.22.0 (08.10.2019)
 
 * Keep generated refract in memory instead of an external file.
