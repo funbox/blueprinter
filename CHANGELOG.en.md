@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.24.0 (17.10.2019)
+
+* Cancel collapsing of a resource and its only action in the navigation in the left column.
+
 ## 2.23.0 (08.10.2019)
 
 * Update dependencies.
