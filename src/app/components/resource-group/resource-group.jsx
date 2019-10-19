@@ -15,7 +15,7 @@ class ResourceGroup extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { collapsed: false };
+    this.state = { collapsed: true };
     this.toggleClass = this.toggleClass.bind(this);
   }
 
@@ -196,6 +196,7 @@ class ResourceGroup extends React.Component {
     return (
       <SlideToggle
         bestPerformance
+        collapsed
         onCollapsed={this.toggleClass}
         onExpanding={this.toggleClass}
       >
