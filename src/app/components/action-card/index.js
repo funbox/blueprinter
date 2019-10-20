@@ -11,3 +11,4 @@ require('./__href/action-card__href.scss');
 require('./__formatted-href/action-card__formatted-href.scss');
 require('./__method/action-card__method.scss');
 require('./__title/action-card__title.scss');
+require('./__content/action-card__content.scss');

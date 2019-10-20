@@ -1,6 +1,7 @@
 import RawContent from 'app/components/raw-content';
 import Link from 'app/components/link';
 import Parameters from 'app/components/parameters';
+import TransitionContainer from 'app/components/transition-container';
 import { get, withHeaderAnchors } from 'app/common/utils/helpers';
 import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 import formatHref from 'app/common/utils/helpers/formatHref';
@@ -15,7 +16,7 @@ const ActionCard = (props) => {
   const href = action.attributes.href || props.href;
   const hrefVariables = action.attributes.hrefVariables;
   const title = get('meta', 'title', 'content').from(action);
-  const descriptionEl = action.content.find(el => el.element === 'copy');
+  const descriptionEl = action.content.find(isCopy);
   const description = get('content').from(descriptionEl);
   const method = action.attributes.method || props.method;
   const hashFriendlyHref = href.slice(1).replace(/\//g, '-');
@@ -60,23 +61,26 @@ const ActionCard = (props) => {
         }
       </div>
 
-      {(!!description || !!hrefVariables) && (
-        <div className="action-card__body">
-          {!!description && (
-            <RawContent
-              mix="action-card__description"
-            >
-              {withHeaderAnchors(description)}
-            </RawContent>
-          )}
+      <div className="action-card__body">
+        {!!description && (
+          <RawContent
+            mix="action-card__description"
+          >
+            {withHeaderAnchors(description)}
+          </RawContent>
+        )}
 
-          {!!hrefVariables && (
-            <div className="action-card__content">
-              <Parameters params={hrefVariables}/>
-            </div>
-          )}
-        </div>
-      )}
+        {!!hrefVariables && (
+          <Parameters params={hrefVariables} mix="action-card__content"/>
+        )}
+
+        <TransitionContainer
+          transactions={action.content.filter(el => !isCopy(el))}
+          transitionProps={{
+            mix: 'action-card__content',
+          }}
+        />
+      </div>
     </div>
   );
 };
@@ -93,5 +97,9 @@ ActionCard.propTypes = {
   location: PropTypes.object,
   parentHash: PropTypes.string.isRequired,
 };
+
+function isCopy(item) {
+  return item.element === 'copy';
+}
 
 export default ActionCard;
