@@ -31,12 +31,6 @@ const get = (...path) => {
   return { from };
 };
 
-const extractTransactionMethod = transition => {
-  const transactions = transition.content.filter(i => i.element !== 'copy');
-  const method = transactions.length > 0 ? transactions[0].content[0].attributes.method : '';
-  return method.content || method;
-};
-
 const extractAttributeData = (attribute, disabledExample = false) => {
   const typeAlias = {
     select: 'One of',
@@ -205,7 +199,6 @@ function parseTextWithCustomBlocks(text) {
 }
 
 export {
-  extractTransactionMethod,
   extractAttributeData,
   getAttributeChildren,
   get,

@@ -1,6 +1,6 @@
 import RawContent from 'app/components/raw-content';
 import Link from 'app/components/link';
-import { get, withHeaderAnchors } from 'app/common/utils/helpers';
+import { withHeaderAnchors } from 'app/common/utils/helpers';
 import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 
 const MessageCard = (props) => {
@@ -11,9 +11,10 @@ const MessageCard = (props) => {
     index,
   } = props;
 
-  const title = get('meta', 'title', 'content').from(message);
-  const descriptionEl = message.content.find(el => el.element === 'copy');
-  const description = get('content').from(descriptionEl);
+  const {
+    title,
+    description,
+  } = message;
 
   const presetHash = description && hashFromComment(description);
   const mainHash = title || String(index + 1);

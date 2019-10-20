@@ -1,5 +1,5 @@
 import { SlideToggle } from 'react-slide-toggle';
-import { extractTransactionMethod as extractMethod, get } from 'app/common/utils/helpers/';
+import { get } from 'app/common/utils/helpers';
 import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 
 import CollapsibleMenuItem from 'app/components/collapsible-menu-item';
@@ -52,7 +52,7 @@ class ResourceGroup extends React.Component {
       const nextLevel = level + 1;
       const actualIndex = descriptionSection ? index : (index + 1);
       let hasSubmenu = level < MAX_NESTING_LEVEL && !!item.content && item.content.length > 0;
-      const href = get('attributes', 'href', 'content').from(item);
+      const href = item.attributes.href;
       let title = get('meta', 'title', 'content').from(item);
       let badge = null;
       let prefix = '';
@@ -76,7 +76,7 @@ class ResourceGroup extends React.Component {
           prefix = 'resource';
         },
         transition: () => {
-          const method = extractMethod(item);
+          const method = item.attributes.method;
           const hashFriendlyHref = href.slice(1).replace(/\//g, '-');
           badge = <MethodBadge method={method} mix="menu__item-icon"/>;
           mainHash = title ? createHash(`${title} ${method}`) : createHash(`${hashFriendlyHref} ${method}`);

@@ -1,7 +1,7 @@
 import RawContent from 'app/components/raw-content';
 import Link from 'app/components/link';
 import Parameters from 'app/components/parameters';
-import { get, extractTransactionMethod, withHeaderAnchors } from 'app/common/utils/helpers';
+import { get, withHeaderAnchors } from 'app/common/utils/helpers';
 import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 import formatHref from 'app/common/utils/helpers/formatHref';
 
@@ -12,12 +12,12 @@ const ActionCard = (props) => {
     parentHash,
   } = props;
 
-  const href = get('attributes', 'href', 'content').from(action) || props.href;
-  const hrefVariables = get('attributes', 'hrefVariables', 'content').from(action);
+  const href = action.attributes.href || props.href;
+  const hrefVariables = action.attributes.hrefVariables;
   const title = get('meta', 'title', 'content').from(action);
   const descriptionEl = action.content.find(el => el.element === 'copy');
   const description = get('content').from(descriptionEl);
-  const method = props.method || extractTransactionMethod(action);
+  const method = action.attributes.method || props.method;
   const hashFriendlyHref = href.slice(1).replace(/\//g, '-');
 
   const presetHash = description && hashFromComment(description);
