@@ -17,7 +17,13 @@ const renderAndServe = async (inputFileName, port, host) => {
 
     watcher.on('change', async (path) => {
       console.log(`Updated ${path}`);
-      const [newRefractData, newFilePaths] = await renderRefract(inputFileName);
+      let newRefractData;
+      let newFilePaths;
+      try {
+        [newRefractData, newFilePaths] = await renderRefract(inputFileName);
+      } catch (e) {
+        console.error(e);
+      }
       refract = newRefractData;
       browserSync.reload();
       watcher.close();
@@ -25,10 +31,15 @@ const renderAndServe = async (inputFileName, port, host) => {
     });
   };
 
-  const [refractData, filePaths] = await renderRefract(inputFileName);
+  let refractData;
+  let filePaths;
+  try {
+    [refractData, filePaths] = await renderRefract(inputFileName);
+  } catch (e) {
+    console.error(e);
+  }
   const isFree = await isPortFree(port);
   refract = refractData;
-
   if (!isFree) {
     throw new Error(`Error starting server. Port ${port} is busy`);
   }

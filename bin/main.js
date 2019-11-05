@@ -19,12 +19,11 @@ const createRefract = inputFileName => promisify(crafter.parseFile)(inputFileNam
       const ast = JSON.stringify(result.toRefract());
       const [hasError, error] = astHasError(result);
       if (hasError) {
-        console.error(`Crafter error: ${error}`);
-        return Promise.resolve([ast, filePaths]);
+        return Promise.reject(new Error(`Crafter error: ${error}`));
       }
       return Promise.resolve([ast, filePaths]);
     } catch (e) {
-      return Promise.reject(e);
+      return Promise.reject(errMessage('Error parsing input', e));
     }
   });
 
@@ -46,7 +45,7 @@ const sendStaticFile = async (outputFileName, refractData) => {
 
 const basicRenderRefract = async (inputFileName, processResult) => {
   const [refract, filePaths] = await createRefract(inputFileName)
-    .catch(error => Promise.reject(errMessage('Error parsing input', error)));
+    .catch(error => Promise.reject(error));
 
   const refractData = processResult ? processResult(refract) : refract;
 
