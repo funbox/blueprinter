@@ -41,7 +41,7 @@ class ResourceGroupSection extends React.PureComponent {
           <div className="resource-group-section__content">
             {group.content
               .filter(gItem => gItem.element !== 'copy')
-              .map(gItem => (
+              .map((gItem, gIndex) => (
                 gItem.element === 'message' ? (
                   <ResourceGroupSection__Message
                     id={gItem.id}
@@ -51,12 +51,14 @@ class ResourceGroupSection extends React.PureComponent {
                       message={gItem}
                       parentHash={hash}
                       title={title}
+                      index={gIndex}
                     />
                   </ResourceGroupSection__Message>
                 ) : (
                   <Resource
                     parentHash={hash}
                     resource={gItem}
+                    index={gIndex}
                     key={`resource-${gItem.meta.title.content}`}
                   />
                 )

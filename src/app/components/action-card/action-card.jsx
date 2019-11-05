@@ -17,9 +17,11 @@ const ActionCard = (props) => {
   const descriptionEl = action.content.find(el => el.element === 'copy');
   const description = get('content').from(descriptionEl);
   const method = props.method || extractTransactionMethod(action);
+  const hashFriendlyHref = href.slice(1).replace(/\//g, '-');
 
   const presetHash = description && hashFromComment(description);
-  const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(`${title || props.title} ${method}`));
+  const mainHash = title ? createHash(`${title} ${method}`) : createHash(`${hashFriendlyHref} ${method}`);
+  const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, mainHash);
 
   return (
     <div
@@ -68,7 +70,6 @@ ActionCard.propTypes = {
     attributes: PropTypes.object,
   }),
   href: PropTypes.string,
-  title: PropTypes.string,
   method: PropTypes.string,
   location: PropTypes.object,
   parentHash: PropTypes.string.isRequired,

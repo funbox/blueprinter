@@ -8,6 +8,7 @@ const MessageCard = (props) => {
     message,
     location,
     parentHash,
+    index,
   } = props;
 
   const title = get('meta', 'title', 'content').from(message);
@@ -15,7 +16,8 @@ const MessageCard = (props) => {
   const description = get('content').from(descriptionEl);
 
   const presetHash = description && hashFromComment(description);
-  const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(title || props.title));
+  const mainHash = title || String(index + 1);
+  const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(mainHash));
 
   return (
     <div
@@ -55,7 +57,7 @@ MessageCard.propTypes = {
     content: PropTypes.array,
     attributes: PropTypes.object,
   }),
-  title: PropTypes.string,
+  index: PropTypes.number.isRequired,
   location: PropTypes.object,
   parentHash: PropTypes.string.isRequired,
 };

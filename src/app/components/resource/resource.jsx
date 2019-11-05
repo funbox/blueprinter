@@ -11,20 +11,21 @@ const DEFAULT_TITLE = 'Resource';
 class Resource extends React.Component {
   render() {
     const { route } = this.context.router;
-    const { resource, parentHash } = this.props;
+    const { index, resource, parentHash } = this.props;
 
     const { content } = resource;
     const href = get('attributes', 'href', 'content').from(resource);
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
-    const title = get('meta', 'title', 'content').from(resource) || DEFAULT_TITLE;
+    const title = get('meta', 'title', 'content').from(resource);
 
     const presetHash = description && hashFromComment(description);
-    const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(title));
+    const mainHash = title ? createHash(title) : String(index + 1);
+    const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, mainHash);
 
     return (
       <section className="resource" id={hash}>
         <h3 className="resource__heading">
-          {title}
+          {title || DEFAULT_TITLE}
           <Anchor
             mix="resource__anchor"
             hash={hash}
@@ -41,7 +42,7 @@ class Resource extends React.Component {
           <div className="resource__content">
             {content
               .filter(rItem => rItem.element !== 'copy')
-              .map(rItem => (
+              .map((rItem, rIndex) => (
                 rItem.element === 'message'
                   ? (
                     <Resource__Action id={rItem.id} key={`resource-action-${rItem.id}`}>
@@ -50,7 +51,7 @@ class Resource extends React.Component {
                         key={`message-${rItem.id}`}
                         parentHash={hash}
                         href={href}
-                        title={title}
+                        index={rIndex}
                       />
                     </Resource__Action>
                   ) : (
@@ -60,7 +61,6 @@ class Resource extends React.Component {
                         key={`action-${rItem.id}`}
                         parentHash={hash}
                         href={href}
-                        title={title}
                       />
                     </Resource__Action>
                   )
@@ -84,6 +84,7 @@ Resource.propTypes = {
     content: PropTypes.array,
   }),
   parentHash: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 Resource.contextTypes = {
