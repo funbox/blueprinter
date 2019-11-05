@@ -1,12 +1,18 @@
 import uniqid from 'uniqid';
+import { GROUP_DEFAULT_TITLE, RESOURCE_DEFAULT_TITLE } from 'app/constants/defaults';
+
 import { get, htmlFromText } from './index';
 
 import categories from './categories';
 import refactorSource, { refactorMessage } from './refactorAction';
+import { createHash, combineHashes, createRoute, combineRoutes } from './hash';
 
 const groupForStandaloneResources = {
   element: 'category',
   content: [],
+  title: GROUP_DEFAULT_TITLE,
+  hash: createHash(GROUP_DEFAULT_TITLE),
+  route: createRoute(GROUP_DEFAULT_TITLE),
 };
 
 const parseSourceFile = ({ content }) => {
@@ -22,6 +28,8 @@ const parseSourceFile = ({ content }) => {
   }
 
   const source = content[0];
+  const resources = [];
+  const actions = [];
 
   const topLevelDescription = source.content.find(i => i.element === 'copy');
   const topLevelDescriptionElement = topLevelDescription ? htmlFromText(topLevelDescription.content) : null;
@@ -70,12 +78,39 @@ const parseSourceFile = ({ content }) => {
     categories.resourceGroupArray.unshift(groupForStandaloneResources);
   }
 
-  const groups = categories.resourceGroupArray.map(group => {
-    group.content = group.content.map(groupChild => {
+  const groups = categories.resourceGroupArray.map((group, gIndex) => {
+    const groupTitle = get('meta', 'title', 'content').from(group) || `${GROUP_DEFAULT_TITLE} ${gIndex}`;
+    const groupHash = createHash(groupTitle);
+    const groupRoute = createRoute(groupTitle);
+    const groupMeta = {
+      title: groupTitle,
+      hash: groupHash,
+      route: groupRoute,
+    };
+
+    group.hash = groupHash;
+    group.route = groupRoute;
+    group.title = groupTitle;
+
+    group.content = group.content.map((groupChild, rIndex) => {
       if (groupChild.element === 'copy') return groupChild;
+
+      const resourceTitle = get('meta', 'title', 'content').from(groupChild) || `${RESOURCE_DEFAULT_TITLE} ${rIndex}`;
+      const resourceHref = get('attributes', 'href', 'content').from(groupChild);
+      const resourceHash = combineHashes(groupHash, createHash(resourceTitle));
+      const resourceRoute = combineRoutes(groupRoute, createRoute(resourceTitle));
+
+      groupChild.hash = resourceHash;
+      groupChild.route = resourceRoute;
+      groupChild.title = resourceTitle;
+
+
       if (groupChild.element === 'message') {
-        groupChild.id = uniqid.time();
-        return refactorMessage(groupChild);
+        const message = refactorMessage(groupChild);
+        message.id = uniqid.time();
+        message.parentGroup = groupMeta;
+        resources.push(message);
+        return message;
       }
 
       groupChild.content = groupChild.content.map(resourceChild => {
@@ -86,9 +121,25 @@ const parseSourceFile = ({ content }) => {
 
         resourceChild.attributes = { ...groupChild.attributes, ...resourceChild.attributes };
         resourceChild.id = uniqid.time();
-        return refactorSource(resourceChild);
+
+        const action = refactorSource(resourceChild);
+
+        action.hash = combineHashes(resourceHash, action.hash);
+        action.route = combineRoutes(resourceRoute, action.route);
+        action.parentResource = {
+          title: resourceTitle,
+          href: resourceHref,
+          hash: resourceHash,
+          route: resourceRoute,
+          group: groupMeta,
+        };
+        actions.push(action);
+        return action;
       });
 
+      groupChild.parentGroup = groupMeta;
+
+      resources.push(groupChild);
       return groupChild;
     });
 
@@ -98,6 +149,8 @@ const parseSourceFile = ({ content }) => {
   return {
     topLevelMeta,
     groups,
+    resources,
+    actions,
   };
 };
 

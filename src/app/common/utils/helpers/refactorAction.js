@@ -1,6 +1,7 @@
 import deepEqual from 'deep-equal';
+import { MESSAGE_DEFAULT_TITLE } from 'app/constants/defaults';
 import { get } from './index';
-
+import { createHash, createRoute } from './hash';
 import categories from './categories';
 
 const standardTypes = ['number', 'string', 'boolean', 'array', 'enum', 'object'];
@@ -88,17 +89,25 @@ const resolveInheritance = (valueMember, parent) => {
   return valueMember;
 };
 
-export const refactorMessage = (message) => ({
-  id: message.id,
-  element: message.element,
-  meta: message.meta,
-  type: 'message',
-  description: getDescription(message),
-  attributes: getDataAttributes(message),
-  body: getBody(message),
-  schema: getSchema(message),
-  title: get('meta', 'title', 'content').from(message),
-});
+export const refactorMessage = (message) => {
+  const title = get('meta', 'title', 'content').from(message) || MESSAGE_DEFAULT_TITLE;
+  const hash = message.hash || createHash(title);
+  const route = message.route || createRoute(title);
+
+  return ({
+    id: message.id,
+    element: message.element,
+    meta: message.meta,
+    type: 'message',
+    description: getDescription(message),
+    attributes: getDataAttributes(message),
+    body: getBody(message),
+    schema: getSchema(message),
+    hash,
+    route,
+    title,
+  });
+};
 
 export const refactorAction = (action) => {
   let method = '';
@@ -150,13 +159,24 @@ export const refactorAction = (action) => {
     return acc;
   }, []);
 
+  const href = get('attributes', 'href', 'content').from(action);
+  const hashFriendlyHref = href.slice(1).replace(/\//g, '-');
+  const title = get('meta', 'title', 'content').from(action);
+  const displayedTitle = title || `${method.toUpperCase()} ${href}`;
+  const hashBase = title ? `${title} ${method}` : `${hashFriendlyHref} ${method}`;
+  const hash = createHash(hashBase);
+  const route = createRoute(hashBase);
+
   return {
     id: action.id,
     meta: action.meta,
+    title: displayedTitle,
+    hash,
+    route,
     element: action.element,
     attributes: {
-      href: get('attributes', 'href', 'content').from(action),
       hrefVariables: get('attributes', 'hrefVariables', 'content').from(action),
+      href,
       method,
     },
     content: copyElements.concat(transactions),
