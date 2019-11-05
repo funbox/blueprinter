@@ -4,6 +4,11 @@ import { get, htmlFromText } from './index';
 import categories from './categories';
 import refactorSource, { refactorMessage } from './refactorAction';
 
+const groupForStandaloneResources = {
+  element: 'category',
+  content: [],
+};
+
 const parseSourceFile = ({ content }) => {
   const [error, warnings] = detectErrorsAndWarnings(content);
 
@@ -17,17 +22,6 @@ const parseSourceFile = ({ content }) => {
   }
 
   const source = content[0];
-
-  const groupForStandaloneResources = {
-    element: 'category',
-    content: [],
-  };
-
-  const getHost = () => {
-    const metadata = get('attributes', 'metadata', 'content').from(source);
-    const hostMetaElement = metadata && metadata.find(item => item.content.key.content === 'HOST');
-    return hostMetaElement ? hostMetaElement.content.value.content : null;
-  };
 
   const topLevelDescription = source.content.find(i => i.element === 'copy');
   const topLevelDescriptionElement = topLevelDescription ? htmlFromText(topLevelDescription.content) : null;
@@ -150,4 +144,10 @@ function extractAnnotationInfo(annotation) {
     file: sourceFile,
   };
   return { text, details: positionDetails, id: uniqid.time() };
+}
+
+function getHost(source) {
+  const metadata = get('attributes', 'metadata', 'content').from(source);
+  const hostMetaElement = metadata && metadata.find(item => item.content.key.content === 'HOST');
+  return hostMetaElement ? hostMetaElement.content.value.content : null;
 }
