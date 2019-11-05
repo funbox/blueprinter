@@ -48,6 +48,7 @@ class ResourceGroup extends React.Component {
 
       const itemType = item.element;
       const nextLevel = level + 1;
+      const actualIndex = descriptionSection ? index : (index + 1);
       let hasSubmenu = level < MAX_NESTING_LEVEL && !!item.content && item.content.length > 0;
       const href = get('attributes', 'href', 'content').from(item);
       let title = get('meta', 'title', 'content').from(item);
@@ -64,8 +65,7 @@ class ResourceGroup extends React.Component {
         }
       }
       const presetHash = description && hashFromComment(description);
-      const hashBase = presetHash || title;
-      let mainHash = createHash(hashBase);
+      let mainHash = title ? createHash(title) : String(actualIndex);
 
       const typeSpecificModifier = {
         resource: () => {
@@ -73,9 +73,10 @@ class ResourceGroup extends React.Component {
         },
         transition: () => {
           const method = extractMethod(item);
+          const hashFriendlyHref = href.slice(1).replace(/\//g, '-');
           badge = <MethodBadge method={method} mix="menu__item-icon"/>;
+          mainHash = title ? createHash(`${title} ${method}`) : createHash(`${hashFriendlyHref} ${method}`);
           title = title || `${method.toUpperCase()} ${href}`;
-          if (!presetHash) mainHash = createHash(`${hashBase} ${method}`);
         },
         message: () => {
           title = title || 'Message';
@@ -88,7 +89,7 @@ class ResourceGroup extends React.Component {
         typeSpecificModifier[itemType]();
       }
 
-      const hash = presetHash ? mainHash : combineHashes(parentHash, mainHash);
+      const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, mainHash);
 
       const itemMods = {
         ...(level ? { level, submenu: true } : {}),
