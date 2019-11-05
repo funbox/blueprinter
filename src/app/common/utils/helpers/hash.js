@@ -1,4 +1,5 @@
 const HASH_DELIMITER = '-';
+const ROUTE_DELIMITER = '/';
 
 const hashFromComment = (comment) => {
   const anchorRegExp = /<!--\s*anchor:\s*([^\s]+)\s*-->/;
@@ -13,4 +14,16 @@ const createHash = (title, parentTitle = '') => (
 
 const combineHashes = (prefixHash, hash) => (prefixHash + HASH_DELIMITER + hash);
 
-export { hashFromComment, createHash, combineHashes };
+const createRoute = (title) => (
+  ROUTE_DELIMITER.concat(createHash(title))
+);
+
+const combineRoutes = (parentRoute, route) => (parentRoute + route);
+
+export {
+  hashFromComment,
+  createHash,
+  combineHashes,
+  createRoute,
+  combineRoutes,
+};
