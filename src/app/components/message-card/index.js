@@ -1,7 +1,4 @@
-import { withRouter } from 'react-router-dom';
-import MessageCard from './message-card';
-
-export default withRouter(MessageCard);
+export { default } from './message-card';
 
 require('./__description/message-card__description.scss');
 require('./__heading/message-card__heading.scss');

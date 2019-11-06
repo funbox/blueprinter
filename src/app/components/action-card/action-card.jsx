@@ -3,35 +3,24 @@ import Link from 'app/components/link';
 import Parameters from 'app/components/parameters';
 import TransitionContainer from 'app/components/transition-container';
 import { get, withHeaderAnchors } from 'app/common/utils/helpers';
-import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 import formatHref from 'app/common/utils/helpers/formatHref';
 
 const ActionCard = (props) => {
   const {
     action,
-    location,
-    parentHash,
   } = props;
 
-  const href = action.attributes.href || props.href;
-  const hrefVariables = action.attributes.hrefVariables;
-  const title = get('meta', 'title', 'content').from(action);
+  const { route, title, attributes } = action;
+  const href = attributes.href || props.href;
+  const hrefVariables = attributes.hrefVariables;
   const descriptionEl = action.content.find(isCopy);
   const description = get('content').from(descriptionEl);
-  const method = action.attributes.method || props.method;
-  const hashFriendlyHref = href.slice(1).replace(/\//g, '-');
+  const method = attributes.method || props.method;
 
-  const presetHash = description && hashFromComment(description);
-  const mainHash = title ? createHash(`${title} ${method}`) : createHash(`${hashFriendlyHref} ${method}`);
-  const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, mainHash);
-  const hashWithPrefix = presetHash ? hash : combineHashes('action', hash);
   const formattedHref = hrefVariables ? formatHref(href, hrefVariables) : href;
 
   return (
-    <div
-      className={b('action-card', { mods: { type: method } })}
-      id={hashWithPrefix}
-    >
+    <div className={b('action-card', { mods: { type: method } })}>
       <div className="action-card__heading">
         {
           !!title && (
@@ -44,7 +33,7 @@ const ActionCard = (props) => {
         <p className="action-card__method-href-container">
           <Link
             mix="action-card__method"
-            to={{ hash: hashWithPrefix, pathname: location.pathname }}
+            to={route}
           >
             {method}
           </Link>
@@ -94,8 +83,6 @@ ActionCard.propTypes = {
   }),
   href: PropTypes.string,
   method: PropTypes.string,
-  location: PropTypes.object,
-  parentHash: PropTypes.string.isRequired,
 };
 
 function isCopy(item) {

@@ -1,8 +1,4 @@
-import { withRouter } from 'react-router-dom';
-
-import ActionCard from './action-card';
-
-export default withRouter(ActionCard);
+export { default } from './action-card';
 
 require('./__heading/action-card__heading.scss');
 require('./__description/action-card__description.scss');

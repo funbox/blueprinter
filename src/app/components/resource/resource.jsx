@@ -3,35 +3,23 @@ import Anchor from 'app/components/anchor';
 import ActionCard from 'app/components/action-card';
 import MessageCard from 'app/components/message-card';
 import { get, withHeaderAnchors } from 'app/common/utils/helpers';
-import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 import Resource__Action from './__action';
-
-const DEFAULT_TITLE = 'Resource';
 
 class Resource extends React.Component {
   render() {
-    const { route } = this.context.router;
-    const { index, resource, parentHash } = this.props;
+    const { resource } = this.props;
 
-    const { content, element } = resource;
+    const { content, title, hash } = resource;
     const href = get('attributes', 'href', 'content').from(resource);
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
-    const title = get('meta', 'title', 'content').from(resource);
-    const prefix = element === 'category' ? 'subgroup' : 'resource';
-
-    const presetHash = description && hashFromComment(description);
-    const mainHash = title ? createHash(title) : String(index + 1);
-    const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, mainHash);
-    const hashWithPrefix = presetHash ? hash : combineHashes(prefix, hash);
 
     return (
-      <section className={b('resource', this.props)} id={hashWithPrefix}>
+      <section className={b('resource', this.props)} id={hash}>
         <h3 className="resource__heading">
-          {title || DEFAULT_TITLE}
+          {title}
           <Anchor
             mix="resource__anchor"
-            hash={hashWithPrefix}
-            pathname={route.location.pathname}
+            hash={hash}
           />
         </h3>
         <div className="resource__body">
@@ -85,12 +73,6 @@ Resource.propTypes = {
     meta: PropTypes.object,
     content: PropTypes.array,
   }),
-  parentHash: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
-};
-
-Resource.contextTypes = {
-  router: PropTypes.object,
 };
 
 export default Resource;
