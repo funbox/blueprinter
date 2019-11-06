@@ -1,6 +1,6 @@
 import { SlideToggle } from 'react-slide-toggle';
 import { getDescriptionHeaders } from 'app/common/utils/helpers';
-import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
+import { hashFromComment, createHash } from 'app/common/utils/helpers/hash';
 
 import CollapsibleMenuItem from 'app/components/collapsible-menu-item';
 import Link from 'app/components/link';
@@ -8,9 +8,8 @@ import Menu, { Menu__Item } from 'app/components/menu';
 import MethodBadge from 'app/components/method-badge';
 
 const MAX_NESTING_LEVEL = 3;
-const DEFAULT_TITLE = 'Resource Group';
 
-let prevHash = '';
+let prevPathname = '';
 
 class ResourceGroup extends React.Component {
   constructor(props) {
@@ -21,22 +20,14 @@ class ResourceGroup extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    const { group } = nextProps;
+    const { group: { route: groupRoute } } = nextProps;
     const { route } = nextContext.router;
-    const title = get('meta', 'title', 'content').from(group) || DEFAULT_TITLE;
-
-    const descriptionEl = group.content.find(el => el.element === 'copy');
-    const presetHash = descriptionEl && hashFromComment(descriptionEl.content);
-    const hash = presetHash ? createHash(presetHash) : createHash(title);
-    const hashWithPrefix = presetHash ? hash : combineHashes('group', hash);
     const stateChanged = this.state.collapsed !== nextState.collapsed;
-
-    return stateChanged || `#${hashWithPrefix}` === route.location.hash;
+    return stateChanged || groupRoute === route.location.pathname;
   }
 
   buildContentList(content, options = {}) {
-    const { level, parentHash = '' } = options;
-    const { route } = this.context.router;
+    const { level, parentRoute = '' } = options;
 
     let descriptionSection;
 
@@ -48,58 +39,26 @@ class ResourceGroup extends React.Component {
         return acc;
       }
 
+      const { title, route } = item;
       const itemType = item.element;
       const nextLevel = level + 1;
-      const actualIndex = descriptionSection ? index : (index + 1);
       let hasSubmenu = level < MAX_NESTING_LEVEL && !!item.content && item.content.length > 0;
-      const href = item.attributes.href;
-      let title = get('meta', 'title', 'content').from(item);
       let badge = null;
-      let prefix = '';
-
-      const descriptionEl = item.content.find(el => el.element === 'copy');
-      let description;
-      if (descriptionEl) {
-        const descriptionHeaders = getDescriptionHeaders(descriptionEl.content);
-        if (descriptionHeaders.length > 0) {
-          description = descriptionEl.content.slice(0, descriptionHeaders[0].index - 1);
-        } else {
-          description = descriptionEl.content;
-        }
-      }
-      const presetHash = description && hashFromComment(description);
-      let mainHash = title ? createHash(title) : String(actualIndex);
 
       const typeSpecificModifier = {
-        resource: () => {
-          title = title || href;
-          prefix = 'resource';
-        },
         transition: () => {
           const method = item.attributes.method;
-          const hashFriendlyHref = href.slice(1).replace(/\//g, '-');
           badge = <MethodBadge method={method} mix="menu__item-icon"/>;
-          mainHash = title ? createHash(`${title} ${method}`) : createHash(`${hashFriendlyHref} ${method}`);
-          title = title || `${method.toUpperCase()} ${href}`;
-          prefix = 'action';
         },
         message: () => {
-          title = title || 'Message';
           hasSubmenu = false;
           badge = <MethodBadge method="message" mix="menu__item-icon"/>;
-          prefix = 'message';
-        },
-        category: () => {
-          prefix = 'subgroup';
         },
       };
 
       if (typeSpecificModifier[itemType]) {
         typeSpecificModifier[itemType]();
       }
-
-      const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, mainHash);
-      const hashWithPrefix = presetHash ? hash : combineHashes(prefix, hash);
 
       const itemMods = {
         ...(level ? { level } : {}),
@@ -113,10 +72,10 @@ class ResourceGroup extends React.Component {
             mods={itemMods}
             key={`${itemType}-${index}`}
             text={title}
-            to={{ hash: hashWithPrefix, pathname: route.location.pathname }}
+            to={route}
             submenu={this.buildContentList(item.content, {
               level: nextLevel,
-              parentHash: hash,
+              parentRoute: route,
             })}
           />
         ) : (
@@ -124,7 +83,7 @@ class ResourceGroup extends React.Component {
             mods={itemMods}
             key={`${itemType}-${index}`}
             text={title}
-            to={{ hash: hashWithPrefix, pathname: route.location.pathname }}
+            to={route}
           >
             {badge}
           </Menu__Item>
@@ -153,7 +112,7 @@ class ResourceGroup extends React.Component {
             mods={{ level: 2 }}
             key={`header-${item.title}`}
             text={item.title}
-            to={{ hash, pathname: route.location.pathname }}
+            to={`${parentRoute}#${hash}`}
           />
         );
       });
@@ -168,39 +127,21 @@ class ResourceGroup extends React.Component {
     );
   }
 
-  getDescritionHeaders(description) {
-    const descriptionHeaders = [];
-    const regex = /#{2,}\s?(.+)\n?/g;
-    let match = regex.exec(description);
-    while (match) {
-      descriptionHeaders.push({ title: match[1], index: match.index });
-      match = regex.exec(description);
-    }
-
-    return descriptionHeaders;
-  }
-
   toggleClass() {
     this.setState(prevState => ({ ...prevState, collapsed: !prevState.collapsed }));
   }
 
   render() {
-    const { route } = this.context.router;
     const { group } = this.props;
     const { collapsed } = this.state;
     const hasContent = !!group.content && group.content.length > 0;
 
-    const title = get('meta', 'title', 'content').from(group) || DEFAULT_TITLE;
-
-    const descriptionEl = group.content.find(el => el.element === 'copy');
-    const presetHash = descriptionEl && hashFromComment(descriptionEl.content);
-    const hash = presetHash ? createHash(presetHash) : createHash(title);
-    const hashWithPrefix = presetHash ? hash : combineHashes('group', hash);
+    const { title, route } = group;
 
     const needJumpToGroup = () => {
-      const currentHash = decodeURIComponent(window.location.hash);
-      const need = currentHash !== prevHash;
-      prevHash = currentHash;
+      const currentPathname = decodeURIComponent(window.location.pathname);
+      const need = currentPathname !== prevPathname;
+      prevPathname = currentPathname;
       return need;
     };
 
@@ -222,12 +163,12 @@ class ResourceGroup extends React.Component {
             >
               <Link
                 mix="resource-group__title"
-                to={{ hash: hashWithPrefix, pathname: route.location.pathname }}
+                to={route}
               >{title}</Link>
             </h3>
 
             <div className="resource-group__content" ref={setCollapsibleElement}>
-              {hasContent ? this.buildContentList(group.content, { level: 2, parentHash: hash }) : null}
+              {hasContent ? this.buildContentList(group.content, { level: 2, parentRoute: route }) : null}
             </div>
           </div>
         )}
