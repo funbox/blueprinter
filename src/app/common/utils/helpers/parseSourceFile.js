@@ -1,11 +1,11 @@
 import uniqid from 'uniqid';
-import { GROUP_DEFAULT_TITLE, RESOURCE_DEFAULT_TITLE } from 'app/constants/defaults';
+import { GROUP_DEFAULT_TITLE } from 'app/constants/defaults';
 
-import { get, htmlFromText } from './index';
+import { get, getDescriptionHeaders, htmlFromText } from './index';
 
 import categories from './categories';
 import refactorSource, { refactorMessage } from './refactorAction';
-import { createHash, combineHashes, createRoute, combineRoutes } from './hash';
+import { createHash, combineHashes, createRoute, combineRoutes, hashFromComment } from './hash';
 
 const groupForStandaloneResources = {
   element: 'category',
@@ -79,9 +79,15 @@ const parseSourceFile = ({ content }) => {
   }
 
   const groups = categories.resourceGroupArray.map((group, gIndex) => {
-    const groupTitle = get('meta', 'title', 'content').from(group) || `${GROUP_DEFAULT_TITLE} ${gIndex}`;
-    const groupHash = createHash(groupTitle);
-    const groupRoute = createRoute(groupTitle);
+    const groupTitle = get('meta', 'title', 'content').from(group) || `${GROUP_DEFAULT_TITLE} ${gIndex + 1}`;
+    const groupDescriptionElement = group.content.find(el => el.element === 'copy');
+    const groupDescription = extractDescription(groupDescriptionElement);
+
+    const gPresetHash = groupDescription && hashFromComment(groupDescription);
+    const gHashBase = gPresetHash || groupTitle;
+
+    const groupHash = createHash(gHashBase);
+    const groupRoute = createRoute(gHashBase);
     const groupMeta = {
       title: groupTitle,
       hash: groupHash,
@@ -95,15 +101,20 @@ const parseSourceFile = ({ content }) => {
     group.content = group.content.map((groupChild, rIndex) => {
       if (groupChild.element === 'copy') return groupChild;
 
-      const resourceTitle = get('meta', 'title', 'content').from(groupChild) || `${RESOURCE_DEFAULT_TITLE} ${rIndex}`;
       const resourceHref = get('attributes', 'href', 'content').from(groupChild);
-      const resourceHash = combineHashes(groupHash, createHash(resourceTitle));
-      const resourceRoute = combineRoutes(groupRoute, createRoute(resourceTitle));
+      const resourceTitle = get('meta', 'title', 'content').from(groupChild);
+      const resourceDescriptionElement = groupChild.content.find(el => el.element === 'copy');
+      const resourceDescription = extractDescription(resourceDescriptionElement);
+
+      const rActualIndex = groupDescriptionElement ? rIndex : (rIndex + 1);
+      const rMainHash = resourceTitle || String(rActualIndex);
+      const rPresetHash = resourceDescription && hashFromComment(resourceDescription);
+      const resourceHash = rPresetHash ? createHash(rPresetHash) : combineHashes(groupHash, createHash(rMainHash));
+      const resourceRoute = rPresetHash ? createRoute(rPresetHash) : combineRoutes(groupRoute, createRoute(rMainHash));
 
       groupChild.hash = resourceHash;
       groupChild.route = resourceRoute;
-      groupChild.title = resourceTitle;
-
+      groupChild.title = resourceTitle || resourceHref;
 
       if (groupChild.element === 'message') {
         const message = refactorMessage(groupChild);
@@ -123,11 +134,14 @@ const parseSourceFile = ({ content }) => {
         resourceChild.id = uniqid.time();
 
         const action = refactorSource(resourceChild);
+        const actionDescriptionElement = resourceChild.content.find(el => el.element === 'copy');
+        const actionDescription = extractDescription(actionDescriptionElement);
+        const aPresetHash = actionDescription && hashFromComment(actionDescription);
 
-        action.hash = combineHashes(resourceHash, action.hash);
-        action.route = combineRoutes(resourceRoute, action.route);
+        action.hash = aPresetHash ? createHash(aPresetHash) : combineHashes(resourceHash, action.hash);
+        action.route = aPresetHash ? createRoute(aPresetHash) : combineRoutes(resourceRoute, action.route);
         action.parentResource = {
-          title: resourceTitle,
+          title: resourceTitle || resourceHref,
           href: resourceHref,
           hash: resourceHash,
           route: resourceRoute,
@@ -197,6 +211,20 @@ function extractAnnotationInfo(annotation) {
     file: sourceFile,
   };
   return { text, details: positionDetails, id: uniqid.time() };
+}
+
+function extractDescription(descriptionElement) {
+  let description;
+
+  if (descriptionElement) {
+    const descriptionHeaders = getDescriptionHeaders(descriptionElement.content);
+    if (descriptionHeaders.length > 0) {
+      description = descriptionElement.content.slice(0, descriptionHeaders[0].index - 1);
+    } else {
+      description = descriptionElement.content;
+    }
+  }
+  return description;
 }
 
 function getHost(source) {
