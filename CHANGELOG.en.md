@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.24.1 (06.11.2019)
+
+* Fix resulting status of a build containing a Crafter error.
+
 ## 2.24.0 (17.10.2019)
 
 * Cancel collapsing of a resource and its only action in the navigation in the left column.
