@@ -8,6 +8,7 @@ import formatHref from 'app/common/utils/helpers/formatHref';
 const ActionCard = (props) => {
   const {
     action,
+    location,
   } = props;
 
   const { route, title, attributes } = action;
@@ -55,7 +56,7 @@ const ActionCard = (props) => {
           <RawContent
             mix="action-card__description"
           >
-            {withHeaderAnchors(description)}
+            {withHeaderAnchors(description, location.pathname)}
           </RawContent>
         )}
 
@@ -83,6 +84,9 @@ ActionCard.propTypes = {
   }),
   href: PropTypes.string,
   method: PropTypes.string,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
 };
 
 function isCopy(item) {

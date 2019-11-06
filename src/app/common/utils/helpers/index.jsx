@@ -87,7 +87,7 @@ const getAttributeChildren = attribute => {
   return (attributeType === 'enum' && get('attributes', 'enumerations', 'content').from(attribute)) || [];
 };
 
-const withHeaderAnchors = (description) => {
+const withHeaderAnchors = (description, pathname) => {
   const descriptionHeaders = [];
   const regex = /#{2,}\s?(.+)\n?/g;
   let match = regex.exec(description);
@@ -118,9 +118,16 @@ const withHeaderAnchors = (description) => {
       const childrenArray = React.Children.toArray(textElement.props.children);
 
       childrenArray[0] = childrenArray[0].concat(' ');
-      childrenArray.push(<Anchor title={hash} mods={{ for: 'description' }} key={`anchor-of-${text}`}/>);
+      childrenArray.push(
+        <Anchor
+          hash={hash}
+          pathname={pathname}
+          mods={{ for: 'description' }}
+          key={`anchor-of-${text}`}
+        />,
+      );
 
-      return React.cloneElement(textElement, { id: createHash(hash) }, childrenArray);
+      return React.cloneElement(textElement, { id: hash }, childrenArray);
     }
 
     return textElement;

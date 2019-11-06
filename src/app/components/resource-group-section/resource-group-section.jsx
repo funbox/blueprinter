@@ -5,7 +5,7 @@ import MessageCard from 'app/components/message-card';
 
 class ResourceGroupSection extends React.PureComponent {
   render() {
-    const { group } = this.props;
+    const { group, location } = this.props;
 
     const descriptionEl = group.content.find(el => el.element === 'copy');
     const description = get('content').from(descriptionEl);
@@ -18,7 +18,7 @@ class ResourceGroupSection extends React.PureComponent {
         <div className="resource-group-section__body">
           {!!description && (
             <RawContent mix="resource-group-section__description">
-              {withHeaderAnchors(description)}
+              {withHeaderAnchors(description, location.pathname)}
             </RawContent>
           )}
 
@@ -32,12 +32,14 @@ class ResourceGroupSection extends React.PureComponent {
                     title={group.title}
                     key={`resource-group-message-${gItem.id}`}
                     mix="resource-group-section__message"
+                    location={location}
                   />
                 ) : (
                   <Resource
                     resource={gItem}
                     key={`resource-${gItem.title}`}
                     mix="resource-group-section__resource"
+                    location={location}
                   />
                 )
               ))}
@@ -56,6 +58,9 @@ ResourceGroupSection.propTypes = {
   group: PropTypes.shape({
     title: PropTypes.string,
     content: PropTypes.array,
+  }),
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }),
 };
 

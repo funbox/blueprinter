@@ -6,6 +6,7 @@ import { withHeaderAnchors } from 'app/common/utils/helpers';
 const MessageCard = (props) => {
   const {
     message,
+    location,
   } = props;
 
   const {
@@ -38,7 +39,7 @@ const MessageCard = (props) => {
       <div className="message-card__body">
         {description && (
           <RawContent mix="message-card__description">
-            {withHeaderAnchors(description)}
+            {withHeaderAnchors(description, location.pathname)}
           </RawContent>
         )}
 
@@ -54,6 +55,9 @@ MessageCard.propTypes = {
     route: PropTypes.string,
     description: PropTypes.string,
     attributes: PropTypes.arrayOf(PropTypes.object),
+  }),
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }),
 };
 

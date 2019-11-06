@@ -6,7 +6,7 @@ import Resource__Action from './__action';
 
 class Resource extends React.Component {
   render() {
-    const { resource } = this.props;
+    const { resource, location } = this.props;
 
     const { content, title } = resource;
     const href = get('attributes', 'href', 'content').from(resource);
@@ -20,7 +20,7 @@ class Resource extends React.Component {
         <div className="resource__body">
           {!!description && (
             <RawContent mix="resource__description">
-              {withHeaderAnchors(description)}
+              {withHeaderAnchors(description, location.pathname)}
             </RawContent>
           )}
 
@@ -35,6 +35,7 @@ class Resource extends React.Component {
                         message={rItem}
                         key={`message-${rItem.id}`}
                         title={title}
+                        location={location}
                       />
                     </Resource__Action>
                   ) : (
@@ -43,6 +44,7 @@ class Resource extends React.Component {
                         action={rItem}
                         key={`action-${rItem.id}`}
                         href={href}
+                        location={location}
                       />
                     </Resource__Action>
                   )
@@ -63,6 +65,9 @@ Resource.propTypes = {
   resource: PropTypes.shape({
     title: PropTypes.string,
     content: PropTypes.array,
+  }),
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }),
 };
 
