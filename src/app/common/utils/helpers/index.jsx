@@ -198,10 +198,23 @@ function parseTextWithCustomBlocks(text) {
   return parsedMarkdown;
 }
 
+function getDescriptionHeaders(description) {
+  const descriptionHeaders = [];
+  const regex = /#{2,}\s?(.+)\n?/g;
+  let match = regex.exec(description);
+  while (match) {
+    descriptionHeaders.push({ title: match[1], index: match.index });
+    match = regex.exec(description);
+  }
+
+  return descriptionHeaders;
+}
+
 export {
   extractAttributeData,
   getAttributeChildren,
   get,
   htmlFromText,
   withHeaderAnchors,
+  getDescriptionHeaders,
 };

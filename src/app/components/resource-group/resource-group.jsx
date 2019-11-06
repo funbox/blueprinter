@@ -1,5 +1,5 @@
 import { SlideToggle } from 'react-slide-toggle';
-import { get } from 'app/common/utils/helpers';
+import { getDescriptionHeaders } from 'app/common/utils/helpers';
 import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 
 import CollapsibleMenuItem from 'app/components/collapsible-menu-item';
@@ -60,7 +60,7 @@ class ResourceGroup extends React.Component {
       const descriptionEl = item.content.find(el => el.element === 'copy');
       let description;
       if (descriptionEl) {
-        const descriptionHeaders = this.getDescritionHeaders(descriptionEl.content);
+        const descriptionHeaders = getDescriptionHeaders(descriptionEl.content);
         if (descriptionHeaders.length > 0) {
           description = descriptionEl.content.slice(0, descriptionHeaders[0].index - 1);
         } else {
@@ -134,7 +134,7 @@ class ResourceGroup extends React.Component {
     }, []);
 
     if (level === 2 && descriptionSection) {
-      const descriptionHeaders = this.getDescritionHeaders(descriptionSection.content);
+      const descriptionHeaders = getDescriptionHeaders(descriptionSection.content);
 
       const headerItems = descriptionHeaders.map((item, idx) => {
         const description = descriptionSection.content;
