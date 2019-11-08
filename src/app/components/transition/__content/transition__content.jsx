@@ -26,12 +26,14 @@ const Transition__Content = (props) => {
   const { headers, attributes, body, description, schema } = selectedData;
 
   const selectedDataId = availableData.indexOf(selectedData);
-  const examplesList = availableData.map((d, index) => (
-    {
-      content: (contentType === 'request' ? d.title : d.statusCode),
+  const examplesList = availableData.map((d, index) => {
+    const titleDescription = d.description ? ` – ${d.description.split('\n')[0].split('.')[0]}` : '';
+
+    return {
+      content: (contentType === 'request' ? d.title : `${d.statusCode}${titleDescription}`),
       selected: index === selectedDataId,
-    }
-  ));
+    };
+  });
 
   return (
     <div className="transition__content">

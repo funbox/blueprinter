@@ -4,6 +4,10 @@
   padding: $basePadding / 2;
   border: 1px solid #666;
   border-radius: 6px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover {
     cursor: pointer;
