@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.25.0 (08.11.2019)
+
+* Show first line of a request description in tabs header. 
+
 ## 2.24.1 (06.11.2019)
 
 * Fix resulting status of a build containing a Crafter error.
