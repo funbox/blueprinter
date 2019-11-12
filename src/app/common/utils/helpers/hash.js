@@ -15,7 +15,9 @@ const createHash = (title, parentTitle = '') => (
 const combineHashes = (prefixHash, hash) => (prefixHash + HASH_DELIMITER + hash);
 
 const createRoute = (title) => (
-  ROUTE_DELIMITER.concat(createHash(title))
+  ROUTE_DELIMITER.concat(createHash(title.replace(/\//g, ' ')))
+  // здесь можно было бы энкодить заголовок, но в ReactRouter это не работает, он декодит обратно
+  // https://github.com/ReactTraining/history/issues/505
 );
 
 const combineRoutes = (parentRoute, route) => (parentRoute + route);
