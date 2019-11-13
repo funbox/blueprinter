@@ -1,4 +1,5 @@
 import { SlideToggle } from 'react-slide-toggle';
+import { withRouter } from 'react-router-dom';
 import { getDescriptionHeaders } from 'app/common/utils/helpers';
 import { hashFromComment, createHash } from 'app/common/utils/helpers/hash';
 
@@ -19,15 +20,8 @@ class ResourceGroup extends React.Component {
     this.toggleClass = this.toggleClass.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    const { group: { route: groupRoute } } = nextProps;
-    const { route } = nextContext.router;
-    const stateChanged = this.state.collapsed !== nextState.collapsed;
-    return stateChanged || groupRoute === route.location.pathname;
-  }
-
   buildContentList(content, options = {}) {
-    const { level, parentRoute = '' } = options;
+    const { level, parentRoute = '', location } = options;
 
     let descriptionSection;
 
@@ -42,6 +36,7 @@ class ResourceGroup extends React.Component {
       const { title, route } = item;
       const itemType = item.element;
       const nextLevel = level + 1;
+      const selected = matchRoute(route, location.pathname);
       let hasSubmenu = level < MAX_NESTING_LEVEL && !!item.content && item.content.length > 0;
       let badge = null;
 
@@ -64,6 +59,7 @@ class ResourceGroup extends React.Component {
         ...(level ? { level } : {}),
         badged: !!badge,
         hasSubmenu,
+        selected,
       };
 
       const menuItem = hasSubmenu
@@ -76,6 +72,7 @@ class ResourceGroup extends React.Component {
             submenu={this.buildContentList(item.content, {
               level: nextLevel,
               parentRoute: route,
+              location,
             })}
           />
         ) : (
@@ -132,7 +129,7 @@ class ResourceGroup extends React.Component {
   }
 
   render() {
-    const { group } = this.props;
+    const { group, location } = this.props;
     const { collapsed } = this.state;
     const hasContent = !!group.content && group.content.length > 0;
 
@@ -145,6 +142,8 @@ class ResourceGroup extends React.Component {
       return need;
     };
 
+    const selected = matchRoute(route, location.pathname);
+
     return (
       <SlideToggle
         bestPerformance
@@ -153,7 +152,7 @@ class ResourceGroup extends React.Component {
         onExpanding={this.toggleClass}
       >
         {({ onToggle, setCollapsibleElement }) => (
-          <div className={b('resource-group', { mods: { collapsed } })}>
+          <div className={b('resource-group', { mods: { collapsed, selected } })}>
             <h3
               className="resource-group__heading"
               onClick={() => {
@@ -168,7 +167,11 @@ class ResourceGroup extends React.Component {
             </h3>
 
             <div className="resource-group__content" ref={setCollapsibleElement}>
-              {hasContent ? this.buildContentList(group.content, { level: 2, parentRoute: route }) : null}
+              {
+                hasContent && !collapsed
+                  ? this.buildContentList(group.content, { level: 2, parentRoute: route, location })
+                  : null
+              }
             </div>
           </div>
         )}
@@ -187,10 +190,14 @@ ResourceGroup.propTypes = {
     meta: PropTypes.object,
     content: PropTypes.array,
   }),
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
 };
 
-ResourceGroup.contextTypes = {
-  router: PropTypes.object,
-};
+export default withRouter(ResourceGroup);
 
-export default ResourceGroup;
+function matchRoute(route, pathname) {
+  const locationRegex = new RegExp(`^${route}.*`);
+  return pathname !== '/' && locationRegex.test(pathname);
+}

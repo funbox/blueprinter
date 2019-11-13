@@ -93,4 +93,12 @@
       }
     }
   }
+
+  .menu__item_selected {
+    > .menu__item-content {
+      > .menu__item-text {
+        color: $color--highlight;
+      }
+    }
+  }
 }
