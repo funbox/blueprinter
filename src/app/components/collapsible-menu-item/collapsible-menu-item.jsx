@@ -6,7 +6,7 @@ class CollapsibleMenuItem extends React.Component {
     super(props);
 
     this.state = {
-      collapsed: true,
+      collapsed: props.collapsed,
     };
     this.toggleClass = this.toggleClass.bind(this);
   }
@@ -17,27 +17,30 @@ class CollapsibleMenuItem extends React.Component {
 
   render() {
     const {
-      submenu,
+      getSubmenuContent,
       mods = {},
     } = this.props;
     const { collapsed } = this.state;
 
     const localMods = Object.assign({ collapsed }, mods);
+    const localProps = Object.assign({}, this.props);
+
+    delete localProps.getSubmenuContent;
 
     return (
       <SlideToggle
         bestPerformance
-        collapsed
+        collapsed={collapsed}
         onCollapsed={this.toggleClass}
         onExpanding={this.toggleClass}
       >
         {
           ({ onToggle, setCollapsibleElement }) => (
             <Menu__Item
-              {...this.props}
+              {...localProps}
               mods={localMods}
               submenu={{
-                content: submenu,
+                content: collapsed ? null : getSubmenuContent(),
                 ref: setCollapsibleElement,
               }}
               onClick={onToggle}

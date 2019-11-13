@@ -16,7 +16,15 @@ class ResourceGroup extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { collapsed: true };
+    const {
+      group: { route },
+      location: { pathname },
+    } = props;
+    const currentGroup = matchRoute(route, pathname);
+
+    this.state = {
+      collapsed: !currentGroup,
+    };
     this.toggleClass = this.toggleClass.bind(this);
   }
 
@@ -69,7 +77,8 @@ class ResourceGroup extends React.Component {
             key={`${itemType}-${index}`}
             text={title}
             to={route}
-            submenu={this.buildContentList(item.content, {
+            collapsed={!matchRoute(route, location.pathname)}
+            getSubmenuContent={() => this.buildContentList(item.content, {
               level: nextLevel,
               parentRoute: route,
               location,
@@ -147,7 +156,7 @@ class ResourceGroup extends React.Component {
     return (
       <SlideToggle
         bestPerformance
-        collapsed
+        collapsed={collapsed}
         onCollapsed={this.toggleClass}
         onExpanding={this.toggleClass}
       >
