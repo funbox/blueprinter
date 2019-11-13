@@ -1,5 +1,5 @@
 .transition__example-label_selected {
-  color: $blueDark;
+  color: $color--highlight;
 
   &::after {
     content: '';
@@ -9,6 +9,6 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: $blueDark;
+    background-color: $color--highlight;
   }
 }
