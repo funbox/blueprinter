@@ -1,0 +1,16 @@
+@import '../seach-field.vars';
+
+@import '~@funbox/scss-utils/placeholder';
+
+.search-field__input {
+  padding-top: #{($search-field-height - 16px) / 2};
+  padding-bottom: #{($search-field-height - 16px) / 2};
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+
+  @include placeholder {
+    font-weight: 500;
+    color: $color--secondary;
+  }
+}

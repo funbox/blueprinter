@@ -1,0 +1,11 @@
+.search-field__dropdown {
+  display: none;
+  position: absolute;
+  z-index: 102;
+  top: calc(100% + 2px);
+  right: 0;
+  left: 0;
+  border-radius: 3px;
+  box-shadow: 0 4px 10px 0 rgba(213, 216, 221, .5);
+  background-color: $white;
+}

@@ -1,0 +1,9 @@
+.search-field__option-list {
+  list-style-type: none;
+  margin: 0 12px;
+  padding: 12px 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $stroke-color--primary;
+  }
+}

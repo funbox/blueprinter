@@ -1,0 +1,35 @@
+.search-field__more-stories {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px;
+  font-weight: 600;
+  color: $color--secondary;
+
+  &:hover, &:focus {
+    background-color: rgba($grayLight, .5);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 17px;
+    height: 13px;
+    margin-right: 8px;
+  }
+
+  &::after {
+    content: '';
+    display: inline-block;
+    transform: translateY(2px);
+    width: 17px;
+    height: 13px;
+    margin-left: 8px;
+    background: transparent url('search-field__more-stories.svg') no-repeat center bottom;
+    background-size: contain;
+  }
+}

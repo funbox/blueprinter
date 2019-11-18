@@ -1,0 +1,47 @@
+.search-field__option {
+  display: flex;
+  position: relative;
+  margin: 0 -12px;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+
+  &::before {
+    margin-right: 12px;
+    font-weight: 600;
+    color: #c5c8cd;
+  }
+
+  &:hover, &:focus-within {
+    background-color: rgba($grayLight, .5);
+  }
+
+  &_highlighted {
+    background-color: rgba($grayLight, .5);
+  }
+
+  &_type_group {
+    &::before {
+      content: 'Г';
+    }
+  }
+
+  &_type_resource {
+    &::before {
+      content: 'Р';
+    }
+  }
+
+  &_type_action {
+    &::before {
+      content: 'Э';
+    }
+  }
+
+  &_type_message {
+    &::before {
+      content: 'С';
+    }
+  }
+}
