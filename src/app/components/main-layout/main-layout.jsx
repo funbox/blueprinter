@@ -14,6 +14,8 @@ import Notification from 'app/components/notification';
 import DocumentWarnings from 'app/components/document-warnings';
 import ApiHost from 'app/components/api-host';
 import Link from 'app/components/link';
+import SearchField from 'app/components/search-field';
+
 import { API_DEFAULT_TITLE } from 'app/constants/defaults';
 
 const propTypes = {
@@ -83,6 +85,10 @@ class MainLayout extends React.PureComponent {
                   </Page__Stripe>
                 )}
               </Page__Title>
+
+              <Page__Stripe mods={{ for: 'search' }}>
+                <SearchField/>
+              </Page__Stripe>
 
               <Page__Navigation>
                 <SideMenu data={groups}/>
