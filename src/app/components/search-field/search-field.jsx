@@ -2,6 +2,7 @@
 import Button from 'fb-base-blocks/button';
 import Link from 'fb-base-blocks/link';
 import TextField from 'app/components/text-field';
+import MethodBadge from 'app/components/method-badge';
 
 const propTypes = {
   mods: PropTypes.object,
@@ -9,6 +10,8 @@ const propTypes = {
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string,
+      type: PropTypes.oneOf(['group', 'resource', 'action', 'message']),
+      method: PropTypes.string,
     }),
   ),
   onSearch: PropTypes.func,
@@ -229,6 +232,13 @@ class SearchField extends React.Component {
                                 dangerouslySetInnerHTML={{ __html: text }}
                               />
                             </Link>
+                          )}
+
+                          {item.type === 'action' && (
+                            <MethodBadge
+                              method={item.method}
+                              mix={b('search-field__badge')}
+                            />
                           )}
                         </li>
                       );

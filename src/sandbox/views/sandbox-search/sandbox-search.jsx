@@ -25,6 +25,7 @@ const items = [
     value: 'get-group-employees',
     label: 'Получить сотрудников группы',
     type: 'action',
+    method: 'get',
   },
   {
     value: 'server-to-client-message',
