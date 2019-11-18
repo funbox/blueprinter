@@ -171,7 +171,7 @@ module.exports = options => {
     {
       loader: '@funbox/scss-imports-loader',
       options: {
-        paths: require('./webpack.app.scssImports').map(scssPath => `${BASE_PATH.replace(/\\/g, '/')}/src/${scssPath}`),
+        paths: require('./webpack.app.scssImports'),
       },
     },
     '@funbox/scss-vars-loader',
