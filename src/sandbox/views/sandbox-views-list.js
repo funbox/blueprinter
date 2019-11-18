@@ -17,6 +17,10 @@ module.exports = {
       to: '/sandbox/request-response',
     },
     {
+      name: 'Поиск',
+      to: '/sandbox/search',
+    },
+    {
       name: '...',
     },
   ],
