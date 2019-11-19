@@ -1,0 +1,11 @@
+.serp-list__item {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  max-width: 100%;
+  padding: 12px 0;
+
+  + .serp-list__item {
+    margin-top: 12px;
+  }
+}
