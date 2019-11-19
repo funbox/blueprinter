@@ -1,0 +1,7 @@
+.search-result__checkbox {
+  display: inline-block;
+
+  + .search-result__checkbox {
+    margin-left: 8px;
+  }
+}
