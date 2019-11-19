@@ -4,6 +4,7 @@ import SandboxDemo from 'sandbox/components/sandbox-demo';
 import SandboxParagraph from 'sandbox/components/sandbox-paragraph';
 
 import SearchField from 'app/components/search-field';
+import Pagination from 'app/components/pagination';
 
 const items = [
   {
@@ -35,7 +36,25 @@ const items = [
 ];
 
 export default class SandboxRequestResponseBlock extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentPage: 1,
+    };
+
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+
+  handlePageChange(newPage) {
+    this.setState({
+      currentPage: newPage,
+    });
+  }
+
   render() {
+    const { currentPage } = this.state;
+
     return (
       <div>
         <h1>Поиск</h1>
@@ -61,6 +80,14 @@ export default class SandboxRequestResponseBlock extends React.Component {
           <SandboxDemo mods={{ theme: 'standard', for: 'search-field' }}>
             <SearchField items={[]}/>
           </SandboxDemo>
+        </SandboxSection>
+
+        <SandboxSection id="pagination" title="Пагинация результатов поиска">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={5}
+            setPage={this.handlePageChange}
+          />
         </SandboxSection>
       </div>
     );
