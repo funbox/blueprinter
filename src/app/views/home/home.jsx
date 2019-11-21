@@ -27,6 +27,9 @@ const propTypes = {
     groups: PropTypes.arrayOf(PropTypes.object),
     actions: PropTypes.arrayOf(PropTypes.object),
   }),
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+  }),
 };
 
 export default class Home extends React.PureComponent {
@@ -57,14 +60,20 @@ export default class Home extends React.PureComponent {
     // вызов через таймаут нужен для того,
     // чтобы применились все стили и функция получила
     // актуальную информацию о высоте нужных элементов
-    setTimeout(this.synchronizeDimensions, 1);
+    setTimeout(() => {
+      this.synchronizeDimensions();
+      this.scrollToAnchor();
+    }, 1);
     window.addEventListener('resize', this.synchronizeDimensions);
 
     document.title = this.topLevelMeta.title || 'API Blueprint';
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     this.synchronizeDimensions();
+    if (prevProps.location !== this.props.location) {
+      this.scrollToAnchor();
+    }
   }
 
   synchronizeDimensions() {
@@ -100,6 +109,13 @@ export default class Home extends React.PureComponent {
         transition.style.marginTop = `${difference}px`;
       }
     });
+  }
+
+  scrollToAnchor() {
+    const { location } = this.props;
+    const id = decodeURIComponent(location.hash.replace('#', ''));
+    const element = document.getElementById(id);
+    if (element) element.scrollIntoView();
   }
 
   closeNotification() {
