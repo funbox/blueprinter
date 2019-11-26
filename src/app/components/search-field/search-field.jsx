@@ -4,6 +4,9 @@ import Link from 'fb-base-blocks/link';
 import TextField from 'app/components/text-field';
 import MethodBadge from 'app/components/method-badge';
 
+const MAX_VISIBLE_ITEMS = 10;
+const MIN_QUERY_LENGTH = 3; // нужно ввести более трёх символов
+
 const propTypes = {
   mods: PropTypes.object,
   items: PropTypes.arrayOf(
@@ -74,7 +77,7 @@ class SearchField extends React.Component {
       this.setState({ open: true });
     }
 
-    if (onSearch) {
+    if (onSearch && value.length >= MIN_QUERY_LENGTH) {
       onSearch(value);
     }
   }
@@ -157,8 +160,9 @@ class SearchField extends React.Component {
     delete textFieldProps.mix;
 
     const defaultMods = { open };
-    const displayedItems = items.slice(0, 10);
-    const showMoreStories = items.length > displayedItems.length;
+    const visibleItems = items.slice(0, MAX_VISIBLE_ITEMS);
+    const showMoreStories = items.length > visibleItems.length;
+    const shortQuery = filterString.length < MIN_QUERY_LENGTH;
 
     return (
       <div className={b('search-field', this.props, defaultMods)}>
@@ -197,11 +201,11 @@ class SearchField extends React.Component {
           ref={this.dropdown}
         >
           {
-            displayedItems.length > 0 && (
+            visibleItems.length > 0 && (
               <>
                 <ul className={b('search-field__option-list')}>
                   {
-                    displayedItems.map(item => {
+                    visibleItems.map(item => {
                       const highlighted = highlightedItem && highlightedItem.value === item.value;
                       const text = getHighlightedSuggestion(item.label, filterString);
                       return (
@@ -261,9 +265,11 @@ class SearchField extends React.Component {
           }
 
           {
-            displayedItems.length === 0 && (
+            visibleItems.length === 0 && (
               <p className={b('search-field__message')}>
-                Ничего не найдено
+                {
+                  shortQuery ? 'Введите не менее 3-х символов' : 'Ничего не найдено'
+                }
               </p>
             )
           }
