@@ -1,6 +1,5 @@
 /* eslint-disable react/no-danger */
 import Button from 'fb-base-blocks/button';
-import Link from 'fb-base-blocks/link';
 import TextField from 'app/components/text-field';
 import MethodBadge from 'app/components/method-badge';
 
@@ -217,30 +216,16 @@ class SearchField extends React.Component {
                           key={item.value}
                           className={b('search-field__option', { mods: { highlighted, type: item.type } })}
                         >
-                          {!(item.to || item.href) && (
-                            <Button
-                              onClick={() => this.select(item)}
-                              mix={b('search-field__option-text')}
-                            >
-                              <span
-                                className={b('button__text')}
-                                dangerouslySetInnerHTML={{ __html: text }}
-                              />
-                            </Button>
-                          )}
-
-                          {(item.to || item.href) && (
-                            <Link
-                              onClick={() => this.select(item)}
-                              mix={b('search-field__option-text')}
-                              {...item}
-                            >
-                              <span
-                                className={b('link__text')}
-                                dangerouslySetInnerHTML={{ __html: text }}
-                              />
-                            </Link>
-                          )}
+                          <Button
+                            onClick={() => this.select(item)}
+                            mix={b('search-field__option-text')}
+                            to={item.to}
+                          >
+                            <span
+                              className={b('button__text')}
+                              dangerouslySetInnerHTML={{ __html: text }}
+                            />
+                          </Button>
 
                           {item.type === 'action' && (
                             <MethodBadge
