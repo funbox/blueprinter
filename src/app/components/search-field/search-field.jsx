@@ -210,7 +210,7 @@ class SearchField extends React.Component {
                   {
                     visibleItems.map(item => {
                       const highlighted = highlightedItem && highlightedItem.value === item.value;
-                      const text = getHighlightedSuggestion(item.label, filterString);
+                      const text = getHighlightedSuggestion(item.label, filterString.trim());
                       return (
                         <li
                           key={item.value}

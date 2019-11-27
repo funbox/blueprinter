@@ -26,6 +26,8 @@ const propTypes = {
     warnings: PropTypes.arrayOf(PropTypes.object),
   }),
   groups: PropTypes.arrayOf(PropTypes.object),
+  resources: PropTypes.arrayOf(PropTypes.object),
+  actions: PropTypes.arrayOf(PropTypes.object),
   children: PropTypes.node,
 };
 
@@ -56,6 +58,8 @@ class MainLayout extends React.PureComponent {
     const {
       topLevelMeta,
       groups,
+      resources,
+      actions,
       children,
     } = this.props;
 
@@ -87,7 +91,11 @@ class MainLayout extends React.PureComponent {
               </Page__Title>
 
               <Page__Stripe mods={{ for: 'search' }}>
-                <SearchFieldContainer/>
+                <SearchFieldContainer
+                  groups={groups}
+                  resources={resources}
+                  actions={actions}
+                />
               </Page__Stripe>
 
               <Page__Navigation>

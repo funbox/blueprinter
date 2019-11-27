@@ -61,6 +61,8 @@ export default class App extends React.Component {
       <MainLayout
         topLevelMeta={topLevelMeta}
         groups={groups}
+        resources={resources}
+        actions={actions}
       >
         <Switch>
           <Route
