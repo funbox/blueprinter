@@ -16,10 +16,17 @@ class SearchFieldContainer extends React.Component {
     };
 
     this.onSearch = this.onSearch.bind(this);
+    this.resetSearch = this.resetSearch.bind(this);
   }
 
   onSearch(searchQuery) {
     console.log(searchQuery);
+  }
+
+  resetSearch() {
+    this.setState({
+      searchedItems: [],
+    });
   }
 
   render() {
@@ -29,6 +36,7 @@ class SearchFieldContainer extends React.Component {
       <SearchField
         items={searchedItems}
         onSearch={this.onSearch}
+        resetSearch={this.resetSearch}
       />
     );
   }

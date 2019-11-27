@@ -124,9 +124,13 @@ class SearchField extends React.Component {
 
   close() {
     const { open } = this.state;
+    const { resetSearch } = this.props;
 
     if (!open) return;
     this.setState({ ...this.defaultState });
+    if (resetSearch) {
+      resetSearch();
+    }
   }
 
   closeOnClickAround(e) {
