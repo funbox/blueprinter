@@ -48,6 +48,7 @@ class SearchField extends React.Component {
     this.onSearch = this.onSearch.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.closeOnClickAround = this.closeOnClickAround.bind(this);
+    this.onShowMoreButtonClick = this.onShowMoreButtonClick.bind(this);
     this.select = this.select.bind(this);
   }
 
@@ -143,6 +144,15 @@ class SearchField extends React.Component {
     }
   }
 
+  onShowMoreButtonClick() {
+    const { onShowMoreButtonClick } = this.props;
+    this.close();
+
+    if (onShowMoreButtonClick) {
+      onShowMoreButtonClick();
+    }
+  }
+
   render() {
     const {
       open,
@@ -152,7 +162,6 @@ class SearchField extends React.Component {
 
     const {
       items,
-      onShowMoreButtonClick,
     } = this.props;
 
     const textFieldProps = Object.assign({}, this.props);
@@ -243,7 +252,7 @@ class SearchField extends React.Component {
                   showMoreStories && (
                     <Button
                       mix={[b('search-field__more-stories')]}
-                      onClick={onShowMoreButtonClick}
+                      onClick={this.onShowMoreButtonClick}
                     >
                       Показать больше
                     </Button>
