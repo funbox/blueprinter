@@ -17,6 +17,7 @@ const propTypes = {
     }),
   ),
   onSearch: PropTypes.func,
+  resetSearch: PropTypes.func,
   onSelect: PropTypes.func,
   onKeyDown: PropTypes.func,
   onShowMoreButtonClick: PropTypes.func,
@@ -26,6 +27,7 @@ const defaultProps = {
   mods: {},
   items: [],
   onSearch: undefined,
+  resetSearch: undefined,
   onSelect: undefined,
   onKeyDown: undefined,
   onShowMoreButtonClick: undefined,
@@ -103,7 +105,10 @@ class SearchField extends React.Component {
         break;
 
       case 'Enter':
-        if (!highlightedItem) return;
+        if (!highlightedItem) {
+          this.onShowMoreButtonClick();
+          return;
+        }
         this.select(highlightedItem);
         if (onKeyDown) onKeyDown(highlightedItem);
         break;
