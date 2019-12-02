@@ -44,18 +44,21 @@ module.exports = options => {
   config.module.rules = config.module.rules.concat([
     {
       test: /\.jsx?$/,
-      loader: 'babel-loader',
-      query: {
-        presets: [
-          ['@babel/preset-env', {
-            targets: ['> 1%', 'android >= 4.4.4', 'ios >= 9'],
-            useBuiltIns: 'entry',
-          }],
-          '@babel/preset-react',
-        ],
-        plugins: ['react-hot-loader/babel', '@babel/plugin-proposal-object-rest-spread'].concat(options.build
-          ? ['@babel/plugin-transform-react-constant-elements', 'transform-react-remove-prop-types']
-          : []),
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            ['@babel/preset-env', {
+              targets: ['> 1%', 'android >= 4.4.4', 'ios >= 9'],
+              useBuiltIns: 'entry',
+              corejs: 3,
+            }],
+            '@babel/preset-react',
+          ],
+          plugins: ['react-hot-loader/babel', '@babel/plugin-proposal-object-rest-spread'].concat(options.build
+            ? ['@babel/plugin-transform-react-constant-elements', 'transform-react-remove-prop-types']
+            : []),
+        },
       },
       exclude: /node_modules[\\/](?!(blueprinter-frontend)[\\/]).*/,
     },
