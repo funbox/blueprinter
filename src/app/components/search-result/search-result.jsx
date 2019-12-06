@@ -1,6 +1,9 @@
 import CheckboxField from 'fb-base-blocks/checkbox-field';
 import SerpList, { serpListProps, searchItemType } from 'app/components/serp-list';
 import Pagination from 'app/components/pagination';
+import getPlural from 'app/common/utils/helpers/getPlural';
+
+const getMatchesPlural = (n) => getPlural(n, 'совпадение', 'совпадения', 'совпадений');
 
 const propTypes = {
   title: PropTypes.string,
@@ -65,7 +68,7 @@ class SearchResult extends React.Component {
           </h2>
 
           <p className={b('search-result__match-counter')}>
-            Найдено <b className={b('mark')}>{totalItems}</b> совпадения
+            Найдено <b className={b('mark')}>{totalItems}</b> {getMatchesPlural(totalItems)}
           </p>
 
           <div className={b('search-result__filter')}>
