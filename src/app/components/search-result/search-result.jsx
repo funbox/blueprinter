@@ -5,11 +5,18 @@ import Pagination from 'app/components/pagination';
 const propTypes = {
   title: PropTypes.string,
   searchItems: serpListProps.items,
+  currentPage: PropTypes.number,
+  totalPages: PropTypes.number,
+  totalItems: PropTypes.number,
+  setPage: PropTypes.func,
 };
 
 const defaultProps = {
   title: '',
   searchItems: [],
+  currentPage: 1,
+  totalPages: 1,
+  totalItems: 0,
 };
 
 class SearchResult extends React.Component {
@@ -40,6 +47,10 @@ class SearchResult extends React.Component {
     const {
       title,
       searchItems,
+      currentPage,
+      totalPages,
+      totalItems,
+      setPage,
     } = this.props;
 
     return (
@@ -50,7 +61,7 @@ class SearchResult extends React.Component {
           </h2>
 
           <p className={b('search-result__match-counter')}>
-            Найдено <b className={b('mark')}>1 892</b> совпадения
+            Найдено <b className={b('mark')}>{totalItems}</b> совпадения
           </p>
 
           <div className={b('search-result__filter')}>
@@ -84,9 +95,17 @@ class SearchResult extends React.Component {
           <SerpList items={searchItems}/>
         </div>
 
-        <div className={b('search-result__footer')}>
-          <Pagination currentPage={1} totalPages={4}/>
-        </div>
+        {
+          totalPages > 1 && (
+            <div className={b('search-result__footer')}>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                setPage={setPage}
+              />
+            </div>
+          )
+        }
       </div>
     );
   }

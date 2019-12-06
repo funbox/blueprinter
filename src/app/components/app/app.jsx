@@ -80,7 +80,14 @@ export default class App extends React.Component {
           <Route
             exact
             path="/search-result"
-            component={SearchResultView}
+            render={(routeProps) => (
+              <SearchResultView
+                {...routeProps}
+                groups={groups}
+                resources={resources}
+                actions={actions}
+              />
+            )}
           />
           <Route
             exact
