@@ -5,7 +5,6 @@ export const searchItemType = {
   group: 'Группа',
   resource: 'Ресурс',
   action: 'Экшен',
-  message: 'Сообщение',
 };
 
 export const propTypes = {

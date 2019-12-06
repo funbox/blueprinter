@@ -5,7 +5,6 @@ const defaultFound = Object.freeze({
   group: [],
   resource: [],
   action: [],
-  message: [],
 });
 
 class SearchService {

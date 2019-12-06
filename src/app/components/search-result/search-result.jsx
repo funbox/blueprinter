@@ -29,7 +29,6 @@ class SearchResult extends React.Component {
         group: true,
         resource: true,
         action: true,
-        message: true,
       },
     };
   }
