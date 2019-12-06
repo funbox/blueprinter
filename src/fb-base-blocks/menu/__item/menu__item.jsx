@@ -59,6 +59,7 @@ Menu__Item.propTypes = {
     content: PropTypes.node,
     ref: PropTypes.func,
   }),
+  onClick: PropTypes.func,
 };
 
 export default Menu__Item;

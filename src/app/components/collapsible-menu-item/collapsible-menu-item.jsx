@@ -1,6 +1,12 @@
 import { SlideToggle } from 'react-slide-toggle';
 import { Menu__Item } from 'fb-base-blocks/menu';
 
+const propTypes = {
+  collapsed: PropTypes.bool,
+  getSubmenuContent: PropTypes.func,
+  mods: PropTypes.object,
+};
+
 class CollapsibleMenuItem extends React.Component {
   constructor(props) {
     super(props);
@@ -51,5 +57,7 @@ class CollapsibleMenuItem extends React.Component {
     );
   }
 }
+
+CollapsibleMenuItem.propTypes = propTypes;
 
 export default CollapsibleMenuItem;
