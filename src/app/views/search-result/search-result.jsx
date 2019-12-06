@@ -38,6 +38,7 @@ class SearchResultView extends React.Component {
     this.searchService = new SearchService(groups, resources, actions);
 
     this.setPage = this.setPage.bind(this);
+    this.onFilterChange = this.onFilterChange.bind(this);
   }
 
   componentDidMount() {
@@ -98,6 +99,19 @@ class SearchResultView extends React.Component {
     });
   }
 
+  onFilterChange(activeFilters) {
+    const filteredResults = this.searchService.applyFilter(activeFilters);
+    const totalPages = Math.ceil(filteredResults.length / this.pageSize);
+    const displayedResults = filteredResults.slice(0, this.pageSize);
+
+    this.setState({
+      currentPage: 1,
+      totalPages,
+      searchResults: filteredResults,
+      displayedResults,
+    });
+  }
+
   render() {
     const {
       title,
@@ -115,6 +129,7 @@ class SearchResultView extends React.Component {
         totalPages={totalPages}
         totalItems={searchResults.length}
         setPage={this.setPage}
+        onFilterChange={this.onFilterChange}
       />
     );
   }

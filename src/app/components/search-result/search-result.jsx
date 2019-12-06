@@ -9,6 +9,7 @@ const propTypes = {
   totalPages: PropTypes.number,
   totalItems: PropTypes.number,
   setPage: PropTypes.func,
+  onFilterChange: PropTypes.func,
 };
 
 const defaultProps = {
@@ -39,7 +40,11 @@ class SearchResult extends React.Component {
         ...prevState.searchFilters,
         [type]: checked,
       },
-    }));
+    }), () => {
+      if (this.props.onFilterChange) {
+        this.props.onFilterChange(this.state.searchFilters);
+      }
+    });
   }
 
   render() {

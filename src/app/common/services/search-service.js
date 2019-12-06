@@ -1,24 +1,55 @@
 const hrefRegex = /(\/\S*)/i;
 const methodRegex = /(delete|get|head|options|patch|post|put)/i;
 
+const defaultFound = Object.freeze({
+  group: [],
+  resource: [],
+  action: [],
+  message: [],
+});
+
 class SearchService {
   constructor(groups, resources, actions) {
-    this.groups = groups;
-    this.resources = resources;
-    this.actions = actions;
+    this.sourceGroups = groups;
+    this.sourceResources = resources;
+    this.sourceActions = actions;
+
+    this.found = defaultFound;
   }
 
   search(searchQuery) {
     if (!searchQuery) return [];
 
     if (hrefRegex.test(searchQuery) || methodRegex.test(searchQuery)) {
-      const actionMatch = searchInAction(searchQuery, this.actions);
+      const actionMatch = searchInAction(searchQuery, this.sourceActions);
+      this.found = {
+        ...defaultFound,
+        action: actionMatch,
+      };
       return actionMatch;
     }
-    const groupMatch = searchInSource(searchQuery, this.groups, 'group');
-    const resourceMatch = searchInSource(searchQuery, this.resources, 'resource');
-    const actionMatch = searchInSource(searchQuery, this.actions, 'action');
+    const groupMatch = searchInSource(searchQuery, this.sourceGroups, 'group');
+    const resourceMatch = searchInSource(searchQuery, this.sourceResources, 'resource');
+    const actionMatch = searchInSource(searchQuery, this.sourceActions, 'action');
+    this.found = {
+      ...defaultFound,
+      group: groupMatch,
+      resource: resourceMatch,
+      action: actionMatch,
+    };
     const fullMatch = groupMatch.concat(resourceMatch, actionMatch);
+    return fullMatch;
+  }
+
+  applyFilter(activeFilters) {
+    const fullMatch = Object.entries(activeFilters).reduce((acc, entry) => {
+      const [type, isActive] = entry;
+      if (isActive) {
+        const res = this.found[type];
+        return acc.concat(res);
+      }
+      return acc;
+    }, []);
     return fullMatch;
   }
 }
