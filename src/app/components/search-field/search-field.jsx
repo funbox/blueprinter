@@ -2,11 +2,15 @@
 import Button from 'fb-base-blocks/button';
 import TextField from 'app/components/text-field';
 import MethodBadge from 'app/components/method-badge';
+import locationParams from 'app/common/utils/helpers/locationParams';
 
 const MAX_VISIBLE_ITEMS = 10;
 const MIN_QUERY_LENGTH = 3; // нужно ввести более трёх символов
 
 const propTypes = {
+  location: PropTypes.shape({
+    search: PropTypes.string,
+  }).isRequired,
   mods: PropTypes.object,
   items: PropTypes.arrayOf(
     PropTypes.shape({
@@ -51,31 +55,36 @@ class SearchField extends React.Component {
     this.onKeyDown = this.onKeyDown.bind(this);
     this.closeOnClickAround = this.closeOnClickAround.bind(this);
     this.onShowMoreButtonClick = this.onShowMoreButtonClick.bind(this);
+    this.onInputFocus = this.onInputFocus.bind(this);
     this.select = this.select.bind(this);
+    this.resetSearch = this.resetSearch.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('click', this.closeOnClickAround);
+    const { q: searchQuery } = locationParams.parse(this.props.location);
+    if (searchQuery) {
+      this.onSearch(searchQuery, false);
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('click', this.closeOnClickAround);
   }
 
-  onSearch(value) {
+  onSearch(value, showDropdown = true) {
     const {
-      items,
       onSearch,
     } = this.props;
 
     this.setState({ filterString: value });
 
     if (!value) {
-      this.close();
+      this.resetSearch();
       return;
     }
 
-    if (!!value && items) {
+    if (showDropdown && value && !this.state.open) {
       this.setState({ open: true });
     }
 
@@ -129,13 +138,12 @@ class SearchField extends React.Component {
 
   close() {
     const { open } = this.state;
-    const { resetSearch } = this.props;
 
     if (!open) return;
-    this.setState({ ...this.defaultState });
-    if (resetSearch) {
-      resetSearch();
-    }
+    this.setState(prevState => ({
+      ...this.defaultState,
+      filterString: prevState.filterString,
+    }));
   }
 
   closeOnClickAround(e) {
@@ -155,6 +163,22 @@ class SearchField extends React.Component {
 
     if (onShowMoreButtonClick) {
       onShowMoreButtonClick();
+    }
+  }
+
+  onInputFocus() {
+    const { open } = this.state;
+
+    if (!open && this.props.items.length) {
+      this.setState({ open: true });
+    }
+  }
+
+  resetSearch() {
+    const { resetSearch } = this.props;
+    this.setState(this.defaultState);
+    if (resetSearch) {
+      resetSearch();
     }
   }
 
@@ -196,6 +220,7 @@ class SearchField extends React.Component {
             onKeyDown: this.onKeyDown,
             ref: this.input,
           }}
+          onFocus={this.onInputFocus}
           value={filterString}
           onChange={this.onSearch}
           placeholder="Поиск"
@@ -209,7 +234,7 @@ class SearchField extends React.Component {
             }}
             htmlFor="search-field-input"
             text="Очистить поле"
-            onClick={() => this.onSearch('')}
+            onClick={this.resetSearch}
           />
         </TextField>
 

@@ -6,6 +6,9 @@ const propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string,
+  }).isRequired,
   groups: PropTypes.arrayOf(PropTypes.object),
   resources: PropTypes.arrayOf(PropTypes.object),
   actions: PropTypes.arrayOf(PropTypes.object),
@@ -71,6 +74,7 @@ class SearchFieldContainer extends React.Component {
         onKeyDown={this.onKeyDown}
         onShowMoreButtonClick={this.onShowMoreButtonClick}
         resetSearch={this.resetSearch}
+        location={this.props.location}
       />
     );
   }
