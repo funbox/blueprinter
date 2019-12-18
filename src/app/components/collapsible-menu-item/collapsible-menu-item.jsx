@@ -32,6 +32,7 @@ class CollapsibleMenuItem extends React.Component {
     const localProps = Object.assign({}, this.props);
 
     delete localProps.getSubmenuContent;
+    delete localProps.collapsed;
 
     return (
       <SlideToggle
