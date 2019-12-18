@@ -28,4 +28,6 @@ export {
   combineHashes,
   createRoute,
   combineRoutes,
+  ROUTE_DELIMITER,
+  HASH_DELIMITER,
 };

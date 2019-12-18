@@ -1,6 +1,6 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
-import { createRoute, combineRoutes } from 'app/common/utils/helpers/hash';
+import { createRoute, combineRoutes, HASH_DELIMITER } from 'app/common/utils/helpers/hash';
 import sourceMock from 'app/source';
 
 import MainLayout from 'app/components/main-layout';
@@ -123,7 +123,8 @@ function createRouteFromHash(hash) {
       break;
     }
   }
-  localHash = localHash.slice(groupHash.length + 1);
+
+  localHash = slice(localHash, groupHash);
 
   if (localHash === '') {
     return createRoute(groupHash);
@@ -131,13 +132,14 @@ function createRouteFromHash(hash) {
 
   for (let i = 0; i < resources.length; i++) {
     const resource = resources[i];
-    const hashWithoutGroup = resource.hash.slice(groupHash.length + 1);
+    const hashWithoutGroup = slice(resource.hash, groupHash);
     if (hashWithoutGroup.length > 0 && localHash.startsWith(hashWithoutGroup)) {
       resourceHash = hashWithoutGroup;
       break;
     }
   }
-  localHash = localHash.slice(resourceHash.length + 1);
+
+  localHash = slice(localHash, resourceHash);
 
   if (localHash === '') {
     return combineRoutes(
@@ -148,18 +150,23 @@ function createRouteFromHash(hash) {
 
   for (let i = 0; i < actions.length; i++) {
     const action = actions[i];
-    const hashWithoutGroupAndResource = action.hash.slice(groupHash.length + 1 + resourceHash.length + 1);
+    const hashWithoutGroup = slice(action.hash, groupHash);
+    const hashWithoutGroupAndResource = slice(hashWithoutGroup, resourceHash);
     if (hashWithoutGroupAndResource.length > 0 && localHash.startsWith(hashWithoutGroupAndResource)) {
       actionHash = hashWithoutGroupAndResource;
       break;
     }
   }
 
-  return combineRoutes(
-    combineRoutes(
-      createRoute(groupHash),
-      createRoute(resourceHash),
-    ),
-    createRoute(actionHash),
-  );
+  const [groupRoute, resourceRoute, actionRoute] = [groupHash, resourceHash, actionHash]
+    .map(createRoute)
+    .map(route => route.replace(/^\/$/, '')); // '/' -> ''
+
+  return combineRoutes(combineRoutes(groupRoute, resourceRoute), actionRoute);
+}
+
+function slice(sourceString, slicedPart = '') {
+  const addedLength = slicedPart.length > 0 ? HASH_DELIMITER.length : 0;
+
+  return sourceString.slice(slicedPart.length + addedLength);
 }
