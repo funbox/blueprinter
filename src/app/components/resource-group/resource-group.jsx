@@ -26,10 +26,10 @@ class ResourceGroup extends React.Component {
 
     const descriptionEl = group.content.find(el => el.element === 'copy');
     const presetHash = descriptionEl && hashFromComment(descriptionEl.content);
-    const hashBase = presetHash || title;
-    const hash = createHash(hashBase);
+    const hash = presetHash ? createHash(presetHash) : createHash(title);
+    const hashWithPrefix = presetHash ? hash : combineHashes('group', hash);
 
-    return `#${hash}` === route.location.hash;
+    return `#${hashWithPrefix}` === route.location.hash;
   }
 
   buildContentList(content, options = {}) {
@@ -53,6 +53,7 @@ class ResourceGroup extends React.Component {
       const href = get('attributes', 'href', 'content').from(item);
       let title = get('meta', 'title', 'content').from(item);
       let badge = null;
+      let prefix = '';
 
       const descriptionEl = item.content.find(el => el.element === 'copy');
       let description;
@@ -70,6 +71,7 @@ class ResourceGroup extends React.Component {
       const typeSpecificModifier = {
         resource: () => {
           title = title || href;
+          prefix = 'resource';
         },
         transition: () => {
           const method = extractMethod(item);
@@ -77,11 +79,16 @@ class ResourceGroup extends React.Component {
           badge = <MethodBadge method={method} mix="menu__item-icon"/>;
           mainHash = title ? createHash(`${title} ${method}`) : createHash(`${hashFriendlyHref} ${method}`);
           title = title || `${method.toUpperCase()} ${href}`;
+          prefix = 'action';
         },
         message: () => {
           title = title || 'Message';
           hasSubmenu = false;
           badge = <MethodBadge mods={{ type: 'message' }} mix="menu__item-icon"/>;
+          prefix = 'message';
+        },
+        category: () => {
+          prefix = 'subgroup';
         },
       };
 
@@ -90,6 +97,7 @@ class ResourceGroup extends React.Component {
       }
 
       const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, mainHash);
+      const hashWithPrefix = presetHash ? hash : combineHashes(prefix, hash);
 
       const itemMods = {
         ...(level ? { level, submenu: true } : {}),
@@ -101,7 +109,7 @@ class ResourceGroup extends React.Component {
           mods={itemMods}
           key={`${itemType}-${index}`}
           text={title}
-          to={{ hash, pathname: route.location.pathname }}
+          to={{ hash: hashWithPrefix, pathname: route.location.pathname }}
           submenu={hasSubmenu
             ? this.buildContentList(item.content, {
               level: nextLevel,
@@ -175,8 +183,8 @@ class ResourceGroup extends React.Component {
 
     const descriptionEl = group.content.find(el => el.element === 'copy');
     const presetHash = descriptionEl && hashFromComment(descriptionEl.content);
-    const hashBase = presetHash || title;
-    const hash = createHash(hashBase);
+    const hash = presetHash ? createHash(presetHash) : createHash(title);
+    const hashWithPrefix = presetHash ? hash : combineHashes('group', hash);
 
     const needJumpToGroup = () => {
       const currentHash = decodeURIComponent(window.location.hash);
@@ -202,7 +210,7 @@ class ResourceGroup extends React.Component {
             >
               <Link
                 mix="resource-group__title"
-                to={{ hash, pathname: route.location.pathname }}
+                to={{ hash: hashWithPrefix, pathname: route.location.pathname }}
               >{title}</Link>
             </h3>
 

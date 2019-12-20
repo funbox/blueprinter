@@ -1,7 +1,7 @@
 import RawContent from 'app/components/raw-content';
 import Anchor from 'app/components/anchor';
 import { get, withHeaderAnchors } from 'app/common/utils/helpers';
-import { hashFromComment, createHash } from 'app/common/utils/helpers/hash';
+import { hashFromComment, createHash, combineHashes } from 'app/common/utils/helpers/hash';
 import Resource from 'app/components/resource';
 import MessageCard from 'app/components/message-card';
 import ResourceGroupSection__Message from './__message';
@@ -17,17 +17,17 @@ class ResourceGroupSection extends React.PureComponent {
     const descriptionEl = group.content.find(el => el.element === 'copy');
     const description = get('content').from(descriptionEl);
 
-    const presetHash = description && hashFromComment(description);
-    const hashBase = presetHash || title;
-    const hash = createHash(hashBase);
+    const presetHash = descriptionEl && hashFromComment(descriptionEl.content);
+    const hash = presetHash ? createHash(presetHash) : createHash(title);
+    const hashWithPrefix = presetHash ? hash : combineHashes('group', hash);
 
     return (
-      <section className={b('resource-group-section', this.props)} id={hash}>
+      <section className={b('resource-group-section', this.props)} id={hashWithPrefix}>
         <h2 className="resource-group-section__heading">
           {title}
           <Anchor
             mix="resource-group-section__anchor"
-            hash={hash}
+            hash={hashWithPrefix}
             pathname={route.location.pathname}
           />
         </h2>

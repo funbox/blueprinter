@@ -13,22 +13,24 @@ class Resource extends React.Component {
     const { route } = this.context.router;
     const { index, resource, parentHash } = this.props;
 
-    const { content } = resource;
+    const { content, element } = resource;
     const href = get('attributes', 'href', 'content').from(resource);
     const description = resource.content[0].element === 'copy' ? resource.content[0].content : null;
     const title = get('meta', 'title', 'content').from(resource);
+    const prefix = element === 'category' ? 'subgroup' : 'resource';
 
     const presetHash = description && hashFromComment(description);
     const mainHash = title ? createHash(title) : String(index + 1);
     const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, mainHash);
+    const hashWithPrefix = presetHash ? hash : combineHashes(prefix, hash);
 
     return (
-      <section className="resource" id={hash}>
+      <section className="resource" id={hashWithPrefix}>
         <h3 className="resource__heading">
           {title || DEFAULT_TITLE}
           <Anchor
             mix="resource__anchor"
-            hash={hash}
+            hash={hashWithPrefix}
             pathname={route.location.pathname}
           />
         </h3>

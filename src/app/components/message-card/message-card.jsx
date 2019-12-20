@@ -18,16 +18,17 @@ const MessageCard = (props) => {
   const presetHash = description && hashFromComment(description);
   const mainHash = title || String(index + 1);
   const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(mainHash));
+  const hashWithPrefix = presetHash ? hash : combineHashes('message', hash);
 
   return (
     <div
       className={b('message-card')}
-      id={hash}
+      id={hashWithPrefix}
     >
       <div className="message-card__heading">
         <Link
           mix="message-card__link"
-          to={{ hash, pathname: location.pathname }}
+          to={{ hash: hashWithPrefix, pathname: location.pathname }}
         >
           Message
         </Link>

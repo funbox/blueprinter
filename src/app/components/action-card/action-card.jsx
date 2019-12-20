@@ -22,16 +22,17 @@ const ActionCard = (props) => {
   const presetHash = description && hashFromComment(description);
   const mainHash = title ? createHash(`${title} ${method}`) : createHash(`${hashFriendlyHref} ${method}`);
   const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, mainHash);
+  const hashWithPrefix = presetHash ? hash : combineHashes('action', hash);
 
   return (
     <div
       className={b('action-card', { mods: { type: method } })}
-      id={hash}
+      id={hashWithPrefix}
     >
       <div className="action-card__heading">
         <Link
           mix="action-card__method"
-          to={{ hash, pathname: location.pathname }}
+          to={{ hash: hashWithPrefix, pathname: location.pathname }}
         >
           {method}
         </Link>
