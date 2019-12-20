@@ -16,6 +16,7 @@ import Notification from 'app/components/notification';
 import DocumentWarnings from 'app/components/document-warnings';
 import ApiHost from 'app/components/api-host';
 import { get } from 'app/common/utils/helpers';
+import { combineHashes } from 'app/common/utils/helpers/hash';
 
 const propTypes = {
   parsedSource: PropTypes.shape({
@@ -57,12 +58,13 @@ export default class Home extends React.PureComponent {
   }
 
   componentDidMount() {
+    const elementFindingFunction = (id) => findElementById(document, id);
     // вызов через таймаут нужен для того,
     // чтобы применились все стили и функция получила
     // актуальную информацию о высоте нужных элементов
     setTimeout(() => {
       this.synchronizeDimensions();
-      this.scrollToAnchor();
+      this.scrollToAnchor(elementFindingFunction);
     }, 1);
     window.addEventListener('resize', this.synchronizeDimensions);
 
@@ -70,9 +72,11 @@ export default class Home extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    this.synchronizeDimensions();
     if (prevProps.location !== this.props.location) {
-      this.scrollToAnchor();
+      const elementFindingFunction = (id) => document.getElementById(id);
+      this.scrollToAnchor(elementFindingFunction);
+    } else {
+      this.synchronizeDimensions();
     }
   }
 
@@ -111,10 +115,10 @@ export default class Home extends React.PureComponent {
     });
   }
 
-  scrollToAnchor() {
+  scrollToAnchor(getElementById) {
     const { location } = this.props;
     const id = decodeURIComponent(location.hash.replace('#', ''));
-    const element = document.getElementById(id);
+    const element = getElementById(id);
     if (element) element.scrollIntoView();
   }
 
@@ -207,3 +211,27 @@ export default class Home extends React.PureComponent {
 }
 
 Home.propTypes = propTypes;
+
+function findElementById(document, id) {
+  const possiblePrefixes = [
+    'group',
+    'subgroup',
+    'resource',
+    'action',
+    'message',
+  ];
+  let element = document.getElementById(id);
+  if (element) {
+    return element;
+  }
+  for (let i = 0; i < possiblePrefixes.length; i++) {
+    const prefix = possiblePrefixes[i];
+    const idWithPrefix = combineHashes(prefix, id);
+    const possibleElement = document.getElementById(idWithPrefix);
+    if (possibleElement) {
+      element = possibleElement;
+      break;
+    }
+  }
+  return element;
+}
