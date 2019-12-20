@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.25.2 (20.12.2019)
+
+* Fix hashes of untitled resources.
+
 ## 2.25.1 (20.12.2019)
 
 * Fix scroll to anchor in Firefox.
