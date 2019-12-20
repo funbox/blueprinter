@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.25.1 (20.12.2019)
+
+* Fix scroll to anchor in Firefox.
+
 ## 2.25.0 (08.11.2019)
 
 * Show first line of a request description in tabs header. 
