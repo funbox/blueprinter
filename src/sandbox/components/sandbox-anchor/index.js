@@ -1,3 +1,3 @@
 export { default } from './sandbox-anchor';
 
-require('./sandbox-anchor.sass');
+require('./sandbox-anchor.scss');

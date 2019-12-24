@@ -1,3 +1,3 @@
 export { default } from './sandbox-paragraph';
 
-require('./sandbox-paragraph.sass');
+require('./sandbox-paragraph.scss');
