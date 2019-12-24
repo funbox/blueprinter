@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.26.0 (24.12.2019)
+
+* Fix webpack errors during building.
+
 ## 2.25.2 (20.12.2019)
 
 * Fix hashes of untitled resources.

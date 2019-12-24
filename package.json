@@ -1,6 +1,6 @@
 {
   "name": "@funbox/blueprinter-frontend",
-  "version": "2.25.2",
+  "version": "2.26.0",
   "description": "Replacement of Aglio library for rendering generated AST as HTML page.",
   "files": [
     "/bin",
