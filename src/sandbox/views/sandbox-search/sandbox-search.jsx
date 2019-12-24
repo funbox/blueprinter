@@ -64,21 +64,30 @@ export default class SandboxRequestResponseBlock extends React.Component {
             Есть более 10 результатов
           </SandboxParagraph>
           <SandboxDemo mods={{ theme: 'standard', for: 'search-field' }}>
-            <SearchField items={[...getUniqueItems(items), ...getUniqueItems(items), ...getUniqueItems(items)]}/>
+            <SearchField
+              location={{ search: '' }}
+              items={[...getUniqueItems(items), ...getUniqueItems(items), ...getUniqueItems(items)]}
+            />
           </SandboxDemo>
 
           <SandboxParagraph>
             Есть менее 10 результатов
           </SandboxParagraph>
           <SandboxDemo mods={{ theme: 'standard', for: 'search-field' }}>
-            <SearchField items={getUniqueItems(items)}/>
+            <SearchField
+              location={{ search: '' }}
+              items={getUniqueItems(items)}
+            />
           </SandboxDemo>
 
           <SandboxParagraph>
             Нет результатов
           </SandboxParagraph>
           <SandboxDemo mods={{ theme: 'standard', for: 'search-field' }}>
-            <SearchField items={[]}/>
+            <SearchField
+              location={{ search: '' }}
+              items={[]}
+            />
           </SandboxDemo>
         </SandboxSection>
 
