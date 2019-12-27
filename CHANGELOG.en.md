@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0 (27.12.2019)
+
+* Implement new design.
+
 ## 2.26.0 (24.12.2019)
 
 * Fix webpack errors during building.
