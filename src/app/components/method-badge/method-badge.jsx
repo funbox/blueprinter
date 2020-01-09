@@ -18,7 +18,7 @@ const MethodBadge = (props = {}) => {
   return (
     <span className={b('method-badge', { mods, mix })}>
       {method && (
-        aliases[method] || method
+        aliases[method.toLowerCase()] || method
       )}
     </span>
   );
