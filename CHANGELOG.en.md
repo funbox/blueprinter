@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.0 (09.01.2020)
+
+* Display HTTP methods names in uppercase.
+
 ## 3.0.0 (27.12.2019)
 
 * Implement new design.
