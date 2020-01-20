@@ -10,6 +10,7 @@ argsParser
   .example('$0 -i example.apib -s', 'Start live server')
   .options('i', { alias: 'input', describe: 'Input file' })
   .options('o', { alias: 'output', describe: 'Output file' })
+  .options('S', { alias: 'strict', describe: 'Strict mode' })
   .options('s', { alias: 'server', describe: 'Start a local live preview server' })
   .options('h', { alias: 'host', describe: 'Address to bind local preview server to', default: '127.0.0.1' })
   .options('p', { alias: 'port', describe: 'Port for local preview server', default: 3001 });
@@ -38,7 +39,7 @@ if (argv.s) {
 } else {
   if (!argv.i || !argv.o) argvError();
 
-  renderAndBuild(argv.i, argv.o)
+  renderAndBuild(argv.i, argv.o, argv.S)
     .then(() => exit())
     .catch(error => exit(error));
 }
