@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.0 (23.01.2020)
+
+* Add strict build mode.
+
 ## 3.1.0 (09.01.2020)
 
 * Display HTTP methods names in uppercase.
