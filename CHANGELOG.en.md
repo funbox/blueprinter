@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.1 (24.01.2020)
+
+* Fix eslint dependencies installation.
+
 ## 3.2.0 (23.01.2020)
 
 * Add strict build mode.
