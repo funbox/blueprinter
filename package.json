@@ -45,6 +45,8 @@
     "@funbox/scss-lint-config": "2.6.0",
     "@funbox/scss-utils": "1.1.1",
     "@funbox/scss-vars-loader": "2.1.0",
+    "acorn": "6.4.0",
+    "acorn-jsx": "5.1.0",
     "autoprefixer": "9.6.1",
     "babel-plugin-transform-react-remove-prop-types": "0.4.12",
     "base64-inline-loader": "1.1.1",
