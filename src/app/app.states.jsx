@@ -21,7 +21,6 @@ const component = () => (
   </BrowserRouter>
 );
 
-ReactDOM.render(
-  React.createElement(ENV === 'dev' ? hot(component) : component),
-  document.getElementById('react-app'),
-);
+const Application = ENV === 'dev' ? hot(component) : component;
+
+ReactDOM.render(<Application/>, document.getElementById('react-app'));
