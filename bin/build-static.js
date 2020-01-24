@@ -2,11 +2,11 @@ process.env.ENV = 'production';
 process.env.NODE_ENV = 'production';
 
 const path = require('path');
-const webpack = require('@funbox/frontend-env-webpack').webpack;
+const webpack = require('webpack');
 const SuppressEntryChunksPlugin = require('suppress-chunks-webpack-plugin').default;
 
 const BASE_PATH = `${__dirname}/..`;
-const buildConfig = require(path.resolve(BASE_PATH, 'config/webpack.app.doc.js'));
+const buildConfig = require(path.resolve(BASE_PATH, 'config/webpack/doc.config.js'));
 
 buildConfig.plugins.push(
   new SuppressEntryChunksPlugin(

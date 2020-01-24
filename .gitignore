@@ -47,7 +47,6 @@ Session.vim
 # -- Public --
 /public
 
-
 # -- Tests --
 /test-reports
 /gemini-*
