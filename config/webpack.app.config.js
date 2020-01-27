@@ -197,5 +197,7 @@ module.exports = options => {
     ]);
   }
 
+  config.output.publicPath = '';
+
   return config;
 };

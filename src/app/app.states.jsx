@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
 import App from './components/app';
@@ -13,12 +13,12 @@ const sandbox = () => {
 };
 
 const component = () => (
-  <BrowserRouter basename={BASE_PATH}>
+  <HashRouter basename={BASE_PATH}>
     <Switch>
       {sandbox()}
       <Route component={App}/>
     </Switch>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 const Application = ENV === 'dev' ? hot(component) : component;
