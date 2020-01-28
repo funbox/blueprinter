@@ -26,11 +26,9 @@ export default class App extends React.Component {
   componentDidMount() {
     const { location, history } = this.props;
 
-    if (location.hash !== '') {
-      const route = createRouteFromHash(location.hash);
-      if (route) {
-        history.push(route);
-      }
+    const route = convertLegacyUrl(location.pathname);
+    if (route && location.pathname !== route) {
+      history.push(route);
     }
   }
 
@@ -110,11 +108,11 @@ App.propTypes = {
   }),
 };
 
-function createRouteFromHash(hash) {
+function convertLegacyUrl(url) {
   let groupHash = '';
   let resourceHash = '';
   let actionHash = '';
-  let localHash = decodeURIComponent(hash).slice(1); // remove #
+  let localHash = decodeURIComponent(url).slice(1); // remove /
 
   for (let i = 0; i < groups.length; i++) {
     const group = groups[i];
