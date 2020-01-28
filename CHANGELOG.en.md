@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.3.0 (28.01.2020)
+
+* Add the ability to open resulting HTML file without any web server.
+
 ## 3.2.1 (24.01.2020)
 
 * Fix eslint dependencies installation.
