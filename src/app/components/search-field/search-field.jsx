@@ -5,7 +5,6 @@ import MethodBadge from 'app/components/method-badge';
 import locationParams from 'app/common/utils/helpers/locationParams';
 
 const MAX_VISIBLE_ITEMS = 10;
-const MIN_QUERY_LENGTH = 3; // нужно ввести более трёх символов
 
 const propTypes = {
   location: PropTypes.shape({
@@ -88,9 +87,7 @@ class SearchField extends React.Component {
       this.setState({ open: true });
     }
 
-    if (onSearch && value.length >= MIN_QUERY_LENGTH) {
-      onSearch(value);
-    }
+    onSearch(value);
   }
 
   onKeyDown(event) {
@@ -203,7 +200,6 @@ class SearchField extends React.Component {
     const defaultMods = { open };
     const visibleItems = items.slice(0, MAX_VISIBLE_ITEMS);
     const showMoreStories = items.length > visibleItems.length;
-    const shortQuery = filterString.length < MIN_QUERY_LENGTH;
 
     return (
       <div className={b('search-field', this.props, defaultMods)}>
@@ -295,9 +291,7 @@ class SearchField extends React.Component {
           {
             visibleItems.length === 0 && (
               <p className={b('search-field__message')}>
-                {
-                  shortQuery ? 'Введите не менее 3-х символов' : 'Ничего не найдено'
-                }
+                Ничего не найдено
               </p>
             )
           }
