@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.3.1 (03.02.2020)
+
+* Delete constraints of search query minimum length.
+
 ## 3.3.0 (28.01.2020)
 
 * Add the ability to open resulting HTML file without any web server.
