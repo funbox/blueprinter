@@ -60,6 +60,9 @@ class Transition extends React.Component {
       };
     });
 
+    const formattedBody = body && (isString(body) ? body.trim() : JSON.stringify(body, null, 2));
+    const isJsonBody = body && body[0] === '{';
+
     return (
       <Section
         title={title}
@@ -116,7 +119,7 @@ class Transition extends React.Component {
           </Section>
         )}
 
-        {!!body && (
+        {!!formattedBody && (
           <Section
             title="Body"
             titleTag="h5"
@@ -124,9 +127,9 @@ class Transition extends React.Component {
             mix={b('transition__section')}
           >
             <CodeSnippet
-              mods={{ for: 'asset' }}
+              mods={{ for: 'asset', disabledSyntax: !isJsonBody }}
             >
-              {isString(body) ? body.trim() : JSON.stringify(body, null, 2)}
+              {formattedBody}
             </CodeSnippet>
           </Section>
         )}
