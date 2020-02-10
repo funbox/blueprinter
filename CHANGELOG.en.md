@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.4.0 (10.02.2020)
+
+* Improve highlight of code punctuation.
+
 ## 3.3.1 (03.02.2020)
 
 * Delete constraints of search query minimum length.
