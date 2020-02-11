@@ -38,8 +38,14 @@ const formatHref = (href, variables) => {
       definedValue = (Array.isArray(value) && value[0]) ? value[0].content : (value.content || value);
     }
 
-    if (Array.isArray(paramKeys) && (paramKeys.includes(name) || paramKeys.includes(`${name}*`))) {
-      constructedParams.push(`${name}=${definedValue}`);
+    if (Array.isArray(paramKeys)) {
+      if (paramKeys.includes(name)) {
+        constructedParams.push(`${name}=${definedValue}`);
+      } else if (paramKeys.includes(`${name}*`)) {
+        definedValue
+          .split(',')
+          .forEach(definedValueItem => constructedParams.push(`${name}=${definedValueItem.trim()}`));
+      }
     }
 
     href = href.replace(`{${name}}`, definedValue);
