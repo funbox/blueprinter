@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.5.0 (12.02.2020)
+
+* Use Roboto font and fix styles of the sidebar.
+
 ## 3.4.1 (12.02.2020)
 
 * Fix parsing of URI parameters that have star symbol.
