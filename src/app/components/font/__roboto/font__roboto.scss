@@ -13,3 +13,11 @@
   font-style: normal;
   font-display: swap;
 }
+
+@font-face {
+  src: local('Roboto Bold'), local('Roboto-Bold'), url('./font__roboto_bold.ttf');
+  font-family: Roboto;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
