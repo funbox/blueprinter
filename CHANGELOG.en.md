@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.4.1 (12.02.2020)
+
+* Fix parsing of URI parameters that have star symbol.
+
 ## 3.4.0 (10.02.2020)
 
 * Improve highlight of code punctuation.
