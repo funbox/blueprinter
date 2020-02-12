@@ -2,7 +2,6 @@
   .menu__item-content {
     display: block;
     text-decoration: none;
-    font-weight: 500;
     color: $black;
 
     &:hover, &:focus {
@@ -27,7 +26,7 @@
 
   .menu__item_level_2 {
     > .menu__item-content {
-      padding: 17px 46px 17px 30px;
+      padding: 9px 46px 9px 30px;
 
       > .menu__item-text {
         padding-left: 18px;
@@ -36,11 +35,8 @@
   }
 
   .menu__item_level_3 {
-    font-size: 12px;
-    line-height: 16px;
-
     > .menu__item-content {
-      padding: 18px 46px 18px 30px;
+      padding: 9px 46px 9px 30px;
 
       > .menu__item-text {
         padding-left: 36px;

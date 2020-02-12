@@ -3,8 +3,9 @@
   box-sizing: border-box;
   width: 100%;
   padding: 16px;
-  font-weight: 600;
+  font-weight: 500;
   color: $color--secondary;
+  font-size: 12px;
 
   &:hover, &:focus {
     background-color: rgba($grayLight, .5);
