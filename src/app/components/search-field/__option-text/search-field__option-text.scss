@@ -1,10 +1,10 @@
 .search-field__option-text {
   overflow: hidden;
+  padding-right: 4px;
   text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
   color: inherit;
-  padding-right: 4px;
 
   &:focus {
     outline: none;
