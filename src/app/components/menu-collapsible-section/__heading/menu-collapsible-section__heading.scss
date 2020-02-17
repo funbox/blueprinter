@@ -1,0 +1,7 @@
+.menu-collapsible-section__heading {
+  display: flex;
+
+  &:hover, &:focus-within {
+    background-color: $background-color--hover;
+  }
+}
