@@ -20,6 +20,7 @@ const Menu__Item = (props) => {
   delete localProps.icon;
   delete localProps.text;
   delete localProps.submenu;
+  delete localProps.tag;
 
   return (
     <li className={b('menu__item', props)}>
