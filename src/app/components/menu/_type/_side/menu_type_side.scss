@@ -1,0 +1,92 @@
+.menu_type_side {
+  .menu__item-title {
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-left: 30px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .menu__item-text {
+    display: -webkit-box; // stylelint-disable-line value-no-vendor-prefix
+    overflow: hidden;
+    max-width: 100%;
+    padding: 9px 0;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    color: $color--body;
+
+    // https://github.com/postcss/autoprefixer/issues/776
+    /* autoprefixer: ignore next */
+    -webkit-box-orient: vertical; // stylelint-disable-line property-no-vendor-prefix
+    -webkit-line-clamp: 3; // stylelint-disable-line property-no-vendor-prefix
+
+    &:focus {
+      outline: none;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  .menu__item_level_1 {
+    .menu__item-title {
+      font-weight: 500;
+    }
+  }
+
+  .menu__item_level_2 {
+    .menu__item-title {
+      font-weight: 400;
+    }
+
+    .menu__item-text {
+      padding-left: 18px;
+    }
+  }
+
+  .menu__item_level_3 {
+    .menu__item-text {
+      padding-right: 8px;
+      padding-left: 36px;
+    }
+  }
+
+  .menu__item:not(.menu__item_has-submenu) {
+    > .menu__item-content {
+      display: flex;
+
+      > .menu__item-title {
+        padding-right: 54px;
+
+        &:hover, &:focus-within {
+          background-color: $background-color--hover;
+        }
+      }
+
+      .menu__item-icon {
+        position: absolute;
+        right: 16px;
+        line-height: 10px;
+      }
+    }
+  }
+
+  .menu__item-title_highlighted {
+    > .menu__item-text {
+      color: $color--highlight;
+    }
+  }
+}
