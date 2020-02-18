@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.5.1 (18.02.2020)
+
+* Refactor side navigation.
+
 ## 3.5.0 (12.02.2020)
 
 * Use Roboto font and fix styles of the sidebar.
