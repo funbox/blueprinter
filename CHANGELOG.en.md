@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.6.0 (18.02.2020)
+
+* Use local webpack configs.
+
 ## 3.5.2 (18.02.2020)
 
 * Add a check for unique response.
