@@ -152,9 +152,11 @@ export const refactorAction = (action) => {
     }
 
     const isRequestUnique = !acc.some(t => deepEqual(t.request, formattedTransaction.request));
+    const isResponseUnique = !acc.some(t => deepEqual(t.response, formattedTransaction.response));
+
     acc.push({
       request: isRequestUnique ? formattedTransaction.request : {},
-      response: formattedTransaction.response,
+      response: isResponseUnique ? formattedTransaction.response : {},
     });
     return acc;
   }, []);
