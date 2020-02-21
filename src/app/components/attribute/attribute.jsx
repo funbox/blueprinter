@@ -1,4 +1,4 @@
-import { SlideToggle } from 'react-slide-toggle';
+import SlideToggle from 'react-slide-toggle';
 import Attribute__Row from './__row';
 
 class Attribute extends React.Component {

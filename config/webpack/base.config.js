@@ -26,6 +26,7 @@ module.exports = {
     alias: {
       'app.settings.env': path.resolve(PATH.PROJECT, `src/app/app.settings.${ENV}`),
       'app.envDeps.env': path.resolve(PATH.PROJECT, `src/app/app.envDeps.${ENV}`),
+      'react-dom': '@hot-loader/react-dom',
     },
   },
   optimization: {

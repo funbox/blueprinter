@@ -52,7 +52,9 @@ module.exports = merge(
             {
               loader: 'sass-loader',
               options: {
-                includePaths: [path.resolve('src')],
+                sassOptions: {
+                  includePaths: [path.resolve('src')],
+                },
               },
             },
             {

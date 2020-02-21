@@ -1,4 +1,4 @@
-import { SlideToggle } from 'react-slide-toggle';
+import SlideToggle from 'react-slide-toggle';
 import { Menu__Item } from 'fb-base-blocks/menu';
 
 const propTypes = {

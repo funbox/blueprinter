@@ -34,7 +34,7 @@ module.exports = merge(
             {
               loader: 'css-loader',
               options: {
-                sourceMaps: true,
+                sourceMap: true,
               },
             },
             {
@@ -53,8 +53,10 @@ module.exports = merge(
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: true,
-                includePaths: [path.resolve('src')],
+                sassOptions: {
+                  sourceMap: true,
+                  includePaths: [path.resolve('src')],
+                },
               },
             },
             {

@@ -1,4 +1,4 @@
-import { SlideToggle } from 'react-slide-toggle';
+import SlideToggle from 'react-slide-toggle';
 import { withRouter } from 'react-router-dom';
 
 import Button from 'fb-base-blocks/button';
