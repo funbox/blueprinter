@@ -31,7 +31,7 @@
     "@funbox/free-port-finder": "2.0.1",
     "@hot-loader/react-dom": "16.10.2",
     "browser-sync": "2.26.7",
-    "react-hot-loader": "4.12.15",
+    "react-hot-loader": "4.12.19",
     "yargs": "12.0.1"
   },
   "devDependencies": {
