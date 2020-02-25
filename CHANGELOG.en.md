@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.6.1 (25.02.2020)
+
+* Update react-hot-loader.
+
 ## 3.6.0 (18.02.2020)
 
 * Use local webpack configs.
