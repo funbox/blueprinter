@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.7.0 (27.02.2020)
+
+* Update dependencies.
+
 ## 3.6.1 (25.02.2020)
 
 * Update react-hot-loader.
