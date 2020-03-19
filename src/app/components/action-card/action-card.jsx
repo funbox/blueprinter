@@ -1,9 +1,32 @@
+import URL from 'url-parse';
+import parser from 'html-react-parser';
+
 import RawContent from 'app/components/raw-content';
 import Link from 'app/components/link';
 import Parameters from 'app/components/parameters';
 import TransitionContainer from 'app/components/transition-container';
 import { get, withHeaderAnchors } from 'app/common/utils/helpers';
 import formatHref from 'app/common/utils/helpers/formatHref';
+
+const highlightQuery = (queryKey, queryValue) => {
+  const key = `<span class="hljs-params">${queryKey}</span>`;
+  const value = `<span class="hljs-value">${queryValue}</span>`;
+
+  return `${key}=${value}`;
+};
+
+const getFormattedQuery = queryObj => (
+  Object.keys(queryObj).map(qKey => {
+    if (queryObj[qKey].includes(',')) {
+      return queryObj[qKey]
+        .split(',')
+        .map(qValue => highlightQuery(qKey, qValue.trim()))
+        .join('&');
+    }
+
+    return highlightQuery(qKey, queryObj[qKey]);
+  }).join('&')
+);
 
 const ActionCard = (props) => {
   const {
@@ -19,6 +42,9 @@ const ActionCard = (props) => {
   const method = attributes.method || props.method;
 
   const formattedHref = hrefVariables ? formatHref(href, hrefVariables) : href;
+
+  const { pathname, query } = new URL(formattedHref, true);
+  const formattedQuery = getFormattedQuery(query);
 
   return (
     <div className={b('action-card', { mods: { type: method } })}>
@@ -44,11 +70,13 @@ const ActionCard = (props) => {
           </span>
         </p>
 
-        {
-          <p className="action-card__formatted-href">
-            {formattedHref}
-          </p>
-        }
+        <p className="action-card__formatted-href">
+          <span className="action-card__example-method">{method}</span>
+          {' '}
+          {pathname}
+          {!!formattedQuery && '?'}
+          <span className="transition__query">{parser(formattedQuery)}</span>
+        </p>
       </div>
 
       <div className="action-card__body">

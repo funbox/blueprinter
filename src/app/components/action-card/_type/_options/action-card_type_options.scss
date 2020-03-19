@@ -6,4 +6,8 @@
   .action-card__method-href-container {
     background-color: rgba($options-method-color--primary, .08);
   }
+
+  .action-card__example-method {
+    color: $options-method-color--primary;
+  }
 }

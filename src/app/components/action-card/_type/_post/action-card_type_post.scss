@@ -6,4 +6,8 @@
   .action-card__method-href-container {
     background-color: rgba($post-method-color--primary, .08);
   }
+
+  .action-card__example-method {
+    color: $post-method-color--primary;
+  }
 }
