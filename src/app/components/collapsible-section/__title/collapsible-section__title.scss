@@ -15,4 +15,12 @@
     border-style: solid;
     border-color: $steelGray transparent transparent;
   }
+
+  &:hover {
+    color: #080914;
+
+    &::before {
+      border-top-color: #2e343c;
+    }
+  }
 }

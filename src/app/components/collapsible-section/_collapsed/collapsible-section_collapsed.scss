@@ -5,7 +5,11 @@
       margin-bottom: 2px;
       border-width: 5px 0 5px 5px;
       border-style: solid;
-      border-color: transparent transparent transparent $black;
+      border-color: transparent transparent transparent $steelGray;
+    }
+
+    &:hover::before {
+      border-left-color: #2e343c;
     }
   }
 }
