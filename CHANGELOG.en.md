@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.9.1 (20.03.2020)
+
+* Fix lists rendering.
+
 ## 3.9.0 (20.03.2020)
 
 * Collapse sections with a schema.
