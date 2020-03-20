@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.9.0 (20.03.2020)
+
+* Collapse sections with a schema.
+
 ## 3.8.0 (20.03.2020)
 
 * Highlight URL parameters in a sample of a response.
