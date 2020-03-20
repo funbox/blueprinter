@@ -1,0 +1,11 @@
+.collapsible-section_collapsed {
+  .collapsible-section__title {
+    &::before {
+      margin-right: 10px;
+      margin-bottom: 2px;
+      border-width: 5px 0 5px 5px;
+      border-style: solid;
+      border-color: transparent transparent transparent $black;
+    }
+  }
+}

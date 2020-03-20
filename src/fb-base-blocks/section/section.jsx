@@ -10,11 +10,13 @@ const Section = (props) => {
 
   return (
     <section className={b('section', props)} id={id}>
-      <div className="section__header">
-        <TitleTag className="section__title">
-          {title}
-        </TitleTag>
-      </div>
+      {!!title && (
+        <div className="section__header">
+          <TitleTag className="section__title">
+            {title}
+          </TitleTag>
+        </div>
+      )}
       <div className="section__body">
         {children}
       </div>
@@ -25,7 +27,7 @@ const Section = (props) => {
 Section.propTypes = {
   children: PropTypes.node,
   id: PropTypes.string,
-  title: PropTypes.node.isRequired,
+  title: PropTypes.node,
   titleTag: PropTypes.string,
 };
 

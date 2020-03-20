@@ -1,6 +1,7 @@
 import Section from 'app/components/section';
 import AttributesList from 'app/components/attirbutes-list';
 import CodeSnippet from 'app/components/code-snippet';
+import CollapsibleSection from 'app/components/collapsible-section';
 import Transition__ExampleList from './__example-list';
 
 const formatHeaders = arrayOfHeaders => arrayOfHeaders.reduce((res, h) => {
@@ -135,18 +136,20 @@ class Transition extends React.Component {
         )}
 
         {!!schema && (
-          <Section
+          <CollapsibleSection
+            mix="transition__section"
             title="Schema"
-            titleTag="h5"
-            mods={{ for: 'transition-content' }}
-            mix={b('transition__section')}
           >
-            <CodeSnippet
-              mods={{ for: 'asset' }}
+            <Section
+              mods={{ for: 'transition-content' }}
             >
-              {isString(schema) ? schema : JSON.stringify(schema, null, 2)}
-            </CodeSnippet>
-          </Section>
+              <CodeSnippet
+                mods={{ for: 'asset' }}
+              >
+                {isString(schema) ? schema : JSON.stringify(schema, null, 2)}
+              </CodeSnippet>
+            </Section>
+          </CollapsibleSection>
         )}
       </Section>
     );

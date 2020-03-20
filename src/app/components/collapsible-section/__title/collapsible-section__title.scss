@@ -1,0 +1,18 @@
+.collapsible-section__title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 26px;
+  cursor: pointer;
+  user-select: none;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    box-sizing: border-box;
+    margin-right: 5px;
+    margin-bottom: 4px;
+    border-width: 5px 5px 0;
+    border-style: solid;
+    border-color: $steelGray transparent transparent;
+  }
+}
