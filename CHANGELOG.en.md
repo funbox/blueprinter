@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.8.0 (20.03.2020)
+
+* Highlight URL parameters in a sample of a response.
+
 ## 3.7.0 (27.02.2020)
 
 * Update dependencies.
