@@ -68,15 +68,6 @@ module.exports = merge(
             '@funbox/scss-vars-loader',
           ],
         },
-        {
-          test: /\.(woff|woff2|ttf|otf|eot)$/,
-          use: {
-            loader: 'file-loader',
-            options: {
-              name: 'fonts/[contenthash].[ext]',
-            },
-          },
-        },
       ],
     },
     devServer: {
