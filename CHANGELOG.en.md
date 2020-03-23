@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.9.3 (23.03.2020)
+
+* Add a check for member fields precedence.
+
 ## 3.9.2 (23.03.2020)
 
 * Fix displaying samples of an attribute.
