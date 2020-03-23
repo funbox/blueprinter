@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.9.2 (23.03.2020)
+
+* Fix displaying samples of an attribute.
+
 ## 3.9.1 (20.03.2020)
 
 * Fix lists rendering.
