@@ -58,6 +58,15 @@ const resolveInheritance = (valueMember, parent) => {
       valueMember.attributes = usefulContent.attributes;
     } else {
       if (!Array.isArray(valueMember.content)) valueMember.content = [];
+      if (valueMember.content.length && referencedObjectContent.length) {
+        referencedObjectContent = referencedObjectContent.filter(rfcItem => !valueMember.content.find(vmcItem => {
+          if (rfcItem.element === 'member' && vmcItem.element === 'member') {
+            return rfcItem.content.key.content === vmcItem.content.key.content;
+          }
+          return false;
+        }));
+      }
+
       valueMember.content.unshift(...referencedObjectContent);
       valueMember.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
       valueMember.attributes = usefulContent.attributes;
