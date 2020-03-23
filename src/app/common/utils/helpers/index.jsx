@@ -45,12 +45,10 @@ const extractAttributeData = (attribute, disabledExample = false) => {
   if (key && value) {
     attributeKey = key.content || null;
     attributeType = value.element || null;
-    attributeExample = disabledExample || value.content === undefined
-      ? null : value.content;
+    attributeExample = disabledExample ? null : getAttributeExample(value);
   } else {
     attributeType = typeAlias[attribute.element] || attribute.element || null;
-    attributeExample = disabledExample || attribute.content === undefined
-      ? null : attribute.content;
+    attributeExample = disabledExample ? null : getAttributeExample(attribute);
   }
 
   const attributeDescription = get('meta', 'description', 'content').from(attribute);
@@ -215,6 +213,25 @@ function getDescriptionHeaders(description) {
   }
 
   return descriptionHeaders;
+}
+
+function getAttributeExample(valueElement) {
+  if (valueElement.content !== undefined && isPrimitive(valueElement.content)) {
+    return valueElement.content;
+  }
+
+  const samples = get('attributes', 'samples', 'content').from(valueElement);
+  return Array.isArray(samples) ? samples.map(sampleElement => {
+    if (sampleElement.element === 'array') {
+      return sampleElement.content.map(sample => sample.content).join(', ');
+    }
+
+    return sampleElement.content;
+  }).join(', ') : null;
+}
+
+function isPrimitive(value) {
+  return ['string', 'number', 'boolean'].includes(typeof value);
 }
 
 export {
