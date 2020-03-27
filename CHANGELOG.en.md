@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.10.0 (27.03.2020)
+
+* Implement new algorithm of search.
+
 ## 3.9.3 (23.03.2020)
 
 * Add a check for member fields precedence.
