@@ -1,9 +1,3 @@
-const defaultFound = Object.freeze({
-  group: [],
-  resource: [],
-  action: [],
-});
-
 const possibleModifiers = {
   type: ['group', 'action', 'resource'],
   method: ['delete', 'get', 'head', 'options', 'patch', 'post', 'put', 'message'],
@@ -19,8 +13,6 @@ class SearchService {
     this.sourceGroups = groups;
     this.sourceResources = resources;
     this.sourceActions = actions;
-
-    this.found = defaultFound;
   }
 
   search(rawSearchQuery) {
@@ -36,25 +28,7 @@ class SearchService {
     const midPriorityMatch = groupMid.concat(resMid, actionMid);
     const lowPriorityMatch = groupLow.concat(resLow, actionLow);
 
-    this.found = {
-      ...defaultFound,
-      group: groupHigh.concat(groupMid, groupLow),
-      resource: resHigh.concat(resMid, resLow),
-      action: actionHigh.concat(actionMid, actionLow),
-    };
-
     return highPriorityMatch.concat(midPriorityMatch, lowPriorityMatch);
-  }
-
-  applyFilter(activeFilters) {
-    return Object.entries(activeFilters).reduce((acc, entry) => {
-      const [type, isActive] = entry;
-      if (isActive) {
-        const res = this.found[type];
-        return acc.concat(res);
-      }
-      return acc;
-    }, []);
   }
 }
 
