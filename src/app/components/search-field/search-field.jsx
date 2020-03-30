@@ -1,10 +1,14 @@
 /* eslint-disable react/no-danger */
+import { FixedSizeList } from 'react-window';
 import Button from 'fb-base-blocks/button';
 import TextField from 'app/components/text-field';
 import MethodBadge from 'app/components/method-badge';
 import locationParams from 'app/common/utils/helpers/locationParams';
 
-const MAX_VISIBLE_ITEMS = 10;
+import SearchField__OptionList from './__option-list';
+
+const SEARCH_OPTIONS_PER_FRAME = 10;
+const SEARCH_OPTION_HEIGHT = 36;
 
 const propTypes = {
   location: PropTypes.shape({
@@ -198,8 +202,10 @@ class SearchField extends React.Component {
     delete textFieldProps.mix;
 
     const defaultMods = { open };
-    const visibleItems = items.slice(0, MAX_VISIBLE_ITEMS);
-    const showMoreStories = items.length > visibleItems.length;
+
+    const dropdownHeight = items.length < SEARCH_OPTIONS_PER_FRAME
+      ? items.length * SEARCH_OPTION_HEIGHT
+      : SEARCH_OPTIONS_PER_FRAME * SEARCH_OPTION_HEIGHT;
 
     return (
       <div className={b('search-field', this.props, defaultMods)}>
@@ -239,57 +245,49 @@ class SearchField extends React.Component {
           ref={this.dropdown}
         >
           {
-            visibleItems.length > 0 && (
-              <>
-                <ul className={b('search-field__option-list')}>
-                  {
-                    visibleItems.map(item => {
-                      const highlighted = highlightedItem && highlightedItem.value === item.value;
-                      const text = getHighlightedSuggestion(item.label, filterString.trim());
-                      return (
-                        <li
-                          key={item.value}
-                          className={b('search-field__option', { mods: { highlighted, type: item.type } })}
-                        >
-                          <Button
-                            onClick={() => this.select(item)}
-                            mix={b('search-field__option-text')}
-                            to={item.to}
-                          >
-                            <span
-                              className={b('button__text')}
-                              dangerouslySetInnerHTML={{ __html: text }}
-                            />
-                          </Button>
-
-                          {item.type === 'action' && (
-                            <MethodBadge
-                              method={item.method}
-                              mix={b('search-field__badge')}
-                            />
-                          )}
-                        </li>
-                      );
-                    })
-                  }
-                </ul>
-
-                {
-                  showMoreStories && (
-                    <Button
-                      mix={[b('search-field__more-stories')]}
-                      onClick={this.onShowMoreButtonClick}
+            items.length > 0 && (
+              <FixedSizeList
+                height={dropdownHeight}
+                width="100%"
+                itemCount={items.length}
+                itemSize={SEARCH_OPTION_HEIGHT}
+                innerElementType={SearchField__OptionList}
+              >
+                {({ index, style }) => {
+                  const item = items[index];
+                  const highlighted = highlightedItem && highlightedItem.value === item.value;
+                  const text = getHighlightedSuggestion(item.label, filterString.trim());
+                  return (
+                    <li
+                      style={style}
+                      className={b('search-field__option', { mods: { highlighted, type: item.type } })}
                     >
-                      Показать больше
-                    </Button>
-                  )
-                }
-              </>
+                      <Button
+                        onClick={() => this.select(item)}
+                        mix={b('search-field__option-text')}
+                        to={item.to}
+                      >
+                        <span
+                          className={b('button__text')}
+                          dangerouslySetInnerHTML={{ __html: text }}
+                        />
+                      </Button>
+
+                      {item.type === 'action' && (
+                        <MethodBadge
+                          method={item.method}
+                          mix={b('search-field__badge')}
+                        />
+                      )}
+                    </li>
+                  );
+                }}
+              </FixedSizeList>
             )
           }
 
           {
-            visibleItems.length === 0 && (
+            items.length === 0 && (
               <p className={b('search-field__message')}>
                 Ничего не найдено
               </p>
