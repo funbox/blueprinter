@@ -9,7 +9,6 @@ import GroupRoutes from 'app/views/groups';
 import ResourceRoutes from 'app/views/resources';
 import ActionRoutes from 'app/views/actions';
 import Error from 'app/views/error';
-import SearchResultView from 'app/views/search-result';
 import ContentNotFound from 'app/views/404';
 
 const source = window.refract || sourceMock;
@@ -75,18 +74,6 @@ export default class App extends React.Component {
             )}
           />
           {routes}
-          <Route
-            exact
-            path="/search-result"
-            render={(routeProps) => (
-              <SearchResultView
-                {...routeProps}
-                groups={groups}
-                resources={resources}
-                actions={actions}
-              />
-            )}
-          />
           <Route
             exact
             path="/404"
