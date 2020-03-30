@@ -61,6 +61,7 @@ class SearchField extends React.Component {
     this.onInputFocus = this.onInputFocus.bind(this);
     this.select = this.select.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
+    this.getItemKey = this.getItemKey.bind(this);
   }
 
   componentDidMount() {
@@ -183,6 +184,12 @@ class SearchField extends React.Component {
     }
   }
 
+  getItemKey(index) {
+    const { items } = this.props;
+
+    return items[index] ? items[index].id : null;
+  }
+
   render() {
     const {
       open,
@@ -252,6 +259,7 @@ class SearchField extends React.Component {
                 itemCount={items.length}
                 itemSize={SEARCH_OPTION_HEIGHT}
                 innerElementType={SearchField__OptionList}
+                itemKey={this.getItemKey}
               >
                 {({ index, style }) => {
                   const item = items[index];

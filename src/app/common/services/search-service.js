@@ -57,7 +57,7 @@ function searchInSource(query, source, sourceType, searchModifiers) {
       ? true
       : method.toLowerCase() === searchModifiers.method.toLowerCase();
 
-    const searchItem = {
+    const searchItemBase = {
       label: sourceItem.title,
       value: sourceItem.route,
       to: sourceItem.route,
@@ -75,18 +75,25 @@ function searchInSource(query, source, sourceType, searchModifiers) {
 
       if (hrefMatch) {
         highPriorityMatch.push({
-          ...searchItem,
+          ...searchItemBase,
           label: href,
+          id: `high-${sourceType}-${searchItemBase.value}`,
         });
       }
     }
 
     if (titleMatch) {
-      midPriorityMatch.push(searchItem);
+      midPriorityMatch.push({
+        ...searchItemBase,
+        id: `mid-${sourceType}-${searchItemBase.value}`,
+      });
     }
 
     if (descriptionMatch) {
-      lowPriorityMatch.push(searchItem);
+      lowPriorityMatch.push({
+        ...searchItemBase,
+        id: `low-${sourceType}-${searchItemBase.value}`,
+      });
     }
   });
 
