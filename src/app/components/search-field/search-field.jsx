@@ -10,6 +10,8 @@ import SearchField__OptionList from './__option-list';
 const SEARCH_OPTIONS_PER_FRAME = 10;
 const SEARCH_OPTION_HEIGHT = 36;
 
+const FORWARD_SLASH_KEY_CODE = 191;
+
 const propTypes = {
   location: PropTypes.shape({
     search: PropTypes.string,
@@ -55,7 +57,8 @@ class SearchField extends React.Component {
     this.input = React.createRef();
 
     this.onSearch = this.onSearch.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
+    this.onInputKeyDown = this.onInputKeyDown.bind(this);
+    this.onDocumentKeyDown = this.onDocumentKeyDown.bind(this);
     this.closeOnClickAround = this.closeOnClickAround.bind(this);
     this.onShowMoreButtonClick = this.onShowMoreButtonClick.bind(this);
     this.onInputFocus = this.onInputFocus.bind(this);
@@ -66,6 +69,7 @@ class SearchField extends React.Component {
 
   componentDidMount() {
     window.addEventListener('click', this.closeOnClickAround);
+    document.addEventListener('keydown', this.onDocumentKeyDown);
     const { q: searchQuery } = locationParams.parse(this.props.location);
     if (searchQuery) {
       this.onSearch(searchQuery, false);
@@ -74,6 +78,7 @@ class SearchField extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('click', this.closeOnClickAround);
+    document.removeEventListener('keydown', this.onDocumentKeyDown);
   }
 
   onSearch(value, showDropdown = true) {
@@ -95,7 +100,7 @@ class SearchField extends React.Component {
     onSearch(value);
   }
 
-  onKeyDown(event) {
+  onInputKeyDown(event) {
     const { items, onKeyDown } = this.props;
     const { highlightedItem } = this.state;
     const itemsCount = items.length;
@@ -126,6 +131,19 @@ class SearchField extends React.Component {
 
       default:
         this.setState({ highlightedItem: null });
+    }
+  }
+
+  onDocumentKeyDown(event) {
+    const inputElement = this.input.current;
+
+    if (!inputElement) return;
+
+    const inputIsFocused = document.activeElement === inputElement;
+
+    if (event.keyCode === FORWARD_SLASH_KEY_CODE && !inputIsFocused) {
+      event.preventDefault(); // иначе символ `/` сразу же попадает в инпут поиска
+      inputElement.focus();
     }
   }
 
@@ -226,7 +244,7 @@ class SearchField extends React.Component {
           mix={b('search-field__field')}
           input={{
             mix: b('search-field__input'),
-            onKeyDown: this.onKeyDown,
+            onKeyDown: this.onInputKeyDown,
             ref: this.input,
           }}
           onFocus={this.onInputFocus}
