@@ -30,18 +30,14 @@ class SearchFieldContainer extends React.Component {
 
     const { groups, resources, actions } = props;
 
-    this.searchQuery = null;
     this.searchService = new SearchService(groups, resources, actions);
 
     this.onSearch = this.onSearch.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
-    this.onShowMoreButtonClick = this.onShowMoreButtonClick.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
   }
 
   onSearch(searchQuery) {
-    this.searchQuery = searchQuery;
-
     const searchResult = this.searchService.search(searchQuery);
 
     this.setState({
@@ -59,11 +55,6 @@ class SearchFieldContainer extends React.Component {
     this.props.history.push(selectedItem.to);
   }
 
-  onShowMoreButtonClick() {
-    const queryString = encodeURIComponent(this.searchQuery);
-    this.props.history.push(`/search-result?q=${queryString}`);
-  }
-
   render() {
     const { searchedItems } = this.state;
 
@@ -72,7 +63,6 @@ class SearchFieldContainer extends React.Component {
         items={searchedItems}
         onSearch={this.onSearch}
         onKeyDown={this.onKeyDown}
-        onShowMoreButtonClick={this.onShowMoreButtonClick}
         resetSearch={this.resetSearch}
         location={this.props.location}
       />

@@ -60,7 +60,6 @@ class SearchField extends React.Component {
     this.onInputKeyDown = this.onInputKeyDown.bind(this);
     this.onDocumentKeyDown = this.onDocumentKeyDown.bind(this);
     this.closeOnClickAround = this.closeOnClickAround.bind(this);
-    this.onShowMoreButtonClick = this.onShowMoreButtonClick.bind(this);
     this.onInputFocus = this.onInputFocus.bind(this);
     this.select = this.select.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
@@ -122,7 +121,6 @@ class SearchField extends React.Component {
 
       case 'Enter':
         if (!highlightedItem) {
-          this.onShowMoreButtonClick();
           return;
         }
         this.select(highlightedItem);
@@ -174,15 +172,6 @@ class SearchField extends React.Component {
 
     if (!(dropdownClick || inputClick)) {
       this.close();
-    }
-  }
-
-  onShowMoreButtonClick() {
-    const { onShowMoreButtonClick } = this.props;
-    this.close();
-
-    if (onShowMoreButtonClick) {
-      onShowMoreButtonClick();
     }
   }
 
