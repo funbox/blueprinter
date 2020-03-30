@@ -55,6 +55,7 @@ class SearchField extends React.Component {
     this.state = { ...this.defaultState };
     this.dropdown = React.createRef();
     this.input = React.createRef();
+    this.optionsList = React.createRef();
 
     this.onSearch = this.onSearch.bind(this);
     this.onInputKeyDown = this.onInputKeyDown.bind(this);
@@ -112,11 +113,11 @@ class SearchField extends React.Component {
     const itemIndex = items.indexOf(highlightedItem);
     switch (event.key) {
       case 'ArrowDown':
-        this.setState({ highlightedItem: (itemIndex === itemsCount - 1 ? items[0] : items[itemIndex + 1]) });
+        this.highlight(itemIndex === itemsCount - 1 ? 0 : (itemIndex + 1));
         break;
 
       case 'ArrowUp':
-        this.setState({ highlightedItem: (itemIndex === 0 ? items[itemsCount - 1] : items[itemIndex - 1]) });
+        this.highlight(itemIndex === 0 ? (itemsCount - 1) : (itemIndex - 1));
         break;
 
       case 'Enter':
@@ -152,6 +153,16 @@ class SearchField extends React.Component {
       onSelect(item);
     }
     this.close();
+  }
+
+  highlight(itemIndex) {
+    const { items } = this.props;
+
+    this.setState({
+      highlightedItem: items[itemIndex],
+    }, () => {
+      this.optionsList.current.scrollToItem(itemIndex);
+    });
   }
 
   close() {
@@ -267,6 +278,7 @@ class SearchField extends React.Component {
                 itemSize={SEARCH_OPTION_HEIGHT}
                 innerElementType={SearchField__OptionList}
                 itemKey={this.getItemKey}
+                ref={this.optionsList}
               >
                 {({ index, style }) => {
                   const item = items[index];
