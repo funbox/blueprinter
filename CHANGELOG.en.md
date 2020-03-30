@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.12.0 (30.03.2020)
+
+* Focus on the search field when «slash» key is pressed.
+
 ## 3.11.0 (30.03.2020)
 
 * Improve displaying of search results.
