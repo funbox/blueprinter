@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.11.0 (30.03.2020)
+
+* Improve displaying of search results.
+
 ## 3.10.0 (27.03.2020)
 
 * Implement new algorithm of search.
