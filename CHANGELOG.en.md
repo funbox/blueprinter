@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.12.1 (31.03.2020)
+
+* Fix navigation between search results using a keyboard.
+
 ## 3.12.0 (30.03.2020)
 
 * Focus on the search field when «slash» key is pressed.
