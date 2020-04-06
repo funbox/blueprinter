@@ -21,12 +21,12 @@ const renderAndServe = async (inputFileName, port, host) => {
       let newFilePaths;
       try {
         [newRefractData, newFilePaths] = await renderRefract(inputFileName);
+        watcher.close();
       } catch (e) {
         console.error(e);
       }
       refract = newRefractData;
       browserSync.reload();
-      watcher.close();
       watchSource([inputFileName, ...newFilePaths]);
     });
   };
