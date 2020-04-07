@@ -1,4 +1,4 @@
-import AttributesList from 'app/components/attirbutes-list';
+import AttributesList from 'app/components/attributes-list';
 import CodeSnippet from 'app/components/code-snippet';
 import Section from 'app/components/section';
 

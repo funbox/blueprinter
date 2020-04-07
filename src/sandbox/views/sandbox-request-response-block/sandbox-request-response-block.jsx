@@ -4,7 +4,7 @@ import SandboxParagraph from 'sandbox/components/sandbox-paragraph';
 import InlineCode from 'sandbox/components/inline-code';
 
 import CodeSnippet from 'app/components/code-snippet';
-import AttributesList from 'app/components/attirbutes-list';
+import AttributesList from 'app/components/attributes-list';
 import TransitionContainer from 'app/components/transition-container';
 
 import { body, schema, rawBody } from 'app/mocks/json';

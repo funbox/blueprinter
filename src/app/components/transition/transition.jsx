@@ -1,5 +1,5 @@
 import Section from 'app/components/section';
-import AttributesList from 'app/components/attirbutes-list';
+import AttributesList from 'app/components/attributes-list';
 import CodeSnippet from 'app/components/code-snippet';
 import CollapsibleSection from 'app/components/collapsible-section';
 import Transition__ExampleList from './__example-list';
