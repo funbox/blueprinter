@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.12.2 (07.04.2020)
+
+* Fix error caused by incorrect mime-type in dev mode.
+
 ## 3.12.1 (31.03.2020)
 
 * Fix navigation between search results using a keyboard.
