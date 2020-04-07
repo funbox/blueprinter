@@ -54,6 +54,7 @@ function startServer(port, host) {
   serverParams.middleware = [{
     route: '/refract.js',
     handle: (req, res) => {
+      res.setHeader('Content-Type', 'text/javascript');
       res.end(refract);
     },
   }];
