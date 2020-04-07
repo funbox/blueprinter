@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.12.3 (07.04.2020)
+
+* Fix rendering of elements of the side navigation.
+
 ## 3.12.2 (07.04.2020)
 
 * Fix error caused by incorrect mime-type in dev mode.
