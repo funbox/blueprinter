@@ -38,10 +38,10 @@ class MenuCollapsibleSection extends React.Component {
   }
 
   componentDidMount() {
-    const { content } = this.props;
+    const { content, visible } = this.props;
     const hasContent = !!content && content.length > 0;
 
-    if (hasContent && this.autoBuildContent()) {
+    if (hasContent && (visible || this.autoBuildContent())) {
       this.setState({ content }, () => {
         this.nestedMenuRef.current.createContent();
       });
