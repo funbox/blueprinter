@@ -223,7 +223,7 @@ function getAttributeExample(valueElement) {
   const samples = get('attributes', 'samples', 'content').from(valueElement);
   return Array.isArray(samples) ? samples.map(sampleElement => {
     if (sampleElement.element === 'array') {
-      return sampleElement.content.map(sample => sample.content).join(', ');
+      return `[${sampleElement.content.map(sample => sample.content).join(', ')}]`;
     }
 
     return sampleElement.content;
