@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.13.0 (08.04.2020)
+
+* Display samples of attributes with nested content.
+
 ## 3.12.3 (07.04.2020)
 
 * Fix rendering of elements of the side navigation.
