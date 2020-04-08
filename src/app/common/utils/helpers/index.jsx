@@ -31,7 +31,7 @@ const get = (...path) => {
   return { from };
 };
 
-const extractAttributeData = (attribute, disabledExample = false) => {
+const extractAttributeData = (attribute) => {
   const typeAlias = {
     select: 'One of',
   };
@@ -45,10 +45,10 @@ const extractAttributeData = (attribute, disabledExample = false) => {
   if (key && value) {
     attributeKey = key.content || null;
     attributeType = value.element || null;
-    attributeExample = disabledExample ? null : getAttributeExample(value);
+    attributeExample = getAttributeExample(value);
   } else {
     attributeType = typeAlias[attribute.element] || attribute.element || null;
-    attributeExample = disabledExample ? null : getAttributeExample(attribute);
+    attributeExample = getAttributeExample(attribute);
   }
 
   const attributeDescription = get('meta', 'description', 'content').from(attribute);

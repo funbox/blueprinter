@@ -44,7 +44,6 @@ class Attribute extends React.Component {
             <Attribute__Row
               attribute={attribute}
               parentType={parentType}
-              disabledExample={hasChildren}
               onClick={onToggle}
             />
 

@@ -1,28 +1,33 @@
 import { extractAttributeData, get } from 'app/common/utils/helpers';
 
 const Attribute__Row = (props) => {
-  const { attribute, parentType, disabledExample } = props;
+  const { attribute, parentType } = props;
   const {
     attributeKey,
     attributeType,
     attributeExample,
     attributeProps,
     attributeDescription,
-  } = extractAttributeData(attribute, disabledExample);
+  } = extractAttributeData(attribute);
 
   const enumMember = parentType === 'enum';
   const oneOfMember = parentType === 'One of';
   const oneOfElement = attributeType === 'One of';
 
   const attributeKeyByType = {
-    enum: attributeExample,
+    enum: enumMember ? attributeExample : attributeKey,
     'One of': attributeType,
   };
 
   return (
     <dl className={b('attribute__row', props)} onClick={props.onClick}>
       <dt className="attribute__key">
-        {attributeKeyByType[parentType] || attributeKeyByType[attributeType] || attributeKey}
+        {
+          attributeKeyByType[parentType]
+          || attributeKeyByType[attributeType]
+          || attributeKey
+        }
+
         {attributeProps && (
           <span className="attribute__props">
             {attributeProps.map(prop => {
@@ -78,7 +83,6 @@ Attribute__Row.propTypes = {
     ]),
   }),
   parentType: PropTypes.string,
-  disabledExample: PropTypes.bool,
   onClick: PropTypes.func,
 };
 
