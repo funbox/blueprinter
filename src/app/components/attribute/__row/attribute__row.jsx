@@ -19,15 +19,17 @@ const Attribute__Row = (props) => {
     'One of': attributeType,
   };
 
+  const attributeKeys = [
+    attributeKeyByType[parentType],
+    attributeKeyByType[attributeType],
+    attributeKey,
+  ];
+  const displayedAttrKey = attributeKeys.find(key => key !== undefined);
+
   return (
     <dl className={b('attribute__row', props)} onClick={props.onClick}>
       <dt className="attribute__key">
-        {
-          attributeKeyByType[parentType]
-          || attributeKeyByType[attributeType]
-          || attributeKey
-        }
-
+        {displayedAttrKey}
         {attributeProps && (
           <span className="attribute__props">
             {attributeProps.map(prop => {
