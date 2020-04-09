@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.13.1 (09.04.2020)
+
+* Fix displaying "0" in enum types.
+
 ## 3.13.0 (08.04.2020)
 
 * Display samples of attributes with nested content.
