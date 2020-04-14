@@ -12,14 +12,14 @@ const mkdir = promisify(fs.mkdir);
 const BASE_PATH = `${__dirname}/..`;
 const staticFileLocation = path.resolve(BASE_PATH, 'static/index.html');
 
-const createRefract = (inputFileName, strictMode) => promisify(crafter.parseFile)(inputFileName, {})
+const createRefract = (inputFileName, strictMode, buildMode) => promisify(crafter.parseFile)(inputFileName, {})
   .then(res => {
     try {
       const [result, filePaths] = res;
       const ast = JSON.stringify(result.toRefract());
 
       const [hasError, error] = astHasError(result);
-      if (hasError) {
+      if (hasError && buildMode) {
         return Promise.reject(new Error(`Crafter error: ${error}`));
       }
 
@@ -49,8 +49,8 @@ const sendStaticFile = async (outputFileName, refractData) => {
   }
 };
 
-const basicRenderRefract = async (inputFileName, processResult, strictMode = false) => {
-  const [refract, filePaths] = await createRefract(inputFileName, strictMode)
+const basicRenderRefract = async (inputFileName, processResult, strictMode = false, buildMode) => {
+  const [refract, filePaths] = await createRefract(inputFileName, strictMode, buildMode)
     .catch(error => Promise.reject(error));
 
   const refractData = processResult ? processResult(refract) : refract;
@@ -58,13 +58,13 @@ const basicRenderRefract = async (inputFileName, processResult, strictMode = fal
   return [refractData, filePaths];
 };
 
-const renderRefract = async (inputFileName, strictMode = false) => {
+const renderRefract = async (inputFileName, strictMode = false, buildMode) => {
   const processor = (refract) => `refract = ${refract};`;
-  return basicRenderRefract(inputFileName, processor, strictMode);
+  return basicRenderRefract(inputFileName, processor, strictMode, buildMode);
 };
 
 const renderAndBuild = async (inputFileName, outputFileName, strictMode = false) => {
-  const [refractData] = await renderRefract(inputFileName, strictMode);
+  const [refractData] = await renderRefract(inputFileName, strictMode, true);
   await sendStaticFile(outputFileName, refractData);
   console.log(`Rendering done. Open "${outputFileName}" to see result.`);
 };

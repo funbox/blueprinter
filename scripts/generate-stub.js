@@ -5,7 +5,7 @@ const { SOURCE_FILE, OUTPUT_FILE } = require('./apib-mock-vars');
 
 const writeFile = promisify(fs.writeFile);
 
-basicRenderRefract(SOURCE_FILE).then(async ([refractData]) => {
+basicRenderRefract(SOURCE_FILE, undefined, undefined, true).then(async ([refractData]) => {
   try {
     await writeFile(OUTPUT_FILE, refractData);
     console.log('Refract created.');

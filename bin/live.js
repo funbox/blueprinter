@@ -17,27 +17,14 @@ const renderAndServe = async (inputFileName, port, host) => {
 
     watcher.on('change', async (path) => {
       console.log(`Updated ${path}`);
-      let newRefractData;
-      let newFilePaths;
-      try {
-        [newRefractData, newFilePaths] = await renderRefract(inputFileName);
-        watcher.close();
-      } catch (e) {
-        console.error(e);
-      }
+      const [newRefractData, newFilePaths] = await renderRefract(inputFileName);
       refract = newRefractData;
       browserSync.reload();
       watchSource([inputFileName, ...newFilePaths]);
     });
   };
 
-  let refractData;
-  let filePaths;
-  try {
-    [refractData, filePaths] = await renderRefract(inputFileName);
-  } catch (e) {
-    console.error(e);
-  }
+  const [refractData, filePaths] = await renderRefract(inputFileName);
   const isFree = await isPortFree(port);
   refract = refractData;
   if (!isFree) {
