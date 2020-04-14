@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.13.2 (14.04.2020)
+
+* Delete definitions of inherited types.
+
 ## 3.13.1 (09.04.2020)
 
 * Fix displaying "0" in enum types.
