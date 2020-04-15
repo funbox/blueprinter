@@ -34,7 +34,7 @@ const ActionCard = (props) => {
     location,
   } = props;
 
-  const { route, title, attributes } = action;
+  const { route, title, attributes, id } = action;
   const href = attributes.href || props.href;
   const hrefVariables = attributes.hrefVariables;
   const descriptionEl = action.content.find(isCopy);
@@ -96,6 +96,7 @@ const ActionCard = (props) => {
           transactions={action.content.filter(el => !isCopy(el))}
           transitionProps={{
             mix: 'action-card__content',
+            parentId: id,
           }}
         />
       </div>

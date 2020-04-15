@@ -11,6 +11,7 @@ const Transition = (props) => {
     contentType,
     mods = {},
     mix,
+    parentId,
   } = props;
 
   const ContentComponent = mods.view === 'expanded' ? Transition__Body_View_Sequential : Transition__Body;
@@ -25,6 +26,7 @@ const Transition = (props) => {
       <ContentComponent
         availableTransactions={availableTransactions}
         contentType={contentType}
+        parentId={parentId}
       />
     </Section>
   );
@@ -36,6 +38,7 @@ Transition.propTypes = {
   title: PropTypes.string,
   titleTag: PropTypes.string,
   mix: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  parentId: PropTypes.string,
 };
 
 export default Transition;

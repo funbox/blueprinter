@@ -4,10 +4,14 @@ const Transition__Body_View_Sequential = (props) => {
   const {
     availableTransactions,
     contentType,
+    parentId,
   } = props;
 
-  return availableTransactions.map(transaction => (
-    <div className={b('transition__stripe')}>
+  return availableTransactions.map((transaction, index) => (
+    <div
+      key={`${parentId}-${contentType}-${index}`}
+      className={b('transition__stripe')}
+    >
       <Transition__Body
         availableTransactions={[transaction]}
         contentType={contentType}
