@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.14.0 (15.04.2020)
+
+* Improve rendering of attributes in data structures.
+
 ## 3.13.2 (14.04.2020)
 
 * Delete definitions of inherited types.
