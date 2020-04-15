@@ -133,6 +133,7 @@ export const refactorAction = (action) => {
     method = get('attributes', 'method', 'content').from(sourceRequest);
 
     const request = {
+      structureType: getDataStructureType(sourceRequest),
       attributes: getDataAttributes(sourceRequest),
       body: getBody(sourceRequest),
       description: getDescription(sourceRequest),
@@ -142,6 +143,7 @@ export const refactorAction = (action) => {
     };
 
     const response = {
+      structureType: getDataStructureType(sourceResponse),
       attributes: getDataAttributes(sourceResponse),
       body: getBody(sourceResponse),
       description: getDescription(sourceResponse),
@@ -229,10 +231,23 @@ function getDataAttributes(httpSource) {
   if (index === -1) return null;
 
   const valueMember = httpSource.content[index].content;
+
   resolveInheritance(valueMember, httpSource.content[index]);
   fillAdditionalAttributes(valueMember);
 
   return valueMember.content;
+}
+
+function getDataStructureType(httpSource) {
+  const index = getSourceElementIndexByType(httpSource, 'dataStructure');
+
+  if (index === -1) return null;
+
+  const valueMember = httpSource.content[index].content;
+
+  resolveInheritance(valueMember, httpSource.content[index]);
+
+  return valueMember.element;
 }
 
 function getDescription(httpSource) {

@@ -49,7 +49,7 @@ class Transition extends React.Component {
 
     const isEmpty = Object.keys(selectedTransaction).length === 1 && (!!selectedTransaction.statusCode || !!selectedTransaction.title);
 
-    const { headers, attributes, body, description, schema } = selectedTransaction;
+    const { headers, attributes, body, description, schema, structureType } = selectedTransaction;
 
     const selectedDataId = availableTransactions.indexOf(selectedTransaction);
     const examplesList = availableTransactions.map((d, index) => {
@@ -111,7 +111,7 @@ class Transition extends React.Component {
 
         {!!attributes && attributes.length > 0 && (
           <Section
-            title="Attributes"
+            title={`Attributes${structureType ? ` (${structureType})` : ''}`}
             titleTag="h5"
             mods={{ for: 'transition-content' }}
             mix={b('transition__section')}
