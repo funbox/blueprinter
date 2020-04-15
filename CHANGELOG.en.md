@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.14.1 (15.04.2020)
+
+* Add data type to Attributes section.
+
 ## 3.14.0 (15.04.2020)
 
 * Improve rendering of attributes in data structures.
