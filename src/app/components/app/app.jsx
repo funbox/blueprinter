@@ -12,6 +12,8 @@ import Error from 'app/views/error';
 import ContentNotFound from 'app/views/404';
 import ManualSearch from 'app/views/manual-search';
 
+import ViewContext, { ViewMode } from './view-context';
+
 const source = window.refract || sourceMock;
 const parsedSource = parseSourceFile(source);
 
@@ -82,10 +84,12 @@ export default class App extends React.Component {
             exact
             path="/manual-search-page"
             render={(props) => (
-              <ManualSearch
-                {...props}
-                groups={groups}
-              />
+              <ViewContext.Provider value={ViewMode.EXPANDED}>
+                <ManualSearch
+                  {...props}
+                  groups={groups}
+                />
+              </ViewContext.Provider>
             )}
           />
           <Route
