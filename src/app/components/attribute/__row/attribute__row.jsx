@@ -31,21 +31,21 @@ const Attribute__Row = (props) => {
       <dt className="attribute__key">
         {displayedAttrKey}
         {attributeProps && (
-          <span className="attribute__props">
+          <ul className="attribute__props">
             {attributeProps.map(prop => {
               const propContent = getAttributePropContent(prop);
               return (
-                <small
+                <li
                   key={`${propContent}_attr`}
                   className={b('attribute__prop', {
                     mix: (propContent === 'required' ? ['attribute__code'] : []),
                   })}
                 >
                   {propContent}
-                </small>
+                </li>
               );
             })}
-          </span>
+          </ul>
         )}
       </dt>
       <dd className="attribute__description-container">
