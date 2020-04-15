@@ -14,7 +14,7 @@ import Notification from 'app/components/notification';
 import DocumentWarnings from 'app/components/document-warnings';
 import ApiHost from 'app/components/api-host';
 import Link from 'app/components/link';
-import SearchFieldContainer from 'app/components/search-field-container';
+import SearchStripe from 'app/components/search-stripe';
 
 import { API_DEFAULT_TITLE } from 'app/constants/defaults';
 
@@ -91,7 +91,7 @@ class MainLayout extends React.PureComponent {
               </Page__Title>
 
               <Page__Stripe mods={{ for: 'search' }}>
-                <SearchFieldContainer
+                <SearchStripe
                   groups={groups}
                   resources={resources}
                   actions={actions}
