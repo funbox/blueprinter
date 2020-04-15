@@ -1,6 +1,8 @@
 import { Fragment } from 'react';
 import Transition from 'app/components/transition';
 
+import ViewContext from 'app/components/app/view-context';
+
 const TransitionContainer = (props) => {
   let availableRequests = [];
   let availableResponses = [];
@@ -30,23 +32,37 @@ const TransitionContainer = (props) => {
     <Fragment>
       {
         availableRequests.length > 0 && (
-          <Transition
-            title="Requests"
-            contentType="request"
-            availableTransactions={availableRequests}
-            {...transitionProps}
-          />
+          <ViewContext.Consumer>
+            {value => (
+              <Transition
+                mods={{
+                  view: value,
+                }}
+                title="Requests"
+                contentType="request"
+                availableTransactions={availableRequests}
+                {...transitionProps}
+              />
+            )}
+          </ViewContext.Consumer>
         )
       }
 
       {
         availableResponses.length > 0 && (
-          <Transition
-            title="Responses"
-            contentType="response"
-            availableTransactions={availableResponses}
-            {...transitionProps}
-          />
+          <ViewContext.Consumer>
+            {value => (
+              <Transition
+                mods={{
+                  view: value,
+                }}
+                title="Responses"
+                contentType="response"
+                availableTransactions={availableResponses}
+                {...transitionProps}
+              />
+            )}
+          </ViewContext.Consumer>
         )
       }
     </Fragment>
