@@ -1,0 +1,7 @@
+.search-stripe__search-field {
+  flex-grow: 1;
+
+  + .search-stripe__manual-search-button {
+    margin-left: 4px;
+  }
+}
