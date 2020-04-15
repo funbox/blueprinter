@@ -10,6 +10,7 @@ import ResourceRoutes from 'app/views/resources';
 import ActionRoutes from 'app/views/actions';
 import Error from 'app/views/error';
 import ContentNotFound from 'app/views/404';
+import ManualSearch from 'app/views/manual-search';
 
 const source = window.refract || sourceMock;
 const parsedSource = parseSourceFile(source);
@@ -77,6 +78,16 @@ export default class App extends React.Component {
             )}
           />
           {routes}
+          <Route
+            exact
+            path="/manual-search-page"
+            render={(props) => (
+              <ManualSearch
+                {...props}
+                groups={groups}
+              />
+            )}
+          />
           <Route
             exact
             path="/404"
