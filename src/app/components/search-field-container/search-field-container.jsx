@@ -12,6 +12,11 @@ const propTypes = {
   groups: PropTypes.arrayOf(PropTypes.object),
   resources: PropTypes.arrayOf(PropTypes.object),
   actions: PropTypes.arrayOf(PropTypes.object),
+  mods: PropTypes.object,
+  mix: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]),
 };
 
 const defaultProps = {
@@ -57,6 +62,11 @@ class SearchFieldContainer extends React.Component {
 
   render() {
     const { searchedItems } = this.state;
+    const {
+      mods,
+      mix,
+      location,
+    } = this.props;
 
     return (
       <SearchField
@@ -64,7 +74,9 @@ class SearchFieldContainer extends React.Component {
         onSearch={this.onSearch}
         onKeyDown={this.onKeyDown}
         resetSearch={this.resetSearch}
-        location={this.props.location}
+        mods={mods}
+        mix={mix}
+        location={location}
       />
     );
   }
