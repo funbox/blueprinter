@@ -24,6 +24,7 @@ class CodeSnippet extends React.Component {
             useHighlight: true,
           });
           this.observer.disconnect();
+          this.observer = null;
         }
       });
     });
@@ -33,6 +34,7 @@ class CodeSnippet extends React.Component {
   componentWillUnmount() {
     if (this.observer) {
       this.observer.disconnect();
+      this.observer = null;
     }
   }
 
