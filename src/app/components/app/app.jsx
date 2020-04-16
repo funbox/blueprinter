@@ -25,9 +25,12 @@ export default class App extends React.Component {
   componentDidMount() {
     const { location, history } = this.props;
 
-    const route = convertLegacyUrl(location.pathname);
-    if (route && location.pathname !== route) {
-      history.push(route);
+    if (!topLevelMeta.error) {
+      const route = convertLegacyUrl(location.pathname);
+
+      if (route && location.pathname !== route) {
+        history.push(route);
+      }
     }
   }
 
