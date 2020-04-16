@@ -1,18 +1,20 @@
 .attribute_has-children {
-  > .attribute__row {
-    position: relative;
-    cursor: pointer;
+  &:not(.attribute_static) {
+    > .attribute__row {
+      position: relative;
+      cursor: pointer;
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 20px;
-      left: 8px;
-      width: 0;
-      height: 0;
-      border-width: 6px 4px 0;
-      border-style: solid;
-      border-color: #8b929c transparent transparent;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 8px;
+        width: 0;
+        height: 0;
+        border-width: 6px 4px 0;
+        border-style: solid;
+        border-color: #8b929c transparent transparent;
+      }
     }
   }
 
