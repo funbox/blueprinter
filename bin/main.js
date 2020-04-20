@@ -49,7 +49,7 @@ const sendStaticFile = async (outputFileName, refractData) => {
   }
 };
 
-const basicRenderRefract = async (inputFileName, processResult, strictMode = false, buildMode) => {
+const basicRenderRefract = async (inputFileName, processResult, strictMode = false, buildMode = false) => {
   const [refract, filePaths] = await createRefract(inputFileName, strictMode, buildMode)
     .catch(error => Promise.reject(error));
 
@@ -58,7 +58,7 @@ const basicRenderRefract = async (inputFileName, processResult, strictMode = fal
   return [refractData, filePaths];
 };
 
-const renderRefract = async (inputFileName, strictMode = false, buildMode) => {
+const renderRefract = async (inputFileName, strictMode = false, buildMode = false) => {
   const processor = (refract) => `refract = ${refract};`;
   return basicRenderRefract(inputFileName, processor, strictMode, buildMode);
 };
