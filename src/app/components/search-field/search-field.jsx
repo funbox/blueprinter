@@ -52,7 +52,10 @@ class SearchField extends React.Component {
       highlightedItem: null,
     };
 
-    this.state = { ...this.defaultState };
+    this.state = {
+      ...this.defaultState,
+      focused: false,
+    };
     this.dropdown = React.createRef();
     this.input = React.createRef();
     this.optionsList = React.createRef();
@@ -62,6 +65,7 @@ class SearchField extends React.Component {
     this.onDocumentKeyDown = this.onDocumentKeyDown.bind(this);
     this.closeOnClickAround = this.closeOnClickAround.bind(this);
     this.onInputFocus = this.onInputFocus.bind(this);
+    this.onInputBlur = this.onInputBlur.bind(this);
     this.select = this.select.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
     this.getItemKey = this.getItemKey.bind(this);
@@ -187,11 +191,16 @@ class SearchField extends React.Component {
   }
 
   onInputFocus() {
-    const { open } = this.state;
+    this.setState(prevState => ({
+      focused: true,
+      open: this.props.items.length > 0 && !prevState.open ? true : prevState.open,
+    }));
+  }
 
-    if (!open && this.props.items.length) {
-      this.setState({ open: true });
-    }
+  onInputBlur() {
+    this.setState({
+      focused: false,
+    });
   }
 
   resetSearch() {
@@ -213,6 +222,7 @@ class SearchField extends React.Component {
       open,
       filterString,
       highlightedItem,
+      focused,
     } = this.state;
 
     const {
@@ -226,7 +236,7 @@ class SearchField extends React.Component {
     delete textFieldProps.id;
     delete textFieldProps.mix;
 
-    const defaultMods = { open };
+    const defaultMods = { open, focused };
 
     const dropdownHeight = items.length < SEARCH_OPTIONS_PER_FRAME
       ? items.length * SEARCH_OPTION_HEIGHT
@@ -248,21 +258,24 @@ class SearchField extends React.Component {
             ref: this.input,
           }}
           onFocus={this.onInputFocus}
+          onBlur={this.onInputBlur}
           value={filterString}
           onChange={this.onSearch}
           placeholder="Поиск"
           {...textFieldProps}
         >
-          <Button
-            type="reset"
-            mix={[b('search-field__clear-button')]}
-            mods={{
-              onlyIcon: true,
-            }}
-            htmlFor="search-field-input"
-            text="Очистить поле"
-            onClick={this.resetSearch}
-          />
+          { filterString.length > 0 && (
+            <Button
+              type="reset"
+              mix={[b('search-field__clear-button')]}
+              mods={{
+                onlyIcon: true,
+              }}
+              htmlFor="search-field-input"
+              text="Очистить поле"
+              onClick={this.resetSearch}
+            />
+          )}
         </TextField>
 
         <div

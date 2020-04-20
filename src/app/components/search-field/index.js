@@ -16,3 +16,4 @@ require('./__option-text/search-field__option-text.scss');
 require('./search-field.scss');
 
 require('./_open/search-field_open.scss');
+require('./_focused/search-field_focused.scss');
