@@ -1,14 +1,14 @@
-import { extractAttributeData, get } from 'app/common/utils/helpers';
+import { get } from 'app/common/utils/helpers';
 
 const Attribute__Row = (props) => {
-  const { attribute, parentType } = props;
+  const { attributeData, parentType } = props;
   const {
     attributeKey,
     attributeType,
     attributeExample,
     attributeProps,
     attributeDescription,
-  } = extractAttributeData(attribute);
+  } = attributeData;
 
   const enumMember = parentType === 'enum';
   const oneOfMember = parentType === 'One of';
@@ -75,14 +75,18 @@ const Attribute__Row = (props) => {
 };
 
 Attribute__Row.propTypes = {
-  attribute: PropTypes.shape({
-    element: PropTypes.string,
-    content: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array,
+  attributeData: PropTypes.shape({
+    attributeKey: PropTypes.string,
+    attributeType: PropTypes.string,
+    attributeExample: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
+      PropTypes.bool,
     ]),
+    attributeProps: PropTypes.arrayOf(
+      PropTypes.object,
+    ),
+    attributeDescription: PropTypes.string,
   }),
   parentType: PropTypes.string,
   onClick: PropTypes.func,

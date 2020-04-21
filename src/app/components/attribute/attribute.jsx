@@ -20,7 +20,7 @@ class Attribute extends React.Component {
 
   render() {
     const {
-      attribute,
+      attributeData,
       parentType,
       renderNestedAttrs,
       mods = {},
@@ -39,7 +39,7 @@ class Attribute extends React.Component {
       return (
         <div className={b('attribute', { mods, mix })}>
           <Attribute__Row
-            attribute={attribute}
+            attributeData={attributeData}
             parentType={parentType}
           />
 
@@ -63,13 +63,13 @@ class Attribute extends React.Component {
         {({ onToggle, setCollapsibleElement }) => (
           <div className={b('attribute', { mods, mix })}>
             <Attribute__Row
-              attribute={attribute}
+              attributeData={attributeData}
               parentType={parentType}
               onClick={onToggle}
             />
 
             {!!hasChildren && (!this.state.collapsed)
-              && <div className="attribute__children" ref={setCollapsibleElement}>{renderNestedAttrs()}</div>
+            && <div className="attribute__children" ref={setCollapsibleElement}>{renderNestedAttrs()}</div>
             }
           </div>
         )}
@@ -81,14 +81,18 @@ class Attribute extends React.Component {
 Attribute.contextType = ViewContext;
 
 Attribute.propTypes = {
-  attribute: PropTypes.shape({
-    element: PropTypes.string,
-    content: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array,
+  attributeData: PropTypes.shape({
+    attributeKey: PropTypes.string,
+    attributeType: PropTypes.string,
+    attributeExample: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
+      PropTypes.bool,
     ]),
+    attributeProps: PropTypes.arrayOf(
+      PropTypes.object,
+    ),
+    attributeDescription: PropTypes.string,
   }),
   parentType: PropTypes.string,
   renderNestedAttrs: PropTypes.func,

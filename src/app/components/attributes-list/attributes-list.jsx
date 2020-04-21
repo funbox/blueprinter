@@ -6,7 +6,8 @@ const AttributesList = (props) => {
 
   const renderAttributes = (attrs, parentType, nested = false) => {
     const items = attrs.map((a, i) => {
-      const { attributeType } = extractAttributeData(a);
+      const attributeData = extractAttributeData(a);
+      const { attributeType } = attributeData;
       const nestedAttrs = getAttributeChildren(a);
       const hasChildren = !!nestedAttrs && !!nestedAttrs.length && nestedAttrs.length > 0;
       const renderNestedAttrs = hasChildren
@@ -17,7 +18,7 @@ const AttributesList = (props) => {
         <li className="attributes-list__item" key={`attr-${i}`}>
           <Attribute
             mods={{ hasChildren, nested }}
-            attribute={a}
+            attributeData={attributeData}
             parentType={parentType}
             renderNestedAttrs={renderNestedAttrs}
           />
