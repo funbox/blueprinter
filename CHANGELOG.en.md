@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.14.2 (21.04.2020)
+
+* Fix restart of a local dev server.
+
 ## 3.14.1 (15.04.2020)
 
 * Add data type to Attributes section.
