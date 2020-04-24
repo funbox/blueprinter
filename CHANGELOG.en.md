@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.15.0 (24.04.2020)
+
+* Add the page for manual search.
+
 ## 3.14.2 (21.04.2020)
 
 * Fix restart of a local dev server.
