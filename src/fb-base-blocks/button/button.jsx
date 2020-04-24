@@ -60,7 +60,7 @@ const Button = React.forwardRef((props, ref) => {
       {
         text && (
           <span className={b('button__text', { mix: text.mix })}>
-            {text}
+            {text.content || text }
           </span>
         )
       }
@@ -78,8 +78,29 @@ Button.propTypes = {
   ]),
   href: PropTypes.string,
   title: PropTypes.string,
-  icon: PropTypes.object,
-  text: PropTypes.string,
+  icon: PropTypes.shape({
+    content: PropTypes.node,
+    mods: PropTypes.object,
+    mix: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(
+        PropTypes.string,
+      ),
+    ]),
+  }),
+  text: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      content: PropTypes.string,
+      mods: PropTypes.object,
+      mix: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(
+          PropTypes.string,
+        ),
+      ]),
+    }),
+  ]),
   type: PropTypes.string,
   onClick: PropTypes.func,
 };
