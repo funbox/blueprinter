@@ -9,9 +9,9 @@ const SearchStripe = (props) => (
     />
 
     <Button
-      text="Перейти на страницу для ручного поиска"
-      mods={{
-        onlyIcon: true,
+      text={{
+        content: 'Перейти на страницу ручного поиска',
+        mix: b('search-stripe__button-hint'),
       }}
       to="/manual-search-page"
       mix={b('search-stripe__manual-search-button')}
