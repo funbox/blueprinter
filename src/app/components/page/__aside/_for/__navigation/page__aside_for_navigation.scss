@@ -1,9 +1,18 @@
 .page__aside_for_navigation {
+  display: flex;
+  flex-direction: column;
   position: sticky;
   top: 0;
-  overflow-y: auto;
   box-sizing: border-box;
   height: 100vh;
   padding: 24px 0;
   background-color: $grayLight;
+
+  > .page__title {
+    flex-shrink: 0;
+  }
+
+  > .page__stripe_for_search {
+    flex-shrink: 0;
+  }
 }
