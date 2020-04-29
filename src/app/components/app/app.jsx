@@ -1,5 +1,5 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
-import parseSourceFile from 'app/common/utils/helpers/parseSourceFile';
+import parseSourceFile from 'app/common/utils/helpers/parse-source-file';
 import { createRoute, combineRoutes, HASH_DELIMITER } from 'app/common/utils/helpers/hash';
 import sourceMock from 'app/source';
 

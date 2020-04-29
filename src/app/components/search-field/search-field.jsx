@@ -3,7 +3,7 @@ import { FixedSizeList } from 'react-window';
 import Button from 'fb-base-blocks/button';
 import TextField from 'app/components/text-field';
 import MethodBadge from 'app/components/method-badge';
-import locationParams from 'app/common/utils/helpers/locationParams';
+import locationParams from 'app/common/utils/helpers/location-params';
 
 import SearchField__OptionList from './__option-list';
 

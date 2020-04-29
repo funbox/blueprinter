@@ -4,7 +4,7 @@ import { GROUP_DEFAULT_TITLE } from 'app/constants/defaults';
 import { get, getDescriptionHeaders, htmlFromText } from './index';
 
 import categories from './categories';
-import refactorSource, { refactorMessage } from './refactorAction';
+import refactorSource, { refactorMessage } from './refactor-action';
 import { createHash, combineHashes, createRoute, combineRoutes, hashFromComment } from './hash';
 
 const groupForStandaloneResources = {
