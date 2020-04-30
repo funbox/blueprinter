@@ -10,14 +10,20 @@ const hashFromComment = (comment) => {
   return undefined;
 };
 
-const createHash = (title, parentTitle = '') => (
-  `${parentTitle} ${title}`.trim().split(' ').join(HASH_DELIMITER).toLowerCase()
+const createHash = (title) => (
+  slugify(title, {
+    replacement: HASH_DELIMITER,
+    remove: undefined,
+    transliterate: false,
+  })
 );
 
 const combineHashes = (prefixHash, hash) => (prefixHash + HASH_DELIMITER + hash);
 
 const createSlug = (title) => (
-  slugify(title, { replacement: HASH_DELIMITER })
+  slugify(title, {
+    replacement: HASH_DELIMITER,
+  })
 );
 
 const createRoute = (title, transformFunction = createHash) => (

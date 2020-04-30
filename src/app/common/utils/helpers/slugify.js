@@ -16,6 +16,7 @@ const defaultOptions = {
  * @param {string=} options.replacement - символ, на который заменится пробел
  * @param {boolean=} options.lower - привести к нижнему регистру
  * @param {RegExp=} options.remove - символы, которые будут удалены
+ * @param {boolean=} options.transliterate - использовать транслитерацию символов
  */
 export default function (string, options = {}) {
   if (typeof string !== 'string') {
@@ -27,12 +28,17 @@ export default function (string, options = {}) {
     ...options,
   };
 
-  const { remove, replacement } = appliedOptions;
+  const { transliterate, remove, replacement } = appliedOptions;
 
   let slug = string
     .split('')
     // replace characters based on charMap
-    .reduce((res, ch) => (res + (charMap[ch] || ch)), '')
+    .reduce((res, ch) => {
+      if (!transliterate) {
+        return (res + ch);
+      }
+      return res + (charMap[ch] || ch);
+    }, '')
     // remove not allowed characters
     .replace(remove, '')
     // trim leading/trailing spaces
