@@ -162,7 +162,7 @@ function convertLegacyUrl(url) {
   }
 
   const [groupRoute, resourceRoute, actionRoute] = [groupHash, resourceHash, actionHash]
-    .map(createRoute)
+    .map((hash) => createRoute(hash))
     .map(route => route.replace(/^\/$/, '')); // '/' -> ''
 
   return combineRoutes(combineRoutes(groupRoute, resourceRoute), actionRoute);

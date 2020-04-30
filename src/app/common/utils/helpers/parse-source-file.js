@@ -5,14 +5,15 @@ import { get, getDescriptionHeaders, htmlFromText } from './index';
 
 import categories from './categories';
 import refactorSource, { refactorMessage } from './refactor-action';
-import { createHash, combineHashes, createRoute, combineRoutes, hashFromComment } from './hash';
+import { createHash, combineHashes, createRoute, combineRoutes, createSlug, hashFromComment } from './hash';
 
 const groupForStandaloneResources = {
   element: 'category',
   content: [],
   title: GROUP_DEFAULT_TITLE,
   hash: createHash(GROUP_DEFAULT_TITLE),
-  route: createRoute(GROUP_DEFAULT_TITLE),
+  route: createRoute(GROUP_DEFAULT_TITLE, createSlug),
+  slug: createSlug(GROUP_DEFAULT_TITLE),
 };
 
 const parseSourceFile = ({ content }) => {
@@ -84,18 +85,22 @@ const parseSourceFile = ({ content }) => {
     const groupDescription = extractDescription(groupDescriptionElement);
 
     const gPresetHash = groupDescription && hashFromComment(groupDescription);
-    const gHashBase = gPresetHash || groupTitle;
+    const gHashBase = gPresetHash || `group-${groupTitle}`;
 
     const groupHash = createHash(gHashBase);
-    const groupRoute = createRoute(gHashBase);
+    const groupSlug = createSlug(gHashBase);
+    const groupRoute = createRoute(gHashBase, createSlug);
     const groupMeta = {
       title: groupTitle,
       hash: groupHash,
       route: groupRoute,
+      slug: groupSlug,
     };
 
+    // group.hash используется в app.jsx@convertLegacyUrl
     group.hash = groupHash;
     group.route = groupRoute;
+    group.slug = groupSlug;
     group.title = groupTitle;
 
     group.content = group.content.map((groupChild, rIndex) => {

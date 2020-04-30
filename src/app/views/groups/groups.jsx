@@ -3,11 +3,11 @@ import ResourceGroupSection from 'app/components/resource-group-section';
 
 const GroupRoutes = (groups) => (
   groups.map(group => {
-    const { hash, route } = group;
+    const { slug, route } = group;
 
     return (
       <Route
-        key={`group-${hash}`}
+        key={`group-${slug}`}
         exact
         path={route}
         render={(props) => (

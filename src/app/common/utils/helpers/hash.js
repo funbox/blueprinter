@@ -1,3 +1,5 @@
+import slugify from 'app/common/utils/helpers/slugify';
+
 const HASH_DELIMITER = '-';
 const ROUTE_DELIMITER = '/';
 
@@ -14,8 +16,12 @@ const createHash = (title, parentTitle = '') => (
 
 const combineHashes = (prefixHash, hash) => (prefixHash + HASH_DELIMITER + hash);
 
-const createRoute = (title) => (
-  ROUTE_DELIMITER.concat(createHash(title.replace(/\//g, ' ')))
+const createSlug = (title) => (
+  slugify(title, { replacement: HASH_DELIMITER })
+);
+
+const createRoute = (title, transformFunction = createHash) => (
+  ROUTE_DELIMITER.concat(transformFunction(title.replace(/\//g, ' ')))
   // здесь можно было бы энкодить заголовок, но в ReactRouter это не работает, он декодит обратно
   // https://github.com/ReactTraining/history/issues/505
 );
@@ -26,6 +32,7 @@ export {
   hashFromComment,
   createHash,
   combineHashes,
+  createSlug,
   createRoute,
   combineRoutes,
   ROUTE_DELIMITER,

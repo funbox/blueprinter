@@ -5,10 +5,10 @@ const ManualSearch = (props) => {
   const { groups, location } = props;
 
   return groups.map(group => {
-    const { hash } = group;
+    const { slug } = group;
     return (
       <Page__Stripe
-        key={hash}
+        key={slug}
         mods={{ for: 'group' }}
       >
         <ResourceGroupSection
