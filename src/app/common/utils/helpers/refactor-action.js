@@ -1,6 +1,7 @@
 import deepEqual from 'deep-equal';
 import { MESSAGE_DEFAULT_TITLE } from 'app/constants/defaults';
 import { get } from './index';
+import { getSourceElementIndexByType, getBody, getSchema, getDescription } from './getters';
 import { createHash, createRoute } from './hash';
 import categories from './categories';
 
@@ -208,23 +209,6 @@ function extractHeaderData(header) {
   };
 }
 
-function getSourceElementIndexByType(source, type) {
-  return source.content.findIndex(item => item.element === type);
-}
-
-function getBody(httpSource) {
-  const index = getSourceElementIndexByType(httpSource, 'asset');
-
-  return (index > -1) ? httpSource.content[index].content : null;
-}
-
-function getSchema(httpSource) {
-  const index = httpSource.content.findIndex(item => (
-    item.element === 'asset' && item.meta.classes.content[0].content === 'messageBodySchema'));
-
-  return (index > -1) ? httpSource.content[index].content : null;
-}
-
 function getDataAttributes(httpSource) {
   const index = getSourceElementIndexByType(httpSource, 'dataStructure');
 
@@ -248,14 +232,6 @@ function getDataStructureType(httpSource) {
   resolveInheritance(valueMember, httpSource.content[index]);
 
   return valueMember.element;
-}
-
-function getDescription(httpSource) {
-  const index = getSourceElementIndexByType(httpSource, 'copy');
-
-  if (index === -1) return null;
-
-  return httpSource.content[index].content;
 }
 
 function fillAdditionalAttributes(valueMember) {

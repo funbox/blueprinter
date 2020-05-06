@@ -1,7 +1,8 @@
 import uniqid from 'uniqid';
 import { GROUP_DEFAULT_TITLE } from 'app/constants/defaults';
 
-import { get, getDescriptionHeaders, htmlFromText } from './index';
+import { get, htmlFromText } from './index';
+import { getDescriptionWithoutHeaders } from './getters';
 
 import categories from './categories';
 import refactorSource, { refactorMessage } from './refactor-action';
@@ -86,8 +87,7 @@ const parseSourceFile = ({ content }) => {
 
   const groups = categories.resourceGroupArray.map((group, gIndex) => {
     const groupTitle = get('meta', 'title', 'content').from(group) || `${GROUP_DEFAULT_TITLE} ${gIndex + 1}`;
-    const groupDescriptionElement = group.content.find(el => el.element === 'copy');
-    const groupDescription = extractDescription(groupDescriptionElement);
+    const groupDescription = getDescriptionWithoutHeaders(group);
 
     const gPresetHash = groupDescription && hashFromComment(groupDescription);
     const gHashBase = gPresetHash || `group-${groupTitle}`;
@@ -113,8 +113,7 @@ const parseSourceFile = ({ content }) => {
 
       const resourceHref = get('attributes', 'href', 'content').from(groupChild);
       const resourceTitle = get('meta', 'title', 'content').from(groupChild);
-      const resourceDescriptionElement = groupChild.content.find(el => el.element === 'copy');
-      const resourceDescription = extractDescription(resourceDescriptionElement);
+      const resourceDescription = getDescriptionWithoutHeaders(groupChild);
 
       const rHashCode = getHashCode(`${resourceTitle || ''}-${resourceHref}`);
       const rMainHash = `resource-${resourceHref.slice(1)}-${rHashCode.toString(16)}`;
@@ -144,8 +143,7 @@ const parseSourceFile = ({ content }) => {
         resourceChild.id = uniqid.time();
 
         const action = refactorSource(resourceChild);
-        const actionDescriptionElement = resourceChild.content.find(el => el.element === 'copy');
-        const actionDescription = extractDescription(actionDescriptionElement);
+        const actionDescription = getDescriptionWithoutHeaders(resourceChild);
         const aPresetHash = actionDescription && hashFromComment(actionDescription);
 
         action.hash = aPresetHash ? createHash(aPresetHash) : combineHashes(resourceHash, action.hash);
@@ -221,20 +219,6 @@ function extractAnnotationInfo(annotation) {
     file: sourceFile,
   };
   return { text, details: positionDetails, id: uniqid.time() };
-}
-
-function extractDescription(descriptionElement) {
-  let description;
-
-  if (descriptionElement) {
-    const descriptionHeaders = getDescriptionHeaders(descriptionElement.content);
-    if (descriptionHeaders.length > 0) {
-      description = descriptionElement.content.slice(0, descriptionHeaders[0].index - 1);
-    } else {
-      description = descriptionElement.content;
-    }
-  }
-  return description;
 }
 
 function getHost(source) {

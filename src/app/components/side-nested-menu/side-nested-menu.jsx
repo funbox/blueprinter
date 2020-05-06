@@ -1,6 +1,6 @@
 import Menu from 'app/components/menu';
 import MethodBadge from 'app/components/method-badge';
-import { getDescriptionHeaders } from 'app/common/utils/helpers';
+import { getDescriptionHeaders } from 'app/common/utils/helpers/getters';
 import { hashFromComment, createHash } from 'app/common/utils/helpers/hash';
 
 import SideNestedMenu__Item from './__item';
