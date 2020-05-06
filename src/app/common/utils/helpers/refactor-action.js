@@ -1,8 +1,8 @@
 import deepEqual from 'deep-equal';
 import { MESSAGE_DEFAULT_TITLE } from 'app/constants/defaults';
 import { get } from './index';
-import { getSourceElementIndexByType, getBody, getSchema, getDescription, getDescriptionWithoutHeaders } from './getters';
-import { combineHashes, combineRoutes, createHash, createRoute, createSlug, hashFromComment } from './hash';
+import { getSourceElementIndexByType, getBody, getSchema, getDescription } from './getters';
+import { combineHashes, combineRoutes, createHash, createRoute, createSlug, getHashCode, hashFromComment } from './hash';
 import categories from './categories';
 
 const standardTypes = ['number', 'string', 'boolean', 'array', 'enum', 'object'];
@@ -101,7 +101,7 @@ const resolveInheritance = (valueMember, parent) => {
 
 export const refactorMessage = (message, parentSource) => {
   const messageTitle = get('meta', 'title', 'content').from(message) || MESSAGE_DEFAULT_TITLE;
-  const messageDescription = getDescriptionWithoutHeaders(message);
+  const messageDescription = getDescription(message);
   const presetHash = messageDescription ? hashFromComment(messageDescription) : null;
   const mainHash = `message-${messageTitle}`;
 
@@ -127,7 +127,7 @@ export const refactorMessage = (message, parentSource) => {
   });
 };
 
-export const refactorAction = (action) => {
+export const refactorAction = (action, parentSource) => {
   let method = '';
   const copyElements = [];
 
@@ -182,12 +182,18 @@ export const refactorAction = (action) => {
   }, []);
 
   const href = get('attributes', 'href', 'content').from(action);
-  const hashFriendlyHref = href.slice(1).replace(/\//g, '-');
   const title = get('meta', 'title', 'content').from(action);
   const displayedTitle = title || `${method.toUpperCase()} ${href}`;
-  const hashBase = title ? `${title} ${method}` : `${hashFriendlyHref} ${method}`;
-  const hash = createHash(hashBase);
-  const route = createRoute(hashBase);
+  const description = getDescription({ content: copyElements }); // чтобы не обходить содержимое action заново
+
+  const { hash: parentHash, route: parentRoute } = parentSource;
+
+  const hashCode = getHashCode(`${title || ''}-${href}-${method}`);
+  const presetHash = description ? hashFromComment(description) : null;
+  const mainHash = `action-${method}-${href.slice(1)}-${hashCode.toString(16)}`;
+
+  const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(mainHash));
+  const route = presetHash ? createRoute(presetHash) : combineRoutes(parentRoute, createRoute(mainHash));
 
   return {
     id: action.id,

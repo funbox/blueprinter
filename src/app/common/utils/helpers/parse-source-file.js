@@ -7,6 +7,7 @@ import { getDescriptionWithoutHeaders } from './getters';
 import categories from './categories';
 import refactorSource, { refactorMessage } from './refactor-action';
 import { createHash, combineHashes, createRoute, combineRoutes, createSlug, hashFromComment, getHashCode } from './hash';
+import slugify from './slugify';
 
 const groupForStandaloneResources = {
   element: 'category',
@@ -125,8 +126,9 @@ const parseSourceFile = ({ content }) => {
       const resourceTitle = get('meta', 'title', 'content').from(groupChild);
       const resourceDescription = getDescriptionWithoutHeaders(groupChild);
 
-      const rHashCode = getHashCode(`${resourceTitle || ''}-${resourceHref}`);
-      const rMainHash = `resource-${resourceHref.slice(1)}-${rHashCode.toString(16)}`;
+      const rHashCode = getHashCode(`${resourceTitle || ''}-${resourceHref || ''}`);
+      const rHashMidPart = resourceHref ? resourceHref.slice(1) : slugify(resourceTitle);
+      const rMainHash = `resource-${rHashMidPart}-${rHashCode.toString(16)}`;
       const rPresetHash = resourceDescription && hashFromComment(resourceDescription);
       const resourceHash = rPresetHash ? createHash(rPresetHash) : combineHashes(groupHash, createHash(rMainHash));
       const resourceRoute = rPresetHash ? createRoute(rPresetHash) : combineRoutes(groupRoute, createRoute(rMainHash));
@@ -152,11 +154,7 @@ const parseSourceFile = ({ content }) => {
         resourceChild.id = uniqid.time();
 
         const action = refactorSource(resourceChild, resourceMeta);
-        const actionDescription = getDescriptionWithoutHeaders(resourceChild);
-        const aPresetHash = actionDescription && hashFromComment(actionDescription);
 
-        action.hash = aPresetHash ? createHash(aPresetHash) : combineHashes(resourceHash, action.hash);
-        action.route = aPresetHash ? createRoute(aPresetHash) : combineRoutes(resourceRoute, action.route);
         action.parentResource = resourceMeta;
         actions.push(action);
         return action;
