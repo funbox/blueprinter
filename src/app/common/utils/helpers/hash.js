@@ -26,8 +26,12 @@ const createSlug = (title) => (
   })
 );
 
-const createRoute = (title, transformFunction = createHash) => (
-  ROUTE_DELIMITER.concat(transformFunction(title.replace(/\//g, ' ')))
+const sanitizeRoute = (str) => str.replace(/\//g, ' ').replace(/\?/g, '');
+
+const createRoute = (title, transform = createHash) => (
+  ROUTE_DELIMITER.concat(
+    transform(sanitizeRoute(title)),
+  )
   // здесь можно было бы энкодить заголовок, но в ReactRouter это не работает, он декодит обратно
   // https://github.com/ReactTraining/history/issues/505
 );

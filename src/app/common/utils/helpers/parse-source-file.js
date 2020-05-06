@@ -5,12 +5,17 @@ import { get, getDescriptionHeaders, htmlFromText } from './index';
 
 import categories from './categories';
 import refactorSource, { refactorMessage } from './refactor-action';
-import { createHash, combineHashes, createRoute, combineRoutes, createSlug, hashFromComment } from './hash';
+import { createHash, combineHashes, createRoute, combineRoutes, createSlug, hashFromComment, getHashCode } from './hash';
 
 const groupForStandaloneResources = {
   element: 'category',
   content: [],
-  title: GROUP_DEFAULT_TITLE,
+  meta: {
+    title: {
+      element: 'string',
+      content: GROUP_DEFAULT_TITLE,
+    },
+  },
   hash: createHash(GROUP_DEFAULT_TITLE),
   route: createRoute(GROUP_DEFAULT_TITLE, createSlug),
   slug: createSlug(GROUP_DEFAULT_TITLE),
@@ -103,7 +108,7 @@ const parseSourceFile = ({ content }) => {
     group.slug = groupSlug;
     group.title = groupTitle;
 
-    group.content = group.content.map((groupChild, rIndex) => {
+    group.content = group.content.map((groupChild) => {
       if (groupChild.element === 'copy') return groupChild;
 
       const resourceHref = get('attributes', 'href', 'content').from(groupChild);
@@ -111,8 +116,8 @@ const parseSourceFile = ({ content }) => {
       const resourceDescriptionElement = groupChild.content.find(el => el.element === 'copy');
       const resourceDescription = extractDescription(resourceDescriptionElement);
 
-      const rActualIndex = groupDescriptionElement ? rIndex : (rIndex + 1);
-      const rMainHash = resourceTitle || String(rActualIndex);
+      const rHashCode = getHashCode(`${resourceTitle || ''}-${resourceHref}`);
+      const rMainHash = `resource-${resourceHref.slice(1)}-${rHashCode.toString(16)}`;
       const rPresetHash = resourceDescription && hashFromComment(resourceDescription);
       const resourceHash = rPresetHash ? createHash(rPresetHash) : combineHashes(groupHash, createHash(rMainHash));
       const resourceRoute = rPresetHash ? createRoute(rPresetHash) : combineRoutes(groupRoute, createRoute(rMainHash));
