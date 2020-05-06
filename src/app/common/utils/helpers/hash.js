@@ -34,6 +34,34 @@ const createRoute = (title, transformFunction = createHash) => (
 
 const combineRoutes = (parentRoute, route) => (parentRoute + route);
 
+const getHashCode = (str) => {
+  // Original hashCode sequence:
+  // s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]
+
+  if (typeof str !== 'string') {
+    throw new TypeError(`Expected a string, got \`${typeof str}\``);
+  }
+
+  let hash = 0;
+
+  if (str.length === 0) {
+    return hash;
+  }
+
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    // A nice property of 31 is that the multiplication can be replaced
+    // by a shift and a subtraction for better performance: 31 * i == (i << 5) - i.
+    // https://stackoverflow.com/a/299748
+    hash = (hash << 5) - hash + char; // eslint-disable-line no-bitwise
+
+    // Convert to 32bit integer
+    hash |= 0; // eslint-disable-line no-bitwise
+  }
+
+  return hash;
+};
+
 export {
   hashFromComment,
   createHash,
@@ -41,6 +69,7 @@ export {
   createSlug,
   createRoute,
   combineRoutes,
+  getHashCode,
   ROUTE_DELIMITER,
   HASH_DELIMITER,
 };
