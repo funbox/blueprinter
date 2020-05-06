@@ -1,8 +1,8 @@
 import deepEqual from 'deep-equal';
 import { MESSAGE_DEFAULT_TITLE } from 'app/constants/defaults';
 import { get } from './index';
-import { getSourceElementIndexByType, getBody, getSchema, getDescription } from './getters';
-import { createHash, createRoute } from './hash';
+import { getSourceElementIndexByType, getBody, getSchema, getDescription, getDescriptionWithoutHeaders } from './getters';
+import { combineHashes, combineRoutes, createHash, createRoute, createSlug, hashFromComment } from './hash';
 import categories from './categories';
 
 const standardTypes = ['number', 'string', 'boolean', 'array', 'enum', 'object'];
@@ -99,10 +99,17 @@ const resolveInheritance = (valueMember, parent) => {
   return valueMember;
 };
 
-export const refactorMessage = (message) => {
-  const title = get('meta', 'title', 'content').from(message) || MESSAGE_DEFAULT_TITLE;
-  const hash = message.hash || createHash(title);
-  const route = message.route || createRoute(title);
+export const refactorMessage = (message, parentSource) => {
+  const messageTitle = get('meta', 'title', 'content').from(message) || MESSAGE_DEFAULT_TITLE;
+  const messageDescription = getDescriptionWithoutHeaders(message);
+  const presetHash = messageDescription ? hashFromComment(messageDescription) : null;
+  const mainHash = `message-${messageTitle}`;
+
+  const { hash: parentHash, route: parentRoute } = parentSource;
+
+  const messageSlug = createSlug(messageTitle);
+  const messageHash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(mainHash));
+  const messageRoute = presetHash ? createRoute(presetHash) : combineRoutes(parentRoute, createRoute(mainHash, createSlug));
 
   return ({
     id: message.id,
@@ -113,9 +120,10 @@ export const refactorMessage = (message) => {
     attributes: getDataAttributes(message),
     body: getBody(message),
     schema: getSchema(message),
-    hash,
-    route,
-    title,
+    hash: messageHash,
+    route: messageRoute,
+    slug: messageSlug,
+    title: messageTitle,
   });
 };
 
@@ -198,8 +206,8 @@ export const refactorAction = (action) => {
   };
 };
 
-export default function refactorSource(source) {
-  return source.element === 'message' ? refactorMessage(source) : refactorAction(source);
+export default function refactorSource(source, parentSource) {
+  return source.element === 'message' ? refactorMessage(source, parentSource) : refactorAction(source, parentSource);
 }
 
 function extractHeaderData(header) {

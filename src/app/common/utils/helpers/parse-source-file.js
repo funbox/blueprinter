@@ -109,7 +109,17 @@ const parseSourceFile = ({ content }) => {
     group.title = groupTitle;
 
     group.content = group.content.map((groupChild) => {
-      if (groupChild.element === 'copy') return groupChild;
+      if (groupChild.element === 'copy') {
+        return groupChild;
+      }
+
+      if (groupChild.element === 'message') {
+        const message = refactorMessage(groupChild, groupMeta);
+        message.id = uniqid.time();
+        message.parentGroup = groupMeta;
+        resources.push(message);
+        return message;
+      }
 
       const resourceHref = get('attributes', 'href', 'content').from(groupChild);
       const resourceTitle = get('meta', 'title', 'content').from(groupChild);
@@ -120,18 +130,17 @@ const parseSourceFile = ({ content }) => {
       const rPresetHash = resourceDescription && hashFromComment(resourceDescription);
       const resourceHash = rPresetHash ? createHash(rPresetHash) : combineHashes(groupHash, createHash(rMainHash));
       const resourceRoute = rPresetHash ? createRoute(rPresetHash) : combineRoutes(groupRoute, createRoute(rMainHash));
+      const resourceMeta = {
+        title: resourceTitle || resourceHref,
+        href: resourceHref,
+        hash: resourceHash,
+        route: resourceRoute,
+        group: groupMeta,
+      };
 
       groupChild.hash = resourceHash;
       groupChild.route = resourceRoute;
       groupChild.title = resourceTitle || resourceHref;
-
-      if (groupChild.element === 'message') {
-        const message = refactorMessage(groupChild);
-        message.id = uniqid.time();
-        message.parentGroup = groupMeta;
-        resources.push(message);
-        return message;
-      }
 
       groupChild.content = groupChild.content.map(resourceChild => {
         if (resourceChild.element === 'copy') return resourceChild;
@@ -142,19 +151,13 @@ const parseSourceFile = ({ content }) => {
         resourceChild.attributes = { ...groupChild.attributes, ...resourceChild.attributes };
         resourceChild.id = uniqid.time();
 
-        const action = refactorSource(resourceChild);
+        const action = refactorSource(resourceChild, resourceMeta);
         const actionDescription = getDescriptionWithoutHeaders(resourceChild);
         const aPresetHash = actionDescription && hashFromComment(actionDescription);
 
         action.hash = aPresetHash ? createHash(aPresetHash) : combineHashes(resourceHash, action.hash);
         action.route = aPresetHash ? createRoute(aPresetHash) : combineRoutes(resourceRoute, action.route);
-        action.parentResource = {
-          title: resourceTitle || resourceHref,
-          href: resourceHref,
-          hash: resourceHash,
-          route: resourceRoute,
-          group: groupMeta,
-        };
+        action.parentResource = resourceMeta;
         actions.push(action);
         return action;
       });
