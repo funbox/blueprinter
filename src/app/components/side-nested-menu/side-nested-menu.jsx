@@ -1,7 +1,6 @@
 import Menu from 'app/components/menu';
 import MethodBadge from 'app/components/method-badge';
-import { getDescriptionHeaders } from 'app/common/utils/helpers/getters';
-import { hashFromComment, createHash } from 'app/common/utils/helpers/hash';
+import { getDescriptionHeadersWithHash } from 'app/common/utils/helpers/getters';
 
 import SideNestedMenu__Item from './__item';
 
@@ -99,29 +98,16 @@ class SideNestedMenu extends React.Component {
     }, []);
 
     if (level === 2 && descriptionSection) {
-      const descriptionHeaders = getDescriptionHeaders(descriptionSection.content);
+      const descriptionHeaders = getDescriptionHeadersWithHash(descriptionSection.content);
 
-      headingItems.push(...descriptionHeaders.map((item, idx) => {
-        const description = descriptionSection.content;
-        let headerDescriptionPart;
-        if (idx === descriptionHeaders.length - 1) {
-          headerDescriptionPart = description.slice(descriptionHeaders[idx].index, description.length);
-        } else {
-          headerDescriptionPart = description.slice(descriptionHeaders[idx].index, descriptionHeaders[idx + 1].index - 1);
-        }
-
-        const presetHash = headerDescriptionPart && hashFromComment(headerDescriptionPart);
-        const hash = presetHash ? createHash(presetHash) : createHash(`header-${item.title}`);
-
-        return (
-          <SideNestedMenu__Item
-            mods={{ level }}
-            key={`header-${item.title}`}
-            title={item.title}
-            route={`${parentRoute}#${hash}`}
-          />
-        );
-      }));
+      headingItems.push(...descriptionHeaders.map((header) => (
+        <SideNestedMenu__Item
+          mods={{ level }}
+          key={`header-${header.title}`}
+          title={header.title}
+          route={`${parentRoute}#${header.hash}`}
+        />
+      )));
     }
 
     return headingItems.concat(menuItems);

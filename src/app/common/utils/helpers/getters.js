@@ -1,3 +1,5 @@
+import { createHash, hashFromComment } from './hash';
+
 export function getSourceElementIndexByType(source, type) {
   return source.content.findIndex(item => item.element === type);
 }
@@ -43,4 +45,21 @@ export function getDescriptionHeaders(description) {
   }
 
   return descriptionHeaders;
+}
+
+export function getDescriptionHeadersWithHash(description) {
+  const descriptionHeaders = getDescriptionHeaders(description);
+
+  return descriptionHeaders.map((item, idx) => {
+    let headerDescriptionPart;
+    if (idx === descriptionHeaders.length - 1) {
+      headerDescriptionPart = description.slice(descriptionHeaders[idx].index, description.length);
+    } else {
+      headerDescriptionPart = description.slice(descriptionHeaders[idx].index, descriptionHeaders[idx + 1].index - 1);
+    }
+
+    const presetHash = headerDescriptionPart && hashFromComment(headerDescriptionPart);
+    const hash = presetHash ? createHash(presetHash) : createHash(`header-${item.title}`);
+    return { title: item.title, hash };
+  });
 }

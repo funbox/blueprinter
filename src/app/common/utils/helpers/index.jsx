@@ -1,6 +1,6 @@
 import parser from 'html-react-parser';
 import Anchor from 'app/components/anchor';
-import { hashFromComment, createHash } from './hash';
+import { getDescriptionHeadersWithHash } from './getters';
 
 const commonmark = require('@funbox/commonmark');
 
@@ -86,27 +86,7 @@ const getAttributeChildren = attribute => {
 };
 
 const withHeaderAnchors = (description, pathname) => {
-  const descriptionHeaders = [];
-  const regex = /#{2,}\s?(.+)\n?/g;
-  let match = regex.exec(description);
-  while (match) {
-    descriptionHeaders.push({ title: match[1], index: match.index });
-    match = regex.exec(description);
-  }
-
-  const headers = descriptionHeaders.map((item, idx) => {
-    let headerDescriptionPart;
-    if (idx === descriptionHeaders.length - 1) {
-      headerDescriptionPart = description.slice(descriptionHeaders[idx].index, description.length);
-    } else {
-      headerDescriptionPart = description.slice(descriptionHeaders[idx].index, descriptionHeaders[idx + 1].index - 1);
-    }
-
-    const presetHash = headerDescriptionPart && hashFromComment(headerDescriptionPart);
-    const hash = presetHash ? createHash(presetHash) : createHash(`header-${item.title}`);
-    return { title: item.title, hash };
-  });
-
+  const headers = getDescriptionHeadersWithHash(description);
   const html = htmlFromText(description);
 
   const modifiedChildren = React.Children.map(html.props.children, textElement => {
