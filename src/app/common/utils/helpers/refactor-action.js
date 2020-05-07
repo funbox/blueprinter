@@ -105,10 +105,11 @@ export const refactorMessage = (message, parentSource) => {
   const presetHash = messageDescription ? hashFromComment(messageDescription) : null;
   const mainHash = `message-${messageTitle}`;
 
-  const { hash: parentHash, route: parentRoute } = parentSource;
+  const { hash: parentHash, route: parentRoute, hashForLegacyUrl: parentLegacyHash } = parentSource;
 
   const messageSlug = createSlug(messageTitle);
   const messageHash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(mainHash));
+  const messageLegacyHash = presetHash ? createHash(presetHash) : combineHashes(parentLegacyHash, createHash(messageTitle));
   const messageRoute = presetHash ? createRoute(presetHash) : combineRoutes(parentRoute, createRoute(mainHash, createSlug));
 
   return ({
@@ -121,6 +122,7 @@ export const refactorMessage = (message, parentSource) => {
     body: getBody(message),
     schema: getSchema(message),
     hash: messageHash,
+    hashForLegacyUrl: messageLegacyHash,
     route: messageRoute,
     slug: messageSlug,
     title: messageTitle,
@@ -186,13 +188,15 @@ export const refactorAction = (action, parentSource) => {
   const displayedTitle = title || `${method.toUpperCase()} ${href}`;
   const description = getDescription({ content: copyElements }); // чтобы не обходить содержимое action заново
 
-  const { hash: parentHash, route: parentRoute } = parentSource;
+  const { hash: parentHash, route: parentRoute, hashForLegacyUrl: parentLegacyHash } = parentSource;
 
   const hashCode = getHashCode(`${title || ''}-${href}-${method}`);
   const presetHash = description ? hashFromComment(description) : null;
   const mainHash = `action-${method}-${href.slice(1)}-${hashCode.toString(16)}`;
+  const legacyHashBase = title ? `${title} ${method}` : `${href.slice(1).replace(/\//g, '-')} ${method}`;
 
   const hash = presetHash ? createHash(presetHash) : combineHashes(parentHash, createHash(mainHash));
+  const legacyHash = presetHash ? createHash(presetHash) : combineHashes(parentLegacyHash, createHash(legacyHashBase));
   const route = presetHash ? createRoute(presetHash) : combineRoutes(parentRoute, createRoute(mainHash));
 
   return {
@@ -201,6 +205,7 @@ export const refactorAction = (action, parentSource) => {
     title: displayedTitle,
     hash,
     route,
+    hashForLegacyUrl: legacyHash,
     element: action.element,
     attributes: {
       hrefVariables: get('attributes', 'hrefVariables', 'content').from(action),

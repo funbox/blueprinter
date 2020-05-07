@@ -1,6 +1,6 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import parseSourceFile from 'app/common/utils/helpers/parse-source-file';
-import { createRoute, combineRoutes, HASH_DELIMITER } from 'app/common/utils/helpers/hash';
+import { HASH_DELIMITER } from 'app/common/utils/helpers/hash';
 import sourceMock from 'app/source';
 
 import MainLayout from 'app/components/main-layout';
@@ -116,56 +116,57 @@ App.propTypes = {
 function convertLegacyUrl(url) {
   let groupHash = '';
   let resourceHash = '';
-  let actionHash = '';
+  let matchedGroup = null;
+  let matchedResource = null;
+  let matchedAction = null;
   let localHash = decodeURIComponent(url).slice(1); // remove /
 
   for (let i = 0; i < groups.length; i++) {
     const group = groups[i];
-    if (localHash.startsWith(group.hash)) {
-      groupHash = group.hash;
+    if (localHash.startsWith(group.hashForLegacyUrl)) {
+      groupHash = group.hashForLegacyUrl;
+      matchedGroup = group;
       break;
     }
   }
 
   localHash = slice(localHash, groupHash);
 
-  if (localHash === '') {
-    return createRoute(groupHash);
+  if (localHash === '' && matchedGroup !== null) {
+    return matchedGroup.route;
   }
 
   for (let i = 0; i < resources.length; i++) {
     const resource = resources[i];
-    const hashWithoutGroup = slice(resource.hash, groupHash);
+    const hashWithoutGroup = slice(resource.hashForLegacyUrl, groupHash);
     if (hashWithoutGroup.length > 0 && localHash.startsWith(hashWithoutGroup)) {
       resourceHash = hashWithoutGroup;
+      matchedResource = resource;
       break;
     }
   }
 
   localHash = slice(localHash, resourceHash);
 
-  if (localHash === '') {
-    return combineRoutes(
-      createRoute(groupHash),
-      createRoute(resourceHash),
-    );
+  if (localHash === '' && matchedResource !== null) {
+    return matchedResource.route;
   }
 
   for (let i = 0; i < actions.length; i++) {
     const action = actions[i];
-    const hashWithoutGroup = slice(action.hash, groupHash);
+    const hashWithoutGroup = slice(action.hashForLegacyUrl, groupHash);
     const hashWithoutGroupAndResource = slice(hashWithoutGroup, resourceHash);
     if (hashWithoutGroupAndResource.length > 0 && localHash.startsWith(hashWithoutGroupAndResource)) {
-      actionHash = hashWithoutGroupAndResource;
+      matchedAction = action;
       break;
     }
   }
 
-  const [groupRoute, resourceRoute, actionRoute] = [groupHash, resourceHash, actionHash]
-    .map((hash) => createRoute(hash))
-    .map(route => route.replace(/^\/$/, '')); // '/' -> ''
+  if (matchedAction) {
+    return matchedAction.route;
+  }
 
-  return combineRoutes(combineRoutes(groupRoute, resourceRoute), actionRoute);
+  return null;
 }
 
 function slice(sourceString, slicedPart = '') {

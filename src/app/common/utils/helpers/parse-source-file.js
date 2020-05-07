@@ -92,24 +92,28 @@ const parseSourceFile = ({ content }) => {
 
     const gPresetHash = groupDescription && hashFromComment(groupDescription);
     const gHashBase = gPresetHash || `group-${groupTitle}`;
+    const gHashBaseUnprefixed = gPresetHash || groupTitle;
 
     const groupHash = createHash(gHashBase);
+    const groupLegacyHash = createHash(gHashBaseUnprefixed);
     const groupSlug = createSlug(gHashBase);
     const groupRoute = createRoute(gHashBase, createSlug);
     const groupMeta = {
       title: groupTitle,
       hash: groupHash,
+      hashForLegacyUrl: groupLegacyHash,
       route: groupRoute,
       slug: groupSlug,
     };
 
     // group.hash используется в app.jsx@convertLegacyUrl
+    group.hashForLegacyUrl = groupLegacyHash;
     group.hash = groupHash;
     group.route = groupRoute;
     group.slug = groupSlug;
     group.title = groupTitle;
 
-    group.content = group.content.map((groupChild) => {
+    group.content = group.content.map((groupChild, rIndex) => {
       if (groupChild.element === 'copy') {
         return groupChild;
       }
@@ -126,20 +130,25 @@ const parseSourceFile = ({ content }) => {
       const resourceTitle = get('meta', 'title', 'content').from(groupChild);
       const resourceDescription = getDescriptionWithoutHeaders(groupChild);
 
+      const rActualIndex = groupDescription ? rIndex : (rIndex + 1);
+      const rLegacyHash = resourceTitle || String(rActualIndex);
       const rHashCode = getHashCode(`${resourceTitle || ''}-${resourceHref || ''}`);
-      const rHashMidPart = resourceHref ? resourceHref.slice(1) : slugify(resourceTitle);
+      const rHashMidPart = resourceHref ? resourceHref.slice(1) : slugify(resourceTitle); // у SubGroup нет href
       const rMainHash = `resource-${rHashMidPart}-${rHashCode.toString(16)}`;
       const rPresetHash = resourceDescription && hashFromComment(resourceDescription);
       const resourceHash = rPresetHash ? createHash(rPresetHash) : combineHashes(groupHash, createHash(rMainHash));
+      const resourceLegacyHash = rPresetHash ? createHash(rPresetHash) : combineHashes(group.hashForLegacyUrl, createHash(rLegacyHash));
       const resourceRoute = rPresetHash ? createRoute(rPresetHash) : combineRoutes(groupRoute, createRoute(rMainHash));
       const resourceMeta = {
         title: resourceTitle || resourceHref,
         href: resourceHref,
         hash: resourceHash,
+        hashForLegacyUrl: resourceLegacyHash,
         route: resourceRoute,
         group: groupMeta,
       };
 
+      groupChild.hashForLegacyUrl = rPresetHash ? createHash(rPresetHash) : combineHashes(group.hashForLegacyUrl, createHash(rLegacyHash));
       groupChild.hash = resourceHash;
       groupChild.route = resourceRoute;
       groupChild.title = resourceTitle || resourceHref;
