@@ -112,15 +112,17 @@ const parseSourceFile = ({ content }) => {
     group.route = groupRoute;
     group.slug = groupSlug;
     group.title = groupTitle;
+    group.id = uniqid.time();
 
     group.content = group.content.map((groupChild, rIndex) => {
       if (groupChild.element === 'copy') {
         return groupChild;
       }
 
+      groupChild.id = uniqid.time();
+
       if (groupChild.element === 'message') {
         const message = refactorMessage(groupChild, groupMeta);
-        message.id = uniqid.time();
         message.parentGroup = groupMeta;
         resources.push(message);
         return message;

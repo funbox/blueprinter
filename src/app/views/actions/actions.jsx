@@ -3,11 +3,7 @@ import ResourceGroupSection from 'app/components/resource-group-section';
 
 const ActionRoutes = (actions) => (
   actions.map(action => {
-    const {
-      hash,
-      route,
-      parentResource,
-    } = action;
+    const { id, route, parentResource } = action;
 
     const parentGroup = parentResource.group;
     const resource = { ...parentResource };
@@ -17,7 +13,7 @@ const ActionRoutes = (actions) => (
 
     return (
       <Route
-        key={`action-${hash}`}
+        key={`action-${id}`}
         exact
         path={route}
         render={(props) => (
