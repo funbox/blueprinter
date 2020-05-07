@@ -94,23 +94,16 @@ const parseSourceFile = ({ content }) => {
     const gHashBase = gPresetHash || `group-${groupTitle}`;
     const gHashBaseUnprefixed = gPresetHash || groupTitle;
 
-    const groupHash = createHash(gHashBase);
     const groupLegacyHash = createHash(gHashBaseUnprefixed);
-    const groupSlug = createSlug(gHashBase);
     const groupRoute = createRoute(gHashBase, createSlug);
     const groupMeta = {
       title: groupTitle,
-      hash: groupHash,
       hashForLegacyUrl: groupLegacyHash,
       route: groupRoute,
-      slug: groupSlug,
     };
 
-    // group.hash используется в app.jsx@convertLegacyUrl
-    group.hashForLegacyUrl = groupLegacyHash;
-    group.hash = groupHash;
+    group.hashForLegacyUrl = groupLegacyHash; // используется в app.jsx@convertLegacyUrl
     group.route = groupRoute;
-    group.slug = groupSlug;
     group.title = groupTitle;
     group.id = uniqid.time();
 
@@ -138,20 +131,17 @@ const parseSourceFile = ({ content }) => {
       const rHashMidPart = resourceHref ? resourceHref.slice(1) : slugify(resourceTitle); // у SubGroup нет href
       const rMainHash = `resource-${rHashMidPart}-${rHashCode.toString(16)}`;
       const rPresetHash = resourceDescription && hashFromComment(resourceDescription);
-      const resourceHash = rPresetHash ? createHash(rPresetHash) : combineHashes(groupHash, createHash(rMainHash));
       const resourceLegacyHash = rPresetHash ? createHash(rPresetHash) : combineHashes(group.hashForLegacyUrl, createHash(rLegacyHash));
       const resourceRoute = rPresetHash ? createRoute(rPresetHash) : combineRoutes(groupRoute, createRoute(rMainHash));
       const resourceMeta = {
         title: resourceTitle || resourceHref,
         href: resourceHref,
-        hash: resourceHash,
         hashForLegacyUrl: resourceLegacyHash,
         route: resourceRoute,
         group: groupMeta,
       };
 
       groupChild.hashForLegacyUrl = rPresetHash ? createHash(rPresetHash) : combineHashes(group.hashForLegacyUrl, createHash(rLegacyHash));
-      groupChild.hash = resourceHash;
       groupChild.route = resourceRoute;
       groupChild.title = resourceTitle || resourceHref;
 
