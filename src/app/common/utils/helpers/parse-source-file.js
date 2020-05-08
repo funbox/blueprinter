@@ -1,8 +1,8 @@
 import uniqid from 'uniqid';
 import { GROUP_DEFAULT_TITLE } from 'app/constants/defaults';
 
-import { get, htmlFromText } from './index';
-import { getDescriptionWithoutHeaders } from './getters';
+import { htmlFromText } from './index';
+import { get, getDescriptionWithoutHeaders } from './getters';
 
 import categories from './categories';
 import refactorSource, { refactorMessage } from './refactor-action';

@@ -1,4 +1,4 @@
-import { get } from '.';
+import { get } from './getters';
 
 const parameteresRegex = /(?:{\?(.+)}$)/; // example: {?kind,full} -> "kind,full"
 

@@ -1,7 +1,8 @@
 import RawContent from 'app/components/raw-content';
 import ActionCard from 'app/components/action-card';
 import MessageCard from 'app/components/message-card';
-import { get, withHeaderAnchors } from 'app/common/utils/helpers';
+import { withHeaderAnchors } from 'app/common/utils/helpers';
+import { get } from 'app/common/utils/helpers/getters';
 import Resource__Action from './__action';
 
 class Resource extends React.Component {

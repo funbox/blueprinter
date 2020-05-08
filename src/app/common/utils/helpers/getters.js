@@ -1,5 +1,11 @@
 import { createHash, hashFromComment } from './hash';
 
+export function get(...path) {
+  const from = (source) => path.reduce((xs, x) => ((xs && xs[x] !== undefined) ? xs[x] : null), source);
+
+  return { from };
+}
+
 export function getSourceElementIndexByType(source, type) {
   return source.content.findIndex(item => item.element === type);
 }

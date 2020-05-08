@@ -1,7 +1,6 @@
 import deepEqual from 'deep-equal';
 import { MESSAGE_DEFAULT_TITLE } from 'app/constants/defaults';
-import { get } from './index';
-import { getSourceElementIndexByType, getBody, getSchema, getDescription } from './getters';
+import { get, getSourceElementIndexByType, getBody, getSchema, getDescription } from './getters';
 import { combineHashes, combineRoutes, createHash, createRoute, createSlug, getHashCode, hashFromComment } from './hash';
 import categories from './categories';
 

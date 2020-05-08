@@ -1,4 +1,4 @@
-import { get } from 'app/common/utils/helpers';
+import { get } from 'app/common/utils/helpers/getters';
 
 const Attribute__Row = (props) => {
   const { attributeData, parentType } = props;

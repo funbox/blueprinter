@@ -1,6 +1,6 @@
 import parser from 'html-react-parser';
 import Anchor from 'app/components/anchor';
-import { getDescriptionHeadersWithHash } from './getters';
+import { get, getDescriptionHeadersWithHash } from './getters';
 
 const commonmark = require('@funbox/commonmark');
 
@@ -23,12 +23,6 @@ const htmlFromText = (text, wrap = 'no-wrap', Tag = 'div') => {
   }
 
   return <React.Fragment>{parser(htmlString)}</React.Fragment>;
-};
-
-const get = (...path) => {
-  const from = (source) => path.reduce((xs, x) => ((xs && xs[x] !== undefined) ? xs[x] : null), source);
-
-  return { from };
 };
 
 const extractAttributeData = (attribute) => {
@@ -205,7 +199,6 @@ function isPrimitive(value) {
 export {
   extractAttributeData,
   getAttributeChildren,
-  get,
   htmlFromText,
   withHeaderAnchors,
 };

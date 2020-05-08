@@ -5,7 +5,8 @@ import RawContent from 'app/components/raw-content';
 import Link from 'app/components/link';
 import Parameters from 'app/components/parameters';
 import TransitionContainer from 'app/components/transition-container';
-import { get, withHeaderAnchors } from 'app/common/utils/helpers';
+import { withHeaderAnchors } from 'app/common/utils/helpers';
+import { get } from 'app/common/utils/helpers/getters';
 import formatHref from 'app/common/utils/helpers/format-href';
 
 const parseQuery = query => {

@@ -1,5 +1,6 @@
 import RawContent from 'app/components/raw-content';
-import { get, withHeaderAnchors } from 'app/common/utils/helpers';
+import { withHeaderAnchors } from 'app/common/utils/helpers';
+import { get } from 'app/common/utils/helpers/getters';
 import Resource from 'app/components/resource';
 import MessageCard from 'app/components/message-card';
 

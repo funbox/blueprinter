@@ -1,5 +1,6 @@
 import RawContent from 'app/components/raw-content';
-import { get, htmlFromText } from 'app/common/utils/helpers';
+import { htmlFromText } from 'app/common/utils/helpers';
+import { get } from 'app/common/utils/helpers/getters';
 
 import Parameter__Prop from './__prop';
 
