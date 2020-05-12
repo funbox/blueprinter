@@ -8,23 +8,26 @@ import TransitionContainer from 'app/components/transition-container';
 import { get, withHeaderAnchors } from 'app/common/utils/helpers';
 import formatHref from 'app/common/utils/helpers/formatHref';
 
-const highlightQuery = (queryKey, queryValue) => {
-  const key = `<span class="hljs-params">${queryKey}</span>`;
-  const value = `<span class="hljs-value">${queryValue}</span>`;
+const parseQuery = query => {
+  if (!query) return [];
 
-  return `${key}=${value}`;
+  // Декодирование URI реализовано по аналогии с модулем querystringify, который
+  // используется по умолчанию для парсинга query строк в библиотеке url-parse
+  const decodedQuery = decodeURIComponent(query.replace(/\+/g, ' '));
+
+  return decodedQuery
+    .slice(decodedQuery.indexOf('?') + 1)
+    .split('&');
 };
 
-const getFormattedQuery = queryObj => (
-  Object.keys(queryObj).map(qKey => {
-    if (queryObj[qKey].includes(',')) {
-      return queryObj[qKey]
-        .split(',')
-        .map(qValue => highlightQuery(qKey, qValue.trim()))
-        .join('&');
-    }
+const highlightQuery = queryPairs => (
+  queryPairs.map(queryPair => {
+    const [queryKey, queryValue] = queryPair.split('=');
 
-    return highlightQuery(qKey, queryObj[qKey]);
+    const key = `<span class="hljs-params">${queryKey}</span>`;
+    const value = `<span class="hljs-value">${queryValue}</span>`;
+
+    return `${key}=${value}`;
   }).join('&')
 );
 
@@ -43,8 +46,8 @@ const ActionCard = (props) => {
 
   const formattedHref = hrefVariables ? formatHref(href, hrefVariables) : href;
 
-  const { pathname, query } = new URL(formattedHref, true);
-  const formattedQuery = getFormattedQuery(query);
+  const { pathname, query } = new URL(formattedHref, parseQuery);
+  const formattedQuery = highlightQuery(query);
 
   return (
     <div className={b('action-card', { mods: { type: method } })}>
