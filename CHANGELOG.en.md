@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.16.0 (15.05.2020)
+
+* Add support of recursive objects.
+
 ## 3.15.0 (24.04.2020)
 
 * Add the page for manual search.
