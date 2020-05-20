@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.17.0 (20.05.2020)
+
+* Fix rendering of URI parameters that have star symbol.
+
 ## 3.16.0 (15.05.2020)
 
 * Add support of recursive objects.
