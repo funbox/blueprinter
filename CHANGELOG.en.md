@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.18.0 (29.05.2020)
+
+* Rework routes generation.
+
 ## 3.17.0 (20.05.2020)
 
 * Fix rendering of URI parameters that have star symbol.
