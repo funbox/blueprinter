@@ -61,7 +61,20 @@ class Transition__Body extends React.PureComponent {
 
     const isEmpty = Object.keys(selectedTransaction).length === 1 && (!!selectedTransaction.statusCode || !!selectedTransaction.title);
 
-    const { headers, attributes, body, description, schema, structureType } = selectedTransaction;
+    const { title, headers, attributes, body, schema, structureType } = selectedTransaction;
+
+    let { description } = selectedTransaction;
+
+    if (contentType === 'request' && title) {
+      description = (
+        <>
+          <p className={b('transition__description-title')}>
+            {title.trim()}
+          </p>
+          {description || ''}
+        </>
+      );
+    }
 
     const selectedDataId = availableTransactions.indexOf(selectedTransaction);
     const examplesList = availableTransactions.map((d, index) => {
