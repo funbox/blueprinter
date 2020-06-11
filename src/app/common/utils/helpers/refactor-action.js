@@ -3,8 +3,7 @@ import { MESSAGE_DEFAULT_TITLE } from 'app/constants/defaults';
 import { get, getSourceElementIndexByType, getBody, getSchema, getDescription } from './getters';
 import { combineHashes, combineRoutes, createHash, createRoute, createSlug, getHashCode, hashFromComment } from './hash';
 import categories from './categories';
-
-const standardTypes = ['number', 'string', 'boolean', 'array', 'enum', 'object'];
+import InheritanceResolver from './inheritance-resolver';
 
 const removeEmpty = object => (
   Object.keys(object).reduce((res, key) => {
@@ -14,89 +13,7 @@ const removeEmpty = object => (
     return res;
   }, {}));
 
-const resolveInheritance = (valueMember, parent) => {
-  const type = valueMember.element;
-  const referencedDataStructure = categories.dataStructuresArray.find(ds => {
-    const dsContent = Array.isArray(ds.content) ? ds.content[0].meta.id.content : ds.content.meta.id.content;
-    return type === 'ref' ? dsContent === valueMember.content : dsContent === valueMember.element;
-  });
-  const referencedSchemaStructure = categories.schemaStructuresArray.find(ss => {
-    const ssContent = ss.meta.id.content;
-    return ssContent === valueMember.element;
-  });
-
-  if (referencedDataStructure) {
-    const refDSContent = referencedDataStructure.content;
-    const enumContent = get('attributes', 'enumerations').from(refDSContent);
-    const isEnum = !!enumContent;
-    if (!standardTypes.includes(refDSContent.element)) {
-      resolveInheritance(refDSContent);
-    }
-    const referencedObjectType = refDSContent.element;
-    const usefulContent = isEnum ? enumContent : refDSContent;
-
-    let referencedObjectContent;
-    if (Array.isArray(usefulContent.content)) {
-      usefulContent.content.forEach(item => resolveInheritance(item, usefulContent));
-      referencedObjectContent = [...usefulContent.content];
-    }
-
-    if (type === 'ref') {
-      const refMemberIndex = parent.content.indexOf(valueMember);
-      const refilledArray = parent.content.slice(0, refMemberIndex)
-        .concat(referencedObjectContent)
-        .concat(parent.content.slice(refMemberIndex + 1));
-      parent.content = [...refilledArray];
-    } else if (isEnum) {
-      valueMember.attributes = valueMember.attributes || {};
-      valueMember.attributes.enumerations = valueMember.attributes.enumerations || {};
-      valueMember.attributes.enumerations.content = valueMember.attributes.enumerations.content || [];
-      valueMember.attributes.enumerations.content.unshift(...referencedObjectContent);
-      valueMember.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
-    } else if (!referencedObjectContent) {
-      valueMember.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
-      valueMember.attributes = usefulContent.attributes;
-    } else {
-      if (!Array.isArray(valueMember.content)) valueMember.content = [];
-      if (valueMember.content.length && referencedObjectContent.length) {
-        referencedObjectContent = referencedObjectContent.filter(rfcItem => !valueMember.content.find(vmcItem => {
-          if (rfcItem.element === 'member' && vmcItem.element === 'member') {
-            return rfcItem.content.key.content === vmcItem.content.key.content;
-          }
-          return false;
-        }));
-      }
-
-      valueMember.content.unshift(...referencedObjectContent);
-      valueMember.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
-      valueMember.attributes = usefulContent.attributes;
-    }
-  }
-
-  if (referencedSchemaStructure) {
-    const refSSContent = referencedSchemaStructure.content;
-    if (Array.isArray(refSSContent) && refSSContent.every(item => item.element === 'asset')) {
-      valueMember.element = 'schema type';
-    }
-  }
-
-  let childElement;
-  if (type === 'member') {
-    const elementType = valueMember.content.value.element;
-    childElement = standardTypes.includes(elementType) ? valueMember.content.value : valueMember;
-  } else {
-    childElement = valueMember;
-  }
-  const childElementContent = childElement.content;
-
-  if (Array.isArray(childElementContent)) {
-    childElementContent.map(item => resolveInheritance(item, childElement));
-  } else if (childElementContent && childElementContent.value) {
-    resolveInheritance(childElementContent.value, valueMember);
-  }
-
-  return valueMember;
-};
+const resolver = new InheritanceResolver(categories);
 
 export const refactorMessage = (message, parentSource) => {
   const messageTitle = get('meta', 'title', 'content').from(message) || MESSAGE_DEFAULT_TITLE;
@@ -228,7 +145,7 @@ function getDataAttributes(httpSource) {
 
   const valueMember = httpSource.content[index].content;
 
-  resolveInheritance(valueMember, httpSource.content[index]);
+  resolver.resolveInheritance(valueMember, httpSource.content[index]);
   fillAdditionalAttributes(valueMember);
 
   return valueMember.content;
@@ -241,7 +158,7 @@ function getDataStructureType(httpSource) {
 
   const valueMember = httpSource.content[index].content;
 
-  resolveInheritance(valueMember, httpSource.content[index]);
+  resolver.resolveInheritance(valueMember, httpSource.content[index]);
 
   return valueMember.element;
 }
