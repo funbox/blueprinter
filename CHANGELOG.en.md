@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.18.1 (11.06.2020)
+
+* Account presence of recursive data structures.
+
 ## 3.18.0 (29.05.2020)
 
 * Rework routes generation.
