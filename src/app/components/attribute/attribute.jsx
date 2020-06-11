@@ -34,6 +34,8 @@ class Attribute extends React.Component {
       mods.collapsed = this.state.collapsed;
     }
 
+    mods.recursive = attributeData.recursive;
+
     if (viewMode === 'expanded') {
       mods.static = true;
       return (

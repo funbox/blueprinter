@@ -32,9 +32,11 @@ const extractAttributeData = (attribute) => {
 
   const key = get('content', 'key').from(attribute);
   const value = get('content', 'value').from(attribute);
+  const attributeStructureName = attribute.referenceDataStructure;
   let attributeKey;
   let attributeType;
   let attributeExample;
+  let recursive = attribute.recursive;
 
   if (key && value) {
     attributeKey = key.content || null;
@@ -54,9 +56,18 @@ const extractAttributeData = (attribute) => {
       attributeProps = attributeProps || [];
       attributeProps = attributeProps.concat(valueAttributes);
     }
+    recursive = value.recursive || recursive;
   }
 
-  return { attributeKey, attributeType, attributeExample, attributeDescription, attributeProps };
+  return {
+    attributeKey,
+    attributeType,
+    attributeExample,
+    attributeDescription,
+    attributeProps,
+    attributeStructureName,
+    recursive,
+  };
 };
 
 const getAttributeChildren = attribute => {

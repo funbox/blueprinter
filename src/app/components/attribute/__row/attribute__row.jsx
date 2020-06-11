@@ -8,6 +8,8 @@ const Attribute__Row = (props) => {
     attributeExample,
     attributeProps,
     attributeDescription,
+    attributeStructureName,
+    recursive,
   } = attributeData;
 
   const enumMember = parentType === 'enum';
@@ -54,8 +56,14 @@ const Attribute__Row = (props) => {
           && !oneOfElement
           && !oneOfMember
           && (
-            <p className={b('attribute__type', { mix: [b('attribute__code')] })}>
-              {attributeType}
+            <p className={b('attribute__type')} title={recursive ? 'Эта структура является рекурсивной' : undefined}>
+              <span className={b('attribute__code')}>
+                {
+                  recursive && attributeStructureName
+                    ? `${attributeStructureName} (${attributeType})`
+                    : attributeType
+                }
+              </span>
             </p>
           )
         }
