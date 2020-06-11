@@ -53,11 +53,13 @@ export const refactorAction = (action, parentSource) => {
 
     const sourceRequest = trans.content.find(tItem => tItem.element === 'httpRequest');
     const sourceResponse = trans.content.find(tItem => tItem.element === 'httpResponse');
+    const processedRequest = resolveSourceElementInheritance(sourceRequest);
+    const processedResponse = resolveSourceElementInheritance(sourceResponse);
     method = get('attributes', 'method', 'content').from(sourceRequest);
 
     const request = {
-      structureType: getDataStructureType(sourceRequest),
-      attributes: getDataAttributes(sourceRequest),
+      structureType: getDataStructureType(processedRequest),
+      attributes: getDataAttributes(processedRequest),
       body: getBody(sourceRequest),
       description: getDescription(sourceRequest),
       headers: sourceRequest.attributes.headers ? sourceRequest.attributes.headers.content.map(extractHeaderData) : null,
@@ -66,8 +68,8 @@ export const refactorAction = (action, parentSource) => {
     };
 
     const response = {
-      structureType: getDataStructureType(sourceResponse),
-      attributes: getDataAttributes(sourceResponse),
+      structureType: getDataStructureType(processedResponse),
+      attributes: getDataAttributes(processedResponse),
       body: getBody(sourceResponse),
       description: getDescription(sourceResponse),
       headers: sourceResponse.attributes.headers ? sourceResponse.attributes.headers.content.map(extractHeaderData) : null,
@@ -138,20 +140,21 @@ function extractHeaderData(header) {
   };
 }
 
-function getDataAttributes(httpSource) {
-  const index = getSourceElementIndexByType(httpSource, 'dataStructure');
+function getDataAttributes(sourceValueMember) {
+  if (!sourceValueMember) return sourceValueMember;
 
-  if (index === -1) return null;
+  fillAdditionalAttributes(sourceValueMember);
 
-  const valueMember = httpSource.content[index].content;
-
-  resolver.resolveInheritance(valueMember, httpSource.content[index]);
-  fillAdditionalAttributes(valueMember);
-
-  return valueMember.content;
+  return sourceValueMember.content;
 }
 
-function getDataStructureType(httpSource) {
+function getDataStructureType(sourceValueMember) {
+  if (!sourceValueMember) return sourceValueMember;
+
+  return sourceValueMember.element;
+}
+
+function resolveSourceElementInheritance(httpSource) {
   const index = getSourceElementIndexByType(httpSource, 'dataStructure');
 
   if (index === -1) return null;
@@ -160,7 +163,7 @@ function getDataStructureType(httpSource) {
 
   resolver.resolveInheritance(valueMember, httpSource.content[index]);
 
-  return valueMember.element;
+  return valueMember;
 }
 
 function fillAdditionalAttributes(valueMember) {
