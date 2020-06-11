@@ -151,7 +151,11 @@ function getDataAttributes(sourceValueMember) {
 function getDataStructureType(sourceValueMember) {
   if (!sourceValueMember) return sourceValueMember;
 
-  return sourceValueMember.element;
+  return {
+    type: sourceValueMember.element,
+    name: sourceValueMember.referenceDataStructure,
+    recursive: sourceValueMember.recursive,
+  };
 }
 
 function resolveSourceElementInheritance(httpSource) {

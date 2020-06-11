@@ -118,7 +118,7 @@ class Transition__Body extends React.PureComponent {
 
         {!!attributes && attributes.length > 0 && (
           <Section
-            title={`Attributes${structureType ? ` (${structureType})` : ''}`}
+            title={getAttributesTitle(structureType)}
             titleTag="h5"
             mods={{ for: 'transition-content' }}
             mix={b('transition__section')}
@@ -173,4 +173,27 @@ function formatHeaders(arrayOfHeaders) {
 
 function isString(s) {
   return (typeof s === 'string' || s instanceof String);
+}
+
+function getAttributesTitle(structureType) {
+  const prefix = 'Attributes';
+
+  if (!structureType) {
+    return prefix;
+  }
+
+  if (!structureType.recursive) {
+    return `${prefix} (${structureType.type})`;
+  }
+
+  return (
+    <>
+      {prefix}
+      {' '}
+      {`(recursive ${structureType.type}`}
+      {' '}
+      <code className={b('transition__code')}>{structureType.name}</code>
+      {')'}
+    </>
+  );
 }
