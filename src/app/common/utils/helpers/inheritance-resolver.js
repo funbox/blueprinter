@@ -11,9 +11,14 @@ const getDataStructureId = (dataStructure) => (
 export default class InheritanceResolver {
   constructor(categories = []) {
     this.categories = categories;
+    this.usedStructuresMap = new Map();
   }
 
   resolveInheritance(valueMember, parent) {
+    if (valueMember.recursive) {
+      return valueMember;
+    }
+
     const type = valueMember.element;
     const referencedDataStructure = this.categories.dataStructuresArray.find(ds => (
       getDataStructureId(ds) === (type === 'ref' ? valueMember.content : valueMember.element)
@@ -24,6 +29,7 @@ export default class InheritanceResolver {
 
     if (referencedDataStructure) {
       this.fillValueMemberWithDataStructureContent(referencedDataStructure, valueMember, parent);
+      valueMember.recursive = referencedDataStructure.recursive;
     }
 
     if (referencedSchemaStructure) {
@@ -53,6 +59,15 @@ export default class InheritanceResolver {
 
   fillValueMemberWithDataStructureContent(referencedDataStructure, member, memberParent) {
     const type = member.element;
+    const dataStructureId = getDataStructureId(referencedDataStructure);
+
+    if (this.usedStructuresMap.has(dataStructureId)) {
+      this.usedStructuresMap.get(dataStructureId).recursive = true;
+      member.recursive = true;
+      return;
+    }
+
+    this.usedStructuresMap.set(dataStructureId, referencedDataStructure);
     const refDSContent = referencedDataStructure.content;
     const enumContent = get('attributes', 'enumerations').from(refDSContent);
     const isEnum = !!enumContent;
@@ -97,6 +112,8 @@ export default class InheritanceResolver {
       member.content.unshift(...referencedObjectContent);
       member.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
       member.attributes = usefulContent.attributes;
+      member.referenceDataStructure = dataStructureId;
     }
+    this.usedStructuresMap.delete(dataStructureId);
   }
 }
