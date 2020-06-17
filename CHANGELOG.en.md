@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.19.0 (17.06.2020)
+
+* Use Node.js 12.16.3 as the base Docker image.
+
 ## 3.18.1 (11.06.2020)
 
 * Account presence of recursive data structures.
