@@ -1,4 +1,4 @@
-FROM node:10.24.1
+FROM node:12.16.3
 
 LABEL org.label-schema.description="Image for launching npm package \"@funbox/blueprinter-frontend\""
 LABEL org.label-schema.vcs-url="https://github.com/funbox/blueprinter-frontend"
