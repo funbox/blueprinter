@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.20.1 (22.06.2020)
+
+* Fix rendering of a Crafter error without a source map.
+
 ## 3.20.0 (22.06.2020)
 
 * Detect first node of an imported file.
