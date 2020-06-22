@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.20.2 (22.06.2020)
+
+* Fix parsing of a Resource section that comes after a Resource Prototypes section.
+
 ## 3.20.1 (22.06.2020)
 
 * Fix rendering of a Crafter error without a source map.
