@@ -213,16 +213,21 @@ function detectErrorsAndWarnings(content) {
 
 function extractAnnotationInfo(annotation) {
   const text = annotation.content;
-  const sourceMap = annotation.attributes.sourceMap.content[0];
-  const startPositionSourceMap = sourceMap.content[0];
-  const sourceFile = sourceMap.file;
-  const positionAttributes = startPositionSourceMap.content[0].attributes;
-  const positionDetails = {
-    line: positionAttributes.line.content,
-    column: positionAttributes.column.content,
-    file: sourceFile,
-  };
-  return { text, details: positionDetails, id: uniqid.time() };
+  const result = { text, id: uniqid.time() };
+
+  if (annotation.attributes) {
+    const sourceMap = annotation.attributes.sourceMap.content[0];
+    const startPositionSourceMap = sourceMap.content[0];
+    const sourceFile = sourceMap.file;
+    const positionAttributes = startPositionSourceMap.content[0].attributes;
+    result.positionDetails = {
+      line: positionAttributes.line.content,
+      column: positionAttributes.column.content,
+      file: sourceFile,
+    };
+  }
+
+  return result;
 }
 
 function getHost(source) {
