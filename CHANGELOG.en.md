@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.20.0 (22.06.2020)
+
+* Detect first node of an imported file.
+
 ## 3.19.0 (17.06.2020)
 
 * Use Node.js 12.16.3 as the base Docker image.
