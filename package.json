@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@funbox/commonmark": "0.29.0-fb-1.0.3",
-    "@funbox/crafter": "1.54.0",
+    "@funbox/crafter": "1.54.2",
     "@funbox/free-port-finder": "2.0.1",
     "browser-sync": "2.26.7",
     "react-hot-loader": "4.12.19",
