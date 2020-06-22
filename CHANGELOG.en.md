@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.20.3 (22.06.2020)
+
+* Fix processing imports inside of an imported file.
+
 ## 3.20.2 (22.06.2020)
 
 * Fix parsing of a Resource section that comes after a Resource Prototypes section.
