@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.21.0 (07.07.2020)
+
+* Add headers to a response description.
+
 ## 3.20.3 (22.06.2020)
 
 * Fix processing imports inside of an imported file.
