@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.21.1 (08.07.2020)
+
+* Generate routes without curly braces.
+
 ## 3.21.0 (07.07.2020)
 
 * Add headers to a response description.
