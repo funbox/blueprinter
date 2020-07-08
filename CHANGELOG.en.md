@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.22.0 (08.07.2020)
+
+* Update Crafter to 1.57.0.
+
 ## 3.21.1 (08.07.2020)
 
 * Generate routes without curly braces.
