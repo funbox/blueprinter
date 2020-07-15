@@ -2,6 +2,7 @@ import AttributesList from 'app/components/attributes-list';
 import CodeSnippet from 'app/components/code-snippet';
 import CollapsibleSection from 'app/components/collapsible-section';
 import Section from 'app/components/section';
+import Code from 'app/components/code';
 
 import Transition__ExampleList from '../__example-list';
 
@@ -203,9 +204,11 @@ function getAttributesTitle(structureType) {
     <>
       {prefix}
       {' '}
-      {`(recursive ${structureType.type}`}
+      {`(${structureType.type}`}
       {' '}
-      <code className={b('transition__code')}>{structureType.name}</code>
+      <Code mods={{ theme: 'standard' }}>
+        {structureType.name}
+      </Code>
       {')'}
     </>
   );

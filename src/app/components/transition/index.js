@@ -1,6 +1,5 @@
 export { default } from './transition';
 
-require('./__code/transition__code.scss');
 require('./__description/transition__description.scss');
 require('./__description-title/transition__description-title.scss');
 require('./__example-label/transition__example-label.scss');

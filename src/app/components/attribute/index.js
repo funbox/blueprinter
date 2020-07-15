@@ -1,7 +1,6 @@
 export { default } from './attribute';
 
 require('./__children/attribute__children.scss');
-require('./__code/attribute__code.scss');
 require('./__description-container/attribute__description-container.scss');
 require('./__description/attribute__description.scss');
 require('./__example/attribute__example.scss');

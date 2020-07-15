@@ -1,3 +1,4 @@
+import Code from 'app/components/code';
 import { get } from 'app/common/utils/helpers/getters';
 
 const Attribute__Row = (props) => {
@@ -39,11 +40,13 @@ const Attribute__Row = (props) => {
               return (
                 <li
                   key={`${propContent}_attr`}
-                  className={b('attribute__prop', {
-                    mix: (propContent === 'required' ? ['attribute__code'] : []),
-                  })}
+                  className={b('attribute__prop')}
                 >
-                  {propContent}
+                  { propContent === 'required' ? (
+                    <Code mods={{ theme: 'standard' }}>
+                      {propContent}
+                    </Code>
+                  ) : propContent }
                 </li>
               );
             })}
@@ -57,13 +60,13 @@ const Attribute__Row = (props) => {
           && !oneOfMember
           && (
             <p className={b('attribute__type')} title={recursive ? 'Эта структура является рекурсивной' : undefined}>
-              <span className={b('attribute__code')}>
+              <Code mods={{ theme: 'standard' }}>
                 {
                   recursive && attributeStructureName
                     ? `${attributeStructureName} (${attributeType})`
                     : attributeType
                 }
-              </span>
+              </Code>
             </p>
           )
         }
