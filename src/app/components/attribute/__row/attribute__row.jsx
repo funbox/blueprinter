@@ -60,7 +60,7 @@ const Attribute__Row = (props) => {
           && !oneOfMember
           && (
             <p className={b('attribute__type')} title={recursive ? 'Эта структура является рекурсивной' : undefined}>
-              <Code mods={{ theme: 'standard' }}>
+              <Code mods={{ theme: 'standard', recursive }}>
                 {
                   recursive && attributeStructureName
                     ? `${attributeStructureName} (${attributeType})`

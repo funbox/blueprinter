@@ -206,7 +206,10 @@ function getAttributesTitle(structureType) {
       {' '}
       {`(${structureType.type}`}
       {' '}
-      <Code mods={{ theme: 'standard' }}>
+      <Code
+        mods={{ theme: 'standard', recursive: true }}
+        mix={b('transition__structure-name')}
+      >
         {structureType.name}
       </Code>
       {')'}

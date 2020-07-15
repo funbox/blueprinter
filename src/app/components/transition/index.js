@@ -8,5 +8,6 @@ require('./__example-list/transition__example-list.scss');
 require('./__no-content-notice/transition__no-content-notice.scss');
 require('./__section/transition__section.scss');
 require('./__stripe/transition__stripe.scss');
+require('./__structure-name/transition__structure-name.scss');
 
 require('./_view/_expanded/transition_view_expanded.scss');
