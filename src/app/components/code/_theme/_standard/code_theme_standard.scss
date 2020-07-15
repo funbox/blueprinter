@@ -8,4 +8,22 @@
   border: 1px solid $stroke-color--primary;
   border-radius: 4px;
   background-color: $grayLight;
+
+  &.code_recursive {
+    position: relative;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(50%, -50%);
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: $steelGray url('./code_recursive.svg') no-repeat center;
+      background-size: 9px 10px;
+    }
+  }
 }
