@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.24.0 (16.07.2020)
+
+* Improve displaying of recursive attributes.
+
 ## 3.23.0 (09.07.2020)
 
 * Improve `README.md`.
