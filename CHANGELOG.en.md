@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.25.0 (17.07.2020)
+
+* Improve check of a MemberTypeGroup section in a named type.
+
 ## 3.24.0 (16.07.2020)
 
 * Improve displaying of recursive attributes.
