@@ -171,19 +171,20 @@ function resolveSourceElementInheritance(httpSource) {
 }
 
 function fillAdditionalAttributes(valueMember) {
-  const allowedElementTypes = ['object', 'select', 'option'];
-  const elementNeedsAttributes = el => allowedElementTypes.includes(el.element) && Array.isArray(el.content);
+  if (!Array.isArray(valueMember.content)) return valueMember;
 
   const addAttribute = (attribute, element) => {
     element.attributes.typeAttributes.content.push({ element: 'string', content: attribute });
     return element;
   };
 
-  if (elementNeedsAttributes(valueMember)) {
-    valueMember.content.forEach(property => {
-      if (Array.isArray(property.content)) {
-        property.content.forEach(element => fillAdditionalAttributes(element));
-      } else {
+  switch (valueMember.element) {
+    case 'select':
+      valueMember.content.forEach(option => fillAdditionalAttributes(option));
+      break;
+    case 'object':
+    case 'option':
+      valueMember.content.forEach(property => {
         if (!property.attributes) property.attributes = { typeAttributes: { content: [], element: 'array' } };
 
         const attributesContent = property.attributes.typeAttributes.content;
@@ -195,11 +196,14 @@ function fillAdditionalAttributes(valueMember) {
 
         if (!hasNullableAttr && !hasNonNullableAttr) addAttribute('non-nullable', property);
         if (!hasRequiredAttr && !hasOptionalAttr) addAttribute('optional', property);
-
         const childElement = property.content.value;
-        if (childElement && elementNeedsAttributes(childElement)) fillAdditionalAttributes(childElement);
-      }
-    });
+        if (childElement) fillAdditionalAttributes(childElement);
+      });
+      break;
+    case 'array':
+      valueMember.content.forEach(nestedType => fillAdditionalAttributes(nestedType));
+      break;
+    // no default
   }
 
   return valueMember;
