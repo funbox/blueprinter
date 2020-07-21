@@ -2,8 +2,9 @@ import RawContent from 'app/components/raw-content';
 
 export const errorProps = {
   text: PropTypes.string,
-  details: PropTypes.shape({
+  positionDetails: PropTypes.shape({
     line: PropTypes.number,
+    column: PropTypes.number,
     file: PropTypes.string,
   }),
 };
@@ -19,7 +20,7 @@ const defaultProps = {
 const ErrorInfo = (props) => {
   const {
     text,
-    details = {},
+    positionDetails = {},
   } = props.error;
 
   return (
@@ -29,19 +30,24 @@ const ErrorInfo = (props) => {
           {text}
         </p>
 
-        {(details.line || details.file) && (
-          <dl className={b('error-info__details')}>
+        {(Object.keys(positionDetails)).length > 0 && (
+          <dl className={b('error-info__positionDetails')}>
             <dt className={b('error-info__summary-text')}>
               Details
             </dt>
-            {details.line && (
+            {positionDetails.line && (
               <dd className={b('error-info__summary-line')}>
-                Line: {details.line}
+                Line: {positionDetails.line}
               </dd>
             )}
-            {details.file && (
+            {positionDetails.column && (
               <dd className={b('error-info__summary-line')}>
-                Source file: {details.file}
+                Column: {positionDetails.column}
+              </dd>
+            )}
+            {positionDetails.file && (
+              <dd className={b('error-info__summary-line')}>
+                Source file: {positionDetails.file}
               </dd>
             )}
           </dl>
