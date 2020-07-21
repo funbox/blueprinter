@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.25.1 (21.07.2020)
+
+* Improve displaying of a Crafter error.
+
 ## 3.25.0 (17.07.2020)
 
 * Improve check of a MemberTypeGroup section in a named type.
