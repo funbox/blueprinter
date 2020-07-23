@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.25.2 (23.07.2020)
+
+* Fill in array attributes.
+
 ## 3.25.1 (21.07.2020)
 
 * Improve displaying of a Crafter error.
