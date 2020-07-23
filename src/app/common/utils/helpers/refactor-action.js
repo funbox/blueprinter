@@ -170,41 +170,39 @@ function resolveSourceElementInheritance(httpSource) {
   return valueMember;
 }
 
-function fillAdditionalAttributes(valueMember) {
-  if (!Array.isArray(valueMember.content)) return valueMember;
+function fillAdditionalAttributes(member) {
+  if (!member.content) return member;
 
   const addAttribute = (attribute, element) => {
     element.attributes.typeAttributes.content.push({ element: 'string', content: attribute });
     return element;
   };
 
-  switch (valueMember.element) {
+  switch (member.element) {
     case 'select':
-      valueMember.content.forEach(option => fillAdditionalAttributes(option));
-      break;
     case 'object':
     case 'option':
-      valueMember.content.forEach(property => {
-        if (!property.attributes) property.attributes = { typeAttributes: { content: [], element: 'array' } };
-
-        const attributesContent = property.attributes.typeAttributes.content;
-
-        const hasNullableAttr = attributesContent.some(attr => attr.content === 'nullable');
-        const hasNonNullableAttr = attributesContent.some(attr => attr.content === 'non-nullable');
-        const hasRequiredAttr = attributesContent.some(attr => attr.content === 'required');
-        const hasOptionalAttr = attributesContent.some(attr => attr.content === 'optional');
-
-        if (!hasNullableAttr && !hasNonNullableAttr) addAttribute('non-nullable', property);
-        if (!hasRequiredAttr && !hasOptionalAttr) addAttribute('optional', property);
-        const childElement = property.content.value;
-        if (childElement) fillAdditionalAttributes(childElement);
-      });
-      break;
     case 'array':
-      valueMember.content.forEach(nestedType => fillAdditionalAttributes(nestedType));
+      member.content.forEach(item => fillAdditionalAttributes(item));
       break;
+    case 'member': {
+      if (!member.attributes) member.attributes = { typeAttributes: { content: [], element: 'array' } };
+
+      const attributesContent = member.attributes.typeAttributes.content;
+
+      const hasNullableAttr = attributesContent.some(attr => attr.content === 'nullable');
+      const hasNonNullableAttr = attributesContent.some(attr => attr.content === 'non-nullable');
+      const hasRequiredAttr = attributesContent.some(attr => attr.content === 'required');
+      const hasOptionalAttr = attributesContent.some(attr => attr.content === 'optional');
+
+      if (!hasNullableAttr && !hasNonNullableAttr) addAttribute('non-nullable', member);
+      if (!hasRequiredAttr && !hasOptionalAttr) addAttribute('optional', member);
+      const childElement = member.content.value;
+      if (childElement) fillAdditionalAttributes(childElement);
+      break;
+    }
     // no default
   }
 
-  return valueMember;
+  return member;
 }
