@@ -26,7 +26,7 @@ const createSlug = (title) => (
   })
 );
 
-const sanitizeRoute = (str) => str.replace(/\//g, ' ').replace(/[?{}]/g, '');
+const sanitizeRoute = (str) => decodeURIComponent(str).replace(/\//g, ' ').replace(/[?{}*[\]]/g, '');
 
 const createRoute = (title, transform = createHash) => (
   ROUTE_DELIMITER.concat(
