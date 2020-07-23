@@ -14,6 +14,7 @@ const propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }),
+  nestedRoutePresets: PropTypes.arrayOf(PropTypes.string),
 };
 
 class MenuCollapsibleSection extends React.Component {
@@ -23,9 +24,10 @@ class MenuCollapsibleSection extends React.Component {
     const {
       route,
       location: { pathname },
+      nestedRoutePresets,
     } = props;
 
-    const current = matchRoute(route, pathname);
+    const current = matchRoute(route, pathname) || nestedRoutePresets.includes(pathname);
 
     this.state = {
       collapsed: !current,

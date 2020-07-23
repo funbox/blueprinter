@@ -52,7 +52,7 @@ class SideNestedMenu extends React.Component {
         return acc;
       }
 
-      const { title, route } = item;
+      const { title, route, nestedRoutePresets } = item;
       const itemType = item.element;
       const nextLevel = level + 1;
       let hasSubmenu = level < MAX_NESTING_LEVEL && !!item.content && item.content.length > 0;
@@ -88,6 +88,7 @@ class SideNestedMenu extends React.Component {
           currentLevel={level}
           nextLevel={nextLevel}
           parentRoute={parentRoute}
+          nestedRoutePresets={nestedRoutePresets}
           icon={badge ? {
             content: badge,
           } : null}
@@ -106,6 +107,7 @@ class SideNestedMenu extends React.Component {
           key={`header-${header.title}`}
           title={header.title}
           route={`${parentRoute}#${header.hash}`}
+          nestedRoutePresets={[]}
         />
       )));
     }

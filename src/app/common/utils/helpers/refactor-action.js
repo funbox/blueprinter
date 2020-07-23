@@ -38,6 +38,8 @@ export const refactorMessage = (message, parentSource) => {
     hashForLegacyUrl: messageLegacyHash,
     route: messageRoute,
     title: messageTitle,
+    routePreset: presetHash ? messageRoute : null,
+    nestedRoutePresets: [],
   });
 };
 
@@ -126,6 +128,8 @@ export const refactorAction = (action, parentSource) => {
     },
     content: copyElements.concat(transactions),
     type: 'transaction',
+    routePreset: presetHash ? route : null,
+    nestedRoutePresets: [],
   };
 };
 

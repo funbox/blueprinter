@@ -106,6 +106,7 @@ const parseSourceFile = ({ content }) => {
     group.route = groupRoute;
     group.title = groupTitle;
     group.id = uniqid.time();
+    group.nestedRoutePresets = [];
 
     group.content = group.content.map((groupChild, rIndex) => {
       if (groupChild.element === 'copy') {
@@ -113,11 +114,15 @@ const parseSourceFile = ({ content }) => {
       }
 
       groupChild.id = uniqid.time();
+      groupChild.nestedRoutePresets = [];
 
       if (groupChild.element === 'message') {
         const message = refactorMessage(groupChild, groupMeta);
         message.parentGroup = groupMeta;
         resources.push(message);
+        if (message.routePreset) {
+          group.nestedRoutePresets.push(message.routePreset);
+        }
         return message;
       }
 
@@ -143,6 +148,10 @@ const parseSourceFile = ({ content }) => {
         group: groupMeta,
       };
 
+      if (rPresetHash) {
+        group.nestedRoutePresets.push(resourceRoute);
+      }
+
       groupChild.hashForLegacyUrl = resourceLegacyHash;
       groupChild.route = resourceRoute;
       groupChild.title = resourceTitle || resourceHref;
@@ -160,6 +169,12 @@ const parseSourceFile = ({ content }) => {
 
         action.parentResource = resourceMeta;
         actions.push(action);
+
+        if (action.routePreset) {
+          groupChild.nestedRoutePresets.push(action.routePreset);
+          group.nestedRoutePresets.push(action.routePreset);
+        }
+
         return action;
       });
 

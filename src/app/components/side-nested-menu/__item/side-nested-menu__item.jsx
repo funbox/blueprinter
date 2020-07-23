@@ -18,6 +18,7 @@ const propTypes = {
   icon: PropTypes.shape({
     content: PropTypes.node,
   }),
+  nestedRoutePresets: PropTypes.arrayOf(PropTypes.string),
 };
 
 class SideNestedMenu__Item extends React.Component {
@@ -44,9 +45,10 @@ class SideNestedMenu__Item extends React.Component {
       nextLevel,
       visible,
       icon,
+      nestedRoutePresets,
     } = this.props;
 
-    const selected = matchRoute(route, location.pathname);
+    const selected = matchRoute(route, location.pathname) || nestedRoutePresets.includes(location.pathname);
     const current = matchRoute(route, location.pathname, true);
     const localMods = {
       ...mods,
@@ -67,6 +69,7 @@ class SideNestedMenu__Item extends React.Component {
             currentLevel={currentLevel}
             nextLevel={nextLevel}
             visible={visible}
+            nestedRoutePresets={nestedRoutePresets}
           >
             <SideNestedMenu__Title
               currentLevel={currentLevel}
