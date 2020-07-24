@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.25.4 (24.07.2020)
+
+* Fix sidebar navigation behaviour when a resource with a custom anchor is opened.
+
 ## 3.25.3 (24.07.2020)
 
 * Fix rendering of an action with a repeating parameter.
