@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.25.3 (24.07.2020)
+
+* Fix rendering of an action with a repeating parameter.
+
 ## 3.25.2 (23.07.2020)
 
 * Fill in array attributes.
