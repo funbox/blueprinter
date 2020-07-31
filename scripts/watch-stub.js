@@ -1,5 +1,10 @@
 const chokidar = require('chokidar');
 const fs = require('fs');
+const {
+  isAbsolute,
+  dirname,
+  join,
+} = require('path');
 const { promisify } = require('util');
 const { basicRenderRefract } = require('../bin/main');
 const {
@@ -8,14 +13,20 @@ const {
 } = require('./apib-mock-vars');
 
 const writeFile = promisify(fs.writeFile);
+
 const renderRefract = async () => {
   const [refractData, filePaths] = await basicRenderRefract(SOURCE_FILE);
   await writeFile(OUTPUT_FILE, refractData);
+
   return filePaths;
 };
 
 const watchSource = (filePaths) => {
-  const watcher = chokidar.watch(filePaths);
+  const absPath = filePaths.find(p => isAbsolute(p));
+  const baseDir = absPath ? dirname(absPath) : '';
+  const truePaths = getAbsoluteFilePaths(filePaths, baseDir);
+
+  const watcher = chokidar.watch(truePaths);
 
   watcher.on('change', async (path) => {
     try {
@@ -35,3 +46,7 @@ renderRefract().then((filePaths) => {
 }).catch(error => {
   console.error(error.message);
 });
+
+function getAbsoluteFilePaths(filePaths, baseDir) {
+  return filePaths.map(p => (isAbsolute(p) ? p : join(baseDir, p)));
+}
