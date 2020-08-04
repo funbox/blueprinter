@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.25.5 (04.08.2020)
+
+* Fix watching of apib files.
+
 ## 3.25.4 (24.07.2020)
 
 * Fix sidebar navigation behaviour when a resource with a custom anchor is opened.
