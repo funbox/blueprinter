@@ -47,6 +47,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
             <SearchField
               location={{ search: '' }}
               items={[...getUniqueItems(items), ...getUniqueItems(items), ...getUniqueItems(items)]}
+              onSearch={() => {}}
             />
           </SandboxDemo>
 
@@ -56,6 +57,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
             <SearchField
               location={{ search: '' }}
               items={getUniqueItems(items)}
+              onSearch={() => {}}
             />
           </SandboxDemo>
 
@@ -65,6 +67,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
             <SearchField
               location={{ search: '' }}
               items={[]}
+              onSearch={() => {}}
             />
           </SandboxDemo>
         </SandboxSection>
@@ -76,6 +79,6 @@ export default class SandboxRequestResponseBlock extends React.Component {
 function getUniqueItems(initialItems) {
   return initialItems.map(item => ({
     ...item,
-    value: uniqid.time(item.value),
+    id: uniqid.time(item.value),
   }));
 }
