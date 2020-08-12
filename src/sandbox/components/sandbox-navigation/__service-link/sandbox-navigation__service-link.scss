@@ -1,0 +1,15 @@
+@import '../sandbox-navigation.vars';
+
+.sandbox-navigation__service-link {
+  padding: $sandbox-navigation--padding-vrt $sandbox-navigation--padding-hrz;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 20px;
+  color: $color--body;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    color: $color--highlight;
+  }
+}
