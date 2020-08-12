@@ -38,12 +38,11 @@ export default class SandboxRequestResponseBlock extends React.Component {
   render() {
     return (
       <div>
-        <h1>Поиск</h1>
+        <h2>Поиск</h2>
 
-        <SandboxSection id="search-field" title="Поле поиска">
-          <SandboxParagraph>
-            Есть более 10 результатов
-          </SandboxParagraph>
+        <SandboxSection id="search-field">
+          <SandboxParagraph>Есть более 10 результатов</SandboxParagraph>
+
           <SandboxDemo mods={{ theme: 'standard', for: 'search-field' }}>
             <SearchField
               location={{ search: '' }}
@@ -51,9 +50,8 @@ export default class SandboxRequestResponseBlock extends React.Component {
             />
           </SandboxDemo>
 
-          <SandboxParagraph>
-            Есть менее 10 результатов
-          </SandboxParagraph>
+          <SandboxParagraph>Есть менее 10 результатов</SandboxParagraph>
+
           <SandboxDemo mods={{ theme: 'standard', for: 'search-field' }}>
             <SearchField
               location={{ search: '' }}
@@ -61,9 +59,8 @@ export default class SandboxRequestResponseBlock extends React.Component {
             />
           </SandboxDemo>
 
-          <SandboxParagraph>
-            Нет результатов
-          </SandboxParagraph>
+          <SandboxParagraph>Нет результатов</SandboxParagraph>
+
           <SandboxDemo mods={{ theme: 'standard', for: 'search-field' }}>
             <SearchField
               location={{ search: '' }}

@@ -22,7 +22,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
   render() {
     return (
       <div>
-        <h1>Блок структуры запроса-ответа</h1>
+        <h2>Блок структуры запроса-ответа</h2>
 
         <SandboxSection id="code-snippet" title="Блок вывода фрагмента кода">
           <SandboxDemo>
@@ -40,6 +40,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
           <SandboxParagraph>
             Передача модификатора <InlineCode>{'mods={{ disabledSyntax: true }}'}</InlineCode> отключает подсветку:
           </SandboxParagraph>
+
           <SandboxDemo>
             <CodeSnippet mods={{ disabledSyntax: true }}>
               {rawBody}
@@ -51,6 +52,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
             {' '}
             <InlineCode>syntax=&quot;http&quot;</InlineCode>:
           </SandboxParagraph>
+
           <SandboxDemo>
             <CodeSnippet syntax="http" mods={{ for: 'headers' }}>
               Content-Type: application/json
