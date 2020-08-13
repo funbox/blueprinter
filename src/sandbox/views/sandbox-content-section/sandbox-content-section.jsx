@@ -32,7 +32,7 @@ export default class SandboxContentSection extends React.Component {
   render() {
     return (
       <div>
-        <h1>Типографика</h1>
+        <h2>Типографика</h2>
 
         <SandboxSection id="raw-content" title="Контентная область">
           <SandboxParagraph>
@@ -112,7 +112,10 @@ export default class SandboxContentSection extends React.Component {
 
         <SandboxSection id="resource-group-section" title="Блок Resource group">
           <SandboxDemo>
-            <ResourceGroupSection group={group[0]}/>
+            <ResourceGroupSection
+              location={{ pathname: '/group-zony' }}
+              group={group[0]}
+            />
           </SandboxDemo>
         </SandboxSection>
 
@@ -121,11 +124,12 @@ export default class SandboxContentSection extends React.Component {
             <Page>
               <MainContent
                 title="API Blueprint"
-                description={
-                  <p>Документация API проекта «Новый проект»</p>
-                }
+                description={<p>Документация API проекта «Новый проект»</p>}
               >
-                <ResourceGroupSection group={group[0]}/>
+                <ResourceGroupSection
+                  location={{ pathname: '/group-zony' }}
+                  group={group[0]}
+                />
               </MainContent>
             </Page>
           </SandboxDemo>
@@ -133,20 +137,22 @@ export default class SandboxContentSection extends React.Component {
 
         <SandboxSection id="resource" title="Блок Resource">
           <SandboxDemo>
-            <Resource resource={resource} parentHash=""/>
+            <Resource
+              location={{ pathname: '/group-zony' }}
+              resource={resource}
+              parentHash=""
+            />
           </SandboxDemo>
         </SandboxSection>
 
         <SandboxSection id="parameters" title="Блок параметров">
           <SandboxDemo>
-            <Parameters params={hrefVariables.content}/>
+            <Parameters params={hrefVariables}/>
           </SandboxDemo>
         </SandboxSection>
 
         <SandboxSection id="action" title="Блок Action">
-          <SandboxDemo
-            mods={{ for: 'action-toggle' }}
-          >
+          <SandboxDemo mods={{ for: 'action-toggle' }}>
             {httpMethods.map(method => (
               <Button
                 key={`action-button-${method}`}
@@ -162,6 +168,7 @@ export default class SandboxContentSection extends React.Component {
             <ActionCard
               method={this.state.actionCardMethod}
               action={resource.content[1]}
+              location={{ pathname: '/group-zony' }}
               parentHash=""
             >
               <Parameters params={hrefVariables.content}/>
@@ -172,6 +179,7 @@ export default class SandboxContentSection extends React.Component {
         <SandboxSection id="message" title="Блок Message">
           <SandboxDemo>
             <MessageCard
+              location={{ pathname: '/group-zony' }}
               parentHash=""
               message={message}
             />
@@ -180,7 +188,11 @@ export default class SandboxContentSection extends React.Component {
 
         <SandboxSection id="note-warning-sections" title="Секции Note и Warning">
           <SandboxDemo>
-            <Resource resource={resourceWithNote} parentHash=""/>
+            <Resource
+              location={{ pathname: '/group-zony' }}
+              resource={resourceWithNote}
+              parentHash=""
+            />
           </SandboxDemo>
         </SandboxSection>
       </div>

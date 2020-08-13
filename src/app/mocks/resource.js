@@ -1,9 +1,9 @@
 import uniqid from 'uniqid';
-import Transaction from './transaction';
+import transaction from './transaction';
 import actionBuilder from './action-builder';
 
-const getUsers = actionBuilder('List users', Transaction.GET, uniqid.time());
-const deleteUser = actionBuilder('Delete user', Transaction.DELETE, uniqid.time());
+const getUsers = actionBuilder('List users', transaction(), uniqid.time(), 'GET');
+const deleteUser = actionBuilder('Delete user', transaction(), uniqid.time(), 'DELETE');
 
 const resource = {
   element: 'resource',
@@ -27,6 +27,9 @@ const resource = {
       content: '/user',
     },
   },
+  route: '/users-resource-content',
+  nestedRoutePresets: [],
+  title: 'Users resource content',
 };
 
 export const resourceWithNote = {

@@ -1,5 +1,10 @@
 import resource from './resource';
 
+const generateRoute = str => str
+  .split(' ')
+  .map(item => item.toLowerCase())
+  .join('-');
+
 const resourceGroup = groupName => (
   {
     element: 'category',
@@ -16,9 +21,12 @@ const resourceGroup = groupName => (
       {
         element: 'copy',
         content: 'Resource Group content',
+        ...resource,
       },
-      resource,
     ],
+    route: `/${generateRoute(groupName)}`,
+    nestedRoutePresets: [],
+    title: groupName,
   }
 );
 

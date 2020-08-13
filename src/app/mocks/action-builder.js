@@ -1,6 +1,6 @@
 import hrefVariables from './hrefVariables';
 
-const actionBuilder = (title, content, id) => (
+const actionBuilder = (title, content, id, method) => (
   {
     id,
     element: 'transition',
@@ -18,11 +18,9 @@ const actionBuilder = (title, content, id) => (
       content,
     ],
     attributes: {
-      href: {
-        element: 'string',
-        content: '/user',
-      },
+      href: '/user',
       hrefVariables,
+      method,
     },
   }
 );

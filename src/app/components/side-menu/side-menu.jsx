@@ -19,6 +19,8 @@ SideMenu.propTypes = {
     element: PropTypes.string,
     meta: PropTypes.object,
     content: PropTypes.array,
+    title: PropTypes.string,
+    route: PropTypes.string,
   })),
 };
 
