@@ -170,9 +170,7 @@ export default class SandboxContentSection extends React.Component {
               action={resource.content[1]}
               location={{ pathname: '/group-zony' }}
               parentHash=""
-            >
-              <Parameters params={hrefVariables.content}/>
-            </ActionCard>
+            />
           </SandboxDemo>
         </SandboxSection>
 
