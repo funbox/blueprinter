@@ -43,7 +43,7 @@ const ActionCard = (props) => {
   const hrefVariables = attributes.hrefVariables;
   const descriptionEl = action.content.find(isCopy);
   const description = get('content').from(descriptionEl);
-  const method = attributes.method || props.method;
+  const method = props.method || attributes.method;
 
   const formattedHref = hrefVariables ? formatHref(href, hrefVariables) : href;
 
