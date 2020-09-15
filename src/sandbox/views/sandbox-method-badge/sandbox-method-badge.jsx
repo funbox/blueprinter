@@ -30,6 +30,15 @@ export default class SandboxMethodBadge extends React.Component {
               mods={{ for: 'method-badges' }}
             />
           </SandboxDemo>
+
+          <SandboxParagraph>
+            Для не-REST взаимодействия, например, в сокетах, можно использовать бейдж с
+            модификатором <InlineCode>mods={'{{ type: message }}'}</InlineCode>
+          </SandboxParagraph>
+
+          <SandboxDemo>
+            <MethodBadge method="message"/>
+          </SandboxDemo>
         </SandboxSection>
       </div>
     );
