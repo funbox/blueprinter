@@ -22,6 +22,9 @@ const actionBuilder = (title, content, id, method) => (
       hrefVariables,
       method,
     },
+    route: '/users-resource-method',
+    nestedRoutePresets: [],
+    title: 'Users resource method',
   }
 );
 
