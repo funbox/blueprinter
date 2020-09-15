@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.25.6 (15.09.2020)
+
+* Fix nested types of a named type extracted during inheritance processing.
+
 ## 3.25.5 (04.08.2020)
 
 * Fix watching of apib files.
