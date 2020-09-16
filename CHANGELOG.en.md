@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.26.0 (16.09.2020)
+
+* Fix warnings and errors in the project and in the sandbox.
+
 ## 3.25.6 (15.09.2020)
 
 * Fix nested types of a named type extracted during inheritance processing.
