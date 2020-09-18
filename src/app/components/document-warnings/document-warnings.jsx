@@ -1,6 +1,6 @@
 export const warningProps = PropTypes.arrayOf(PropTypes.shape({
   text: PropTypes.string,
-  details: PropTypes.shape({
+  positionDetails: PropTypes.shape({
     line: PropTypes.number,
     file: PropTypes.string,
   }),
@@ -28,9 +28,9 @@ const DocumentWarnings = (props) => (
       </summary>
       <ul className={b('document-warnings__list')}>
         {
-          props.warnings.map(({ text, details = {}, id }) => (
+          props.warnings.map(({ text, positionDetails = {}, id }) => (
             <li className={b('document-warnings__item')} key={id}>
-              Line {details.line}{details.file ? ` (in ${details.file})` : ''}:
+              Line {positionDetails.line}{positionDetails.file ? ` (in ${positionDetails.file})` : ''}:
               &nbsp;
               {text}
             </li>
