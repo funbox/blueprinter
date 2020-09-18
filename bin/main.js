@@ -3,7 +3,7 @@ const path = require('path');
 const { promisify } = require('util');
 const crafter = require('@funbox/crafter');
 
-const { errMessage, astHasError, rejectCrafterError } = require('./utils');
+const { errMessage, astHasError, rejectCrafterError, extendAst } = require('./utils');
 
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
@@ -16,7 +16,7 @@ const createRefract = (inputFileName, strictMode, buildMode) => promisify(crafte
   .then(res => {
     try {
       const [result, filePaths] = res;
-      const ast = JSON.stringify(result.toRefract());
+      const ast = result.toRefract();
 
       const [hasError, errorDetails] = astHasError(result);
 
@@ -28,7 +28,11 @@ const createRefract = (inputFileName, strictMode, buildMode) => promisify(crafte
         return Promise.reject(new Error('Warnings are not allowed in strict mode'));
       }
 
-      return Promise.resolve([ast, filePaths]);
+      if (hasError) {
+        return extendAst(ast, inputFileName, errorDetails).then(modifiedAst => [JSON.stringify(modifiedAst), filePaths]);
+      }
+
+      return Promise.resolve([JSON.stringify(ast), filePaths]);
     } catch (e) {
       return Promise.reject(errMessage('Error parsing input', e));
     }

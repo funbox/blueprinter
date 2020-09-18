@@ -13,6 +13,23 @@ function errMessage(message, error) {
   return error;
 }
 
+function astHasError(parseResult) {
+  const errorAnnotationIndex = parseResult.annotations.findIndex(anno => anno.type === 'error');
+  if (errorAnnotationIndex > -1) {
+    const anno = parseResult.annotations[errorAnnotationIndex];
+    const { text } = anno;
+
+    if (!anno.sourceMap) {
+      return [true, { text }];
+    }
+
+    const position = anno.sourceMap.charBlocks[0];
+    const file = anno.sourceMap.file;
+    return [true, { text, position, file }];
+  }
+  return [false];
+}
+
 function rejectCrafterError(inputFile, errorDetails) {
   return new Promise(async (resolve, reject) => {
     try {
@@ -54,6 +71,7 @@ async function extendAst(ast, inputFile, errorDetails) {
 }
 module.exports = {
   errMessage,
+  astHasError,
   rejectCrafterError,
   extendAst,
 };
