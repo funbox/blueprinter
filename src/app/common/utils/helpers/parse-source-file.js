@@ -23,8 +23,9 @@ const groupForStandaloneResources = {
   slug: createSlug(GROUP_DEFAULT_TITLE),
 };
 
-const parseSourceFile = ({ content }) => {
-  const [error, warnings] = detectErrorsAndWarnings(content);
+const parseSourceFile = (ast) => {
+  const { content } = ast;
+  const [error, warnings] = detectErrorsAndWarnings(ast);
 
   if (error) {
     return {
@@ -197,8 +198,9 @@ const parseSourceFile = ({ content }) => {
 
 export default parseSourceFile;
 
-function detectErrorsAndWarnings(content) {
+function detectErrorsAndWarnings(ast) {
   let eAnnotation;
+  const { content } = ast;
   const warnings = [];
   const annotationType = (source) => get('meta', 'classes', 'content', '0', 'content').from(source);
   const isAnnotationOfType = (item, type) => {
@@ -221,7 +223,7 @@ function detectErrorsAndWarnings(content) {
     return [undefined, consumableWarnings];
   }
 
-  const consumableError = extractAnnotationInfo(eAnnotation);
+  const consumableError = extractErrorInfo(eAnnotation, ast.attributes);
 
   return [consumableError, consumableWarnings];
 }
@@ -243,6 +245,24 @@ function extractAnnotationInfo(annotation) {
   }
 
   return result;
+}
+
+function extractErrorInfo(annotation, astAttributes) {
+  if (!astAttributes) {
+    return extractAnnotationInfo(annotation);
+  }
+
+  const text = annotation.content;
+  const { errorDetails } = astAttributes;
+
+  return {
+    id: uniqid.time(),
+    text,
+    positionDetails: {
+      file: errorDetails.file,
+      lines: errorDetails.lines,
+    },
+  };
 }
 
 function getHost(source) {

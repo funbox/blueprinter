@@ -6,6 +6,7 @@ export const errorProps = {
     line: PropTypes.number,
     column: PropTypes.number,
     file: PropTypes.string,
+    lines: PropTypes.arrayOf(PropTypes.string),
   }),
 };
 
@@ -31,7 +32,7 @@ const ErrorInfo = (props) => {
         </p>
 
         {(Object.keys(positionDetails)).length > 0 && (
-          <dl className={b('error-info__positionDetails')}>
+          <dl className={b('error-info__position-details')}>
             <dt className={b('error-info__summary-text')}>
               Details
             </dt>
@@ -48,6 +49,21 @@ const ErrorInfo = (props) => {
             {positionDetails.file && (
               <dd className={b('error-info__summary-line')}>
                 Source file: {positionDetails.file}
+              </dd>
+            )}
+            {positionDetails.lines && (
+              <dd className={b('error-info__summary-line', {}, { for: 'source-lines' })}>
+                Source lines:
+                <pre>
+                  {positionDetails.lines.map((line, index) => {
+                    const highlighted = line.trim().startsWith('>');
+                    return (
+                      <code key={index} className={b('error-info__source-line', {}, { highlighted })}>
+                        {line}
+                      </code>
+                    );
+                  })}
+                </pre>
               </dd>
             )}
           </dl>
