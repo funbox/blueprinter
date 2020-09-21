@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.27.0 (21.09.2020)
+
+* Display extended error information.
+
 ## 3.26.0 (16.09.2020)
 
 * Fix warnings and errors in the project and in the sandbox.
