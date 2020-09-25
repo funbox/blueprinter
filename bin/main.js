@@ -12,7 +12,16 @@ const mkdir = promisify(fs.mkdir);
 const BASE_PATH = `${__dirname}/..`;
 const staticFileLocation = path.resolve(BASE_PATH, 'static/index.html');
 
-const createRefract = (inputFileName, strictMode, buildMode) => promisify(crafter.parseFile)(inputFileName, {})
+const logger = {
+  warn(text, details) {
+    const [linePos, currentFile] = details;
+    const positionText = linePos ? ` at line ${linePos}` : '';
+    const fileText = currentFile ? ` (see ${currentFile})` : '';
+    console.error('\x1b[33m%s\x1b[0m', `Warning${positionText}${fileText}: ${text}`); // yellow color
+  },
+};
+
+const createRefract = (inputFileName, strictMode, buildMode) => promisify(crafter.parseFile)(inputFileName, { logger })
   .then(res => {
     try {
       const [result, filePaths] = res;
