@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.28.0 (12.10.2020)
+
+* Use a separate logger to output warnings during refract generation.
+
 ## 3.27.0 (21.09.2020)
 
 * Display extended error information.
