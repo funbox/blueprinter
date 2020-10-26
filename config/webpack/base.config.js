@@ -11,7 +11,6 @@ module.exports = {
   mode: 'none',
   entry: {
     app: [
-      'core-js/stable',
       path.resolve(PATH.PROJECT, 'src/app/app.entry.js'),
     ],
   },

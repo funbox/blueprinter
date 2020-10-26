@@ -15,7 +15,13 @@ module.exports = merge(
             loader: 'babel-loader',
             options: {
               presets: [
-                require.resolve('@babel/preset-env'),
+                [require.resolve('@babel/preset-env'), {
+                  useBuiltIns: 'entry',
+                  corejs: 3,
+                  targets: {
+                    esmodules: true,
+                  },
+                }],
                 require.resolve('@babel/preset-react'),
               ],
               plugins: [
