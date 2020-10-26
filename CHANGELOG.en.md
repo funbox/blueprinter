@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.29.0 (26.10.2020)
+
+* Optimize fonts and target browsers.
+
 ## 3.28.1 (26.10.2020)
 
 * Fix an error caused by adding anchors to description headings.
