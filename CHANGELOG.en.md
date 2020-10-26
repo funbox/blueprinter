@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.28.1 (26.10.2020)
+
+* Fix an error caused by adding anchors to description headings.
+
 ## 3.28.0 (12.10.2020)
 
 * Use a separate logger to output warnings during refract generation.
