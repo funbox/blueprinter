@@ -94,10 +94,15 @@ const withHeaderAnchors = (description, pathname) => {
   const headers = getDescriptionHeadersWithHash(description);
   const html = htmlFromText(description);
 
+  if (headers.length === 0) {
+    return html;
+  }
+
   const modifiedChildren = React.Children.map(html.props.children, textElement => {
     if (textElement.type && /^h\d$/.exec(textElement.type)) {
       const text = textElement.props.children;
-      const hash = headers.find(header => header.title === text).hash;
+      const matchingHeader = headers.find(header => header.title === text);
+      const hash = matchingHeader ? matchingHeader.hash : undefined;
       const childrenArray = React.Children.toArray(textElement.props.children);
 
       childrenArray[0] = childrenArray[0].concat(' ');
