@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.30.0 (13.11.2020)
+
+* Display "fixed" attribute in the attributes list of nested members.
+
 ## 3.29.0 (26.10.2020)
 
 * Optimize fonts and target browsers.
