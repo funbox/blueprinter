@@ -184,6 +184,13 @@ function fillAdditionalAttributes(member) {
     return element;
   };
 
+  const removeAttribute = (attribute, element) => {
+    const elementAttrsContent = get('attributes', 'typeAttributes', 'content').from(element);
+    const elementAttrIndex = elementAttrsContent.findIndex(attr => attr.content === attribute);
+
+    elementAttrsContent.splice(elementAttrIndex, 1);
+  };
+
   const checkAttributeExists = (attribute, element) => {
     const elementAttrsContent = get('attributes', 'typeAttributes', 'content').from(element);
     return elementAttrsContent && elementAttrsContent.some(attr => attr.content === attribute);
@@ -195,6 +202,7 @@ function fillAdditionalAttributes(member) {
   };
   
   const memberHasFixedAttr = checkAttributeExists('fixed', member);
+  const memberHasFixedTypeAttr = checkAttributeExists('fixedType', member);
 
   switch (member.element) {
     case 'select':
@@ -215,6 +223,8 @@ function fillAdditionalAttributes(member) {
 
       if (!hasNullableAttr && !hasNonNullableAttr) addAttribute('non-nullable', member);
       if (!hasRequiredAttr && !hasOptionalAttr) addAttribute('optional', member);
+      if (memberHasFixedAttr && memberHasFixedTypeAttr) removeAttribute('fixedType', member);
+
       const childElement = member.content.value;
 
       if (childElement) {
