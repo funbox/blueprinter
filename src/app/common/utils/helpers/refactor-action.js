@@ -178,26 +178,40 @@ function fillAdditionalAttributes(member) {
   if (!member.content) return member;
 
   const addAttribute = (attribute, element) => {
+    if (!element.attributes) element.attributes = { typeAttributes: { content: [], element: 'array' } };
+
     element.attributes.typeAttributes.content.push({ element: 'string', content: attribute });
     return element;
+  };
+
+  const checkAttributeExists = (attribute, element) => {
+    const elementAttrsContent = get('attributes', 'typeAttributes', 'content').from(element);
+
+    return elementAttrsContent && elementAttrsContent.some(attr => attr.content === attribute);
   };
 
   switch (member.element) {
     case 'select':
     case 'object':
     case 'option':
-    case 'array':
-      member.content.forEach(item => fillAdditionalAttributes(item));
+    case 'array': {
+      const memberHasFixedAttr = checkAttributeExists('fixed', member);
+
+      member.content.forEach(item => {
+        if (memberHasFixedAttr) {
+          const itemHasFixedAttr = checkAttributeExists('fixed', item);
+
+          if (!itemHasFixedAttr) addAttribute('fixed', item);
+        }
+        fillAdditionalAttributes(item);
+      });
       break;
+    }
     case 'member': {
-      if (!member.attributes) member.attributes = { typeAttributes: { content: [], element: 'array' } };
-
-      const attributesContent = member.attributes.typeAttributes.content;
-
-      const hasNullableAttr = attributesContent.some(attr => attr.content === 'nullable');
-      const hasNonNullableAttr = attributesContent.some(attr => attr.content === 'non-nullable');
-      const hasRequiredAttr = attributesContent.some(attr => attr.content === 'required');
-      const hasOptionalAttr = attributesContent.some(attr => attr.content === 'optional');
+      const hasNullableAttr = checkAttributeExists('nullable', member);
+      const hasNonNullableAttr = checkAttributeExists('non-nullable', member);
+      const hasRequiredAttr = checkAttributeExists('required', member);
+      const hasOptionalAttr = checkAttributeExists('optional', member);
 
       if (!hasNullableAttr && !hasNonNullableAttr) addAttribute('non-nullable', member);
       if (!hasRequiredAttr && !hasOptionalAttr) addAttribute('optional', member);
