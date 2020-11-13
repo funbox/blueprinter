@@ -186,23 +186,23 @@ function fillAdditionalAttributes(member) {
 
   const checkAttributeExists = (attribute, element) => {
     const elementAttrsContent = get('attributes', 'typeAttributes', 'content').from(element);
-
     return elementAttrsContent && elementAttrsContent.some(attr => attr.content === attribute);
   };
+
+  const checkAndAddAttribute = (attribute, element) => {
+    const elementHasAttr = checkAttributeExists(attribute, element);
+    if (!elementHasAttr) addAttribute(attribute, element);
+  };
+  
+  const memberHasFixedAttr = checkAttributeExists('fixed', member);
 
   switch (member.element) {
     case 'select':
     case 'object':
     case 'option':
     case 'array': {
-      const memberHasFixedAttr = checkAttributeExists('fixed', member);
-
       member.content.forEach(item => {
-        if (memberHasFixedAttr) {
-          const itemHasFixedAttr = checkAttributeExists('fixed', item);
-
-          if (!itemHasFixedAttr) addAttribute('fixed', item);
-        }
+        if (memberHasFixedAttr) checkAndAddAttribute('fixed', item);
         fillAdditionalAttributes(item);
       });
       break;
@@ -216,7 +216,13 @@ function fillAdditionalAttributes(member) {
       if (!hasNullableAttr && !hasNonNullableAttr) addAttribute('non-nullable', member);
       if (!hasRequiredAttr && !hasOptionalAttr) addAttribute('optional', member);
       const childElement = member.content.value;
-      if (childElement) fillAdditionalAttributes(childElement);
+
+      if (childElement) {
+        if (Array.isArray(childElement.content)) {
+          childElement.content.forEach(item => memberHasFixedAttr && checkAndAddAttribute('fixed', item));
+        }
+        fillAdditionalAttributes(childElement);
+      }
       break;
     }
     // no default
