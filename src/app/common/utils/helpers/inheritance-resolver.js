@@ -12,6 +12,15 @@ export default class InheritanceResolver {
   constructor(categories = []) {
     this.categories = categories;
     this.usedStructuresMap = new Map();
+    this.cachedDataStructures = new Map();
+  }
+
+  getCachedDataStructure(structure) {
+    return this.cachedDataStructures.get(structure);
+  }
+
+  cacheDataStructure(structure, source) {
+    this.cachedDataStructures.set(structure, source);
   }
 
   resolveInheritance(valueMember, parent) {
