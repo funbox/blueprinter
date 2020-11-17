@@ -155,8 +155,11 @@ function getDataAttributes(sourceValueMember) {
 function getDataStructureType(sourceValueMember) {
   if (!sourceValueMember) return sourceValueMember;
 
+  const typeAttributes = get('attributes', 'typeAttributes', 'content').from(sourceValueMember);
+
   return {
     type: sourceValueMember.element,
+    typeAttributes,
     name: sourceValueMember.referenceDataStructure,
     recursive: sourceValueMember.recursive,
   };
