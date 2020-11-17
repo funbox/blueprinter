@@ -111,7 +111,22 @@ export default class InheritanceResolver {
 
       member.content.unshift(...referencedObjectContent);
       member.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
-      member.attributes = usefulContent.attributes;
+
+      if (!member.attributes) {
+        member.attributes = usefulContent.attributes;
+      } else {
+        const usefulContentAttrs = get('attributes', 'typeAttributes', 'content').from(usefulContent);
+        const memberAttrs = get('attributes', 'typeAttributes', 'content').from(member);
+
+        if (usefulContentAttrs) {
+          usefulContentAttrs.forEach(attr => {
+            const memberHasAttr = memberAttrs.some(memberAttr => memberAttr.content === attr.content);
+
+            if (!memberHasAttr) memberAttrs.push(attr);
+          });
+        }
+      }
+
       member.referenceDataStructure = dataStructureId;
     }
     this.usedStructuresMap.delete(dataStructureId);
