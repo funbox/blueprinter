@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.31.0 (18.11.2020)
+
+* Display attributes of Attributes section.
+
 ## 3.30.0 (13.11.2020)
 
 * Display "fixed" attribute in the attributes list of nested members.
