@@ -31,7 +31,7 @@ export default class InheritanceResolver {
     ));
     const refDSContent = get('content', 'content').from(referencedDS);
 
-    return refDSContent && refDSContent.length === member.content.length;
+    return (refDSContent && member.content) ? refDSContent.length === member.content.length : false;
   }
 
   cacheDataStructure(member) {

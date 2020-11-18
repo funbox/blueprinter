@@ -171,6 +171,15 @@ function resolveSourceElementInheritance(httpSource) {
   if (index === -1) return null;
 
   const valueMember = httpSource.content[index].content;
+  const standardTypes = ['number', 'string', 'boolean', 'array', 'enum', 'object'];
+
+  if (valueMember && !standardTypes.includes(valueMember.element)) {
+    valueMember.referenceDataStructure = valueMember.element;
+
+    const cachedDataStructure = resolver.getCachedDataStructure(valueMember);
+
+    if (cachedDataStructure) return cachedDataStructure;
+  }
 
   resolver.resolveInheritance(valueMember, httpSource.content[index]);
 
