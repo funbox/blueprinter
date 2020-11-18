@@ -17,12 +17,12 @@ export default class InheritanceResolver {
   getCachedDataStructure(member, referenceDataStructure = member.referenceDataStructure) {
     if (!referenceDataStructure) return null;
 
-    const isContentEqual = this.checkStructureContent(member, referenceDataStructure);
+    const isContentEqual = this.checkDataStructureContent(member, referenceDataStructure);
 
     return isContentEqual ? this.cachedDataStructures.get(referenceDataStructure) : null;
   }
 
-  checkStructureContent(member, referenceDataStructure = member.referenceDataStructure) {
+  checkDataStructureContent(member, referenceDataStructure = member.referenceDataStructure) {
     if (!referenceDataStructure) return null;
 
     const referencedDS = this.categories.dataStructuresArray.find(ds => (
@@ -38,7 +38,7 @@ export default class InheritanceResolver {
   cacheDataStructure(member) {
     if (!member.referenceDataStructure) return;
 
-    const isContentEqual = this.checkStructureContent(member);
+    const isContentEqual = this.checkDataStructureContent(member);
 
     if (isContentEqual) this.cachedDataStructures.set(member.referenceDataStructure, member);
   }
