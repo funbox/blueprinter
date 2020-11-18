@@ -15,12 +15,31 @@ export default class InheritanceResolver {
     this.cachedDataStructures = new Map();
   }
 
-  getCachedDataStructure(structure) {
-    return this.cachedDataStructures.get(structure);
+  getCachedDataStructure(member) {
+    if (!member.referenceDataStructure) return null;
+
+    const isContentEqual = this.checkStructureContent(member);
+
+    return isContentEqual ? this.cachedDataStructures.get(member.referenceDataStructure) : null;
   }
 
-  cacheDataStructure(structure, source) {
-    this.cachedDataStructures.set(structure, source);
+  checkStructureContent(member) {
+    if (!member.referenceDataStructure) return null;
+
+    const referencedDS = this.categories.dataStructuresArray.find(ds => (
+      getDataStructureId(ds) === member.referenceDataStructure
+    ));
+    const refDSContent = get('content', 'content').from(referencedDS);
+
+    return refDSContent && refDSContent.length === member.content.length;
+  }
+
+  cacheDataStructure(member) {
+    if (!member.referenceDataStructure) return;
+
+    const isContentEqual = this.checkStructureContent(member);
+
+    if (isContentEqual) this.cachedDataStructures.set(member.referenceDataStructure, member);
   }
 
   resolveInheritance(valueMember, parent) {

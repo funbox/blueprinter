@@ -102,7 +102,6 @@ export const refactorAction = (action, parentSource) => {
   const href = get('attributes', 'href', 'content').from(action);
   const title = get('meta', 'title', 'content').from(action);
   const displayedTitle = title || `${method.toUpperCase()} ${href}`;
-  console.log(displayedTitle);
   const description = getDescription({ content: copyElements }); // чтобы не обходить содержимое action заново
 
   const { route: parentRoute, hashForLegacyUrl: parentLegacyHash } = parentSource;
@@ -148,17 +147,9 @@ function extractHeaderData(header) {
 function getDataAttributes(sourceValueMember) {
   if (!sourceValueMember) return sourceValueMember;
 
-  const updatedMember = fillAdditionalAttributes(sourceValueMember);
+  fillAdditionalAttributes(sourceValueMember);
 
-  if (sourceValueMember.referenceDataStructure) {
-    const cachedDataStructure = resolver.getCachedDataStructure(sourceValueMember.referenceDataStructure);
-
-    if (!cachedDataStructure) {
-      resolver.cacheDataStructure(sourceValueMember.referenceDataStructure, sourceValueMember);
-    }
-  }
-
-  return updatedMember.content;
+  return sourceValueMember.content;
 }
 
 function getDataStructureType(sourceValueMember) {
@@ -188,14 +179,6 @@ function resolveSourceElementInheritance(httpSource) {
 
 function fillAdditionalAttributes(member) {
   if (!member.content) return member;
-
-  if (member.referenceDataStructure) {
-    const cachedDataStructure = resolver.getCachedDataStructure(member.referenceDataStructure);
-
-    if (cachedDataStructure) {
-      return cachedDataStructure;
-    }
-  }
 
   const addAttribute = (attribute, element) => {
     if (!element.attributes) element.attributes = { typeAttributes: { content: [], element: 'array' } };
@@ -229,10 +212,17 @@ function fillAdditionalAttributes(member) {
     case 'object':
     case 'option':
     case 'array': {
+      const cachedDataStructure = resolver.getCachedDataStructure(member);
+
+      if (cachedDataStructure && !memberHasFixedAttr) return cachedDataStructure;
+
       member.content.forEach(item => {
         if (memberHasFixedAttr) checkAndAddAttribute('fixed', item);
         fillAdditionalAttributes(item);
       });
+
+      if (!cachedDataStructure && !memberHasFixedAttr) resolver.cacheDataStructure(member);
+
       break;
     }
     case 'member': {
