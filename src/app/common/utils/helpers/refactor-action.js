@@ -173,9 +173,7 @@ function resolveSourceElementInheritance(httpSource) {
   const valueMember = httpSource.content[index].content;
 
   if (valueMember && !STANDARD_TYPES.includes(valueMember.element)) {
-    valueMember.referenceDataStructure = valueMember.element;
-
-    const cachedDataStructure = resolver.getCachedDataStructure(valueMember);
+    const cachedDataStructure = resolver.getCachedDataStructure(valueMember, valueMember.element);
 
     if (cachedDataStructure) return cachedDataStructure;
   }
@@ -222,7 +220,7 @@ function fillAdditionalAttributes(member) {
     case 'array': {
       const cachedDataStructure = resolver.getCachedDataStructure(member);
 
-      if (cachedDataStructure && !memberHasFixedAttr) return cachedDataStructure;
+      if (cachedDataStructure) return cachedDataStructure;
 
       member.content.forEach(item => {
         if (memberHasFixedAttr) checkAndAddAttribute('fixed', item);
