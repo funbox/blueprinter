@@ -195,10 +195,10 @@ function getAttributesTitle(structureType) {
   if (!structureType) return prefix;
 
   const typeAttributes = structureType.typeAttributes
-    && structureType.typeAttributes.map(attr => attr.content).join(', ') || '';
+    && ` ${structureType.typeAttributes.map(attr => attr.content).join(', ')}` || '';
 
   if (!structureType.recursive) {
-    return `${prefix} (${structureType.type}) ${typeAttributes}`;
+    return `${prefix} (${structureType.type})${typeAttributes}`;
   }
 
   return (
