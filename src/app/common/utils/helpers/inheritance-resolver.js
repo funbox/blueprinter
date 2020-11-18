@@ -30,6 +30,8 @@ export default class InheritanceResolver {
     ));
     const refDSContent = get('content', 'content').from(referencedDS);
 
+    if (referenceDataStructure === member.element) return !!refDSContent && !member.content;
+
     return (refDSContent && member.content) ? refDSContent.length === member.content.length : false;
   }
 
