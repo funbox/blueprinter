@@ -1,6 +1,5 @@
+import { STANDARD_TYPES } from 'app/constants/defaults';
 import { get } from './getters';
-
-const standardTypes = ['number', 'string', 'boolean', 'array', 'enum', 'object'];
 
 const getDataStructureId = (dataStructure) => (
   Array.isArray(dataStructure.content)
@@ -70,7 +69,7 @@ export default class InheritanceResolver {
     let childElement;
     if (type === 'member') {
       const elementType = valueMember.content.value.element;
-      childElement = standardTypes.includes(elementType) ? valueMember.content.value : valueMember;
+      childElement = STANDARD_TYPES.includes(elementType) ? valueMember.content.value : valueMember;
     } else {
       childElement = valueMember;
     }
@@ -99,7 +98,7 @@ export default class InheritanceResolver {
     const refDSContent = referencedDataStructure.content;
     const enumContent = get('attributes', 'enumerations').from(refDSContent);
     const isEnum = !!enumContent;
-    if (!standardTypes.includes(refDSContent.element)) {
+    if (!STANDARD_TYPES.includes(refDSContent.element)) {
       this.resolveInheritance(refDSContent);
     }
     const referencedObjectType = refDSContent.element;
@@ -122,9 +121,9 @@ export default class InheritanceResolver {
       member.attributes.enumerations = member.attributes.enumerations || {};
       member.attributes.enumerations.content = member.attributes.enumerations.content || [];
       member.attributes.enumerations.content.unshift(...referencedObjectContent);
-      member.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
+      member.element = STANDARD_TYPES.includes(referencedObjectType) ? referencedObjectType : 'object';
     } else if (!referencedObjectContent) {
-      member.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
+      member.element = STANDARD_TYPES.includes(referencedObjectType) ? referencedObjectType : 'object';
       member.attributes = usefulContent.attributes;
     } else {
       if (!Array.isArray(member.content)) member.content = [];
@@ -138,7 +137,7 @@ export default class InheritanceResolver {
       }
 
       member.content.unshift(...referencedObjectContent);
-      member.element = standardTypes.includes(referencedObjectType) ? referencedObjectType : 'object';
+      member.element = STANDARD_TYPES.includes(referencedObjectType) ? referencedObjectType : 'object';
 
       if (!member.attributes) {
         member.attributes = usefulContent.attributes;

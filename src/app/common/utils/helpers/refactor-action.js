@@ -1,5 +1,5 @@
 import deepEqual from 'deep-equal';
-import { MESSAGE_DEFAULT_TITLE } from 'app/constants/defaults';
+import { MESSAGE_DEFAULT_TITLE, STANDARD_TYPES } from 'app/constants/defaults';
 import { get, getSourceElementIndexByType, getBody, getSchema, getDescription } from './getters';
 import { combineHashes, combineRoutes, createHash, createRoute, createSlug, getHashCode, hashFromComment } from './hash';
 import categories from './categories';
@@ -171,9 +171,8 @@ function resolveSourceElementInheritance(httpSource) {
   if (index === -1) return null;
 
   const valueMember = httpSource.content[index].content;
-  const standardTypes = ['number', 'string', 'boolean', 'array', 'enum', 'object'];
 
-  if (valueMember && !standardTypes.includes(valueMember.element)) {
+  if (valueMember && !STANDARD_TYPES.includes(valueMember.element)) {
     valueMember.referenceDataStructure = valueMember.element;
 
     const cachedDataStructure = resolver.getCachedDataStructure(valueMember);
