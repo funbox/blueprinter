@@ -1,4 +1,3 @@
-import deepEqual from 'deep-equal';
 import { STANDARD_TYPES } from 'app/constants/defaults';
 import { get } from './getters';
 
@@ -15,19 +14,20 @@ export default class InheritanceResolver {
     this.cachedDataStructures = new Map();
   }
 
-  getCachedDataStructure(member, referenceDataStructure = member.referenceDataStructure) {
-    if (!referenceDataStructure) return null;
-
+  getCachedDataStructure(member) {
+    const referenceDataStructure = member.referenceDataStructure || member.element;
     const cachedDataStructure = this.cachedDataStructures.get(referenceDataStructure);
 
     if (!cachedDataStructure) return null;
 
-    const isContentEqual = this.checkDataStructureContent(member, referenceDataStructure);
+    const isContentEqual = this.checkDataStructureContent(member);
 
     return isContentEqual ? cachedDataStructure : null;
   }
 
-  checkDataStructureContent(member, referenceDataStructure = member.referenceDataStructure) {
+  checkDataStructureContent(member) {
+    const referenceDataStructure = member.referenceDataStructure || member.element;
+
     if (!referenceDataStructure || member.attributes) return false;
 
     const referencedDS = this.categories.dataStructuresArray.find(ds => getDataStructureId(ds) === referenceDataStructure);

@@ -173,7 +173,7 @@ function resolveSourceElementInheritance(httpSource) {
   const valueMember = httpSource.content[index].content;
 
   if (valueMember && !STANDARD_TYPES.includes(valueMember.element)) {
-    const cachedDataStructure = resolver.getCachedDataStructure(valueMember, valueMember.element);
+    const cachedDataStructure = resolver.getCachedDataStructure(valueMember);
 
     if (cachedDataStructure) return cachedDataStructure;
   }
