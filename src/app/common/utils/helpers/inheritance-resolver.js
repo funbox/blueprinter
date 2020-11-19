@@ -1,3 +1,4 @@
+import deepEqual from 'deep-equal';
 import { STANDARD_TYPES } from 'app/constants/defaults';
 import { get } from './getters';
 
@@ -17,22 +18,24 @@ export default class InheritanceResolver {
   getCachedDataStructure(member, referenceDataStructure = member.referenceDataStructure) {
     if (!referenceDataStructure) return null;
 
+    const cachedDataStructure = this.cachedDataStructures.get(referenceDataStructure);
+
+    if (!cachedDataStructure) return null;
+
     const isContentEqual = this.checkDataStructureContent(member, referenceDataStructure);
 
-    return isContentEqual ? this.cachedDataStructures.get(referenceDataStructure) : null;
+    return isContentEqual ? cachedDataStructure : null;
   }
 
   checkDataStructureContent(member, referenceDataStructure = member.referenceDataStructure) {
-    if (!referenceDataStructure) return null;
+    if (!referenceDataStructure || member.attributes) return false;
 
-    const referencedDS = this.categories.dataStructuresArray.find(ds => (
-      getDataStructureId(ds) === referenceDataStructure
-    ));
+    const referencedDS = this.categories.dataStructuresArray.find(ds => getDataStructureId(ds) === referenceDataStructure);
     const refDSContent = get('content', 'content').from(referencedDS);
 
-    if (referenceDataStructure === member.element) return !!refDSContent && !member.content;
+    if (referenceDataStructure === member.element) return !member.content;
 
-    return (refDSContent && member.content) ? refDSContent.length === member.content.length : false;
+    return member.content ? refDSContent.length === member.content.length : false;
   }
 
   cacheDataStructure(member) {

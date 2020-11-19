@@ -227,7 +227,7 @@ function fillAdditionalAttributes(member) {
         fillAdditionalAttributes(item);
       });
 
-      if (!cachedDataStructure && !memberHasFixedAttr) resolver.cacheDataStructure(member);
+      if (!cachedDataStructure) resolver.cacheDataStructure(member);
 
       break;
     }
