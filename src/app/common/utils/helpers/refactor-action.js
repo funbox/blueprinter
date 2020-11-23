@@ -209,9 +209,6 @@ function fillAdditionalAttributes(member) {
     const elementHasAttr = checkAttributeExists(attribute, element);
     if (!elementHasAttr) addAttribute(attribute, element);
   };
-  
-  const memberHasFixedAttr = checkAttributeExists('fixed', member);
-  const memberHasFixedTypeAttr = checkAttributeExists('fixedType', member);
 
   switch (member.element) {
     case 'select':
@@ -222,16 +219,21 @@ function fillAdditionalAttributes(member) {
 
       if (cachedDataStructure) return cachedDataStructure;
 
+      const memberHasFixedAttr = checkAttributeExists('fixed', member);
+
       member.content.forEach(item => {
         if (memberHasFixedAttr) checkAndAddAttribute('fixed', item);
         fillAdditionalAttributes(item);
       });
 
-      if (!cachedDataStructure) resolver.cacheDataStructure(member);
+      resolver.cacheDataStructure(member);
 
       break;
     }
     case 'member': {
+      const memberHasFixedAttr = checkAttributeExists('fixed', member);
+      const memberHasFixedTypeAttr = checkAttributeExists('fixedType', member);
+
       const hasNullableAttr = checkAttributeExists('nullable', member);
       const hasNonNullableAttr = checkAttributeExists('non-nullable', member);
       const hasRequiredAttr = checkAttributeExists('required', member);
