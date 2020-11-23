@@ -16,7 +16,11 @@ export default class InheritanceResolver {
 
   getCachedDataStructure(member) {
     const referenceDataStructure = member.referenceDataStructure || member.element;
-    const cachedDataStructure = this.cachedDataStructures.get(referenceDataStructure);
+
+    if (!referenceDataStructure) return null;
+
+    const attrs = member.attributes ? JSON.stringify(member.attributes) : '';
+    const cachedDataStructure = this.cachedDataStructures.get(referenceDataStructure + attrs);
 
     if (!cachedDataStructure) return null;
 
@@ -28,7 +32,7 @@ export default class InheritanceResolver {
   checkDataStructureContent(member) {
     const referenceDataStructure = member.referenceDataStructure || member.element;
 
-    if (!referenceDataStructure || member.attributes) return false;
+    if (!referenceDataStructure) return false;
 
     const referencedDS = this.categories.dataStructuresArray.find(ds => getDataStructureId(ds) === referenceDataStructure);
     const refDSContent = get('content', 'content').from(referencedDS);
@@ -43,7 +47,10 @@ export default class InheritanceResolver {
 
     const isContentEqual = this.checkDataStructureContent(member);
 
-    if (isContentEqual) this.cachedDataStructures.set(member.referenceDataStructure, member);
+    if (!isContentEqual) return;
+
+    const attrs = member.attributes ? JSON.stringify(member.attributes) : '';
+    this.cachedDataStructures.set(member.referenceDataStructure + attrs, member);
   }
 
   resolveInheritance(valueMember, parent) {
