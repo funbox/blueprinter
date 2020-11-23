@@ -147,9 +147,9 @@ function extractHeaderData(header) {
 function getDataAttributes(sourceValueMember) {
   if (!sourceValueMember) return sourceValueMember;
 
-  fillAdditionalAttributes(sourceValueMember);
+  const updatedMember = fillAdditionalAttributes(sourceValueMember);
 
-  return sourceValueMember.content;
+  return updatedMember.content;
 }
 
 function getDataStructureType(sourceValueMember) {
