@@ -19,7 +19,7 @@ export default class InheritanceResolver {
 
     if (!referenceDataStructure) return null;
 
-    const attrs = member.attributes ? JSON.stringify(member.attributes) : '';
+    const attrs = this.getSortedAttributesString(member);
     const cachedDataStructure = this.cachedDataStructures.get(referenceDataStructure + attrs);
 
     if (!cachedDataStructure) return null;
@@ -49,8 +49,14 @@ export default class InheritanceResolver {
 
     if (!isContentEqual) return;
 
-    const attrs = member.attributes ? JSON.stringify(member.attributes) : '';
+    const attrs = this.getSortedAttributesString(member);
     this.cachedDataStructures.set(member.referenceDataStructure + attrs, member);
+  }
+
+  getSortedAttributesString(member) {
+    const attrsContent = get('attributes', 'typeAttributes', 'content').from(member);
+
+    return attrsContent ? JSON.stringify(attrsContent.map(attr => attr.content).sort()) : '';
   }
 
   resolveInheritance(valueMember, parent) {
