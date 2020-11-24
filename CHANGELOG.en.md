@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.32.0 (24.11.2020)
+
+* Optimize functions "fillAdditionalAttributes" and "resolveSourceElementInheritance".
+
 ## 3.31.0 (18.11.2020)
 
 * Display attributes of Attributes section.

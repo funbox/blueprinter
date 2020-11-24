@@ -1,5 +1,9 @@
 # История изменений проекта
 
+## 3.32.0 (24.11.2020)
+
+* Оптимизация работы функций fillAdditionalAttributes и resolveSourceElementInheritance.
+
 ## 3.31.0 (18.11.2020)
 
 * Добавление отображения атрибутов у секции Attributes.
