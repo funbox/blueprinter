@@ -24,12 +24,12 @@ export default class InheritanceResolver {
 
     if (!cachedDataStructure) return null;
 
-    const isContentEqual = this.checkDataStructureContent(member);
+    const canUseFromCache = this.canUseFromCache(member);
 
-    return isContentEqual ? cachedDataStructure : null;
+    return canUseFromCache ? cachedDataStructure : null;
   }
 
-  checkDataStructureContent(member) {
+  canUseFromCache(member) {
     const referenceDataStructure = member.referenceDataStructure || member.element;
 
     if (!referenceDataStructure) return false;
@@ -45,9 +45,9 @@ export default class InheritanceResolver {
   cacheDataStructure(member) {
     if (!member.referenceDataStructure) return;
 
-    const isContentEqual = this.checkDataStructureContent(member);
+    const canUseFromCache = this.canUseFromCache(member);
 
-    if (!isContentEqual) return;
+    if (!canUseFromCache) return;
 
     const attrs = this.getSortedAttributesString(member);
     this.cachedDataStructures.set(member.referenceDataStructure + attrs, member);
