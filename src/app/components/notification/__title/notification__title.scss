@@ -1,0 +1,7 @@
+.notification__title {
+  margin: 0;
+
+  + .notification__content {
+    margin-top: 12px;
+  }
+}

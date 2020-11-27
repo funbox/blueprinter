@@ -17,28 +17,22 @@ const defaultProps = {
 };
 
 const DocumentWarnings = (props) => (
-  <div className={b('document-warnings', props)}>
-    <p className={b('document-warnings__title')}>
-      API Blueprint has warnings
-    </p>
-
-    <details className={b('document-warnings__details')} open={props.detailsAreOpen}>
-      <summary className={b('document-warnings__summary')}>
-        See details
-      </summary>
-      <ul className={b('document-warnings__list')}>
-        {
-          props.warnings.map(({ text, positionDetails = {}, id }) => (
-            <li className={b('document-warnings__item')} key={id}>
-              Line {positionDetails.line}{positionDetails.file ? ` (in ${positionDetails.file})` : ''}:
-              &nbsp;
-              {text}
-            </li>
-          ))
-        }
-      </ul>
-    </details>
-  </div>
+  <details className={b('document-warnings', props)} open={props.detailsAreOpen}>
+    <summary className={b('document-warnings__summary')}>
+      See details
+    </summary>
+    <ul className={b('document-warnings__list')}>
+      {
+        props.warnings.map(({ text, positionDetails = {}, id }) => (
+          <li className={b('document-warnings__item')} key={id}>
+            Line {positionDetails.line}{positionDetails.file ? ` (in ${positionDetails.file})` : ''}:
+            &nbsp;
+            {text}
+          </li>
+        ))
+      }
+    </ul>
+  </details>
 );
 
 DocumentWarnings.propTypes = propTypes;

@@ -1,12 +1,18 @@
 import Button from 'fb-base-blocks/button';
 
 const propTypes = {
+  title: PropTypes.string,
   children: PropTypes.node,
   onClose: PropTypes.func,
 };
 
 const Notification = (props) => (
   <div className={b('notification', props)}>
+    { props.title && (
+      <p className={b('notification__title')}>
+        {props.title}
+      </p>
+    )}
     <div className={b('notification__content')}>
       {props.children}
     </div>

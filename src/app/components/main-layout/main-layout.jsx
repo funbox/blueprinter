@@ -112,7 +112,10 @@ class MainLayout extends React.PureComponent {
         </Page__Layout>
 
         {this.state.isWarningNotificationOpen && (
-          <Notification onClose={this.closeNotification}>
+          <Notification
+            onClose={this.closeNotification}
+            title="API Blueprint has warnings"
+          >
             <DocumentWarnings warnings={this.warnings}/>
           </Notification>
         )}
