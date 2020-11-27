@@ -1,0 +1,13 @@
+.crafter-diagnostic-message_type_error {
+  .crafter-diagnostic-message__header {
+    &::before {
+      content: 'Error';
+      background: $red url('./crafter-diagnostic-message_type_error.svg') no-repeat left 12px top 8px;
+      background-size: 12px;
+    }
+  }
+
+  .crafter-diagnostic-message__subtitle {
+    color: #d33653;
+  }
+}
