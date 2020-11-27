@@ -1,7 +1,4 @@
-import RawContent from 'app/components/raw-content';
-
 export const errorProps = {
-  text: PropTypes.string,
   positionDetails: PropTypes.shape({
     line: PropTypes.number,
     column: PropTypes.number,
@@ -20,55 +17,84 @@ const defaultProps = {
 
 const ErrorInfo = (props) => {
   const {
-    text,
     positionDetails = {},
   } = props.error;
 
+  const { line, column, file, lines } = positionDetails;
+  const hasErrorDetails = [line, column, file].filter(Boolean).length > 0;
+  const hasErrorSourceLines = !!lines;
+
+  if (!hasErrorDetails && !hasErrorSourceLines) {
+    return null;
+  }
+
   return (
     <div className={b('error-info', props)}>
-      <RawContent>
-        <p className={b('error-info__message')}>
-          {text}
-        </p>
+      { hasErrorDetails && (
+        <section className={b('error-info__section')}>
+          <h3 className={b('error-info__title')}>
+            Details
+          </h3>
 
-        {(Object.keys(positionDetails)).length > 0 && (
-          <dl className={b('error-info__position-details')}>
-            <dt className={b('error-info__summary-text')}>
-              Details
-            </dt>
-            {positionDetails.line && (
-              <dd className={b('error-info__summary-line')}>
-                Line: {positionDetails.line}
-              </dd>
-            )}
-            {positionDetails.column && (
-              <dd className={b('error-info__summary-line')}>
-                Column: {positionDetails.column}
-              </dd>
-            )}
-            {positionDetails.file && (
-              <dd className={b('error-info__summary-line')}>
-                Source file: {positionDetails.file}
-              </dd>
-            )}
-            {positionDetails.lines && (
-              <dd className={b('error-info__summary-line', {}, { for: 'source-lines' })}>
-                Source lines:
-                <pre>
-                  {positionDetails.lines.map((line, index) => {
-                    const highlighted = line.trim().startsWith('>');
-                    return (
-                      <code key={index} className={b('error-info__source-line', {}, { highlighted })}>
-                        {line}
-                      </code>
-                    );
-                  })}
-                </pre>
-              </dd>
-            )}
-          </dl>
-        )}
-      </RawContent>
+          <div className={b('error-info__content', { mods: { for: 'details' } })}>
+            <table className={b('error-info__details')}>
+              <tbody className={b('error-info__body')}>
+                { line && (
+                  <tr className={b('error-info__row')}>
+                    <td className={b('error-info__data', {}, { type: 'name' })}>
+                      Line:
+                    </td>
+                    <td className={b('error-info__data', {}, { type: 'value' })}>
+                      {line}
+                    </td>
+                  </tr>
+                )}
+                { column && (
+                  <tr className={b('error-info__row')}>
+                    <td className={b('error-info__data', {}, { type: 'name' })}>
+                      Column:
+                    </td>
+                    <td className={b('error-info__data', {}, { type: 'value' })}>
+                      {column}
+                    </td>
+                  </tr>
+                )}
+                { file && (
+                  <tr className={b('error-info__row')}>
+                    <td className={b('error-info__data', {}, { type: 'name' })}>
+                      Source file:
+                    </td>
+                    <td className={b('error-info__data', {}, { type: 'value' })}>
+                      {file}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      { hasErrorSourceLines && (
+        <section className={b('error-info__section')}>
+          <h3 className={b('error-info__title')}>
+            Source lines:
+          </h3>
+
+          <div className={b('error-info__content', { mods: { for: 'source-lines' } })}>
+            <pre className={b('error-info__source-lines')}>
+              {lines.map((ln, index) => {
+                const highlighted = ln.trim().startsWith('>');
+                return (
+                  <code key={index} className={b('error-info__line', {}, { highlighted })}>
+                    {ln}
+                  </code>
+                );
+              })}
+            </pre>
+          </div>
+        </section>
+      )}
     </div>
   );
 };
