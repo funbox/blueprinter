@@ -248,17 +248,17 @@ function extractAnnotationInfo(annotation) {
 }
 
 function extractErrorInfo(annotation, astAttributes) {
+  const annotationInfo = extractAnnotationInfo(annotation);
+
   if (!astAttributes) {
-    return extractAnnotationInfo(annotation);
+    return annotationInfo;
   }
 
-  const text = annotation.content;
   const { errorDetails } = astAttributes;
-
   return {
-    id: uniqid.time(),
-    text,
+    ...annotationInfo,
     positionDetails: {
+      ...annotationInfo.positionDetails,
       file: errorDetails.file,
       lines: errorDetails.lines,
     },

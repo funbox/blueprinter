@@ -1,32 +1,15 @@
 .page_type_error {
-  .page__body {
-    padding: 56px;
-  }
-
-  .page__main {
-    position: relative;
-    padding-left: 70px;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 50px;
-      height: 50px;
-      background: transparent url('./page_type_error.svg') no-repeat center;
-      background-size: contain;
-    }
-  }
-
   .page__title {
-    margin-bottom: $baseMargin * 2;
-    padding: 0;
+    @include visually-hidden;
+  }
+
+  .page__body {
+    padding: 96px;
   }
 
   .page__content {
     + .page__content {
-      margin-top: 100px;
+      margin-top: 96px;
     }
   }
 }

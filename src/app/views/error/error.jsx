@@ -5,6 +5,7 @@ import Page, {
   Page__Main,
 } from 'app/components/page';
 import PageTitle from 'app/components/page-title';
+import CrafterDiagnosticMessage from 'app/components/crafter-diagnostic-message';
 import ErrorInfo, { errorProps } from 'app/components/error-info';
 import DocumentWarnings, { warningProps } from 'app/components/document-warnings';
 
@@ -23,20 +24,25 @@ const Error = (props) => (
     <Page__Body>
       <Page__Main>
         <Page__Title>
-          <PageTitle mods={{ for: 'main-content' }}>
-            Crafter parsing error
+          <PageTitle>
+            Ошибки и предупреждения
           </PageTitle>
         </Page__Title>
 
         <Page__Content>
-          <ErrorInfo
-            error={props.error}
-          />
+          <CrafterDiagnosticMessage
+            type="error"
+            subTitle={props.error.text}
+          >
+            <ErrorInfo
+              error={props.error}
+            />
+          </CrafterDiagnosticMessage>
         </Page__Content>
 
-        {
-          props.warnings.length > 0 && (
-            <Page__Content>
+        { props.warnings.length > 0 && (
+          <Page__Content>
+            <CrafterDiagnosticMessage type="warning">
               <DocumentWarnings
                 warnings={props.warnings}
                 mods={{
@@ -44,9 +50,9 @@ const Error = (props) => (
                 }}
                 detailsAreOpen
               />
-            </Page__Content>
-          )
-        }
+            </CrafterDiagnosticMessage>
+          </Page__Content>
+        )}
       </Page__Main>
     </Page__Body>
   </Page>
