@@ -25,9 +25,14 @@ const DocumentWarnings = (props) => (
       {
         props.warnings.map(({ text, positionDetails = {}, id }) => (
           <li className={b('document-warnings__item')} key={id}>
-            Line {positionDetails.line}{positionDetails.file ? ` (in ${positionDetails.file})` : ''}:
-            &nbsp;
-            {text}
+            <span className={b('document-warnings__line')}>
+              Line {positionDetails.line}:
+            </span>
+            {'\u00a0'}
+            <span className={b('document-warnings__text')}>
+              {positionDetails.file ? `(in ${positionDetails.file}): ` : ''}
+              {text}
+            </span>
           </li>
         ))
       }
