@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.33.0 (30.11.2020)
+
+* Update markup of error page.
+
 ## 3.32.0 (24.11.2020)
 
 * Optimize functions "fillAdditionalAttributes" and "resolveSourceElementInheritance".
