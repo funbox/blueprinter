@@ -8,14 +8,17 @@ class Attribute extends React.Component {
     super(props, context);
 
     this.state = { collapsed: context !== 'expanded' };
-    this.toggleCollapsedState = this.toggleCollapsedState.bind(this);
+
+    this.openAttribute = this.openAttribute.bind(this);
+    this.closeAttribute = this.closeAttribute.bind(this);
   }
 
-  toggleCollapsedState() {
-    this.setState((prevState) => ({
-      ...prevState,
-      collapsed: !prevState.collapsed,
-    }));
+  openAttribute() {
+    this.setState({ collapsed: false });
+  }
+
+  closeAttribute() {
+    this.setState({ collapsed: true });
   }
 
   render() {
@@ -26,12 +29,15 @@ class Attribute extends React.Component {
       mods = {},
       mix = [],
     } = this.props;
+
+    const { collapsed } = this.state;
+
     const viewMode = this.context;
 
     const { hasChildren } = mods;
 
     if (hasChildren) {
-      mods.collapsed = this.state.collapsed;
+      mods.collapsed = collapsed;
     }
 
     mods.recursive = attributeData.recursive;
@@ -45,7 +51,7 @@ class Attribute extends React.Component {
             parentType={parentType}
           />
 
-          { !!hasChildren && (
+          {!!hasChildren && (
             <div className="attribute__children">
               {renderNestedAttrs()}
             </div>
@@ -56,11 +62,11 @@ class Attribute extends React.Component {
 
     return (
       <SlideToggle
-        duration={200}
         bestPerfomance
-        onExpanded={this.toggleCollapsedState}
-        onCollapsing={this.toggleCollapsedState}
+        duration={200}
         collapsed={viewMode !== 'expanded'}
+        onExpanded={this.openAttribute}
+        onCollapsing={this.closeAttribute}
       >
         {({ onToggle, setCollapsibleElement }) => (
           <div className={b('attribute', { mods, mix })}>
@@ -70,9 +76,11 @@ class Attribute extends React.Component {
               onClick={onToggle}
             />
 
-            {!!hasChildren && (!this.state.collapsed)
-            && <div className="attribute__children" ref={setCollapsibleElement}>{renderNestedAttrs()}</div>
-            }
+            {!!hasChildren && !collapsed && (
+              <div className="attribute__children" ref={setCollapsibleElement}>
+                {renderNestedAttrs()}
+              </div>
+            )}
           </div>
         )}
       </SlideToggle>
