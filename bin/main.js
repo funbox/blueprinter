@@ -1,13 +1,12 @@
 const fs = require('fs');
 const path = require('path');
-const { promisify } = require('util');
 const crafter = require('@funbox/crafter');
 
 const { errMessage, astHasError, rejectCrafterError, extendAst } = require('./utils');
 
-const readFile = promisify(fs.readFile);
-const writeFile = promisify(fs.writeFile);
-const mkdir = promisify(fs.mkdir);
+const readFile = fs.promises.readFile;
+const writeFile = fs.promises.writeFile;
+const mkdir = fs.promises.mkdir;
 
 const BASE_PATH = `${__dirname}/..`;
 const staticFileLocation = path.resolve(BASE_PATH, 'static/index.html');
@@ -21,7 +20,7 @@ const logger = {
   },
 };
 
-const createRefract = (inputFileName, strictMode, buildMode) => promisify(crafter.parseFile)(inputFileName, { logger })
+const createRefract = (inputFileName, strictMode, buildMode) => crafter.parseFile(inputFileName, { logger })
   .then(res => {
     try {
       const [result, filePaths] = res;
