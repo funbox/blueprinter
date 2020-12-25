@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.34.0 (25.12.2020)
+
+* Use monospace font in code blocks.
+
 ## 3.33.0 (30.11.2020)
 
 * Update markup of error page.
