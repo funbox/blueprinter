@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.35.0 (31.12.2020)
+
+* Update to crafter v2.
+
 ## 3.34.0 (25.12.2020)
 
 * Use monospace font in code blocks.
