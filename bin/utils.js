@@ -24,8 +24,7 @@ function astHasError(parseResult) {
     }
 
     const position = anno.sourceMap.charBlocks[0];
-    const file = anno.sourceMap.file;
-    return [true, { text, position, file }];
+    return [true, { text, position, file: position.file }];
   }
   return [false];
 }
