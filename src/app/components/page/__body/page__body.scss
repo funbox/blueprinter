@@ -1,4 +1,8 @@
 .page__body {
   padding-bottom: 80px;
   padding-left: 100px;
+
+  @media print {
+    padding-left: 20px;
+  }
 }

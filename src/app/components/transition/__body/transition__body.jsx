@@ -159,6 +159,7 @@ class Transition__Body extends React.PureComponent {
         {!!schema && (
           <CollapsibleSection
             mix="transition__section"
+            mods={{ print: 'hidden' }}
             title="Schema"
           >
             <Section

@@ -1,0 +1,5 @@
+.collapsible-section_print_hidden {
+  @media print {
+    display: none;
+  }
+}

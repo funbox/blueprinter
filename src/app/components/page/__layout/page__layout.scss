@@ -9,5 +9,9 @@
 
   > .page__resizable {
     flex-shrink: 0;
+
+    @media print {
+      display: none;
+    }
   }
 }
