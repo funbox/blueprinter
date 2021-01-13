@@ -9,4 +9,8 @@
   border: 1px solid $stroke-color--primary;
   border-radius: 6px;
   background-color: $white;
+
+  @media print {
+    display: none;
+  }
 }
