@@ -12,4 +12,8 @@
   &:focus {
     outline: none;
   }
+
+  @media print {
+    display: none;
+  }
 }

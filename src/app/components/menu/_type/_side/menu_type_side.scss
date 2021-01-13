@@ -26,34 +26,63 @@
     -webkit-box-orient: vertical; // stylelint-disable-line property-no-vendor-prefix
     -webkit-line-clamp: 3; // stylelint-disable-line property-no-vendor-prefix
 
+    @media print {
+      padding: 0;
+      font-weight: 400;
+    }
+
     &:focus {
       outline: none;
     }
 
     &::before {
-      content: '';
-      position: absolute;
-      z-index: 2;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      @media not print {
+        content: '';
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
     }
   }
 
   .menu__item_level_1 {
+    @media print {
+      counter-reset: menuItemLevel2;
+      counter-increment: menuItemLevel1;
+    }
+
     .menu__item-title {
       font-weight: 500;
+    }
+
+    .menu__item-text {
+      @media print {
+        &::before {
+          content: counter(menuItemLevel1) ". ";
+          padding-right: 3px;
+        }
+      }
     }
   }
 
   .menu__item_level_2 {
-    .menu__item-title {
-      font-weight: 400;
+    @media print {
+      counter-reset: menuItemLevel3;
     }
 
     .menu__item-text {
       padding-left: 18px;
+
+      @media print {
+        &::before {
+          counter-increment: menuItemLevel2;
+          content: counter(menuItemLevel1) "." counter(menuItemLevel2) ". ";
+          padding-right: 3px;
+        }
+      }
     }
   }
 
@@ -61,6 +90,14 @@
     .menu__item-text {
       padding-right: 8px;
       padding-left: 36px;
+
+      @media print {
+        &::before {
+          counter-increment: menuItemLevel3;
+          content: counter(menuItemLevel1) "." counter(menuItemLevel2) "." counter(menuItemLevel3) ". ";
+          padding-right: 3px;
+        }
+      }
     }
   }
 
@@ -80,6 +117,10 @@
         position: absolute;
         right: 16px;
         line-height: 10px;
+
+        @media print {
+          position: static;
+        }
       }
     }
   }

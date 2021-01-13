@@ -1,4 +1,16 @@
 .page__navigation {
   overflow-y: auto;
   margin-top: 22px;
+
+  @media print {
+    counter-reset: menuItemLevel1;
+
+    &::before {
+      content: 'Содержание';
+      display: block;
+      font-weight: 500;
+      font-size: 18px;
+      margin: 0 30px 10px;
+    }
+  }
 }

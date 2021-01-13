@@ -1,17 +1,23 @@
 .page__layout {
   display: flex;
 
+  @media print {
+    display: block;
+  }
+
   > .page__body {
-    flex-grow: 1;
-    width: 0;
-    max-width: 800px;
+    @media not print {
+      flex-grow: 1;
+      width: 0;
+      max-width: 800px;
+    }
   }
 
   > .page__resizable {
     flex-shrink: 0;
 
     @media print {
-      display: none;
+      min-width: 100%!important;
     }
   }
 }
