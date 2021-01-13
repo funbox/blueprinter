@@ -1,3 +1,7 @@
 .transition__section {
   margin-top: 44px;
+
+  @media print {
+    margin-top: 22px;
+  }
 }

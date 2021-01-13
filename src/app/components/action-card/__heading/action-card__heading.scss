@@ -1,7 +1,15 @@
 .action-card__heading {
   padding-top: 16px;
 
+  @media print {
+    padding-top: 8px;
+  }
+
   + .action-card__body {
     margin-top: 44px;
+
+    @media print {
+      margin-top: 22px;
+    }
   }
 }

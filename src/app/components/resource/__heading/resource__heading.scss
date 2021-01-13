@@ -4,4 +4,10 @@
   padding-top: 16px;
   font-size: 24px;
   line-height: 30px;
+
+  @media print {
+    font-size: 16px;
+    line-height: 18px;
+    padding-top: 8px;
+  }
 }

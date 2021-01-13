@@ -7,4 +7,10 @@
   white-space: nowrap;
   font-size: 40px;
   line-height: 48px;
+
+  @media print {
+    font-size: 20px;
+    line-height: 24px;
+    padding-top: 10px;
+  }
 }

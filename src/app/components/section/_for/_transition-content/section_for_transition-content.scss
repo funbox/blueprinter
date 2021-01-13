@@ -9,5 +9,9 @@
 
   > .section__body {
     margin-top: 18px;
+
+    @media print {
+      margin-top: 0;
+    }
   }
 }
