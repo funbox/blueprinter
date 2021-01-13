@@ -4,6 +4,11 @@
       margin: 0;
       font-size: 18px;
       line-height: 26px;
+
+      @media print {
+        font-size: 16px;
+        line-height: 18px;
+      }
     }
   }
 
@@ -11,7 +16,7 @@
     margin-top: 18px;
 
     @media print {
-      margin-top: 0;
+      margin-top: 4px;
     }
   }
 }

@@ -1,3 +1,7 @@
 .transition__description {
   margin-top: 28px;
+
+  @media print {
+    margin-top: 4px;
+  }
 }

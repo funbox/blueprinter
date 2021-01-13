@@ -1,10 +1,18 @@
 .action-card_type_put {
   .action-card__method {
     background-color: $put-method-color--primary;
+
+    @media print {
+      background: none;
+    }
   }
 
   .action-card__method-href-container {
     background-color: rgba($put-method-color--primary, .08);
+
+    @media print {
+      background: none;
+    }
   }
 
   .action-card__example-method {

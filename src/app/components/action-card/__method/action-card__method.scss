@@ -9,6 +9,12 @@
   background-color: $blue;
   color: $white;
 
+  @media print {
+    background: none;
+    color: $ebony;
+    border: 1px dashed $ebony;
+  }
+
   + .action-card__href {
     margin-left: 10px;
   }

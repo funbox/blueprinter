@@ -14,8 +14,17 @@
   line-height: 20px;
   color: $color--secondary;
 
+  @media print {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid;
+    max-width: none;
+  }
+
   &:hover {
-    color: $color--highlight;
-    cursor: pointer;
+    @media not print {
+      color: $color--highlight;
+      cursor: pointer;
+    }
   }
 }

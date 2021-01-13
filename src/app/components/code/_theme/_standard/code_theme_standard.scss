@@ -9,6 +9,10 @@
   border-radius: 4px;
   background-color: $grayLight;
 
+  @media print {
+    background: none;
+  }
+
   &.code_recursive {
     position: relative;
 

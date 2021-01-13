@@ -3,4 +3,8 @@
   margin: 0;
   padding: 14px 20px;
   border: 1px solid $stroke-color--primary;
+
+  @media print {
+    padding: 4px 8px;
+  }
 }

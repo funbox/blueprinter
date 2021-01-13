@@ -1,3 +1,7 @@
 .parameter__description {
   margin-top: 10px;
+
+  @media print {
+    margin-top: 4px;
+  }
 }

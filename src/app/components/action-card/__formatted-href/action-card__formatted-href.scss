@@ -3,4 +3,8 @@
   word-break: break-word;
   font-size: 14px;
   line-height: 16px;
+
+  @media print {
+    margin-top: 8px;
+  }
 }

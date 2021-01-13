@@ -1,5 +1,9 @@
 .attribute__prop {
   + .attribute__prop {
     margin-top: 12px;
+
+    @media print {
+      margin-top: 4px;
+    }
   }
 }

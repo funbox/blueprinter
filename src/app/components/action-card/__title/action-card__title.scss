@@ -15,5 +15,9 @@
 
   + .action-card__method-href-container {
     margin-top: 18px;
+
+    @media print {
+      margin-top: 8px;
+    }
   }
 }

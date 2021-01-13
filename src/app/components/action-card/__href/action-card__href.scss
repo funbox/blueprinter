@@ -8,4 +8,8 @@
   border: 1px solid $stroke-color--primary;
   border-radius: 4px;
   background-color: $white;
+
+  @media print {
+    border: none;
+  }
 }

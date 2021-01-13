@@ -5,4 +5,8 @@
   padding: 12px;
   border-radius: 3px;
   background-color: rgba(15, 115, 238, .08);
+
+  @media print {
+    padding: 0;
+  }
 }

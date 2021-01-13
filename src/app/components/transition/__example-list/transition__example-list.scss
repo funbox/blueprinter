@@ -8,6 +8,11 @@
   margin: -#{$label-margin-vertical} -#{$label-margin-horizontal};
   padding: 0;
 
+  @media print {
+    margin: 0;
+    padding-bottom: 4px;
+  }
+
   &::after {
     content: '';
     position: absolute;
@@ -16,5 +21,9 @@
     width: calc(100% - 2 * #{$label-margin-horizontal});
     height: 1px;
     background-color: $stroke-color--primary;
+
+    @media print {
+      display: none;
+    }
   }
 }

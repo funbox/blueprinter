@@ -1,6 +1,10 @@
 .parameters__item {
   padding: 16px 20px;
 
+  @media print {
+    padding: 4px 8px;
+  }
+
   &:not(:only-child):not(:last-child) {
     border-bottom: 1px solid $stroke-color--primary;
   }
