@@ -3,6 +3,16 @@
   font-size: 18px;
   line-height: 24px;
 
+  @media print {
+    font-size: 16px;
+    line-height: 18px;
+
+    &:before {
+      counter-increment: actionCard;
+      content: counter(resourceGroupSection)  "." counter(resourceSection) "." counter(actionCard) ". ";
+    }
+  }
+
   + .action-card__method-href-container {
     margin-top: 18px;
   }

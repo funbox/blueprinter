@@ -4,5 +4,6 @@
 
   @media print {
     padding-left: 20px;
+    counter-reset: resourceGroupSection;
   }
 }
