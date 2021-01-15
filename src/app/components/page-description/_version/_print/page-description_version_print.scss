@@ -1,0 +1,7 @@
+.page-description_version_print {
+  display: none;
+
+  @media print {
+    display: block;
+  }
+}

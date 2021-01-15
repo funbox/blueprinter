@@ -86,8 +86,8 @@ export default class App extends React.Component {
             render={(props) => (
               <ViewContext.Provider value={ViewMode.EXPANDED}>
                 {
-                  window.matchMedia('print').matches && !!topLevelMeta.description && (
-                    <PageDescription description={topLevelMeta.description}/>
+                  topLevelMeta.description && (
+                    <PageDescription description={topLevelMeta.description} mix="page-description_version_print"/>
                   )
                 }
                 <ManualSearch

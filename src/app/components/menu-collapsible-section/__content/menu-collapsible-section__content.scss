@@ -1,3 +1,7 @@
 .menu-collapsible-section__content {
   overflow: hidden;
+
+  @media print {
+    display: block!important;
+  }
 }

@@ -5,17 +5,24 @@ const propTypes = {
     PropTypes.string,
     PropTypes.node,
   ]),
+  mix: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 };
 
-const PageDescription = (props) => (
-  <RawContent mix={[b('page__description')]}>
-    <h2>
-      Общие сведения
-    </h2>
+const PageDescription = (props) => {
+  const {
+    mix,
+  } = props;
 
-    {props.description}
-  </RawContent>
-);
+  return (
+    <RawContent mix={[b('page__description'), mix]}>
+      <h2>
+        Общие сведения
+      </h2>
+
+      {props.description}
+    </RawContent>
+  );
+};
 
 PageDescription.propTypes = propTypes;
 
