@@ -2,6 +2,6 @@
   overflow: hidden;
 
   @media print {
-    display: block!important;
+    display: block!important; // stylelint-disable-line declaration-no-important
   }
 }
