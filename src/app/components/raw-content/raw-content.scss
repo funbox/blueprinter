@@ -10,12 +10,24 @@
     margin: $baseMargin 0;
     font-size: 36px;
     line-height: 40px;
+
+    @media print {
+      margin: $baseMargin/2 0;
+      font-size: 26px;
+      line-height: 30px;
+    }
   }
 
   h2 {
     margin: $baseMargin 0;
     font-size: 30px;
     line-height: 36px;
+
+    @media print {
+      margin: $baseMargin/2 0;
+      font-size: 20px;
+      line-height: 26px;
+    }
   }
 
   h3 {
@@ -23,14 +35,28 @@
     text-transform: uppercase;
     font-size: 18px;
     line-height: 26px;
+
+    @media print {
+      margin: $baseMargin/2 0;
+      font-size: 16px;
+      line-height: 20px;
+    }
   }
 
   h4, h5, h6 {
     margin: $baseMargin 0;
+
+    @media print {
+      margin: $baseMargin/2 0;
+    }
   }
 
   p {
     margin: 0 0 10px;
+
+    @media print {
+      margin-bottom: 5px;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -39,6 +65,10 @@
 
   div {
     margin: 0 0 10px;
+
+    @media print {
+      margin-bottom: 5px;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -73,6 +103,11 @@
     font-size: 16px;
     border-left: 5px solid $gray;
     color: rgba($black, .5);
+
+    @media print {
+      margin: $baseMargin/2 0;
+      padding: 5px 10px;
+    }
 
     p:last-child {
       margin-bottom: 0;
