@@ -85,6 +85,11 @@ export default class App extends React.Component {
             path="/manual-search-page"
             render={(props) => (
               <ViewContext.Provider value={ViewMode.EXPANDED}>
+                {
+                  window.matchMedia('print').matches && !!topLevelMeta.description && (
+                    <PageDescription description={topLevelMeta.description}/>
+                  )
+                }
                 <ManualSearch
                   {...props}
                   groups={groups}
