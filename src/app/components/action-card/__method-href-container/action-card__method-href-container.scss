@@ -9,5 +9,6 @@
   @media print {
     padding: 4px;
     border: 1px dashed $ebony;
+    page-break-inside: avoid;
   }
 }
