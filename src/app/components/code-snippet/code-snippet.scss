@@ -10,7 +10,8 @@
 
   @media print {
     background: none;
-    padding: 0;
+    border: 1px solid $gray;
+    padding: 8px;
     line-height: 16px;
   }
 

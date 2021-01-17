@@ -7,6 +7,7 @@
   background-color: rgba(15, 115, 238, .08);
 
   @media print {
-    padding: 0;
+    padding: 4px;
+    border: 1px dashed $ebony;
   }
 }
