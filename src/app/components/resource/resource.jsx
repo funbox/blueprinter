@@ -15,7 +15,7 @@ class Resource extends React.Component {
 
     return (
       <section className={b('resource', this.props)}>
-        <h3 className="resource__heading">
+        <h3 className="resource__heading" id={resource.route}>
           {title}
         </h3>
         <div className="resource__body">

@@ -13,7 +13,7 @@ class ResourceGroupSection extends React.PureComponent {
 
     return (
       <section className={b('resource-group-section', this.props)}>
-        <h2 className="resource-group-section__heading">
+        <h2 className="resource-group-section__heading" id={group.route}>
           {group.title}
         </h2>
         <div className="resource-group-section__body">
