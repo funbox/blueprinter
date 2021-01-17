@@ -4,8 +4,10 @@
   line-height: 24px;
 
   @media print {
-    font-size: 16px;
+    font-size: 17px;
     line-height: 18px;
+    color: $blue;
+    padding: 4px 0 12px;
 
     &:before {
       counter-increment: actionCard;

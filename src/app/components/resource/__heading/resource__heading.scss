@@ -6,10 +6,11 @@
   line-height: 30px;
 
   @media print {
-    font-size: 18px;
-    line-height: 20px;
-    padding-top: 8px;
+    font-size: 20px;
+    line-height: 24px;
+    padding-top: 10px;
     padding-left: 15px;
+    color: $blue;
 
     &:before {
       counter-increment: resourceSection;
