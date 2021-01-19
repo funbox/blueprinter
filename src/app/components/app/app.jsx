@@ -156,7 +156,7 @@ function convertLegacyUrl(url) {
     const action = actions[i];
     const hashWithoutGroup = slice(action.hashForLegacyUrl, groupHash);
     const hashWithoutGroupAndResource = slice(hashWithoutGroup, resourceHash);
-    if (hashWithoutGroupAndResource.length > 0 && localHash.startsWith(hashWithoutGroupAndResource)) {
+    if (hashWithoutGroupAndResource.length > 0 && localHash === hashWithoutGroupAndResource) {
       matchedAction = action;
       break;
     }
