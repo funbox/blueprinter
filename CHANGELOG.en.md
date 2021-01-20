@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.35.3 (20.01.2021)
+
+* Fix redirect to URL without groups or resources.
+
 ## 3.35.2 (20.01.2021)
 
 * Fix interaction with value attributes.
