@@ -13,6 +13,8 @@ const removeEmpty = object => (
     return res;
   }, {}));
 
+const propertyAttributes = ['required', 'optional']; // see https://apielements.org/en/latest/element-definitions.html#member-element
+
 const resolver = new InheritanceResolver(categories);
 
 export const refactorMessage = (message, parentSource) => {
@@ -186,14 +188,24 @@ function resolveSourceElementInheritance(httpSource) {
 function fillAdditionalAttributes(member) {
   if (!member.content) return member;
 
+  const isPropertyAttribute = (attribute) => propertyAttributes.includes(attribute);
+
   const addAttribute = (attribute, element) => {
+    if (element.element === 'member' && !isPropertyAttribute(attribute)) {
+      return addAttribute(attribute, element.content.value);
+    }
     if (!element.attributes) element.attributes = { typeAttributes: { content: [], element: 'array' } };
+    if (!element.attributes.typeAttributes) element.attributes.typeAttributes = { content: [], element: 'array' };
 
     element.attributes.typeAttributes.content.push({ element: 'string', content: attribute });
     return element;
   };
 
   const removeAttribute = (attribute, element) => {
+    if (element.element === 'member' && !isPropertyAttribute(attribute)) {
+      removeAttribute(attribute, element.content.value);
+      return;
+    }
     const elementAttrsContent = get('attributes', 'typeAttributes', 'content').from(element);
     const elementAttrIndex = elementAttrsContent.findIndex(attr => attr.content === attribute);
 
@@ -201,6 +213,9 @@ function fillAdditionalAttributes(member) {
   };
 
   const checkAttributeExists = (attribute, element) => {
+    if (element.element === 'member' && !isPropertyAttribute(attribute)) {
+      return checkAttributeExists(attribute, element.content.value);
+    }
     const elementAttrsContent = get('attributes', 'typeAttributes', 'content').from(element);
     return elementAttrsContent && elementAttrsContent.some(attr => attr.content === attribute);
   };
