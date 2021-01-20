@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.35.1 (20.01.2021)
+
+* Fix attribute unfolding after double click.
+
 ## 3.35.0 (31.12.2020)
 
 * Update to crafter v2.
