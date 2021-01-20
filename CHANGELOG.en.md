@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.35.2 (20.01.2021)
+
+* Fix interaction with value attributes.
+
 ## 3.35.1 (20.01.2021)
 
 * Fix attribute unfolding after double click.
