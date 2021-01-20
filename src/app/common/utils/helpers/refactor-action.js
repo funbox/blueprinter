@@ -188,43 +188,6 @@ function resolveSourceElementInheritance(httpSource) {
 function fillAdditionalAttributes(member) {
   if (!member.content) return member;
 
-  const isPropertyAttribute = (attribute) => propertyAttributes.includes(attribute);
-
-  const addAttribute = (attribute, element) => {
-    if (element.element === 'member' && !isPropertyAttribute(attribute)) {
-      return addAttribute(attribute, element.content.value);
-    }
-    if (!element.attributes) element.attributes = { typeAttributes: { content: [], element: 'array' } };
-    if (!element.attributes.typeAttributes) element.attributes.typeAttributes = { content: [], element: 'array' };
-
-    element.attributes.typeAttributes.content.push({ element: 'string', content: attribute });
-    return element;
-  };
-
-  const removeAttribute = (attribute, element) => {
-    if (element.element === 'member' && !isPropertyAttribute(attribute)) {
-      removeAttribute(attribute, element.content.value);
-      return;
-    }
-    const elementAttrsContent = get('attributes', 'typeAttributes', 'content').from(element);
-    const elementAttrIndex = elementAttrsContent.findIndex(attr => attr.content === attribute);
-
-    elementAttrsContent.splice(elementAttrIndex, 1);
-  };
-
-  const checkAttributeExists = (attribute, element) => {
-    if (element.element === 'member' && !isPropertyAttribute(attribute)) {
-      return checkAttributeExists(attribute, element.content.value);
-    }
-    const elementAttrsContent = get('attributes', 'typeAttributes', 'content').from(element);
-    return elementAttrsContent && elementAttrsContent.some(attr => attr.content === attribute);
-  };
-
-  const checkAndAddAttribute = (attribute, element) => {
-    const elementHasAttr = checkAttributeExists(attribute, element);
-    if (!elementHasAttr) addAttribute(attribute, element);
-  };
-
   switch (member.element) {
     case 'select':
     case 'object':
@@ -272,4 +235,49 @@ function fillAdditionalAttributes(member) {
   }
 
   return member;
+}
+
+function addAttribute(attribute, element) {
+  const attributesContainer = getAttributesContainer(attribute, element);
+  if (attributesContainer !== element) {
+    return addAttribute(attribute, attributesContainer);
+  }
+  if (!element.attributes) element.attributes = { typeAttributes: { content: [], element: 'array' } };
+  if (!element.attributes.typeAttributes) element.attributes.typeAttributes = { content: [], element: 'array' };
+
+  element.attributes.typeAttributes.content.push({ element: 'string', content: attribute });
+  return element;
+}
+
+function removeAttribute(attribute, element) {
+  const attributesContainer = getAttributesContainer(attribute, element);
+  if (attributesContainer !== element) {
+    removeAttribute(attribute, attributesContainer);
+    return;
+  }
+  const elementAttrsContent = get('attributes', 'typeAttributes', 'content').from(element);
+  const elementAttrIndex = elementAttrsContent.findIndex(attr => attr.content === attribute);
+
+  elementAttrsContent.splice(elementAttrIndex, 1);
+}
+
+function checkAttributeExists(attribute, element) {
+  const attributesContainer = getAttributesContainer(attribute, element);
+  if (attributesContainer !== element) {
+    return checkAttributeExists(attribute, attributesContainer);
+  }
+  const elementAttrsContent = get('attributes', 'typeAttributes', 'content').from(element);
+  return elementAttrsContent && elementAttrsContent.some(attr => attr.content === attribute);
+}
+
+function checkAndAddAttribute(attribute, element) {
+  const elementHasAttr = checkAttributeExists(attribute, element);
+  if (!elementHasAttr) addAttribute(attribute, element);
+}
+
+function getAttributesContainer(targetAttribute, element) {
+  if (element.element === 'member' && !propertyAttributes.includes(targetAttribute)) {
+    return element.content.value;
+  }
+  return element;
 }
