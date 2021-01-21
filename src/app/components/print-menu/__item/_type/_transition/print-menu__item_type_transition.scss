@@ -1,0 +1,10 @@
+.print-menu__item_type_transition {
+  @media print {
+    padding-left: 90px;
+    &::before {
+      counter-increment: menuItemLevel3;
+      content: counter(menuItemLevel1) "." counter(menuItemLevel2) "." counter(menuItemLevel3) ". ";
+      padding-right: 3px;
+    }
+  }
+}

@@ -9,6 +9,7 @@ import Page, {
 import PageTitle from 'app/components/page-title';
 import Resizable from 'app/components/resizable';
 import SideMenu from 'app/components/side-menu';
+import PrintMenu from 'app/components/print-menu';
 import MainContent from 'app/components/main-content';
 import Notification from 'app/components/notification';
 import DocumentWarnings from 'app/components/document-warnings';
@@ -100,6 +101,7 @@ class MainLayout extends React.PureComponent {
 
               <Page__Navigation>
                 <SideMenu data={groups}/>
+                <PrintMenu data={groups}/>
               </Page__Navigation>
             </Page__Aside>
           </Resizable>

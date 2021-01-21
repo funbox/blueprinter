@@ -1,0 +1,12 @@
+.print-menu__item_type_category {
+  @media print {
+    padding-left: 30px;
+    counter-reset: menuItemLevel2;
+    counter-increment: menuItemLevel1;
+
+    &::before {
+      content: counter(menuItemLevel1) ". ";
+      padding-right: 3px;
+    }
+  }
+}
