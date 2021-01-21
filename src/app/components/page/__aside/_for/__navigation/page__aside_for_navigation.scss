@@ -9,12 +9,6 @@
   padding: 24px 0;
   background-color: $grayLight;
 
-  @media print {
-    background: none;
-    padding-bottom: 0;
-    height: auto;
-  }
-
   > .page__title {
     flex-shrink: 0;
   }

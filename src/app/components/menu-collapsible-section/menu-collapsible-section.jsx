@@ -30,7 +30,7 @@ class MenuCollapsibleSection extends React.Component {
     const current = matchRoute(route, pathname) || nestedRoutePresets.includes(pathname);
 
     this.state = {
-      collapsed: window.matchMedia('print').matches ? false : !current,
+      collapsed: !current,
       content: null,
     };
 
