@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.36.0 (26.01.2021)
+
+* Add adapted version of HTML document to print it as a PDF file.
+
 ## 3.35.3 (20.01.2021)
 
 * Fix redirect to URL without groups or resources.
