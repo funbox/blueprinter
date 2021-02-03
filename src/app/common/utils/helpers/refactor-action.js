@@ -28,13 +28,15 @@ export const refactorMessage = (message, parentSource) => {
   const messageLegacyHash = presetHash ? createHash(presetHash) : combineHashes(parentLegacyHash, createHash(messageTitle));
   const messageRoute = presetHash ? createRoute(presetHash) : combineRoutes(parentRoute, createRoute(mainHash, createSlug));
 
+  const processedMessage = resolveSourceElementInheritance(message);
+
   return ({
     id: message.id,
     element: message.element,
     meta: message.meta,
     type: 'message',
     description: getDescription(message),
-    attributes: getDataAttributes(message),
+    attributes: getDataAttributes(processedMessage),
     body: getBody(message),
     schema: getSchema(message),
     hashForLegacyUrl: messageLegacyHash,
