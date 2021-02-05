@@ -50,7 +50,8 @@ const sendStaticFile = async (outputFileName, refractData) => {
   const htmlData = await readFile(staticFileLocation, { encoding: 'utf-8' });
 
   const htmlWithRefract = htmlData
-    .replace('<script src="./refract.js"></script>', `<script>${refractData}</script>`)
+    // вторым параметром передаётся функция, чтобы определённые символы в refractData не применились как шаблоны замены
+    .replace('<script src="./refract.js"></script>', () => `<script>${refractData}</script>`)
     .replace(/\/favicon/g, `${BASE_PATH}/static$&`)
     .replace(/\/safari-pinned-tab/, `${BASE_PATH}/static$&`)
     .replace(/\/apple-touch-icon/, `${BASE_PATH}/static$&`);
