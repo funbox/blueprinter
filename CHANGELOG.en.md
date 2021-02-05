@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.36.1 (05.02.2021)
+
+* Fix rendering of attributes in Messages section.
+
 ## 3.36.0 (26.01.2021)
 
 * Add adapted version of HTML document to print it as a PDF file.
