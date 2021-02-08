@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.36.2 (08.02.2021)
+
+* Fix including refract tree in a HTML file.
+
 ## 3.36.1 (05.02.2021)
 
 * Fix rendering of attributes in Messages section.
