@@ -20,10 +20,12 @@
     "watch-stub": "node ./scripts/watch-stub.js",
     "lint:scss": "stylelint \"src/**/*.scss\" --syntax scss --fix --config .stylelintrc --cache",
     "lint:js": "eslint --cache -c .eslintrc.js --ext .jsx,.js src config",
-    "lint": "npm run -s lint:scss && npm run -s lint:js",
-    "prebuild": "npm run lint",
+    "lint:test": "eslint -c tests/.eslintrc tests",
+    "lint": "npm run -s lint:scss && npm run -s lint:js && npm run -s lint:test",
+    "prebuild": "npm run lint && npm run test",
     "prepublishOnly": "npm run build-static",
-    "postpublish": "bash ./build-docker.sh"
+    "postpublish": "bash ./build-docker.sh",
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@funbox/commonmark": "0.29.0-fb-1.0.3",
@@ -90,7 +92,14 @@
     "webpack-dev-server": "3.11.2",
     "webpack-merge": "4.2.2"
   },
-  "pugLintConfig": {
-    "extends": "funbox"
+  "jest": {
+    "testEnvironment": "node",
+    "roots": [
+      "tests"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
   }
 }
