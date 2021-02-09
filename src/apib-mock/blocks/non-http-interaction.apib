@@ -1,0 +1,40 @@
+# Data Structures
+
+## ChatMessage (object)
+
++ `id`: `12` (string, required) - id сообщения
++ `text`: `Привет!` (string, required) - текст сообщения
++ `state` (enum, required) - статус сообщения
+    + Members
+        + `delivered` - отправлено
+        + `read` - прочитано
+
+## NewMessage(ChatMessage)
+
++ `type`: `newMessage` (string, fixed, required) - тип сообщения — `newMessage`
+
+
+# Group Не-HTTP-взаимодействие
+
+Демонстрация создания API с не-HTTP-взаимодействием. Для описания не-HTTP-взаимодействий используются секции Group, SubGroup и Message.
+
+## SubGroup ChatChannel:chat_id
+
+Подписка на обновления активного чата.
+
+### Message NewMessage
+
+Получение нового сообщения.
+
++ Attributes (NewMessage)
+
+## SubGroup channel_id
+
+Сообщения между MCM IDGW и фронтенд-клиентом с идентификатором channel_id
+
+### Message ServerToClientMessage aoc_requested
+
+Доступные команды:
+
+- `accept_aoc` - клиент согласился на запрос сервис провайдера;
+- `decline_aoc` - клиент отказался от запроса сервис провайдера;
