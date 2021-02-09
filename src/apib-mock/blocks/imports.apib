@@ -1,0 +1,15 @@
+# Import ./imports/timezone.apib
+# Import ./imports/profile.apib
+# Import ./imports/normal-response.apib
+
+# Group Импорты
+
+Демонстрация разбиения большой документации на несколько файлов с помощью инструкции Import и последующего использования этих структур при описании ответов.
+
+## GET /users
+
++ Response 200 (application/json)
+    Запрос выполнен успешно
+    + Attributes (object, required)
+        + Include NormalResponse
+        + `profile` (Profile, required)
