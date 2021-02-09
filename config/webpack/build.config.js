@@ -32,6 +32,7 @@ module.exports = merge(
                 require.resolve('@babel/plugin-proposal-object-rest-spread'),
                 require.resolve('@babel/plugin-proposal-class-properties'),
                 require.resolve('@babel/plugin-transform-react-constant-elements'),
+                require.resolve('babel-plugin-transform-react-remove-prop-types'),
               ],
             },
           },
