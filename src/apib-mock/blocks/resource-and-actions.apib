@@ -1,0 +1,53 @@
+# Group Resource и Action
+
+# /messages
+
+Демонстрация возможности объявления нескольких секций Action внутри секции Resource.
+
+## GET
+
++ Response 200 (text/plain)
+    + Body
+
+          Hello world!
+
+## POST
+
++ Request (application/json)
+    + Body
+
+          {
+            "text": "Test message"
+          }
+
++ Response 200 (application/json)
+
+# Сообщение дня [/messages/{id}]
+
+Демонстрация возможности объявления несколько секций Action внутри именованной секции Resource.
+
+## Обновить сообщение дня [PUT]
+
++ Request (application/json)
+    + Body
+
+          {
+            "text": "Test message"
+          }
+
++ Response 200 (application/json)
+
+## Прикрепить изображение к сообщению [POST /message-files]
+
++ Request Пример запроса (multipart/form-data;boundary=--BOUNDARY)
+    + Body
+
+            --BOUNDARY
+            Content-Disposition: form-data; name="file" filename="$filename"
+            Content-Type: $mimetype
+            Content-Transfer-Encoding: binary
+
+            $binarydata
+            --BOUNDARY--
+
++ Response 200 (application/json)
