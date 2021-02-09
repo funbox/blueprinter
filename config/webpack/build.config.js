@@ -16,25 +16,6 @@ module.exports = merge(
           test: /\.(js|jsx)?$/,
           use: {
             loader: 'babel-loader',
-            options: {
-              presets: [
-                [require.resolve('@babel/preset-env'), {
-                  useBuiltIns: 'entry',
-                  corejs: 3,
-                  targets: {
-                    esmodules: true,
-                  },
-                }],
-                require.resolve('@babel/preset-react'),
-              ],
-              plugins: [
-                require.resolve('react-hot-loader/babel'),
-                require.resolve('@babel/plugin-proposal-object-rest-spread'),
-                require.resolve('@babel/plugin-proposal-class-properties'),
-                require.resolve('@babel/plugin-transform-react-constant-elements'),
-                require.resolve('babel-plugin-transform-react-remove-prop-types'),
-              ],
-            },
           },
           exclude: /node_modules[\\/](?!(blueprinter-frontend)[\\/]).*/,
         },

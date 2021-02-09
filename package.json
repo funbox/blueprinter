@@ -11,9 +11,9 @@
   },
   "scripts": {
     "start": "npm run dev",
-    "build": "npm run make-stub && webpack --config ./config/webpack/build.config.js",
-    "build-production": "webpack --config ./config/webpack/build.production.config.js",
-    "build-static": "node ./bin/build-static.js",
+    "build": "npm run make-stub && BABEL_ENV=production webpack --config ./config/webpack/build.config.js",
+    "build-production": "BABEL_ENV=production webpack --config ./config/webpack/build.production.config.js",
+    "build-static": "BABEL_ENV=production node ./bin/build-static.js",
     "dev": "npm-run-all --parallel watch-stub start-dev",
     "start-dev": "webpack-dev-server --progress --config ./config/webpack/dev.config.js",
     "make-stub": "node ./scripts/generate-stub.js",
