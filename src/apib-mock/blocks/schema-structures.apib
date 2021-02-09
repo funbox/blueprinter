@@ -1,0 +1,55 @@
+# Schema Structures
+
+# SchemaNamedType
+
++ Body
+
+      {
+          "test": "Hello"
+      }
+
++ Schema
+
+      {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "type": "object",
+          "properties": {
+              "test": {
+                  "type": "string"
+              }
+          }
+      }
+
+# Data Structures
+
+# NamedType
+
++ `foo` (SchemaNamedType)
++ `bar` (array[SchemaNamedType])
+
+
+# Group Schema-типы
+
+Демонстрация создания переиспользуемых структур данных с помощью секции Schema Structures и последующего использования этих структур при описании ответов.
+
+## Создать schema-типы [POST /schema_types]
+
++ Response 200 (application/json)
+    + attributes(SchemaNamedType)
+
++ Response 200 (application/json)
+    + attributes(NamedType)
+
++ Response 200 (application/json)
+    + attributes(array[SchemaNamedType])
+        + `foo`
+
++ Response 200 (application/json)
+    + attributes
+        + `foo` (SchemaNamedType)
+
++ Response 200 (application/json)
+    + attributes
+        + One of
+            + `foo` (SchemaNamedType)
+            + `bar` (number)
