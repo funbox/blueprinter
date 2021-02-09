@@ -1,0 +1,57 @@
+# Data Structures
+
+## RecursiveArray (array)
+
++ (array[RecursiveArray])
+
+## RecursiveArrayWithRecObject (array)
+
++ (array[RecursiveArrayWithRecObject])
++ (DNSServer)
+
+## Node
++ `full_name`: `Иванова Мария` (string, required)
++ `position`: `Менеджер проектов` (string, required)
++ `avatar`: `https://avatars.slack-edge.com/eac80_192.png` (string, optional)
++ `children` (array[Node], optional)
+
+## DNSServer
++ `address` (string, required)
++ `parent` (DNSServer, nullable)
+
+## DNSSettings
++ `parent` (DNSServerWithSettings, required, nullable)
+
+## DNSServerWithSettings
++ `address` (string, required)
++ `settings` (DNSSettings)
+
+
+# Group Рекурсивные структуры
+
+Демонстрация создания рекурсивных структур.
+
+## Рекурсивный массив [GET /recursive-array]
+
++ Response 200 (application/json)
+    + Attributes (RecursiveArray)
+
+## Рекурсивный массив c рекурсивным объектом [GET /recursive-array-with-recursive-object]
+
++ Response 200 (application/json)
+    + Attributes (RecursiveArrayWithRecObject)
+
+## Массив c рекурсивным объектом [GET /nodes]
+
++ Response 200 (application/json)
+    + Attributes(array[Node])
+
+## Рекурсивный объект [GET /server]
+
++ Response 200 (application/json)
+    + Attributes (DNSServer)
+
+## Глубокая рекурсия [GET /server-deep]
+
++ Response 200 (application/json)
+    + Attributes (DNSServerWithSettings)
