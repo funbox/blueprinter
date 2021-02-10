@@ -1,0 +1,28 @@
+# Group Parameters
+
+Демонстрация различных способов задания URI-параметров.
+
+## Получить список отчетов [GET /reports{?id*,page,filter%5Bentity_name%5D,sort_order,search,created_at_from,type%5B%5D*}]
+
++ Parameters
+    + `id`: `5,10` (number, required) - ID отчетов
+    + `page`: `1` (number, required) - Номер страницы выдачи
+    + `filter%5Bentity_name%5D` (string, optional) - Фильтр по entity_name
+    + `sort_order`: `asc` (enum[string], optional) - Направление сортировки
+        + Default: `asc`
+        + Members
+            + `asc` - прямая сортировка;
+            + `desc` - обратное направление сортировки
+    + `search`: `1234` (string, optional) - Фильтр по ID ли названию отчета
+    + `created_at_from`: `1540533418` (number, optional) - Минимальный timestamp создания отчета
+
+        Описание можно добавлять в виде блока.
+
+        И добавлять перенос на новую строку.
+    + `type%5B%5D`: `common` (enum[string], optional) - фильтр по типу отчета
+        + Members
+            + `common` - общий;
+            + `detail` - детальный;
+            + `by_success_percent` - по % успешной доставки
+
++ Response 200
