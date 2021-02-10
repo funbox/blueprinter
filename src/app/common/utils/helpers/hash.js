@@ -20,8 +20,9 @@ const createHash = (title) => (
 
 const combineHashes = (prefixHash, hash) => (prefixHash + HASH_DELIMITER + hash);
 
-const createSlug = (title) => (
+const createSlug = (title, options = {}) => (
   slugify(title, {
+    ...options,
     replacement: HASH_DELIMITER,
   })
 );
