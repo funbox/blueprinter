@@ -1,0 +1,71 @@
+# Group Requests
+
+Демонстрация различных способов задания запросов.
+
+## POST /clients
+
++ Request Пример запроса (application/json)
+    + Attributes
+        + First request
+
++ Request Длинный текст описания запроса (application/json)
+    + Headers
+
+            Accept-Charset: utf-8
+            Connection: keep-alive
+            Content-Type: multipart/form-data, boundary=AaB03x
+
++ Request С Body (application/json)
+    + Body
+
+            {
+                "hello": "world"
+            }
+
++ Request С кастомизированной schema (application/json)
+    + Body
+
+            {
+                "hello": "world"
+            }
+
+    + Schema
+
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "required": [
+                    "hello"
+                ],
+                "properties": {
+                    "hello": {
+                        "type": "string"
+                    }
+                }
+            }
+
++ Request Простой текстовый запрос с заголовками (text/plain)
+    + Headers
+
+            X-My-Message-Header: 42
+
+    + Body
+
+            Hello World!
+
++ Request Запрос с MSON-структурой данных (application/json)
+    + Attributes (object)
+        + foo: `bar` (string, required)
+
++ Request Отправка файла (multipart/form-data;boundary=--BOUNDARY)
+    + Body
+
+            --BOUNDARY
+            Content-Disposition: form-data; name="file" filename="$filename"
+            Content-Type: $mimetype
+            Content-Transfer-Encoding: binary
+
+            $binarydata
+            --BOUNDARY--
+
++ Response 200
