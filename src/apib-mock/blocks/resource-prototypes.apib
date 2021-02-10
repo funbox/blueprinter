@@ -1,0 +1,86 @@
+# Data Structures
+
+## UnauthorizedError (object)
+
++ `status` (enum, required)
+  + `unauthorized`
+  + `internalError`
+
+
+# Resource Prototypes
+
+## NotFound
+
++ Response 404 (application/json)
+    + Attributes
+        + `status`: `not found` (string, required, fixed)
+
+## AccessDenied
+
++ Response 200 (application/json)
+    + Attributes
+        + `status`: `error` (string, required, fixed)
+        + `error`: `access_denied` (string, required, fixed) - Доступ запрещен
+
+## UserResource (NotFound)
+
++ Response 200 (application/json)
+    + Attributes (UnauthorizedError)
+
++ Response 403 (application/json)
+    + Attributes
+        + `status`: `permission denied` (string, required, fixed)
+
+
+# Group Resource Prototypes для groups (UserResource)
+
+Демонстрация создания переиспользуемых ответов с помощью секции Resource Prototypes и последующего использования этих структур при описании ответов.
+
+## Комментарии [/comments]
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (array, required)
+
+### POST
+
++ Request (application/json)
+    + Body
+
+          {
+            "text": "My comment"
+          }
+
++ Response 204
+
+## Заметки [/notes]
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (array, required)
+
+### POST
+
++ Request (application/json)
+    + Body
+
+          {
+            "text": "Test note"
+          }
+
++ Response 204
+
+
+# Group Resource Prototypes для endpoint
+
+## Рассылки [GET /campaigns] (NotFound)
+
++ Response 200 (application/json)
+    + Attributes (array, required)
+
+## Рассылка [GET /campaign] (AccessDenied, NotFound)
+
++ Response 200 (application/json)
+    + Attributes (object, required)
