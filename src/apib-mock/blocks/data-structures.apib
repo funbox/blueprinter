@@ -1,0 +1,43 @@
+# Data Structures
+
+# MessageType(enum)
+
++ One Of
+    + Properties
+        + `incoming` - входящее сообщение
+    + Properties
+        + `outcoming` - исходящее сообщение
+
+# Tag
+
++ `id`: `42` (number, required) - идентификатор тега
++ `title`: `some tag` (string, required) - текст тега
+
+# Note
+
++ `text` (string)
+
+# Message
+
++ id (object)
+    + `type` (MessageType, required)
+    + `author_id` (number, required) - идентификатор автора сообщения
+    + `id`: `1` (string, required) - ID
++ `text`: `Hello world` (string, required) - текст сообщения
++ `tags` (array[Tag], optional) - теги сообщения
+
+
+# Group Data Structures
+
+Демонстрация создания переиспользуемых структур данных с помощью секции Data Structures и последующего использования этих структур при описании ответов.
+
+## GET /chat
+
++ Response 200 (application/json)
+    Non-nullable у аттрибута id должен отрендериться
+
+    + Attributes (array[Message])
+        + `result` (array[Note])
+            + 0
+            + 1
+            + 2
