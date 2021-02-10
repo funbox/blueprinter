@@ -7,8 +7,12 @@ const getDataStructureId = (dataStructure) => (
     : dataStructure.content.meta.id.content
 );
 
+const defaultCategories = {
+  dataStructuresArray: [], // TODO: что лучше — фоллбэк на дефолтное значение или бросить исключение?
+};
+
 export default class InheritanceResolver {
-  constructor(categories = []) {
+  constructor(categories = defaultCategories) {
     this.categories = categories;
     this.usedStructuresMap = new Map();
     this.cachedDataStructures = new Map();
