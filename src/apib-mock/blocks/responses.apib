@@ -1,0 +1,72 @@
+# Group Responses
+
+Демонстрация различных способов задания ответов.
+
+## GET /message
+
++ Response 200 (text/plain)
+    Простой с заголовками
+    + Headers
+
+            X-My-Message-Header: 42
+
+    + Body
+
+            Hello World!
+
++ Response 200 (application/json)
+    С кастомизированной schema
+    + Body
+
+            {
+                "hello": "world"
+            }
+
+    + Schema
+
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "required": [
+                    "hello"
+                ],
+                "properties": {
+                    "hello": {
+                        "type": "string"
+                    }
+                }
+            }
+
++ Response 200
+    С заголовками
+    + Headers
+
+            Accept-Charset: utf-8
+            Connection: keep-alive
+            Content-Type: multipart/form-data, boundary=AaB03x
+
++ Response 200 (application/json)
+    + Headers
+
+            Accept-Charset: utf-8
+            Connection: keep-alive
+            Content-Type: multipart/form-data, boundary=AaB03x
+
++ Response 200 (application/zip)
+    + Headers
+
+            Content-Disposition: form-data; filename="$filename"
+
++ Response 200 (application/json)
+    С пустыми Body и Schema
+    + Body
+
+    + Schema
+
++ Response 200 (application/json)
+    Ответ с MSON-структурой данных
+    + Attributes (object)
+        + foo: `bar` (string, required)
+
++ Response 403
+    Ответ без тела
