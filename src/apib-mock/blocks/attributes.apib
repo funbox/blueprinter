@@ -1,0 +1,96 @@
+# Data Structures
+
+# Fragment
+
++ `number`: `20` (string, required) - Название имени отправителя
++ `first_name`: `Иван` (string, nullable, required) - Имя клиента
+
+## AlreadyExistsError (object)
++ status: alreadyExists (required, fixed)
+
+
+# Group Attributes
+
+Демонстрация задания структуры ответа с помощью секции Attributes.
+
+## GET /sender
+
++ Response 200 (application/json)
+    + Attributes(array[Fragment])
+
++ Response 200 (application/json)
+    + Attributes (object, required)
+        + Include Fragment
+        + `avatar` (file) - User avatar
+        + `expected_confirmation_at`: `1540533418` (number, required) - unix timestamp желаемая дата активации
+        + `forced_confirmation`: `false` (boolean, optional) - Активировать без ожидания одобрения от МТС
+        + `expected_operators` (array, required) - Доступные операторы
+            + (enum[string], required)
+                + Members
+                    + `rtk` - Ростелеком
+                    + `tele2` - Теле2
+                    + `beeline` - Билайн
+                    + `mts` - МТС
+                    + `megafon` - Мегафон
+                    + `other` - Др. операторы РФ
+                    + `international` - Международные операторы
+        + `message`: `Новое сообщение` (string, optional) - Сообщение для модератора
+        + `statement_file_id` (number, required) - Идентификатор загруженного заявления
+        + `document_file_ids` (array[number], required) - Массив идентификаторов загруженных подтверждающих документов
+
++ Response 200 (application/json)
+    + Attributes(array[object])
+        + Items
+            + (object)
+                + `id` (array[number]) - Начало описания.
+                Продолжение описания.
+                + `name` (string)
+                + `example`: `false` (boolean, optional)
+
++ Response 200 (application/json)
+    + Attributes (AlreadyExistsError)
+        Атрибуты с наследованием.
+        + Properties
+            + `id`: `5` (string)
+
++ Request (application/json)
+    + Attributes
+        + `name`: `John` (string, required) - Имя отправителя
+        + `email`: `admin@localhost` (string, optional)
+
+    + Schema
+
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "msisdn": {
+                        "type": "string"
+                    }
+                }
+            }
+
++ Response 200 (application/json)
+    + Attributes
+        + status: `ok`
+
+    + Schema
+
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "ok"
+                        ]
+                    }
+                },
+                "required": [
+                    "status"
+                ]
+            }
