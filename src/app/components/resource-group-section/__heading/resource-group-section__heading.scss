@@ -9,15 +9,15 @@
   line-height: 48px;
 
   @media print {
-    font-size: 24px;
-    line-height: 28px;
     padding-top: 30px;
     padding-left: 30px;
+    font-size: 24px;
+    line-height: 28px;
     color: $blue;
 
-     &:before {
-       counter-increment: resourceGroupSection;
-       content: counter(resourceGroupSection) ". ";
-     }
+    &::before {
+      counter-increment: resourceGroupSection;
+      content: counter(resourceGroupSection) '. ';
+    }
   }
 }

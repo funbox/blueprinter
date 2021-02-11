@@ -9,10 +9,10 @@
   background-color: $grayLight;
 
   @media print {
-    background: none;
-    border: 1px solid $gray;
     padding: 8px;
     line-height: 16px;
+    border: 1px solid $gray;
+    background: none;
   }
 
   pre {

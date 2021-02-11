@@ -4,14 +4,14 @@
   line-height: 24px;
 
   @media print {
+    padding: 4px 0 12px;
     font-size: 17px;
     line-height: 18px;
     color: $blue;
-    padding: 4px 0 12px;
 
-    &:before {
+    &::before {
       counter-increment: actionCard;
-      content: counter(resourceGroupSection)  "." counter(resourceSection) "." counter(actionCard) ". ";
+      content: counter(resourceGroupSection)  '.' counter(resourceSection) '.' counter(actionCard) '. ';
     }
   }
 

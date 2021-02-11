@@ -6,15 +6,15 @@
   line-height: 30px;
 
   @media print {
-    font-size: 20px;
-    line-height: 24px;
     padding-top: 10px;
     padding-left: 15px;
+    font-size: 20px;
+    line-height: 24px;
     color: $blue;
 
-    &:before {
+    &::before {
       counter-increment: resourceSection;
-      content: counter(resourceGroupSection)  "." counter(resourceSection) ". ";
+      content: counter(resourceGroupSection)  '.' counter(resourceSection) '. ';
     }
   }
 }

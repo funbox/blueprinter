@@ -6,9 +6,9 @@
       line-height: 30px;
 
       @media print {
+        padding-bottom: 4px;
         font-size: 18px;
         line-height: 20px;
-        padding-bottom: 4px;
       }
     }
   }

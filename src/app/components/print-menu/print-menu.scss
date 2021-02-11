@@ -2,15 +2,15 @@
   display: none;
 
   @media print {
-    display: block;
     counter-reset: menuItemLevel1;
+    display: block;
 
     &::before {
       content: 'Содержание';
       display: block;
-      font-weight: 500;
-      font-size: 18px;
       margin: 0 30px 10px;
+      font-size: 18px;
+      font-weight: 500;
     }
   }
 }

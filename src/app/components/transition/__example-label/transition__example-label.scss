@@ -15,12 +15,12 @@
   color: $color--secondary;
 
   @media print {
+    max-width: none;
     margin: 0;
     padding: 0;
-    border-bottom: 1px solid;
-    max-width: none;
     font-size: 14px;
     line-height: 18px;
+    border-bottom: 1px solid;
   }
 
   &:hover {

@@ -3,9 +3,9 @@
   padding-left: 100px;
 
   @media print {
-    padding-left: 20px;
-    padding-right: 40px;
     counter-reset: resourceGroupSection;
+    padding-right: 40px;
+    padding-left: 20px;
     break-before: page;
   }
 }
