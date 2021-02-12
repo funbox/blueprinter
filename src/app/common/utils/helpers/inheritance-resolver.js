@@ -1,5 +1,6 @@
 import { STANDARD_TYPES } from 'app/constants/defaults';
 import { get } from './getters';
+import extractCategories from './extract-categories';
 
 const getDataStructureId = (dataStructure) => (
   Array.isArray(dataStructure.content)
@@ -7,9 +8,7 @@ const getDataStructureId = (dataStructure) => (
     : dataStructure.content.meta.id.content
 );
 
-const defaultCategories = {
-  dataStructuresArray: [], // TODO: что лучше — фоллбэк на дефолтное значение или бросить исключение?
-};
+const defaultCategories = extractCategories(); // TODO: что лучше — фоллбэк на дефолтное значение или бросить исключение?
 
 export default class InheritanceResolver {
   constructor(categories = defaultCategories) {
