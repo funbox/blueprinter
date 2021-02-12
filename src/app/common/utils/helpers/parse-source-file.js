@@ -5,9 +5,10 @@ import { htmlFromText } from './index';
 import { get, getDescriptionWithoutHeaders } from './getters';
 
 import categories from './categories';
-import refactorSource, { refactorMessage } from './refactor-action';
 import { createHash, combineHashes, createRoute, combineRoutes, createSlug, hashFromComment, getHashCode } from './hash';
 import slugify from './slugify';
+import ActionProcessor from './action-processor';
+import InheritanceResolver from './inheritance-resolver';
 
 const groupForStandaloneResources = {
   element: 'category',
@@ -87,6 +88,9 @@ const parseSourceFile = (ast) => {
     categories.resourceGroupArray.unshift(groupForStandaloneResources);
   }
 
+  const resolver = new InheritanceResolver(categories);
+  const actionProcessor = new ActionProcessor(resolver);
+
   const groups = categories.resourceGroupArray.map((group, gIndex) => {
     const groupTitle = get('meta', 'title', 'content').from(group) || `${GROUP_DEFAULT_TITLE} ${gIndex + 1}`;
     const groupDescription = getDescriptionWithoutHeaders(group);
@@ -118,7 +122,7 @@ const parseSourceFile = (ast) => {
       groupChild.nestedRoutePresets = [];
 
       if (groupChild.element === 'message') {
-        const message = refactorMessage(groupChild, groupMeta);
+        const message = actionProcessor.refactorMessage(groupChild, groupMeta);
         message.parentGroup = groupMeta;
         resources.push(message);
         if (message.routePreset) {
@@ -166,7 +170,7 @@ const parseSourceFile = (ast) => {
         resourceChild.attributes = { ...groupChild.attributes, ...resourceChild.attributes };
         resourceChild.id = uniqid.time();
 
-        const action = refactorSource(resourceChild, resourceMeta);
+        const action = actionProcessor.refactorSource(resourceChild, resourceMeta);
 
         action.parentResource = resourceMeta;
         actions.push(action);
