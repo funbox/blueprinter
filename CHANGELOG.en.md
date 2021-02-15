@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.36.3 (15.02.2021)
+
+* Add babel-plugin-transform-react-remove-prop-types plugin.
+
 ## 3.36.2 (08.02.2021)
 
 * Fix including refract tree in a HTML file.
