@@ -4,25 +4,11 @@ import { GROUP_DEFAULT_TITLE } from 'app/constants/defaults';
 import { htmlFromText } from './index';
 import { get, getDescriptionWithoutHeaders } from './getters';
 
-import categories from './categories';
+import extractCategories from './extract-categories';
 import { createHash, combineHashes, createRoute, combineRoutes, createSlug, hashFromComment, getHashCode } from './hash';
 import slugify from './slugify';
 import ActionProcessor from './action-processor';
 import InheritanceResolver from './inheritance-resolver';
-
-const groupForStandaloneResources = {
-  element: 'category',
-  content: [],
-  meta: {
-    title: {
-      element: 'string',
-      content: GROUP_DEFAULT_TITLE,
-    },
-  },
-  hash: createHash(GROUP_DEFAULT_TITLE),
-  route: createRoute(GROUP_DEFAULT_TITLE, createSlug),
-  slug: createSlug(GROUP_DEFAULT_TITLE),
-};
 
 const parseSourceFile = (ast) => {
   const { content } = ast;
@@ -52,41 +38,7 @@ const parseSourceFile = (ast) => {
     warnings,
   };
 
-  Object.values(categories).forEach(itemArray => {
-    if (itemArray.length > 0) itemArray.length = 0;
-  });
-
-  topLevelContentItems.forEach(item => {
-    if (item.element === 'category') {
-      const categoryType = Array.isArray(item.meta.classes)
-        ? item.meta.classes[0]
-        : item.meta.classes.content[0].content;
-
-      categories[`${categoryType}Array`].push(item);
-    }
-
-    if (item.element === 'resource') {
-      groupForStandaloneResources.content.push(item);
-    }
-  });
-
-  if (categories.dataStructuresArray.length > 0) {
-    categories.dataStructuresArray = categories.dataStructuresArray.reduce((res, dsItem) => {
-      res.push(...dsItem.content);
-      return res;
-    }, []);
-  }
-
-  if (categories.schemaStructuresArray.length > 0) {
-    categories.schemaStructuresArray = categories.schemaStructuresArray.reduce((res, ssItem) => {
-      res.push(...ssItem.content);
-      return res;
-    }, []);
-  }
-
-  if (groupForStandaloneResources.content.length > 0) {
-    categories.resourceGroupArray.unshift(groupForStandaloneResources);
-  }
+  const categories = extractCategories(topLevelContentItems);
 
   const resolver = new InheritanceResolver(categories);
   const actionProcessor = new ActionProcessor(resolver);
