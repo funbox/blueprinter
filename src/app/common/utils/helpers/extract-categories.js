@@ -4,7 +4,6 @@ import { GROUP_DEFAULT_TITLE } from 'app/constants/defaults';
  * @typedef {Object} Categories
  * @property {Object[]} dataStructuresArray
  * @property {Object[]} schemaStructuresArray
- * @property {Object[]} messageBodyArray
  * @property {Object[]} resourceGroupArray
  * @property {Object[]} resourcePrototypesArray
  */
@@ -17,10 +16,10 @@ export default function extractCategories(content) {
   const categories = {
     dataStructuresArray: [],
     schemaStructuresArray: [],
-    messageBodyArray: [],
     resourceGroupArray: [],
     resourcePrototypesArray: [],
   };
+  const needToFlatten = ['dataStructuresArray', 'schemaStructuresArray', 'resourcePrototypesArray'];
 
   const groupForStandaloneResources = {
     element: 'category',
@@ -39,14 +38,12 @@ export default function extractCategories(content) {
 
   content.forEach(item => {
     if (item.element === 'category') {
-      const categoryType = Array.isArray(item.meta.classes)
-        ? item.meta.classes[0]
-        : item.meta.classes.content[0].content;
-
+      const categoryType = item.meta.classes.content[0].content;
       const categoryKey = `${categoryType}Array`;
 
       if (Array.isArray(categories[categoryKey])) {
-        categories[categoryKey].push(item);
+        const categoryItems = needToFlatten.includes(categoryKey) ? item.content : [item];
+        categories[categoryKey].push(...categoryItems);
       }
     }
 
@@ -54,27 +51,6 @@ export default function extractCategories(content) {
       groupForStandaloneResources.content.push(item);
     }
   });
-
-  if (categories.dataStructuresArray.length > 0) {
-    categories.dataStructuresArray = categories.dataStructuresArray.reduce((res, dsItem) => {
-      res.push(...dsItem.content);
-      return res;
-    }, []);
-  }
-
-  if (categories.schemaStructuresArray.length > 0) {
-    categories.schemaStructuresArray = categories.schemaStructuresArray.reduce((res, ssItem) => {
-      res.push(...ssItem.content);
-      return res;
-    }, []);
-  }
-
-  if (categories.resourcePrototypesArray.length > 0) {
-    categories.resourcePrototypesArray = categories.resourcePrototypesArray.reduce((res, rpItem) => {
-      res.push(...rpItem.content);
-      return res;
-    }, []);
-  }
 
   if (groupForStandaloneResources.content.length > 0) {
     categories.resourceGroupArray.unshift(groupForStandaloneResources);

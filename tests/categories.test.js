@@ -12,7 +12,6 @@ describe('extract-categories', () => {
     expect(categories.schemaStructuresArray).toHaveLength(0);
     expect(categories.resourceGroupArray).toHaveLength(0);
     expect(categories.resourcePrototypesArray).toHaveLength(0);
-    expect(categories.messageBodyArray).toHaveLength(0);
   });
 
   it('extracts data structures', async () => {
@@ -37,7 +36,6 @@ describe('extract-categories', () => {
     expect(categories.schemaStructuresArray).toHaveLength(0);
     expect(categories.resourceGroupArray).toHaveLength(0);
     expect(categories.resourcePrototypesArray).toHaveLength(0);
-    expect(categories.messageBodyArray).toHaveLength(0);
 
     expect(categories.dataStructuresArray[0]).toEqual({
       element: 'dataStructure',
@@ -90,7 +88,6 @@ describe('extract-categories', () => {
     expect(categories.schemaStructuresArray).toHaveLength(1);
     expect(categories.resourceGroupArray).toHaveLength(0);
     expect(categories.resourcePrototypesArray).toHaveLength(0);
-    expect(categories.messageBodyArray).toHaveLength(0);
 
     expect(categories.schemaStructuresArray[0]).toEqual({
       element: 'schemaStructure',
@@ -149,7 +146,6 @@ describe('extract-categories', () => {
     expect(categories.schemaStructuresArray).toHaveLength(0);
     expect(categories.resourceGroupArray).toHaveLength(2);
     expect(categories.resourcePrototypesArray).toHaveLength(0);
-    expect(categories.messageBodyArray).toHaveLength(0);
 
     expect(categories.resourceGroupArray[0]).toEqual({
       element: 'category',
@@ -249,7 +245,6 @@ describe('extract-categories', () => {
     expect(categories.schemaStructuresArray).toHaveLength(0);
     expect(categories.resourceGroupArray).toHaveLength(0);
     expect(categories.resourcePrototypesArray).toHaveLength(2);
-    expect(categories.messageBodyArray).toHaveLength(0);
 
     expect(categories.resourcePrototypesArray[0]).toEqual({
       element: 'resourcePrototype',
@@ -320,7 +315,6 @@ describe('extract-categories', () => {
     expect(categories.schemaStructuresArray).toHaveLength(0);
     expect(categories.resourceGroupArray).toHaveLength(1);
     expect(categories.resourcePrototypesArray).toHaveLength(0);
-    expect(categories.messageBodyArray).toHaveLength(0);
     expect(categories.resourceGroupArray[0].content).toBeDefined();
     expect(categories.resourceGroupArray[0].meta.title.content).toBe('Resource Group');
 
