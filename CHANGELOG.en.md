@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.37.0 (16.02.2021)
+
+* Run dependencies audit.
+
 ## 3.36.3 (15.02.2021)
 
 * Add babel-plugin-transform-react-remove-prop-types plugin.
