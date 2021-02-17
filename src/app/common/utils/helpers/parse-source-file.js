@@ -1,4 +1,3 @@
-import uniqid from 'uniqid';
 import { GROUP_DEFAULT_TITLE } from 'app/constants/defaults';
 
 import { htmlFromText } from './index';
@@ -10,9 +9,13 @@ import slugify from './slugify';
 import ActionProcessor from './action-processor';
 import InheritanceResolver from './inheritance-resolver';
 
-const parseSourceFile = (ast) => {
+/**
+ * @param {Object} ast
+ * @param {IdProvider} idProvider
+ */
+const parseSourceFile = (ast, idProvider) => {
   const { content } = ast;
-  const [error, warnings] = detectErrorsAndWarnings(ast);
+  const [error, warnings] = detectErrorsAndWarnings(ast, idProvider);
 
   if (error) {
     return {
@@ -62,7 +65,7 @@ const parseSourceFile = (ast) => {
     group.hashForLegacyUrl = groupLegacyHash; // используется в app.jsx@convertLegacyUrl
     group.route = groupRoute;
     group.title = groupTitle;
-    group.id = uniqid.time();
+    group.id = idProvider.getUniqueId();
     group.nestedRoutePresets = [];
 
     group.content = group.content.map((groupChild, rIndex) => {
@@ -70,7 +73,7 @@ const parseSourceFile = (ast) => {
         return groupChild;
       }
 
-      groupChild.id = uniqid.time();
+      groupChild.id = idProvider.getUniqueId();
       groupChild.nestedRoutePresets = [];
 
       if (groupChild.element === 'message') {
@@ -120,7 +123,7 @@ const parseSourceFile = (ast) => {
         }
 
         resourceChild.attributes = { ...groupChild.attributes, ...resourceChild.attributes };
-        resourceChild.id = uniqid.time();
+        resourceChild.id = idProvider.getUniqueId();
 
         const action = actionProcessor.refactorSource(resourceChild, resourceMeta);
 
@@ -154,7 +157,7 @@ const parseSourceFile = (ast) => {
 
 export default parseSourceFile;
 
-function detectErrorsAndWarnings(ast) {
+function detectErrorsAndWarnings(ast, idProvider) {
   let eAnnotation;
   const { content } = ast;
   const warnings = [];
@@ -173,20 +176,26 @@ function detectErrorsAndWarnings(ast) {
     }
   });
 
-  const consumableWarnings = warnings.map(extractAnnotationInfo);
+  const consumableWarnings = warnings.map(annotation => ({
+    ...extractAnnotationInfo(annotation),
+    id: idProvider.getUniqueId(),
+  }));
 
   if (!eAnnotation) {
     return [undefined, consumableWarnings];
   }
 
-  const consumableError = extractErrorInfo(eAnnotation, ast.attributes);
+  const consumableError = {
+    ...extractErrorInfo(eAnnotation, ast.attributes),
+    id: idProvider.getUniqueId(),
+  };
 
   return [consumableError, consumableWarnings];
 }
 
 function extractAnnotationInfo(annotation) {
   const text = annotation.content;
-  const result = { text, id: uniqid.time() };
+  const result = { text };
 
   if (annotation.attributes) {
     const sourceMap = annotation.attributes.sourceMap.content[0];

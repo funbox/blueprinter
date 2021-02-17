@@ -1,6 +1,8 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
+import uniqid from 'uniqid';
 import parseSourceFile from 'app/common/utils/helpers/parse-source-file';
 import { HASH_DELIMITER } from 'app/common/utils/helpers/hash';
+import IdProvider from 'app/common/utils/helpers/id-provider';
 import sourceMock from 'app/source';
 
 import MainLayout from 'app/components/main-layout';
@@ -15,7 +17,8 @@ import ManualSearch from 'app/views/manual-search';
 import ViewContext, { ViewMode } from './view-context';
 
 const source = window.refract || sourceMock;
-const parsedSource = parseSourceFile(source);
+const idProvider = IdProvider(uniqid.time);
+const parsedSource = parseSourceFile(source, idProvider);
 
 const {
   topLevelMeta,
