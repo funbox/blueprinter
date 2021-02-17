@@ -1,6 +1,5 @@
 import { GROUP_DEFAULT_TITLE } from 'app/constants/defaults';
 
-import { htmlFromText } from './index';
 import { get, getDescriptionWithoutHeaders } from './getters';
 
 import extractCategories from './extract-categories';
@@ -31,12 +30,11 @@ const parseSourceFile = (ast, idProvider) => {
   const actions = [];
 
   const topLevelDescription = source.content.find(i => i.element === 'copy');
-  const topLevelDescriptionElement = topLevelDescription ? htmlFromText(topLevelDescription.content) : null;
   const topLevelContentItems = source.content;
 
   const topLevelMeta = {
     title: get('meta', 'title', 'content').from(source),
-    description: topLevelDescriptionElement,
+    description: get('content').from(topLevelDescription),
     host: getHost(),
     warnings,
   };

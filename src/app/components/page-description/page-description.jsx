@@ -1,10 +1,8 @@
 import RawContent from 'app/components/raw-content';
+import { htmlFromText } from 'app/common/utils/helpers';
 
 const propTypes = {
-  description: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]),
+  description: PropTypes.string,
   mix: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 };
 
@@ -19,7 +17,7 @@ const PageDescription = (props) => {
         Общие сведения
       </h2>
 
-      {props.description}
+      {htmlFromText(props.description)}
     </RawContent>
   );
 };

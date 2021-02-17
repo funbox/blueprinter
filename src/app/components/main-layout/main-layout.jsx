@@ -22,7 +22,7 @@ import { API_DEFAULT_TITLE } from 'app/constants/defaults';
 const propTypes = {
   topLevelMeta: PropTypes.shape({
     title: PropTypes.string,
-    description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+    description: PropTypes.string,
     host: PropTypes.string,
     warnings: PropTypes.arrayOf(PropTypes.object),
   }),
@@ -107,7 +107,7 @@ class MainLayout extends React.PureComponent {
           </Resizable>
 
           <Page__Body>
-            <MainContent description={topLevelMeta.description}>
+            <MainContent>
               {children}
             </MainContent>
           </Page__Body>
