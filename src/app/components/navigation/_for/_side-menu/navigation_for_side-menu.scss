@@ -1,4 +1,6 @@
 .navigation_for_side-menu {
+  position: relative;
+
   .navigation__title {
     @include visually-hidden;
   }
