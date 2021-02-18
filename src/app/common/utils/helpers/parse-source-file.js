@@ -35,7 +35,7 @@ const parseSourceFile = (ast, idProvider) => {
   const topLevelMeta = {
     title: get('meta', 'title', 'content').from(source),
     description: get('content').from(topLevelDescription),
-    host: getHost(),
+    host: getHost(source),
     warnings,
   };
 
