@@ -44,8 +44,8 @@ class ActionProcessor {
       method = get('attributes', 'method', 'content').from(sourceRequest);
 
       const request = {
-        structureType: this.getDataStructureType(processedRequest),
-        attributes: this.getDataAttributes(processedRequest),
+        structureType: getDataStructureType(processedRequest),
+        attributes: get('content').from(this.fillAdditionalAttributes(processedRequest)),
         body: getBody(sourceRequest),
         description: getDescription(sourceRequest),
         headers: sourceRequest.attributes.headers ? sourceRequest.attributes.headers.content.map(extractHeaderData) : null,
@@ -54,8 +54,8 @@ class ActionProcessor {
       };
 
       const response = {
-        structureType: this.getDataStructureType(processedResponse),
-        attributes: this.getDataAttributes(processedResponse),
+        structureType: getDataStructureType(processedResponse),
+        attributes: get('content').from(this.fillAdditionalAttributes(processedResponse)),
         body: getBody(sourceResponse),
         description: getDescription(sourceResponse),
         headers: sourceResponse.attributes.headers ? sourceResponse.attributes.headers.content.map(extractHeaderData) : null,
@@ -141,7 +141,7 @@ class ActionProcessor {
       meta: message.meta,
       type: 'message',
       description: getDescription(message),
-      attributes: this.getDataAttributes(processedMessage),
+      attributes: get('content').from(this.fillAdditionalAttributes(processedMessage)),
       body: getBody(message),
       schema: getSchema(message),
       hashForLegacyUrl: messageLegacyHash,
@@ -172,31 +172,8 @@ class ActionProcessor {
   }
 
   /** @private */
-  getDataAttributes(sourceValueMember) {
-    if (!sourceValueMember) return sourceValueMember;
-
-    const updatedMember = this.fillAdditionalAttributes(sourceValueMember);
-
-    return updatedMember.content;
-  }
-
-  /** @private */
-  getDataStructureType(sourceValueMember) {
-    if (!sourceValueMember) return sourceValueMember;
-
-    const typeAttributes = get('attributes', 'typeAttributes', 'content').from(sourceValueMember);
-
-    return {
-      type: sourceValueMember.element,
-      typeAttributes,
-      name: sourceValueMember.referenceDataStructure,
-      recursive: sourceValueMember.recursive,
-    };
-  }
-
-  /** @private */
   fillAdditionalAttributes(member) {
-    if (!member.content) return member;
+    if (!get('content').from(member)) return member;
 
     switch (member.element) {
       case 'select':
@@ -254,6 +231,19 @@ function extractHeaderData(header) {
   return {
     key: get('content', 'key', 'content').from(header),
     value: get('content', 'value', 'content').from(header),
+  };
+}
+
+function getDataStructureType(sourceValueMember) {
+  if (!sourceValueMember) return sourceValueMember;
+
+  const typeAttributes = get('attributes', 'typeAttributes', 'content').from(sourceValueMember);
+
+  return {
+    type: sourceValueMember.element,
+    typeAttributes,
+    name: sourceValueMember.referenceDataStructure,
+    recursive: sourceValueMember.recursive,
   };
 }
 
