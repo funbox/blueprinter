@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.37.1 (18.02.2021)
+
+* Fix overflow of side navigation.
+
 ## 3.37.0 (16.02.2021)
 
 * Run dependencies audit.
