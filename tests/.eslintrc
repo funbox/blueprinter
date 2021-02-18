@@ -1,3 +1,3 @@
 {
-  "extends": "../node_modules/@funbox/eslint-config/.eslintrc.tests.js"
+  "extends": "@funbox/eslint-config/tests"
 }
