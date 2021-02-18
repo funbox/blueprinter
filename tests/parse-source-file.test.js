@@ -1,8 +1,8 @@
+import Crafter from '@funbox/crafter';
 import parseSourceFile from 'app/common/utils/helpers/parse-source-file';
 import IdProvider from 'app/common/utils/helpers/id-provider';
 
-const Crafter = require('@funbox/crafter');
-const blueprintFixtures = require('./fixtures/blueprints');
+import blueprintFixtures from './fixtures/blueprints';
 
 const idProvider = IdProvider(() => 0);
 

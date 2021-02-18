@@ -1,9 +1,9 @@
 import ActionProcessor from 'app/common/utils/helpers/action-processor';
 import InheritanceResolver from 'app/common/utils/helpers/inheritance-resolver';
-import { getActions, getMessages, getCategories } from './utils';
 
-const actionFixtures = require('./fixtures/actions');
-const messageFixtures = require('./fixtures/messages');
+import { getActions, getMessages, getCategories } from './utils';
+import actionFixtures from './fixtures/actions';
+import messageFixtures from './fixtures/messages';
 
 describe('action processor', () => {
   it('can be instantiated', () => {

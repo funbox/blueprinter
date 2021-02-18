@@ -1,7 +1,6 @@
+import Crafter from '@funbox/crafter';
 import InheritanceResolver from 'app/common/utils/helpers/inheritance-resolver';
 import extractCategories from 'app/common/utils/helpers/extract-categories';
-
-const Crafter = require('@funbox/crafter');
 
 describe('Inheritance resolver', () => {
   it('can be instantiated', () => {

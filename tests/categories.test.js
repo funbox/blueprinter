@@ -1,6 +1,5 @@
+import Crafter from '@funbox/crafter';
 import extractCategories from 'app/common/utils/helpers/extract-categories';
-
-const Crafter = require('@funbox/crafter');
 
 describe('extract-categories', () => {
   it('returns an empty categories set', () => {
