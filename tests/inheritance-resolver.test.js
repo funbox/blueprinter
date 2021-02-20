@@ -2,6 +2,8 @@ import Crafter from '@funbox/crafter';
 import InheritanceResolver from 'app/common/utils/helpers/inheritance-resolver';
 import extractCategories from 'app/common/utils/helpers/extract-categories';
 
+import fixtures from './fixtures/structures';
+
 describe('Inheritance resolver', () => {
   it('can be instantiated', () => {
     const resolver = new InheritanceResolver();
@@ -9,867 +11,120 @@ describe('Inheritance resolver', () => {
   });
 
   it('resolves inheritance from a data structure', async () => {
-    const apib = `# My API
-
-# Data Structures
-
-# User
-
-+ name: John (string, required) - user name
-+ email
-+ phone
-+ age (number)
-`;
-
-    const categories = await getCategories(apib);
-    const valueMember = { element: 'User' };
-    const parent = {
-      element: 'dataStructure',
-      content: valueMember,
-    };
-    const resolver = new InheritanceResolver(categories);
-
-    resolver.resolveInheritance(valueMember, parent);
-
-    expect(valueMember).toEqual({
-      element: 'object',
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'name' },
-            value: {
-              element: 'string',
-              attributes: {
-                samples: {
-                  element: 'array',
-                  content: [{ element: 'string', content: 'John' }],
-                },
-              },
-            },
-          },
-          attributes: {
-            typeAttributes: {
-              element: 'array',
-              content: [{ element: 'string', content: 'required' }],
-            },
-          },
-          meta: {
-            description: { element: 'string', content: 'user name' },
-          },
-        },
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'email' },
-            value: { element: 'string' },
-          },
-        },
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'phone' },
-            value: { element: 'string' },
-          },
-        },
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'age' },
-            value: { element: 'number' },
-          },
-        },
-      ],
-      referenceDataStructure: 'User',
-    });
+    await testInheritanceFromStructure(
+      fixtures.dataStructure.source,
+      fixtures.dataStructure.parentElement,
+      fixtures.dataStructure.processed,
+    );
   });
 
   it('resolves inheritance from a schema structure', async () => {
-    const apib = `
-# Schema Structures
-
-# SchemaNamedType
-
-+ Body
-
-      {
-          "test": "Hello"
-      }
-
-+ Schema
-
-      {
-          "$schema": "http://json-schema.org/draft-04/schema#",
-          "type": "object",
-          "properties": {
-              "test": {
-                  "type": "string"
-              }
-          }
-      }
-`;
-
-    const categories = await getCategories(apib);
-    const valueMember = { element: 'SchemaNamedType' };
-    const parent = {
-      element: 'dataStructure',
-      content: valueMember,
-    };
-    const resolver = new InheritanceResolver(categories);
-
-    resolver.resolveInheritance(valueMember, parent);
-
-    expect(valueMember).toEqual({ element: 'schema type' });
+    await testInheritanceFromStructure(
+      fixtures.schemaStructure.source,
+      fixtures.schemaStructure.parentElement,
+      fixtures.schemaStructure.processed,
+    );
   });
 
   it('resolves nested inheritance', async () => {
-    const apib = `
-# My API
-
-# Data Structures
-
-## ArrayType (array)
-+ example (string)
-
-## ArrayTypeExtended (ArrayType)
-+ (object)
-   + id (number)
-   + name (string)
-`;
-
-    const categories = await getCategories(apib);
-    const valueMember = { element: 'ArrayTypeExtended' };
-    const parent = {
-      element: 'dataStructure',
-      content: valueMember,
-    };
-    const resolver = new InheritanceResolver(categories);
-
-    resolver.resolveInheritance(valueMember, parent);
-
-    expect(valueMember).toEqual({
-      element: 'array',
-      content: [
-        {
-          element: 'string',
-          content: 'example',
-        },
-        {
-          element: 'object',
-          content: [
-            {
-              element: 'member',
-              content: {
-                key: { element: 'string', content: 'id' },
-                value: { element: 'number' },
-              },
-            },
-            {
-              element: 'member',
-              content: {
-                key: { element: 'string', content: 'name' },
-                value: { element: 'string' },
-              },
-            },
-          ],
-        },
-      ],
-      referenceDataStructure: 'ArrayTypeExtended',
-    });
+    await testInheritanceFromStructure(
+      fixtures.nestedInheritance.source,
+      fixtures.nestedInheritance.parentElement,
+      fixtures.nestedInheritance.processed,
+    );
   });
 
   it('resolves inheritance from a mixin', async () => {
-    const apib = `# My API
-
-Defines attributes using mixin.
-
-# Data Structures
-
-# User
-
-+ name: John (string, required) - user name
-
-# Admin
-
-+ accessLevel: all (string, required)
-`;
-
-    const categories = await getCategories(apib);
-    const valueMember = {
-      element: 'User',
-      content: [
-        {
-          element: 'ref',
-          attributes: { path: { element: 'string', content: 'content' } },
-          content: 'Admin',
-        },
-      ],
-    };
-    const parent = {
-      element: 'dataStructure',
-      content: valueMember,
-    };
-    const resolver = new InheritanceResolver(categories);
-
-    resolver.resolveInheritance(valueMember, parent);
-
-    expect(valueMember).toEqual({
-      element: 'object',
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'name' },
-            value: {
-              element: 'string',
-              attributes: {
-                samples: {
-                  element: 'array',
-                  content: [{ element: 'string', content: 'John' }],
-                },
-              },
-            },
-          },
-          attributes: {
-            typeAttributes: {
-              element: 'array',
-              content: [{ element: 'string', content: 'required' }],
-            },
-          },
-          meta: {
-            description: { element: 'string', content: 'user name' },
-          },
-        },
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'accessLevel' },
-            value: {
-              element: 'string',
-              attributes: {
-                samples: {
-                  element: 'array',
-                  content: [{ element: 'string', content: 'all' }],
-                },
-              },
-            },
-          },
-          attributes: {
-            typeAttributes: {
-              element: 'array',
-              content: [{ element: 'string', content: 'required' }],
-            },
-          },
-        },
-      ],
-      referenceDataStructure: 'User',
-    });
+    await testInheritanceFromStructure(
+      fixtures.mixinInheritance.source,
+      fixtures.mixinInheritance.parentElement,
+      fixtures.mixinInheritance.processed,
+    );
   });
 
   it('resolves inheritance from an enum structure', async () => {
-    const apib = `# My API
-
-# Data Structures
-
-## Post Code (enum)
-
-+ Include East Code
-
-## East Code (enum)
-
-+ EC2A
-+ E1
-`;
-
-    const categories = await getCategories(apib);
-    const parent = {
-      element: 'dataStructure',
-      content: {
-        element: 'object',
-        content: [
-          {
-            element: 'member',
-            content: {
-              key: {
-                element: 'string',
-                content: 'code',
-              },
-              value: {
-                element: 'Post Code',
-              },
-            },
-          },
-        ],
-      },
-    };
-    const valueMember = parent.content;
-    const resolver = new InheritanceResolver(categories);
-
-    resolver.resolveInheritance(valueMember, parent);
-
-    expect(valueMember).toEqual({
-      element: 'object',
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: {
-              element: 'string',
-              content: 'code',
-            },
-            value: {
-              element: 'enum',
-              attributes: {
-                enumerations: {
-                  content: [
-                    {
-                      element: 'string',
-                      attributes: {
-                        typeAttributes: {
-                          element: 'array',
-                          content: [
-                            {
-                              element: 'string',
-                              content: 'fixed',
-                            },
-                          ],
-                        },
-                      },
-                      content: 'EC2A',
-                    },
-                    {
-                      element: 'string',
-                      attributes: {
-                        typeAttributes: {
-                          element: 'array',
-                          content: [
-                            {
-                              element: 'string',
-                              content: 'fixed',
-                            },
-                          ],
-                        },
-                      },
-                      content: 'E1',
-                    },
-                  ],
-                },
-              },
-            },
-          },
-        },
-      ],
-    });
+    await testInheritanceFromStructure(
+      fixtures.enumInheritance.source,
+      fixtures.enumInheritance.parentElement,
+      fixtures.enumInheritance.processed,
+    );
   });
 
   it('manages a simple recursive value member', async () => {
-    const apib = `
-# My API
-
-# Data Structures
-
-## DNSServer
-+ address (string, required)
-+ parent (DNSServer, nullable)
-`;
-
-    const categories = await getCategories(apib);
-    const valueMember = { element: 'DNSServer' };
-    const parent = {
-      element: 'dataStructure',
-      content: valueMember,
-    };
-    const resolver = new InheritanceResolver(categories);
-
-    resolver.resolveInheritance(valueMember, parent);
-
-    expect(valueMember).toEqual({
-      element: 'object',
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'address' },
-            value: { element: 'string' },
-          },
-          attributes: {
-            typeAttributes: {
-              element: 'array',
-              content: [{ element: 'string', content: 'required' }],
-            },
-          },
-        },
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'parent' },
-            value: {
-              element: 'DNSServer',
-              attributes: {
-                typeAttributes: {
-                  element: 'array',
-                  content: [{ element: 'string', content: 'nullable' }],
-                },
-              },
-              recursive: true,
-            },
-          },
-        },
-      ],
-      referenceDataStructure: 'DNSServer',
-      recursive: true,
-    });
+    await testInheritanceFromStructure(
+      fixtures.simpleRecursion.source,
+      fixtures.simpleRecursion.parentElement,
+      fixtures.simpleRecursion.processed,
+    );
   });
 
   it('manages a deep recursive value member', async () => {
-    const apib = `
-# My API
-
-# Data Structures
-
-## DNSSettings
-+ parent (DNSServerWithSettings, required, nullable)
-
-## DNSServerWithSettings
-+ address (string, required)
-+ settings (DNSSettings)
-`;
-
-    const categories = await getCategories(apib);
-    const valueMember = { element: 'DNSServerWithSettings' };
-    const parent = {
-      element: 'dataStructure',
-      content: valueMember,
-    };
-    const resolver = new InheritanceResolver(categories);
-
-    resolver.resolveInheritance(valueMember, parent);
-
-    expect(valueMember).toEqual({
-      element: 'object',
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'address' },
-            value: { element: 'string' },
-          },
-          attributes: {
-            typeAttributes: {
-              element: 'array',
-              content: [{ element: 'string', content: 'required' }],
-            },
-          },
-        },
-        {
-          element: 'member',
-          content: {
-            key: {
-              element: 'string',
-              content: 'settings',
-            },
-            value: {
-              element: 'object',
-              content: [
-                {
-                  element: 'member',
-                  content: {
-                    key: { element: 'string', content: 'parent' },
-                    value: {
-                      element: 'DNSServerWithSettings',
-                      attributes: {
-                        typeAttributes: {
-                          element: 'array',
-                          content: [{ element: 'string', content: 'nullable' }],
-                        },
-                      },
-                      recursive: true,
-                    },
-                  },
-                  attributes: {
-                    typeAttributes: {
-                      element: 'array',
-                      content: [{ element: 'string', content: 'required' }],
-                    },
-                  },
-                },
-              ],
-              referenceDataStructure: 'DNSSettings',
-            },
-          },
-        },
-      ],
-      referenceDataStructure: 'DNSServerWithSettings',
-      recursive: true,
-    });
+    await testInheritanceFromStructure(
+      fixtures.deepRecursion.source,
+      fixtures.deepRecursion.parentElement,
+      fixtures.deepRecursion.processed,
+    );
   });
 
   it('saves data structure attributes', async () => {
-    const apib = `# My API
-
-# Data Structures
-
-## NormalResponse (object, fixed)
-+ status: ok (required) - штатный ответ
-`;
-
-    const categories = await getCategories(apib);
-    const parent = {
-      element: 'dataStructure',
-      content: {
-        element: 'NormalResponse',
-        attributes: {
-          typeAttributes: {
-            element: 'array',
-            content: [{ element: 'string', content: 'required' }],
-          },
-        },
-      },
-    };
-    const valueMember = parent.content;
-    const resolver = new InheritanceResolver(categories);
-
-    resolver.resolveInheritance(valueMember, parent);
-
-    expect(valueMember).toEqual({
-      element: 'object',
-      attributes: {
-        typeAttributes: {
-          element: 'array',
-          content: [
-            {
-              element: 'string',
-              content: 'required',
-            },
-            {
-              element: 'string',
-              content: 'fixed',
-            },
-          ],
-        },
-      },
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: {
-              element: 'string',
-              content: 'status',
-            },
-            value: {
-              element: 'string',
-              content: 'ok',
-            },
-          },
-          attributes: {
-            typeAttributes: {
-              element: 'array',
-              content: [
-                {
-                  element: 'string',
-                  content: 'required',
-                },
-              ],
-            },
-          },
-          meta: {
-            description: {
-              element: 'string',
-              content: 'штатный ответ',
-            },
-          },
-        },
-      ],
-      referenceDataStructure: 'NormalResponse',
-    });
+    await testInheritanceFromStructure(
+      fixtures.structureWithAttributes.source,
+      fixtures.structureWithAttributes.parentElement,
+      fixtures.structureWithAttributes.processed,
+    );
   });
 
   it('can cache member with referenced data structure', async () => {
-    const apib = `# My API
-
-# Data Structures
-
-## NormalResponse (object, fixed)
-+ status: ok (required) - штатный ответ
-`;
-
-    const categories = await getCategories(apib);
+    const categories = await getCategories(fixtures.cache.source);
     const resolver = new InheritanceResolver(categories);
-    const member = {
-      element: 'object',
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'status' },
-            value: { element: 'string' },
-          },
-        },
-      ],
-      referenceDataStructure: 'NormalResponse',
-    };
-
-    resolver.cacheDataStructure(member);
+    resolver.cacheDataStructure(fixtures.cache.memberWithReference);
 
     expect(resolver.cachedDataStructures.size).toBe(1); // TODO: по-хорошему, cachedDataStructures — приватное поле и к нему нельзя обращаться
   });
 
   it('a member without referenced data structure cannot be cached', async () => {
-    const apib = `# My API
-
-# Data Structures
-
-## NormalResponse (object, fixed)
-+ status: ok (required) - штатный ответ
-`;
-
-    const categories = await getCategories(apib);
+    const categories = await getCategories(fixtures.cache.source);
     const resolver = new InheritanceResolver(categories);
-    const member = {
-      element: 'string',
-      content: 'hello',
-    };
-
-    resolver.cacheDataStructure(member);
+    resolver.cacheDataStructure(fixtures.cache.memberWithoutReference);
 
     expect(resolver.cachedDataStructures.size).toBe(0);
   });
 
   it('cached member can be obtained', async () => {
-    const apib = `# My API
-
-# Data Structures
-
-## NormalResponse (object, fixed)
-+ status: ok (required) - штатный ответ
-`;
-
-    const categories = await getCategories(apib);
+    const categories = await getCategories(fixtures.cache.source);
     const resolver = new InheritanceResolver(categories);
-    const member = {
-      element: 'object',
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'status' },
-            value: { element: 'string' },
-          },
-        },
-      ],
-      referenceDataStructure: 'NormalResponse',
-    };
+    resolver.cacheDataStructure(fixtures.cache.memberWithReference);
 
-    resolver.cacheDataStructure(member);
+    const cached = resolver.getCachedDataStructure(fixtures.cache.memberWithReference);
 
-    const cached = resolver.getCachedDataStructure(member);
-
-    expect(cached).toBe(member);
+    expect(cached).toBe(fixtures.cache.memberWithReference);
+    expect(cached).toEqual(fixtures.cache.memberWithReference);
   });
 
   it('accounts members attributes when caching', async () => {
-    const apib = `# My API
-
-# Data Structures
-
-## NormalResponse (object, fixed)
-+ status: ok (required) - штатный ответ
-`;
-
-    const categories = await getCategories(apib);
+    const categories = await getCategories(fixtures.cacheAttributes.source);
     const resolver = new InheritanceResolver(categories);
-    const member = {
-      element: 'object',
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: { element: 'string', content: 'status' },
-            value: { element: 'string' },
-          },
-        },
-      ],
-      attributes: {
-        typeAttributes: {
-          element: 'array',
-          content: [{ element: 'string', content: 'required' }],
-        },
-      },
-      referenceDataStructure: 'NormalResponse',
-    };
-    const memberToCache = {
-      ...member,
-      attributes: {
-        typeAttributes: {
-          element: 'array',
-          content: [{ element: 'string', content: 'required' }],
-        },
-      },
-    };
-    const memberToObtain = {
-      ...member,
-      attributes: {
-        typeAttributes: {
-          element: 'array',
-          content: [{ element: 'string', content: 'optional' }],
-        },
-      },
-    };
+    resolver.cacheDataStructure(fixtures.cacheAttributes.memberToCache);
 
-    resolver.cacheDataStructure(memberToCache);
-
-    const cached = resolver.getCachedDataStructure(memberToObtain);
+    const cached = resolver.getCachedDataStructure(fixtures.cacheAttributes.memberToObtain);
 
     expect(cached).toBeNull();
   });
 
   it('handles attributes override', async () => {
-    const apib = `# My API
-
-# Data Structures
-
-## NewEmployeeMonitoring
-+ kind: employee (string, required, fixed)
-
-## NewZoneMonitoring (NewEmployeeMonitoring)
-+ kind: zone (string, required, fixed)`;
-
-    const categories = await getCategories(apib);
-    const valueMember = { element: 'NewZoneMonitoring' };
-    const parent = {
-      element: 'dataStructure',
-      content: { element: 'NewZoneMonitoring' },
-    };
-    const resolver = new InheritanceResolver(categories);
-
-    resolver.resolveInheritance(valueMember, parent);
-
-    expect(valueMember).toEqual({
-      element: 'object',
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: {
-              element: 'string',
-              content: 'kind',
-            },
-            value: {
-              element: 'string',
-              attributes: {
-                typeAttributes: {
-                  element: 'array',
-                  content: [
-                    {
-                      element: 'string',
-                      content: 'fixed',
-                    },
-                  ],
-                },
-              },
-              content: 'zone',
-            },
-          },
-          attributes: {
-            typeAttributes: {
-              element: 'array',
-              content: [
-                {
-                  element: 'string',
-                  content: 'required',
-                },
-              ],
-            },
-          },
-        },
-      ],
-      referenceDataStructure: 'NewZoneMonitoring',
-    });
+    await testInheritanceFromStructure(
+      fixtures.attributesOverride.source,
+      fixtures.attributesOverride.parentElement,
+      fixtures.attributesOverride.processed,
+    );
   });
 
   it('can inherit type attributes from a primitive data structure', async () => {
-    const apib = `# My API
-
-# Data Structures
-
-# Age (number, minimum="18", maximum="100")`;
-
-    const categories = await getCategories(apib);
-    const valueMember = {
-      element: 'object',
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: {
-              element: 'string',
-              content: 'age',
-            },
-            value: {
-              element: 'Age',
-            },
-          },
-        },
-      ],
-    };
-    const parent = {
-      element: 'dataStructure',
-      content: valueMember,
-    };
-    const resolver = new InheritanceResolver(categories);
-
-    resolver.resolveInheritance(valueMember, parent);
-
-    expect(valueMember).toEqual({
-      element: 'object',
-      content: [
-        {
-          element: 'member',
-          content: {
-            key: {
-              element: 'string',
-              content: 'age',
-            },
-            value: {
-              element: 'number',
-              attributes: {
-                typeAttributes: {
-                  element: 'array',
-                  content: [
-                    {
-                      element: 'member',
-                      content: {
-                        key: {
-                          element: 'string',
-                          content: 'minimum',
-                        },
-                        value: {
-                          element: 'string',
-                          content: 18,
-                        },
-                      },
-                    },
-                    {
-                      element: 'member',
-                      content: {
-                        key: {
-                          element: 'string',
-                          content: 'maximum',
-                        },
-                        value: {
-                          element: 'string',
-                          content: 100,
-                        },
-                      },
-                    },
-                  ],
-                },
-              },
-            },
-          },
-        },
-      ],
-    });
+    await testInheritanceFromStructure(
+      fixtures.primitiveStructure.source,
+      fixtures.primitiveStructure.parentElement,
+      fixtures.primitiveStructure.processed,
+    );
   });
 });
 
@@ -879,4 +134,14 @@ async function getCategories(apib) {
   const content = ast.content[0].content;
 
   return extractCategories(content);
+}
+
+async function testInheritanceFromStructure(source, parentElement, expected) {
+  const categories = await getCategories(source);
+  const valueMember = parentElement.content;
+  const resolver = new InheritanceResolver(categories);
+
+  resolver.resolveInheritance(valueMember, parentElement);
+
+  expect(valueMember).toEqual(expected);
 }
