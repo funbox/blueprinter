@@ -79,7 +79,7 @@ describe('Inheritance resolver', () => {
     const resolver = new InheritanceResolver(categories);
     resolver.cacheDataStructure(fixtures.cache.memberWithReference);
 
-    expect(resolver.cachedDataStructures.size).toBe(1); // TODO: по-хорошему, cachedDataStructures — приватное поле и к нему нельзя обращаться
+    expect(resolver.getCacheSize()).toBe(1);
   });
 
   it('a member without referenced data structure cannot be cached', async () => {
@@ -87,7 +87,7 @@ describe('Inheritance resolver', () => {
     const resolver = new InheritanceResolver(categories);
     resolver.cacheDataStructure(fixtures.cache.memberWithoutReference);
 
-    expect(resolver.cachedDataStructures.size).toBe(0);
+    expect(resolver.getCacheSize()).toBe(0);
   });
 
   it('cached member can be obtained', async () => {

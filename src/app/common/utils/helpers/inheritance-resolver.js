@@ -17,6 +17,14 @@ export default class InheritanceResolver {
     this.cachedDataStructures = new Map();
   }
 
+  getCache() {
+    return this.cachedDataStructures;
+  }
+
+  getCacheSize() {
+    return this.cachedDataStructures.size;
+  }
+
   getCachedDataStructure(member) {
     const referenceDataStructure = member.referenceDataStructure || member.element;
 
