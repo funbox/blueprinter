@@ -39,6 +39,16 @@ const createRoute = (title, transform = createHash) => (
 
 const combineRoutes = (parentRoute, route) => (parentRoute + route);
 
+const getCharHashCode = (char, hashBase = 0) => {
+  const charCode = char.charCodeAt(0);
+  // A nice property of 31 is that the multiplication can be replaced
+  // by a shift and a subtraction for better performance: 31 * i == (i << 5) - i.
+  // https://stackoverflow.com/a/299748
+  const hash = (hashBase << 5) - hashBase + charCode; // eslint-disable-line no-bitwise
+  // Convert to 32bit integer
+  return hash | 0; // eslint-disable-line no-bitwise
+};
+
 const getHashCode = (str) => {
   // Original hashCode sequence:
   // s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]
@@ -54,14 +64,8 @@ const getHashCode = (str) => {
   }
 
   for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    // A nice property of 31 is that the multiplication can be replaced
-    // by a shift and a subtraction for better performance: 31 * i == (i << 5) - i.
-    // https://stackoverflow.com/a/299748
-    hash = (hash << 5) - hash + char; // eslint-disable-line no-bitwise
-
-    // Convert to 32bit integer
-    hash |= 0; // eslint-disable-line no-bitwise
+    const char = str[i];
+    hash = getCharHashCode(char, hash);
   }
 
   return hash;
@@ -75,6 +79,7 @@ export {
   createRoute,
   combineRoutes,
   getHashCode,
+  getCharHashCode,
   ROUTE_DELIMITER,
   HASH_DELIMITER,
 };

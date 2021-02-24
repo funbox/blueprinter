@@ -1,4 +1,4 @@
-import { createHash, createRoute, createSlug, hashFromComment, getHashCode } from 'app/common/utils/helpers/hash';
+import { createHash, createRoute, createSlug, hashFromComment, getHashCode, getCharHashCode } from 'app/common/utils/helpers/hash';
 
 describe('createSlug', () => {
   it('creates a slug from a latin title', () => {
@@ -74,6 +74,38 @@ describe('route creator', () => {
 });
 
 describe('hash code generator', () => {
+  it('creates a numeric hash code for a char', () => {
+    const str = 'The quick brown fox jumps over the lazy dog';
+
+    for (let charIndex = 0; charIndex < str.length; charIndex++) {
+      const char = str[charIndex];
+      expect(getCharHashCode(char)).toBe(str.charCodeAt(charIndex));
+    }
+  });
+
+  it('creates a numeric hash code for a sequence of chars', () => {
+    const sequence = ['b', 'a', 'r'];
+    const hashCode1 = getCharHashCode(sequence[0]);
+    const hashCode2 = getCharHashCode(sequence[1]);
+    const hashCode3 = getCharHashCode(sequence[2]);
+
+    // 31 здесь — магическое число, на котором базируется хэш-код
+    expect(getHashCode('ba')).toBe(31 * hashCode1 + hashCode2);
+    expect(getHashCode('bar')).toBe(31 * getHashCode('ba') + hashCode3);
+  });
+
+  it('casts hash code to int32', () => {
+    const MAX_INT32_VALUE = 2 ** 31 - 1; // 2147483647
+
+    const baseHashCode = getHashCode('test_');
+    const overflowed = 31 * baseHashCode + getCharHashCode('a');
+    const casted = getHashCode('test_a');
+
+    expect(Math.abs(overflowed)).toBeGreaterThan(MAX_INT32_VALUE);
+    expect(Math.abs(casted)).toBeLessThan(MAX_INT32_VALUE);
+    expect(casted).toBeLessThan(0);
+  });
+
   it('creates a numeric hash code for a string input', () => {
     const title = 'The quick brown fox jumps over the lazy dog';
     const hashCode = getHashCode(title);
