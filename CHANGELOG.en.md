@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.38.0 (25.02.2021)
+
+* Add unit tests.
+
 ## 3.37.1 (18.02.2021)
 
 * Fix overflow of side navigation.
