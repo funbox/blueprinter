@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.39.0 (26.02.2021)
+
+* Show a description of a One Of element.
+
 ## 3.38.0 (25.02.2021)
 
 * Add unit tests.
