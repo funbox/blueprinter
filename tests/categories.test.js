@@ -248,7 +248,7 @@ describe('extract-categories', () => {
     expect(categories.resourcePrototypesArray[0]).toEqual({
       element: 'resourcePrototype',
       meta: {
-        title: {
+        id: {
           element: 'string',
           content: 'NotFound',
         },
@@ -270,7 +270,7 @@ describe('extract-categories', () => {
     expect(categories.resourcePrototypesArray[1]).toEqual({
       element: 'resourcePrototype',
       meta: {
-        title: {
+        id: {
           element: 'string',
           content: 'NormalResponse',
         },
