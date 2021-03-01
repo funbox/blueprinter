@@ -7,7 +7,7 @@ import Page, {
   Page__Title,
 } from 'app/components/page';
 import PageTitle from 'app/components/page-title';
-import Resizable from 'app/components/resizable';
+import Sidebar from 'app/components/sidebar';
 import SideMenu from 'app/components/side-menu';
 import PrintMenu from 'app/components/print-menu';
 import MainContent from 'app/components/main-content';
@@ -67,11 +67,8 @@ class MainLayout extends React.PureComponent {
     return (
       <Page>
         <Page__Layout>
-          <Resizable
-            mix="page__resizable"
-            direction="right"
-            initialSize={{ width: '360px' }}
-            minWidth="10%"
+          <Sidebar
+            mix="page__sidebar"
           >
             <Page__Aside mods={{ for: 'navigation' }}>
               <Page__Title>
@@ -104,7 +101,7 @@ class MainLayout extends React.PureComponent {
                 <PrintMenu data={groups}/>
               </Page__Navigation>
             </Page__Aside>
-          </Resizable>
+          </Sidebar>
 
           <Page__Body>
             <MainContent>

@@ -1,13 +1,10 @@
 import { Resizable as _Resizable } from 're-resizable';
 
-const Resizable = (props) => {
+const Resizable = React.forwardRef((props, ref) => {
   const {
     direction,
     children,
     initialSize,
-    minWidth,
-    maxWidth,
-    onResizeStop,
   } = props;
 
   const permittedDirections = {
@@ -33,34 +30,26 @@ const Resizable = (props) => {
 
   return !!children && (
     <_Resizable
+      ref={ref}
       enable={permittedDirections}
       className={b('resizable', props)}
-      minWidth={minWidth}
-      maxWidth={maxWidth}
       defaultSize={{ ...initialSize }}
-      onResizeStop={onResizeStop}
     >
       {props.children}
     </_Resizable>
   );
-};
-
-Resizable.defaultProps = {
-  directions: ['left', 'right'],
-};
+});
 
 Resizable.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
   direction: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.string,
-  ]),
+  ]).isRequired,
   initialSize: PropTypes.shape({
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  }),
-  minWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }).isRequired,
 };
 
 export default Resizable;

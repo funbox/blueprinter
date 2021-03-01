@@ -3,7 +3,7 @@ import Page, {
   Page__Aside,
   Page__Layout,
 } from 'app/components/page';
-import Resizable from 'app/components/resizable';
+import Sidebar from 'app/components/sidebar';
 import PageTitle from 'app/components/page-title';
 
 import SandboxNavigation from 'sandbox/components/sandbox-navigation';
@@ -17,11 +17,9 @@ export default class SandboxLayout extends React.Component {
     return (
       <Page mix="sandbox-layout">
         <Page__Layout>
-          <Resizable
-            mix="page__resizable"
-            direction="right"
-            initialSize={{ width: '360px' }}
-            minWidth="10%"
+          <Sidebar
+            mix="page__sidebar"
+            mods={{ for: 'sandbox' }}
           >
             <Page__Aside mods={{ for: 'navigation' }}>
               <PageTitle
@@ -33,7 +31,7 @@ export default class SandboxLayout extends React.Component {
 
               <SandboxNavigation mix="page__navigation"/>
             </Page__Aside>
-          </Resizable>
+          </Sidebar>
 
           <Page__Body>{children}</Page__Body>
         </Page__Layout>
