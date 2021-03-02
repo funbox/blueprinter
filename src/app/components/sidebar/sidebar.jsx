@@ -10,6 +10,11 @@ const TOGGLE_HOTKEY = {
   CODE: 83,
 };
 
+function isToggleHotkey(e) {
+  const isTargetInput = e.target.tagName.toLowerCase() === 'input';
+  return !isTargetInput && !e.ctrlKey && e.keyCode === TOGGLE_HOTKEY.CODE;
+}
+
 const propTypes = {
   children: PropTypes.node.isRequired,
   direction: PropTypes.oneOfType([
@@ -38,6 +43,16 @@ class Sidebar extends React.Component {
     };
 
     this.toggleSidebarStage = this.toggleSidebarStage.bind(this);
+    this.onToggleKeyDown = this.onToggleKeyDown.bind(this);
+    this.onClosedSidebarClick = this.onClosedSidebarClick.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.onToggleKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onToggleKeyDown);
   }
 
   updateSize() {
@@ -59,6 +74,20 @@ class Sidebar extends React.Component {
     }), this.updateSize);
   }
 
+  onToggleKeyDown(e) {
+    if (isToggleHotkey(e)) this.toggleSidebarStage();
+  }
+
+  onClosedSidebarClick() {
+    const { isClosed } = this.state;
+
+    if (isClosed) {
+      this.setState({
+        isClosed: false,
+      }, this.updateSize);
+    }
+  }
+
   render() {
     const {
       direction,
@@ -69,7 +98,10 @@ class Sidebar extends React.Component {
     const { isClosed } = this.state;
 
     return (
-      <div className={b('sidebar', this.props, { closed: isClosed })}>
+      <div
+        className={b('sidebar', this.props, { closed: isClosed })}
+        onClick={this.onClosedSidebarClick}
+      >
         <Button
           mix={b('sidebar__toggle')}
           mods={{
