@@ -1,0 +1,18 @@
+@import '../sidebar.vars';
+
+.sidebar__toggle {
+  position: sticky;
+  z-index: 3;
+  top: $sidebar-offset-top;
+  left: 100%;
+  outline: none;
+  width: 24px;
+  height: 24px;
+  margin-right: 14px;
+  background: url('./sidebar__toggle.svg') no-repeat center;
+
+  &:hover,
+  &:focus {
+    background: url('./sidebar__toggle--focused.svg');
+  }
+}

@@ -1,0 +1,5 @@
+@import '../sidebar.vars';
+
+.sidebar__resizable {
+  margin-top: calc(#{$sidebar-offset-top} * (-1));
+}

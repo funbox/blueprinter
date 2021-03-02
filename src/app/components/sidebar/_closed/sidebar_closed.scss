@@ -1,0 +1,11 @@
+.sidebar_closed {
+  cursor: pointer;
+
+  .sidebar__toggle {
+    transform: rotate(180deg);
+  }
+
+  .sidebar__resizable {
+    transform: translateX(-200px);
+  }
+}
