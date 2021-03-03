@@ -3,6 +3,7 @@ import Button from 'fb-base-blocks/button';
 
 const SIDEBAR_SIZE = {
   CLOSED: 52,
+  MIN: 240,
 };
 
 const TOGGLE_HOTKEY = {
@@ -45,6 +46,8 @@ class Sidebar extends React.Component {
     this.toggleSidebarStage = this.toggleSidebarStage.bind(this);
     this.onToggleKeyDown = this.onToggleKeyDown.bind(this);
     this.onClosedSidebarClick = this.onClosedSidebarClick.bind(this);
+    this.onResize = this.onResize.bind(this);
+    this.onResizeStop = this.onResizeStop.bind(this);
   }
 
   componentDidMount() {
@@ -88,6 +91,26 @@ class Sidebar extends React.Component {
     }
   }
 
+  onResize() {
+    const { initialSize: { height } } = this.props;
+
+    const sidebarWidth = this.resizable.current.size.width;
+
+    if (sidebarWidth <= SIDEBAR_SIZE.MIN) {
+      this.resizable.current.updateSize({ width: SIDEBAR_SIZE.MIN, height });
+    }
+  }
+
+  onResizeStop() {
+    const sidebarWidth = this.resizable.current.size.width;
+
+    if (sidebarWidth === SIDEBAR_SIZE.MIN) {
+      this.setState({
+        isClosed: true,
+      }, this.updateSize);
+    }
+  }
+
   render() {
     const {
       direction,
@@ -115,6 +138,8 @@ class Sidebar extends React.Component {
           mix={b('sidebar__resizable')}
           direction={direction}
           initialSize={{ ...initialSize }}
+          onResize={this.onResize}
+          onResizeStop={this.onResizeStop}
         >
           {children}
         </Resizable>

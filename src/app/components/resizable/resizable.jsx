@@ -5,6 +5,8 @@ const Resizable = React.forwardRef((props, ref) => {
     direction,
     children,
     initialSize,
+    onResize,
+    onResizeStop,
   } = props;
 
   const permittedDirections = {
@@ -34,6 +36,8 @@ const Resizable = React.forwardRef((props, ref) => {
       enable={permittedDirections}
       className={b('resizable', props)}
       defaultSize={{ ...initialSize }}
+      onResize={onResize}
+      onResizeStop={onResizeStop}
     >
       {props.children}
     </_Resizable>
@@ -50,6 +54,8 @@ Resizable.propTypes = {
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }).isRequired,
+  onResize: PropTypes.func.isRequired,
+  onResizeStop: PropTypes.func.isRequired,
 };
 
 export default Resizable;
