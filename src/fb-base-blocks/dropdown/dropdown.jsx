@@ -81,11 +81,11 @@ class Dropdown extends React.Component {
   }
 
   waitClickOutside() {
-    document.addEventListener('click', this.handleOutsideClick, false);
+    document.addEventListener('click', this.handleOutsideClick);
   }
 
   stopWaitingClickOutside() {
-    document.removeEventListener('click', this.handleOutsideClick, false);
+    document.removeEventListener('click', this.handleOutsideClick);
   }
 
   handleOutsideClick(event) {
