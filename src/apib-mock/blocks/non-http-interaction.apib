@@ -18,6 +18,16 @@
 
 Демонстрация создания API с не-HTTP-взаимодействием. Для описания не-HTTP-взаимодействий используются секции Group, SubGroup и Message.
 
+## Message ClientToServerMessage
+
++ Attributes
+  + text: `Hello there` (string, required) - message text
+
+## Message ServerToClientMessage NewParticipant
+
++ Attributes
+    + name (string, required)
+
 ## SubGroup ChatChannel:chat_id
 
 Подписка на обновления активного чата.
