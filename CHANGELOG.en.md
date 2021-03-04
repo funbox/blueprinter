@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.41.0 (04.03.2021)
+
+* Implement sidebar folding/unfolding.
+
 ## 3.40.1 (04.03.2021)
 
 * Correctly search messages without any content (without attributes).
