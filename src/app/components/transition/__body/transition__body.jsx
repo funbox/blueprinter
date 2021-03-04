@@ -3,6 +3,8 @@ import CodeSnippet from 'app/components/code-snippet';
 import CollapsibleSection from 'app/components/collapsible-section';
 import Section from 'app/components/section';
 import Code from 'app/components/code';
+import RawContent from 'app/components/raw-content';
+import { htmlFromText } from 'app/common/utils/helpers';
 
 import Transition__ExampleList from '../__example-list';
 
@@ -62,20 +64,17 @@ class Transition__Body extends React.PureComponent {
 
     const isEmpty = Object.keys(selectedTransaction).length === 1 && (!!selectedTransaction.statusCode || !!selectedTransaction.title);
 
-    const { title, headers, attributes, body, schema, structureType } = selectedTransaction;
+    const {
+      title,
+      headers,
+      attributes,
+      body,
+      schema,
+      structureType,
+      description,
+    } = selectedTransaction;
 
-    let { description } = selectedTransaction;
-
-    if (contentType === 'request' && title) {
-      description = (
-        <>
-          <p className={b('transition__description-title')}>
-            {title.trim()}
-          </p>
-          {description || ''}
-        </>
-      );
-    }
+    const descriptionPredecessor = contentType === 'request' && !!title ? title.trim() : undefined;
 
     const selectedDataId = availableTransactions.indexOf(selectedTransaction);
     const examplesList = availableTransactions.map((d, index) => {
@@ -110,7 +109,14 @@ class Transition__Body extends React.PureComponent {
             mods={{ hiddenTitle: true }}
             mix={b('transition__description')}
           >
-            {description}
+            <RawContent>
+              { descriptionPredecessor && (
+                <p>
+                  <b>{descriptionPredecessor}</b>
+                </p>
+              )}
+              {htmlFromText(description)}
+            </RawContent>
           </Section>
         )}
 
