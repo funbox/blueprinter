@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.40.1 (04.03.2021)
+
+* Correctly search messages without any content (without attributes).
+
 ## 3.40.0 (04.03.2021)
 
 Update caniuse-lite version.
