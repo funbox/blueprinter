@@ -19,13 +19,13 @@
     + Attributes(array[Fragment])
 
 + Response 200 (application/json)
-    + Attributes (object, required)
+    + Attributes (object)
         + Include Fragment
         + `avatar` (file) - User avatar
         + `expected_confirmation_at`: `1540533418` (number, required) - unix timestamp желаемая дата активации
         + `forced_confirmation`: `false` (boolean, optional) - Активировать без ожидания одобрения от МТС
         + `expected_operators` (array, required) - Доступные операторы
-            + (enum[string], required)
+            + (enum[string])
                 + Members
                     + `rtk` - Ростелеком
                     + `tele2` - Теле2
