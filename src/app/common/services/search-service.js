@@ -70,7 +70,7 @@ function searchInSource(query, source, sourceType, searchModifiers) {
         return;
       }
 
-      const href = sourceItem.attributes.href;
+      const href = sourceItem.attributes && sourceItem.attributes.href;
       const hrefMatch = href && findMatch(href, query);
 
       if (hrefMatch) {
