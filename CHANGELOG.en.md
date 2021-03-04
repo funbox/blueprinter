@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.40.0 (04.03.2021)
+
+Update caniuse-lite version.
+
 ## 3.39.0 (26.02.2021)
 
 * Show a description of a One Of element.
