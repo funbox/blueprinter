@@ -1,26 +1,42 @@
 # Data Structures
 
-# MessageType(enum)
+## SelectObjects
 
 + One Of
-    + Properties
-        + `incoming` - входящее сообщение
-    + Properties
-        + `outcoming` - исходящее сообщение
+    + Properties - выбрать только указанные сущности
+        + ids: `6a5dd3ab-e39f-4f1c-a5d4-79a884b21c14` (array[string], required) - выбрать только указанные сущности
+    + Properties - выбрать все сущности, кроме указанных
+        + idsExcept: `6a5dd3ab-e39f-4f1c-a5d4-79a884b21c14` (array[string], required) - выбрать все сущности, кроме указанных
 
-# Tag
+## Type (enum)
+
+## MessageType (Type)
+
++ incoming
++ outcoming
+
+## MessageState(enum[string])
+
++ `awaiting_report` - Отправлено
++ `ready` - Не отправлено
++ `delivered` - Доставлено
++ `failed` - Не доставлено
++ `unapproved` - Не отправлено
+
+## Tag
 
 + `id`: `42` (number, required) - идентификатор тега
 + `title`: `some tag` (string, required) - текст тега
 
-# Note
+## Note
 
 + `text` (string)
 
-# Message
+## Message
 
 + id (object)
     + `type` (MessageType, required)
+    + `state` (MessageState, required)
     + `author_id` (number, required) - идентификатор автора сообщения
     + `id`: `1` (string, required) - ID
 + `text`: `Hello world` (string, required) - текст сообщения
@@ -34,10 +50,14 @@
 ## GET /chat
 
 + Response 200 (application/json)
-    Non-nullable у аттрибута id должен отрендериться
-
     + Attributes (array[Message])
+
++ Response 200 (application/json)
+    + Attributes (array)
         + `result` (array[Note])
             + 0
             + 1
             + 2
+
++ Response 200 (application/json)
+    + Attributes (SelectObjects)
