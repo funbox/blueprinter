@@ -5,7 +5,7 @@ import { get, getDescriptionHeadersWithHash } from './getters';
 const commonmark = require('@funbox/commonmark');
 
 const markdownParser = new commonmark.Parser();
-const htmlRenderer = new commonmark.HtmlRenderer();
+const htmlRenderer = new commonmark.HtmlRenderer({ softbreak: '<br />' }); // render soft breaks as hard breaks
 
 const customFenceRegex = /:{3}\s?(note|warning)/;
 
