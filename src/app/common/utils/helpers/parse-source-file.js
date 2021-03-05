@@ -44,7 +44,7 @@ const parseSourceFile = (ast, idProvider) => {
   const resolver = new InheritanceResolver(categories);
   const actionProcessor = new ActionProcessor(resolver);
 
-  const groups = categories.resourceGroupArray.map((group, gIndex) => {
+  const groups = categories.resourceGroupArray.map(({ ...group }, gIndex) => {
     const groupTitle = get('meta', 'title', 'content').from(group) || `${GROUP_DEFAULT_TITLE} ${gIndex + 1}`;
     const groupDescription = getDescriptionWithoutHeaders(group);
 
@@ -66,7 +66,7 @@ const parseSourceFile = (ast, idProvider) => {
     group.id = idProvider.getUniqueId();
     group.nestedRoutePresets = [];
 
-    group.content = group.content.map((groupChild, rIndex) => {
+    group.content = group.content.map(({ ...groupChild }, rIndex) => {
       if (groupChild.element === 'copy') {
         return groupChild;
       }
@@ -114,7 +114,7 @@ const parseSourceFile = (ast, idProvider) => {
       groupChild.route = resourceRoute;
       groupChild.title = resourceTitle || resourceHref;
 
-      groupChild.content = groupChild.content.map(resourceChild => {
+      groupChild.content = groupChild.content.map(({ ...resourceChild }) => {
         if (resourceChild.element === 'copy') return resourceChild;
         if (!resourceChild.attributes) {
           resourceChild.attributes = {};
