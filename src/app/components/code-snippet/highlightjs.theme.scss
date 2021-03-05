@@ -32,7 +32,7 @@
 .hljs-params,
 .hljs-meta,
 .hljs-link {
-  color: #d33653;
+  color: $dark-red;
 }
 
 /* Tomorrow Green */
@@ -57,7 +57,7 @@
 
 /* Query String Value */
 .hljs-value {
-  color: #f78437;
+  color: $orange;
 }
 
 .hljs {
