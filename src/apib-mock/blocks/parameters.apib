@@ -2,27 +2,67 @@
 
 Демонстрация различных способов задания URI-параметров.
 
-## Получить список отчетов [GET /reports{?id*,page,filter%5Bentity_name%5D,sort_order,search,created_at_from,type%5B%5D*}]
+## Обязательные параметры [GET /advertisers{?page,state,name,all}]
 
 + Parameters
-    + `id`: `5,10` (number, required) - ID отчетов
-    + `page`: `1` (number, required) - Номер страницы выдачи
-    + `filter%5Bentity_name%5D` (string, optional) - Фильтр по entity_name
-    + `sort_order`: `asc` (enum[string], optional) - Направление сортировки
-        + Default: `asc`
+    + `page` (number, required) - Номер страницы выдачи
+    + `state` (enum[string], required) - Состояние
         + Members
-            + `asc` - прямая сортировка;
-            + `desc` - обратное направление сортировки
-    + `search`: `1234` (string, optional) - Фильтр по ID ли названию отчета
-    + `created_at_from`: `1540533418` (number, optional) - Минимальный timestamp создания отчета
-
-        Описание можно добавлять в виде блока.
-
-        И добавлять перенос на новую строку.
-    + `type%5B%5D`: `common` (enum[string], optional) - фильтр по типу отчета
-        + Members
-            + `common` - общий;
-            + `detail` - детальный;
-            + `by_success_percent` - по % успешной доставки
+            + `declined` - Отклонено
+            + `confirmed` - Одобрено
+            + `removed` - Удалено
+    + `name`: `1234` (string, required) - Название
+    + `all`: `true` (boolean, required) - Получить полный список без учёта пагинации
 
 + Response 200
+
+## Опциональные параметры [GET /reports{?search,sort_field,created_at_from,all}]
+
++ Parameters
+    + `search`: `1234` (string, optional) - Фильтр по ID ли названию отчета
+    + `sort_field`: `id` (enum[string], optional) - Поле, по которому производится сортировка
+        + Default: `id`
+        + Members
+            + `id` - по id;
+            + `state` - по состоянию;
+            + `name` - по названию
+    + `created_at_from`: `1540533418` (number, optional) - Минимальный timestamp создания отчета
+    + `all`: `true` (boolean, optional) - Получить полный список без учёта пагинации
+        + Default: false
+
++ Response 200
+
+## Параметры-массивы [GET /campaigns/search{?id*,campaign_type_in%5B%5D*,state_in%5B%5D*}]
+
++ Parameters
+    + `id`: `5,10` (number, required) - ID рассылок
+    + `campaign_type_in%5B%5D`: `schedule_campaign, smpp_campaign` (enum[string], optional) - Тип
+
+        Чтобы получить URL формата `/campaign_type_in[]=schedule_campaign&campaign_type_in[]=smpp_campaign`, необходимо:
+        1) Описать параметр, как `states%5B%5D`.
+        2) Параметру в шаблоне URL добавить звёздочку.
+        3) Указать более одного значения — фиксированного или примерного — для параметра.
+        4) В качестве типа данных для параметра указать примитив (string, number, enum).
+
+        + Members
+            + `schedule_campaign` - рассылка создана в web-интерфейсе;
+            + `direct_abonent_campaign` - рассылка создана с помощью конструктора;
+            + `http_campaign` - HTTP;
+            + `smpp_campaign` - SMPP
+    + `state_in%5B%5D`: `inactive, draft` (enum[string], optional) - Состояние
+        + Members
+            + `awaiting_confirmation` - на рассмотрении у модератора;
+            + `inactive` - готова к запуску;
+            + `draft` - черновик;
+            + `declined` - отклонена;
+            + `preparing` - подготовка;
+            + `preparing_failed` - ошибка запуска;
+            + `ready` - ожидает запуска;
+            + `active` - идет рассылка;
+            + `paused` - приостановлена;
+            + `completed` - окончена;
+            + `archived` - архивная;
+            + `removed` - удалена
+
++ Response 200
+
