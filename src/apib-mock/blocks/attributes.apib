@@ -1,27 +1,63 @@
 # Data Structures
 
-# Fragment
+## Fragment
 
 + `number`: `20` (string, required) - Название имени отправителя
 + `first_name`: `Иван` (string, nullable, required) - Имя клиента
 
 ## AlreadyExistsError (object)
-+ status: alreadyExists (required, fixed)
++ status: `alreadyExists` (required, fixed)
 
 
 # Group Attributes
 
-Демонстрация задания структуры ответа с помощью секции Attributes.
+Демонстрация структур, заданных с помощью секции Attributes.
 
 ## GET /sender
 
-+ Response 200 (application/json)
-    + Attributes(array[Fragment])
++ Request Пример использования Attributes в запросе (application/json)
+  Тип — объект
+    + Attributes (object)
+        + `name`: `John` (string, required) - Имя отправителя
+        + `email`: `admin@localhost` (string, optional)
 
 + Response 200 (application/json)
+  Тип — строка
+    + Attributes (string, format="email")
+
++ Response 200 (application/json)
+  Тип — массив
+    + Attributes(array)
+        + Items
+            + id (string)
+            + name (string)
+
++ Response 200 (application/json)
+  Falsy-атрибуты
+    + Attributes
+        + zero_attr: 0 (number, required)
+        + bool_attr: false (boolean, required)
+        + no_example (boolean, required)
+        + `enum_with_zero_example`: `0` (enum[number], optional) - Флаг, сообщающий на каком узле была выброшена ошибка при отправке PDU
+            + Members
+                + `0` - Ошибка платформы
+                + `1` - Ошибка SMSC
+
++ Response 200 (application/json)
+  Атрибуты с наследованием
+    + Attributes (AlreadyExistsError)
+
++ Response 200 (application/json)
+  Атрибуты с расширением наследуемого объекта AlreadyExistsError
+    + Attributes (AlreadyExistsError)
+        + Properties
+            + `id`: `5` (string)
+
++ Response 200 (application/json)
+  Атрибуты с миксином
     + Attributes (object)
         + Include Fragment
-        + `avatar` (file) - User avatar
+        + `avatar` (file) - Аватарка
         + `expected_confirmation_at`: `1540533418` (number, required) - unix timestamp желаемая дата активации
         + `forced_confirmation`: `false` (boolean, optional) - Активировать без ожидания одобрения от МТС
         + `expected_operators` (array, required) - Доступные операторы
@@ -31,7 +67,7 @@
                     + `tele2` - Теле2
                     + `beeline` - Билайн
                     + `mts` - МТС
-                    + `megafon` - Мегафон
+                    + `megafon` - МегаФон
                     + `other` - Др. операторы РФ
                     + `international` - Международные операторы
         + `message`: `Новое сообщение` (string, optional) - Сообщение для модератора
@@ -39,41 +75,39 @@
         + `document_file_ids` (array[number], required) - Массив идентификаторов загруженных подтверждающих документов
 
 + Response 200 (application/json)
-    + Attributes(array[object])
-        + Items
-            + (object)
-                + `id` (array[number]) - Начало описания.
-                Продолжение описания.
-                + `name` (string)
-                + `example`: `false` (boolean, optional)
-
-+ Response 200 (application/json)
-    + Attributes (AlreadyExistsError)
-        Атрибуты с наследованием.
-        + Properties
-            + `id`: `5` (string)
-
-+ Request (application/json)
+  Атрибут без указания типа
     + Attributes
-        + `name`: `John` (string, required) - Имя отправителя
-        + `email`: `admin@localhost` (string, optional)
-
-    + Schema
-
-            {
-                "$schema": "http://json-schema.org/draft-04/schema#",
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "msisdn": {
-                        "type": "string"
-                    }
-                }
-            }
+        + status: `ok`
 
 + Response 200 (application/json)
+  Атрибуты с вложенной структурой
+    + Attributes(array[boolean])
+        + (object)
+            + id (number)
+            + name (string)
+        + text (string)
+
++ Response 200 (application/json)
+  One Of
+    + Attributes
+        + One of
+            + id (number)
+            + name (string)
+
++ Response 200 (application/json)
+  One Of c Properties
+    + Attributes
+        + One of
+            + Properties
+                + `current_rps` (number, required) - Текущая пропускная способность
+                + `rps` (number, required) - Новая пропускная способность
+                + `activate_at`: `1526464629` (number, required) - Дата, начиная с которой будет изменена пропускная способность
+            + Properties
+                + `move_templates` (boolean, required) - Признак того, что шаблоны тоже нужно копировать вместе с именами отправителей
+                + `senders` (array[Fragment], required) - Сендеры, переносимые в другой аккаунт
+
++ Response 200 (application/json)
+  Атрибуты с кастомизированной Schema
     + Attributes
         + status: `ok`
 
