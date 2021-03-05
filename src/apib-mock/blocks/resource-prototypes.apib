@@ -12,12 +12,14 @@
 ## NotFound
 
 + Response 404 (application/json)
+  Прототип NotFound
     + Attributes
         + `status`: `not found` (string, required, fixed)
 
 ## AccessDenied
 
 + Response 200 (application/json)
+  Прототип AccessDenied
     + Attributes
         + `status`: `error` (string, required, fixed)
         + `error`: `access_denied` (string, required, fixed) - Доступ запрещен
@@ -25,9 +27,11 @@
 ## UserResource (NotFound)
 
 + Response 200 (application/json)
+  Принадлежит прототипу UserResource
     + Attributes (UnauthorizedError)
 
 + Response 403 (application/json)
+  Принадлежит прототипу UserResource
     + Attributes
         + `status`: `permission denied` (string, required, fixed)
 
