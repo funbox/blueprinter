@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.41.1 (05.03.2021)
+
+* Fix hot reload error in dev mode.
+
 ## 3.41.0 (04.03.2021)
 
 * Implement sidebar folding/unfolding.
