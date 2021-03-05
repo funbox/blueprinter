@@ -10,9 +10,9 @@
   color: $white;
 
   @media print {
-    border: 1px dashed $ebony;
+    border: 1px dashed $dark-blue;
     background: none;
-    color: $ebony;
+    color: $color--body;
   }
 
   + .action-card__href {

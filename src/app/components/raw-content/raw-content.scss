@@ -102,7 +102,7 @@
     padding: 10px 20px;
     font-size: 16px;
     border-left: 5px solid $gray;
-    color: rgba($black, .5);
+    color: rgba($color--body, .5);
 
     @media print {
       margin: $baseMargin / 2 0;
@@ -122,7 +122,7 @@
     border: 1px solid #cfcfcf;
     border-radius: 3px;
     background-color: $grayLight;
-    color: $grayDark;
+    color: $dark-blue;
   }
 
   pre {
@@ -138,7 +138,7 @@
       padding: 0;
       border: none;
       background-color: transparent;
-      color: $black;
+      color: $color--body;
     }
   }
 
