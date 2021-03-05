@@ -7,7 +7,7 @@
   line-height: 1;
   border: 1px solid $stroke-color--primary;
   border-radius: 4px;
-  background-color: $grayLight;
+  background-color: $light-gray;
 
   @media print {
     background: none;
@@ -26,7 +26,7 @@
       width: 15px;
       height: 15px;
       border-radius: 50%;
-      background: $steelGray url('./code_recursive.svg') no-repeat center;
+      background: $dark-gray url('./code_recursive.svg') no-repeat center;
       background-size: 9px 10px;
     }
   }

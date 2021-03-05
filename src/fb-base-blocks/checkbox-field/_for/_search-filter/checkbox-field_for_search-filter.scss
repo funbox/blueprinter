@@ -7,18 +7,18 @@ $checked-label-color--hover: lighten($color--highlight, 5%);
     font-size: 12px;
     font-weight: 500;
     line-height: 16px;
-    border: 1px solid #c5c8cd;
+    border: 1px solid $cloudy-gray;
     border-radius: 3px;
     cursor: pointer;
 
     &:hover {
-      background-color: rgba($grayLight, .5);
+      background-color: rgba($light-gray, .5);
     }
   }
 
   &:focus-within {
     .checkbox-field__label {
-      background-color: rgba($grayLight, .5);
+      background-color: rgba($light-gray, .5);
     }
   }
 

@@ -9,15 +9,15 @@
   &::before {
     margin-right: 12px;
     font-weight: 700;
-    color: #c5c8cd;
+    color: $cloudy-gray;
   }
 
   &:hover, &:focus-within {
-    background-color: rgba($grayLight, .5);
+    background-color: rgba($light-gray, .5);
   }
 
   &_highlighted {
-    background-color: rgba($grayLight, .5);
+    background-color: rgba($light-gray, .5);
   }
 
   &_type_group {

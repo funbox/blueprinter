@@ -13,7 +13,7 @@
         height: 0;
         border-width: 6px 4px 0;
         border-style: solid;
-        border-color: #8b929c transparent transparent;
+        border-color: $dark-gray transparent transparent;
       }
     }
   }
@@ -27,7 +27,7 @@
       &::before {
         border-width: 4px 0 4px 6px;
         border-style: solid;
-        border-color: transparent transparent transparent #8b929c;
+        border-color: transparent transparent transparent $dark-gray;
       }
     }
   }
