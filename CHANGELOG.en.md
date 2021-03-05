@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.42.0 (05.03.2021)
+
+* Display formatted description of requests and responses.
+
 ## 3.41.1 (05.03.2021)
 
 * Fix hot reload error in dev mode.
