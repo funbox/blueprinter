@@ -9,7 +9,7 @@
     }
 
     &:hover::before {
-      border-left-color: #2e343c;
+      border-left-color: $dark-blue;
     }
   }
 }

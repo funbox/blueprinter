@@ -17,10 +17,8 @@
   }
 
   &:hover {
-    color: #080914;
-
     &::before {
-      border-top-color: #2e343c;
+      border-top-color: $dark-blue;
     }
   }
 }
