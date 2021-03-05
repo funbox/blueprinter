@@ -1,12 +1,11 @@
 .menu-collapsible-section__switcher {
   flex-shrink: 0;
   width: 54px;
-  border: 1px solid transparent;
   background: transparent url('./menu-collapsible-section__switcher.svg') no-repeat center;
   background-size: 13px 1px;
 
   &:hover, &:focus {
-    border-color: $grayDark;
+    background-image: url('./menu-collapsible-section__switcher--focused.svg');
   }
 
   &:focus {

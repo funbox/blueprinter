@@ -2,5 +2,9 @@
   .menu-collapsible-section__switcher {
     background-image: url('./menu-collapsible-section_collapsed.svg');
     background-size: 13px;
+
+    &:hover, &:focus {
+      background-image: url('./menu-collapsible-section_collapsed--focused.svg');
+    }
   }
 }
