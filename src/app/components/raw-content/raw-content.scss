@@ -6,6 +6,10 @@
   line-height: $baseLineHeight;
   color: $color--body;
 
+  @media print {
+    line-height: 20px;
+  }
+
   h1 {
     margin: $baseMargin 0;
     font-size: 36px;

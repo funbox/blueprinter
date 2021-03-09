@@ -5,6 +5,10 @@ body {
   font-size: $baseFontSize;
   line-height: $baseLineHeight;
   color: $color--body;
+
+  @media print {
+    line-height: 20px;
+  }
 }
 
 h1, h2, h3, h4, h5 {
