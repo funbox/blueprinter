@@ -4,7 +4,7 @@ export { default } from 'fb-base-blocks/page';
 export { default as Page__Navigation } from './__navigation/page__navigation';
 export { default as Page__Layout } from './__layout/page__layout';
 
-require('./__aside/_for/__navigation/page__aside_for_navigation.scss');
+require('./__aside/_for/_navigation/page__aside_for_navigation.scss');
 require('./__body/page__body.scss');
 require('./__description/page__description.scss');
 require('./__layout/page__layout.scss');
