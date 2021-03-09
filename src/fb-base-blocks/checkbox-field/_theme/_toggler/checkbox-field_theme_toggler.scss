@@ -1,0 +1,72 @@
+// stylelint-disable no-descending-specificity
+
+$label-width: 40px;
+$indicator-size: 16px;
+$offset: 4px;
+
+.checkbox-field_theme_toggler {
+  .checkbox-field__label {
+    display: inline-flex;
+    width: $label-width;
+    height: 24px;
+    border-radius: 12px;
+    background-color: $cloudy-gray;
+
+    &::before {
+      content: '';
+      flex-shrink: 0;
+      transform: translateX($offset);
+      box-sizing: border-box;
+      width: $indicator-size;
+      height: $indicator-size;
+      margin-top: $offset;
+      border-radius: 50%;
+      background-color: $white;
+      transition: transform .2s ease-out;
+    }
+
+    &:hover {
+      background-color: $dark-gray;
+    }
+  }
+
+  .checkbox-field__label-content {
+    @include visually-hidden;
+  }
+
+  .checkbox-field__input {
+    &:focus-visible + .checkbox-field__label {
+      background-color: $dark-gray;
+    }
+  }
+
+  &.checkbox-field_checked {
+    .checkbox-field__label {
+      background-color: $green;
+
+      &::before {
+        transform: translateX(#{$label-width - $indicator-size - $offset});
+      }
+
+      &:hover {
+        background-color: $dark-gray;
+      }
+    }
+
+    .checkbox-field__input {
+      &:focus-visible + .checkbox-field__label {
+        background-color: $dark-gray;
+      }
+    }
+  }
+
+  &.checkbox-field_disabled {
+    .checkbox-field__label {
+      background-color: $gray;
+
+      &::before {
+        background-color: $cloudy-gray;
+      }
+    }
+  }
+}
