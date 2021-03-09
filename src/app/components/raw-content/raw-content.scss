@@ -119,8 +119,8 @@
     padding: 1px 4px;
     vertical-align: baseline;
     font-family: $baseFontStack_code;
-    border: 1px solid #cfcfcf;
-    border-radius: 3px;
+    border: 1px solid $gray;
+    border-radius: 4px;
     background-color: $light-gray;
     color: $dark-blue;
   }
@@ -129,8 +129,7 @@
     overflow: auto;
     padding: $basePadding;
     font-family: $baseFontStack_code;
-    border: 1px solid #cfcfcf;
-    border-radius: 6px;
+    border-radius: 3px;
     background-color: $light-gray;
 
     code {
