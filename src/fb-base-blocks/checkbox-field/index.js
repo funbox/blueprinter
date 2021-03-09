@@ -5,4 +5,4 @@ require('./__label/checkbox-field__label.scss');
 
 require('./_disabled/checkbox-field_disabled.scss');
 
-require('./_for/_search-filter/checkbox-field_for_search-filter.scss');
+require('./_theme/_standard/checkbox-field_theme_standard.scss');

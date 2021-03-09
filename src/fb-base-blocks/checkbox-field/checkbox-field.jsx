@@ -84,7 +84,7 @@ class CheckboxField extends React.Component {
     mods.focused = focused;
 
     return (
-      <div className={b('checkbox-field', this.props)}>
+      <div className={b('checkbox-field', this.props, { theme: 'standard' })}>
         <input
           className={b('checkbox-field__input')}
           id={id}
@@ -103,7 +103,7 @@ class CheckboxField extends React.Component {
           className={b('checkbox-field__label')}
           htmlFor={id}
         >
-          {children}
+          <div className={b('checkbox-field__label-content')}>{children}</div>
         </label>
       </div>
     );

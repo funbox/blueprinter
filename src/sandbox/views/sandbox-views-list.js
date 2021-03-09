@@ -25,6 +25,10 @@ module.exports = {
       to: '/sandbox/search',
     },
     {
+      name: 'Чекбокс',
+      to: '/sandbox/checkbox',
+    },
+    {
       name: '...',
     },
   ],

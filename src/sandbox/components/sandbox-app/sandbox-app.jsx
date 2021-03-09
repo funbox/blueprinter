@@ -7,6 +7,7 @@ import SandboxMethodBadge from 'sandbox/views/sandbox-method-badge';
 import SandboxContentSection from 'sandbox/views/sandbox-content-section';
 import SandboxRequestResponseBlock from 'sandbox/views/sandbox-request-response-block';
 import SandboxSearch from 'sandbox/views/sandbox-search';
+import SandboxCheckbox from 'sandbox/views/sandbox-checkbox';
 
 const SandboxApp = () => (
   <SandboxLayout>
@@ -17,6 +18,7 @@ const SandboxApp = () => (
       <Route exact path="/sandbox/raw-content" component={SandboxContentSection}/>
       <Route exact path="/sandbox/request-response" component={SandboxRequestResponseBlock}/>
       <Route exact path="/sandbox/search" component={SandboxSearch}/>
+      <Route exact path="/sandbox/checkbox" component={SandboxCheckbox}/>
     </Switch>
   </SandboxLayout>
 );
