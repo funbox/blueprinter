@@ -29,6 +29,10 @@ module.exports = {
       to: '/sandbox/checkbox',
     },
     {
+      name: 'Переключатель тем',
+      to: '/sandbox/theme-toggler',
+    },
+    {
       name: '...',
     },
   ],
