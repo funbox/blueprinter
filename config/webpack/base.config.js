@@ -42,7 +42,40 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(webp|png|jpg|jpeg|gif|svg)$/,
+        test: /\.svg$/,
+        oneOf: [
+          {
+            resourceQuery: /inline/,
+            use: [
+              {
+                loader: '@svgr/webpack',
+                options: {
+                  svgo: true,
+                  svgoConfig: {
+                    full: true,
+                    plugins: [{
+                      prefixIds: {
+                        prefixIds: true,
+                        prefixClassNames: false,
+                      },
+                    }],
+                  },
+                },
+              },
+            ],
+          },
+          {
+            use: {
+              loader: 'file-loader',
+              options: {
+                name: 'images/[contenthash].[ext]',
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(webp|png|jpg|jpeg|gif)$/,
         use: {
           loader: 'file-loader',
           options: {

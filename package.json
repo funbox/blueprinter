@@ -46,6 +46,7 @@
     "@funbox/scss-utils": "1.1.1",
     "@funbox/scss-vars-loader": "2.1.0",
     "@hot-loader/react-dom": "16.11.0",
+    "@svgr/webpack": "5.5.0",
     "@types/react": "16.9.20",
     "autoprefixer": "9.7.4",
     "babel-loader": "8.0.6",
