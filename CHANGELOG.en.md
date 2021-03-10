@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.43.0 (05.03.2021)
+
+* Update elements style after moving to Figma.
+
 ## 3.42.0 (05.03.2021)
 
 * Display formatted description of requests and responses.
