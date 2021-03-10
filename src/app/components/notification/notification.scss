@@ -1,7 +1,4 @@
 .notification {
-  position: fixed;
-  top: 25px;
-  right: 25px;
   box-sizing: border-box;
   min-width: 300px;
   max-width: 450px;
@@ -9,8 +6,4 @@
   border: 1px solid $stroke-color--primary;
   border-radius: 6px;
   background-color: $white;
-
-  @media print {
-    display: none;
-  }
 }

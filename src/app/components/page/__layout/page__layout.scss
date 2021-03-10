@@ -1,5 +1,6 @@
 .page__layout {
   display: flex;
+  position: relative;
 
   @media print {
     display: block;

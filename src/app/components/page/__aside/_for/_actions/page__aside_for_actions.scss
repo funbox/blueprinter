@@ -1,0 +1,33 @@
+.page__aside_for_actions {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+
+  @media print {
+    display: none;
+  }
+
+  .page__aside-element {
+    + .page__aside-element {
+      margin-top: 20px;
+    }
+  }
+
+  .page__aside-element_for_theme-toggler {
+    text-align: right;
+  }
+
+  .page__aside-element_for_notification {
+    position: sticky;
+    top: 40px;
+  }
+
+  &.page__aside_with_notification {
+    bottom: 0;
+    pointer-events: none;
+
+    .page__aside-element {
+      pointer-events: auto;
+    }
+  }
+}

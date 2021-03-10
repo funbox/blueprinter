@@ -1,6 +1,7 @@
 import Page, {
   Page__Body,
   Page__Aside,
+  Page__AsideElement,
   Page__Navigation,
   Page__Layout,
   Page__Stripe,
@@ -16,6 +17,7 @@ import DocumentWarnings from 'app/components/document-warnings';
 import ApiHost from 'app/components/api-host';
 import Link from 'app/components/link';
 import SearchStripe from 'app/components/search-stripe';
+import ThemeToggler from 'app/components/theme-toggler';
 
 import { API_DEFAULT_TITLE } from 'app/constants/defaults';
 
@@ -64,6 +66,8 @@ class MainLayout extends React.PureComponent {
       children,
     } = this.props;
 
+    const { isWarningNotificationOpen } = this.state;
+
     return (
       <Page>
         <Page__Layout>
@@ -104,20 +108,28 @@ class MainLayout extends React.PureComponent {
           </Sidebar>
 
           <Page__Body>
+            <Page__Aside mods={{ for: 'actions', with: isWarningNotificationOpen ? 'notification' : null }}>
+              <Page__AsideElement mods={{ for: 'theme-toggler' }}>
+                <ThemeToggler/>
+              </Page__AsideElement>
+
+              {isWarningNotificationOpen && (
+                <Page__AsideElement mods={{ for: 'notification' }}>
+                  <Notification
+                    onClose={this.closeNotification}
+                    title="API Blueprint has warnings"
+                  >
+                    <DocumentWarnings warnings={this.warnings}/>
+                  </Notification>
+                </Page__AsideElement>
+              )}
+            </Page__Aside>
+
             <MainContent>
               {children}
             </MainContent>
           </Page__Body>
         </Page__Layout>
-
-        {this.state.isWarningNotificationOpen && (
-          <Notification
-            onClose={this.closeNotification}
-            title="API Blueprint has warnings"
-          >
-            <DocumentWarnings warnings={this.warnings}/>
-          </Notification>
-        )}
       </Page>
     );
   }
