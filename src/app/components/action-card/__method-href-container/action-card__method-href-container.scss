@@ -8,7 +8,7 @@
 
   @media print {
     padding: 4px;
-    border: 1px dashed $dark-blue;
+    border: 1px dashed var(--stroke-color--secondary);
     page-break-inside: avoid;
   }
 }

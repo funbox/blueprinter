@@ -11,7 +11,7 @@
   color: $white;
 
   @media print {
-    border: 1px dashed $dark-blue;
+    border: 1px dashed var(--stroke-color--secondary);
     background: none;
     color: var(--color--body);
   }
