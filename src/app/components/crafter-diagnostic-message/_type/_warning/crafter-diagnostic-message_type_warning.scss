@@ -2,7 +2,7 @@
   .crafter-diagnostic-message__header {
     &::before {
       content: 'Warning';
-      background: $orange url('./crafter-diagnostic-message_type_warning.svg') no-repeat left 12px top 8px;
+      background: var(--background-color--warning) url('./crafter-diagnostic-message_type_warning.svg') no-repeat left 12px top 8px;
       background-size: 13px 12px;
     }
   }

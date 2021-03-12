@@ -1,13 +1,13 @@
 // stylelint-disable selector-max-type
 
 .information_type_warning {
-  border-color: $red;
-  background-color: rgba($red, .05);
+  border-color: var(--stroke-color--error);
+  background-color: var(--background-color--error-secondary);
 
   h1, h2, h3, h4, h5, h6 {
     font-size: 18px;
     font-weight: 700;
     line-height: 26px;
-    color: $red;
+    color: var(--color--error);
   }
 }

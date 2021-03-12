@@ -1,13 +1,13 @@
 // stylelint-disable selector-max-type
 
 .information_type_note {
-  border-color: $blue;
-  background-color: rgba($blue, .05);
+  border-color: var(--stroke-color--note);
+  background-color: var(--background-color--note-secondary);
 
   h1, h2, h3, h4, h5, h6 {
     font-size: 18px;
     font-weight: 700;
     line-height: 26px;
-    color: $blue;
+    color: var(--color--note);
   }
 }

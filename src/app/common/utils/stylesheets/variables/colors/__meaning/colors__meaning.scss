@@ -13,12 +13,22 @@ $post-method-color--primary: $green;
   --color--secondary: var(--dark-gray);
   --color--highlight: var(--text-blue);
   --color--blockquote: var(--dark-blue-50);
+  --color--error: #{$red};
+  --color--error-secondary: #{$dark-red};
+  --color--note: #{$blue};
+  --color--badge: #{$white};
 
   --stroke-color--primary: var(--gray);
+  --stroke-color--error: #{$red};
+  --stroke-color--note: #{$blue};
 
   --background-color--body: var(--white);
   --background-color--sidebar: var(--light-gray);
   --background-color--code: var(--light-gray);
+  --background-color--error: #{$red};
+  --background-color--error-secondary: var(--red-5);
+  --background-color--warning: #{$orange};
+  --background-color--note-secondary: var(--blue-5);
 
   --stroke-color--checkbox-checked: var(--text-blue);
   --stroke-color--checkbox-hover: #{$blue};
