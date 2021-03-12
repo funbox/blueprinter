@@ -11,6 +11,6 @@
 
   @include placeholder {
     font-weight: 500;
-    color: $color--secondary;
+    color: var(--color--secondary);
   }
 }

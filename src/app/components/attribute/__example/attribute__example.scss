@@ -1,5 +1,5 @@
 .attribute__example {
   margin: 0;
   word-break: break-all;
-  color: $color--secondary;
+  color: var(--color--secondary);
 }
