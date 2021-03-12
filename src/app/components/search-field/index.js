@@ -8,7 +8,6 @@ require('./__dropdown/search-field__dropdown.scss');
 require('./__field/search-field__field.scss');
 require('./__input/search-field__input.scss');
 require('./__message/search-field__message.scss');
-require('./__more-stories/search-field__more-stories.scss');
 require('./__option/search-field__option.scss');
 require('./__option-list/search-field__option-list.scss');
 require('./__option-text/search-field__option-text.scss');

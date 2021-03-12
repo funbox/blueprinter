@@ -2,7 +2,6 @@ export { default } from './action-card';
 
 require('./__heading/action-card__heading.scss');
 require('./__description/action-card__description.scss');
-require('./__example-url/action-card__example-url.scss');
 require('./__method-href-container/action-card__method-href-container.scss');
 require('./__href/action-card__href.scss');
 require('./__formatted-href/action-card__formatted-href.scss');
