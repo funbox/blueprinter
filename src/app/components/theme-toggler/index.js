@@ -1,4 +1,4 @@
-export { default } from './theme-toggler';
+export { default, UnconnectedThemeToggler } from './theme-toggler';
 
 require('./__night-icon/theme-toggler__night-icon.scss');
 

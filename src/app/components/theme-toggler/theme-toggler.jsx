@@ -35,3 +35,4 @@ const ThemeToggler = (props) => {
 ThemeToggler.propTypes = propTypes;
 
 export default withTheme(ThemeToggler);
+export { ThemeToggler as UnconnectedThemeToggler };

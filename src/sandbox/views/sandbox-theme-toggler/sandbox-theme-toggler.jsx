@@ -1,18 +1,22 @@
 import SandboxDemo from 'sandbox/components/sandbox-demo';
 import SandboxParagraph from 'sandbox/components/sandbox-paragraph';
 
-import ThemeToggler from 'app/components/theme-toggler';
+import { UnconnectedThemeToggler } from 'app/components/theme-toggler';
 
-export default () => (
-  <div>
-    <h2>Переключатель тем</h2>
+export default () => {
+  const [theme, setTheme] = React.useState('light');
 
-    <SandboxParagraph>
-      Включенное состояние обозначает применённую темную тему:
-    </SandboxParagraph>
+  return (
+    <div>
+      <h2>Переключатель тем</h2>
 
-    <SandboxDemo mods={{ theme: 'standard' }}>
-      <ThemeToggler/>
-    </SandboxDemo>
-  </div>
-);
+      <SandboxParagraph>
+        Включенное состояние обозначает применённую темную тему:
+      </SandboxParagraph>
+
+      <SandboxDemo mods={{ theme: 'standard' }}>
+        <UnconnectedThemeToggler theme={theme} updateTheme={setTheme}/>
+      </SandboxDemo>
+    </div>
+  );
+};
