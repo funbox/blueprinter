@@ -2,6 +2,7 @@ export { default } from './search-field';
 
 require('../mark/mark.scss');
 
+require('./__icon/search-field__icon.scss');
 require('./__badge/search-field__badge.scss');
 require('./__clear-button/search-field__clear-button.scss');
 require('./__dropdown/search-field__dropdown.scss');

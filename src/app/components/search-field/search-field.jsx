@@ -7,6 +7,8 @@ import locationParams from 'app/common/utils/helpers/location-params';
 
 import SearchField__OptionList from './__option-list';
 
+import SearchField__Icon from './__icon/search-field__icon.svg?inline';
+
 const SEARCH_OPTIONS_PER_FRAME = 10;
 const SEARCH_OPTION_HEIGHT = 36;
 
@@ -244,6 +246,7 @@ class SearchField extends React.Component {
 
     return (
       <div className={b('search-field', this.props, defaultMods)}>
+        {focused && <SearchField__Icon className={b('search-field__icon')}/>}
         <TextField
           mods={{
             type: 'search',
