@@ -8,7 +8,7 @@
   padding: 20px;
   border: 1px solid var(--stroke-color--primary);
   border-radius: 3px;
-  background-color: $white;
+  background-color: var(--background-color--body);
   pointer-events: none;
 
   &::before, &::after {
@@ -25,7 +25,7 @@
     z-index: 2;
     left: -8px;
     border-width: 7px 8px 7px 0;
-    border-color: transparent $white transparent transparent;
+    border-color: transparent var(--background-color--body) transparent transparent;
   }
 
   &::after {
