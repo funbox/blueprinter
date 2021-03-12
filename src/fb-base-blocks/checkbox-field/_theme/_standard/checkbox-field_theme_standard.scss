@@ -13,7 +13,7 @@
       width: 16px;
       height: 16px;
       margin-right: 8px;
-      border: 1px solid $gray;
+      border: 1px solid var(--stroke-color--primary);
       border-radius: 50%;
       background-color: $white;
       transition: background-color .1s, border-color .1s;

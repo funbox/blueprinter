@@ -6,7 +6,7 @@
   .document-warnings__list {
     max-height: none;
     padding: 16px 20px;
-    border: 1px solid $stroke-color--primary;
+    border: 1px solid var(--stroke-color--primary);
   }
 
   .document-warnings__item {

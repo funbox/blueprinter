@@ -6,7 +6,7 @@
   font-size: 14px;
   line-height: 16px;
   border-radius: 4px;
-  box-shadow: inset 0 0 0 1px $stroke-color--primary;
+  box-shadow: inset 0 0 0 1px var(--stroke-color--primary);
   background-color: $white;
 
   @media print {

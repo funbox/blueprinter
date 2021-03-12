@@ -11,7 +11,7 @@
   @media print {
     padding: 8px;
     line-height: 16px;
-    border: 1px solid $gray;
+    border: 1px solid var(--stroke-color--primary);
     background: none;
   }
 

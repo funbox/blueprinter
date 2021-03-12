@@ -3,7 +3,7 @@
   min-width: 300px;
   max-width: 450px;
   padding: $basePadding;
-  border: 1px solid $stroke-color--primary;
+  border: 1px solid var(--stroke-color--primary);
   border-radius: 6px;
   background-color: $white;
 }

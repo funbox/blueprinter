@@ -105,7 +105,7 @@
     margin: $baseMargin 0;
     padding: 10px 20px;
     font-size: 16px;
-    border-left: 5px solid $gray;
+    border-left: 5px solid var(--stroke-color--primary);
     color: rgba($color--body, .5);
 
     @media print {
@@ -124,7 +124,7 @@
     vertical-align: baseline;
     font-family: $baseFontStack_code;
     border-radius: 4px;
-    box-shadow: inset 0 0 0 1px $gray;
+    box-shadow: inset 0 0 0 1px var(--stroke-color--primary);
     background-color: $light-gray;
     color: $dark-blue;
   }
@@ -152,7 +152,7 @@
 
     th, td {
       padding: $basePadding / 2 $basePadding;
-      border: 1px solid $gray;
+      border: 1px solid var(--stroke-color--primary);
     }
 
     tr:nth-child(2n) {

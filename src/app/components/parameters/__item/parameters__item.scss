@@ -6,6 +6,6 @@
   }
 
   &:not(:only-child):not(:last-child) {
-    border-bottom: 1px solid $stroke-color--primary;
+    border-bottom: 1px solid var(--stroke-color--primary);
   }
 }

@@ -6,7 +6,7 @@
   transform: translate(calc(100% + 4px), -50%);
   width: 150px;
   padding: 20px;
-  border: 1px solid $stroke-color--primary;
+  border: 1px solid var(--stroke-color--primary);
   border-radius: 3px;
   background-color: $white;
   pointer-events: none;
@@ -31,6 +31,6 @@
   &::after {
     left: -10px;
     border-width: 8px 10px 8px 0;
-    border-color: transparent $stroke-color--primary transparent transparent;
+    border-color: transparent var(--stroke-color--primary) transparent transparent;
   }
 }
