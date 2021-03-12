@@ -6,9 +6,21 @@ $patch-method-color--primary: $orange;
 $put-method-color--primary: $orange;
 $post-method-color--primary: $green;
 
-$stroke-color--primary: $gray;
-$color--body: $dark-blue;
-$color--secondary: $dark-gray;
-$color--highlight: $text-blue;
+@mixin light-css-vars() {
+  @include light-css-colors;
 
-$background-color--hover: rgba($gray, .6);
+  --color--body: var(--dark-blue);
+  --color--secondary: var(--dark-gray);
+  --color--highlight: var(--text-blue);
+
+  --stroke-color--primary: var(--gray);
+
+  --background-color--body: var(--white);
+}
+
+@mixin dark-css-vars() {
+  @include dark-css-colors;
+
+  --color--body: var(--white);
+  --background-color--body: var(--dark-blue);
+}

@@ -1,10 +1,21 @@
-/* stylelint-disable selector-max-type */
+/* stylelint-disable selector-max-type, selector-no-qualifying-type */
+
+html {
+  @include light-css-vars;
+
+  &.dark {
+    @media not print {
+      @include dark-css-vars;
+    }
+  }
+}
 
 body {
   font-family: $baseFontStack;
   font-size: $baseFontSize;
   line-height: $baseLineHeight;
-  color: $color--body;
+  background-color: var(--background-color--body);
+  color: var(--color--body);
 
   @media print {
     line-height: 20px;
