@@ -40,6 +40,9 @@ $post-method-color--primary: $green;
   --stroke-color--icon-hover: var(--dark-blue);
 
   --background-color--menu-hover: var(--gray-60);
+
+  --color--searh-result-hint: #{$cloudy-gray};
+  --background-color--searh-result-hover: var(--light-gray-50);
 }
 
 @mixin dark-css-vars() {
