@@ -35,6 +35,9 @@ $post-method-color--primary: $green;
 
   --background-color--theme-toggler-icon: #{$orange};
   --background-color--theme-toggler-icon-active: #{$white};
+
+  --stroke-color--icon: var(--dark-gray);
+  --stroke-color--icon-hover: var(--dark-blue);
 }
 
 @mixin dark-css-vars() {

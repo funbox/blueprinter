@@ -13,12 +13,12 @@
     margin-bottom: 4px;
     border-width: 5px 5px 0;
     border-style: solid;
-    border-color: $dark-gray transparent transparent;
+    border-color: var(--stroke-color--icon) transparent transparent;
   }
 
   &:hover {
     &::before {
-      border-top-color: $dark-blue;
+      border-top-color: var(--stroke-color--icon-hover);
     }
   }
 }

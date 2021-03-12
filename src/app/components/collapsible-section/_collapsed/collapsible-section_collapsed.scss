@@ -5,11 +5,11 @@
       margin-bottom: 2px;
       border-width: 5px 0 5px 5px;
       border-style: solid;
-      border-color: transparent transparent transparent $dark-gray;
+      border-color: transparent transparent transparent var(--stroke-color--icon);
     }
 
     &:hover::before {
-      border-left-color: $dark-blue;
+      border-left-color: var(--stroke-color--icon-hover);
     }
   }
 }
