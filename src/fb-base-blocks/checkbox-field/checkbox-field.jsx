@@ -18,6 +18,7 @@ export const propTypes = {
   onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
+  title: PropTypes.string,
 };
 
 const defaultProps = {
@@ -27,6 +28,7 @@ const defaultProps = {
   value: undefined,
   onFocus: undefined,
   onBlur: undefined,
+  title: undefined,
 };
 
 class CheckboxField extends React.Component {
@@ -75,6 +77,7 @@ class CheckboxField extends React.Component {
       name,
       value,
       mods,
+      title,
     } = this.props;
 
     const {
@@ -102,6 +105,7 @@ class CheckboxField extends React.Component {
         <label
           className={b('checkbox-field__label')}
           htmlFor={id}
+          title={title}
         >
           <div className={b('checkbox-field__label-content')}>{children}</div>
         </label>

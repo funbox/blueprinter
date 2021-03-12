@@ -3,6 +3,7 @@ import uniqid from 'uniqid';
 import parseSourceFile from 'app/common/utils/helpers/parse-source-file';
 import { HASH_DELIMITER } from 'app/common/utils/helpers/hash';
 import IdProvider from 'app/common/utils/helpers/id-provider';
+import ThemeProvider from 'app/common/providers/theme-provider';
 import sourceMock from 'app/source';
 
 import MainLayout from 'app/components/main-layout';
@@ -64,49 +65,51 @@ export default class App extends React.Component {
     const emptyApib = routes.length === 0;
 
     return (
-      <MainLayout
-        topLevelMeta={topLevelMeta}
-        groups={groups}
-        resources={resources}
-        actions={actions}
-      >
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              topLevelMeta.description ? (
-                <PageDescription description={topLevelMeta.description}/>
-              ) : (
-                <Redirect to={emptyApib ? '/404' : routes[0].props.path}/>
-              )
-            )}
-          />
-          {routes}
-          <Route
-            exact
-            path="/manual-search-page"
-            render={(props) => (
-              <ViewContext.Provider value={ViewMode.EXPANDED}>
-                {
-                  topLevelMeta.description && (
-                    <PageDescription description={topLevelMeta.description} mix="page-description_version_print"/>
-                  )
-                }
-                <ManualSearch
-                  {...props}
-                  groups={groups}
-                />
-              </ViewContext.Provider>
-            )}
-          />
-          <Route
-            exact
-            path="/404"
-            component={ContentNotFound}
-          />
-        </Switch>
-      </MainLayout>
+      <ThemeProvider>
+        <MainLayout
+          topLevelMeta={topLevelMeta}
+          groups={groups}
+          resources={resources}
+          actions={actions}
+        >
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                topLevelMeta.description ? (
+                  <PageDescription description={topLevelMeta.description}/>
+                ) : (
+                  <Redirect to={emptyApib ? '/404' : routes[0].props.path}/>
+                )
+              )}
+            />
+            {routes}
+            <Route
+              exact
+              path="/manual-search-page"
+              render={(props) => (
+                <ViewContext.Provider value={ViewMode.EXPANDED}>
+                  {
+                    topLevelMeta.description && (
+                      <PageDescription description={topLevelMeta.description} mix="page-description_version_print"/>
+                    )
+                  }
+                  <ManualSearch
+                    {...props}
+                    groups={groups}
+                  />
+                </ViewContext.Provider>
+              )}
+            />
+            <Route
+              exact
+              path="/404"
+              component={ContentNotFound}
+            />
+          </Switch>
+        </MainLayout>
+      </ThemeProvider>
     );
   }
 }

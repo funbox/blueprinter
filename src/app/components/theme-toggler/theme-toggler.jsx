@@ -1,17 +1,21 @@
 import Toggler from 'fb-base-blocks/toggler';
-import Theme from 'app/constants/ui-themes';
+import { Theme, THEME_HOTKEY } from 'app/constants/ui-themes';
+import withTheme from 'app/common/HOCs/with-theme';
 
 import NightIcon from './__night-icon/theme-toggler__night-icon.svg?inline';
 
-const ThemeToggler = (props) => {
-  const [theme, setTheme] = React.useState(Theme.LIGHT);
+const propTypes = {
+  theme: PropTypes.oneOf(Object.values(Theme)).isRequired,
+  updateTheme: PropTypes.func.isRequired,
+};
 
+const ThemeToggler = (props) => {
   const onDarkThemeToggle = (checked) => {
-    if (checked) setTheme(Theme.DARK);
-    else setTheme(Theme.LIGHT);
+    const theme = checked ? Theme.DARK : Theme.LIGHT;
+    props.updateTheme(theme);
   };
 
-  const active = theme === Theme.DARK;
+  const active = props.theme === Theme.DARK;
 
   return (
     <div className={b('theme-togger', props)}>
@@ -20,6 +24,7 @@ const ThemeToggler = (props) => {
         className={b('theme-toggler__control')}
         mods={{ checked: active }}
         onChange={onDarkThemeToggle}
+        title={THEME_HOTKEY.TEXT}
       >
         Включить тёмную тему
       </Toggler>
@@ -27,4 +32,6 @@ const ThemeToggler = (props) => {
   );
 };
 
-export default ThemeToggler;
+ThemeToggler.propTypes = propTypes;
+
+export default withTheme(ThemeToggler);
