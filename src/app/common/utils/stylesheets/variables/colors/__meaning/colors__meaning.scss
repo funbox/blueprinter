@@ -17,6 +17,13 @@ $post-method-color--primary: $green;
 
   --background-color--body: var(--white);
 
+  --stroke-color--checkbox-checked: var(--text-blue);
+  --stroke-color--checkbox-hover: #{$blue};
+  --stroke-color--checkbox-disabled: var(--gray);
+  --background-color--checkbox-checked: var(--stroke-color--checkbox-checked);
+  --background-color--checkbox-hover: var(--stroke-color--checkbox-hover);
+  --background-color--checkbox-disabled: var(--stroke-color--checkbox-disabled);
+
   --background-color--toggler: #{$cloudy-gray};
   --background-color--toggler-hover: var(--dark-gray);
   --background-color--toggler-checked: #{$green};

@@ -15,43 +15,43 @@
       margin-right: 8px;
       border: 1px solid var(--stroke-color--primary);
       border-radius: 50%;
-      background-color: $white;
+      background-color: transparent;
       transition: background-color .1s, border-color .1s;
     }
 
     &:hover {
       &::before {
-        border-color: $blue;
+        border-color: var(--stroke-color--checkbox-hover);
       }
     }
   }
 
   .checkbox-field__input {
     &:focus + .checkbox-field__label::before {
-      border-color: $blue;
+      border-color: var(--stroke-color--checkbox-hover);
     }
   }
 
   &.checkbox-field_checked {
     .checkbox-field__label {
       &::before {
-        border-color: $text-blue;
-        background: $text-blue url('./checkbox-field_theme_standard.svg') center no-repeat;
+        border-color: var(--stroke-color--checkbox-checked);
+        background: var(--background-color--checkbox-checked) url('./checkbox-field_theme_standard.svg') center no-repeat;
         background-size: 10px 8px;
       }
 
       &:hover {
         &::before {
-          border-color: $blue;
-          background-color: $blue;
+          border-color: var(--stroke-color--checkbox-hover);
+          background-color: var(--background-color--checkbox-hover);
         }
       }
     }
 
     .checkbox-field__input {
       &:focus + .checkbox-field__label::before {
-        border-color: $blue;
-        background-color: $blue;
+        border-color: var(--stroke-color--checkbox-hover);
+        background-color: var(--background-color--checkbox-hover);
       }
     }
   }
@@ -59,8 +59,8 @@
   &.checkbox-field_disabled {
     .checkbox-field__label {
       &::before {
-        border-color: $gray;
-        background-color: $gray;
+        border-color: var(--stroke-color--checkbox-disabled);
+        background-color: var(--background-color--checkbox-disabled);
       }
     }
   }
