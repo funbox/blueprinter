@@ -1,10 +1,7 @@
 .menu-collapsible-section_collapsed {
   .menu-collapsible-section__switcher {
-    background-image: url('./menu-collapsible-section_collapsed.svg');
-    background-size: 13px;
-
-    &:hover, &:focus {
-      background-image: url('./menu-collapsible-section_collapsed--focused.svg');
+    &::after {
+      transform: translate(-50%, -50%) rotate(0);
     }
   }
 }

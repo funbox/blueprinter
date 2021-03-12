@@ -1,11 +1,19 @@
 .menu-collapsible-section__switcher {
   flex-shrink: 0;
+  position: relative;
   width: 54px;
-  background: transparent url('./menu-collapsible-section__switcher.svg') no-repeat center;
-  background-size: 13px 1px;
 
-  &:hover, &:focus {
-    background-image: url('./menu-collapsible-section__switcher--focused.svg');
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    width: 1px;
+    height: 13px;
+    background-color: currentColor;
+    transition: transform .2s;
   }
 
   &:focus {
