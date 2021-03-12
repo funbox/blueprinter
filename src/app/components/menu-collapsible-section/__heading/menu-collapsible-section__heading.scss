@@ -2,6 +2,6 @@
   display: flex;
 
   &:hover, &:focus-within {
-    background-color: $background-color--hover;
+    background-color: var(--background-color--menu-hover);
   }
 }

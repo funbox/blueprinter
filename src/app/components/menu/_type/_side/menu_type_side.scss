@@ -72,7 +72,7 @@
         padding-right: 54px;
 
         &:hover, &:focus-within {
-          background-color: $background-color--hover;
+          background-color: var(--background-color--menu-hover);
         }
       }
 

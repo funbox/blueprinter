@@ -38,6 +38,8 @@ $post-method-color--primary: $green;
 
   --stroke-color--icon: var(--dark-gray);
   --stroke-color--icon-hover: var(--dark-blue);
+
+  --background-color--menu-hover: var(--gray-60);
 }
 
 @mixin dark-css-vars() {
