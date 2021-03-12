@@ -12,7 +12,6 @@ $post-method-color--primary: $green;
   --color--body: var(--dark-blue);
   --color--secondary: var(--dark-gray);
   --color--highlight: var(--text-blue);
-  --color--blockquote: var(--dark-blue-50);
   --color--error: #{$red};
   --color--error-secondary: var(--dark-red);
   --color--note: #{$blue};
@@ -53,11 +52,14 @@ $post-method-color--primary: $green;
 
   --stroke-color--icon: var(--dark-gray);
   --stroke-color--icon-hover: var(--dark-blue);
+  --stroke-color--icon-secondary: #{$cloudy-gray};
+  --stroke-color--icon-secondary-hover: var(--dark-blue);
 
   --background-color--menu-hover: var(--gray-60);
 
   --color--searh-result-hint: #{$cloudy-gray};
   --background-color--searh-result-hover: var(--light-gray-50);
+  --box-shadow--search-field-dropdown: var(--gray-shadow-50);
 
   --color--header: var(--dark-red);
   --color--number: var(--dark-red);
@@ -70,4 +72,14 @@ $post-method-color--primary: $green;
 
   --color--body: var(--white);
   --background-color--body: var(--nightfall-blue);
+
+  --background-color--sidebar: var(--dark-blue);
+
+  --stroke-color--icon: var(--dark-gray);
+  --stroke-color--icon-hover: var(--white);
+  --stroke-color--icon-secondary: var(--stroke-color--icon);
+  --stroke-color--icon-secondary-hover: var(--stroke-color--icon-hover);
+
+  --color--searh-result-hint: var(--dark-gray);
+  --background-color--searh-result-hover: var(--light-gray);
 }

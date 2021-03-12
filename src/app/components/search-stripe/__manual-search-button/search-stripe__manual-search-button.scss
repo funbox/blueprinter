@@ -6,6 +6,12 @@
   position: relative;
   width: 32px;
   height: 32px;
+  color: var(--stroke-color--icon);
+
+  &:hover,
+  &:focus {
+    color: var(--stroke-color--icon-hover);
+  }
 
   &:hover {
     .search-stripe__button-hint {

@@ -2,6 +2,7 @@
   flex-shrink: 0;
   position: relative;
   width: 54px;
+  color: var(--stroke-color--icon);
 
   &::before,
   &::after {
@@ -14,6 +15,11 @@
     height: 13px;
     background-color: currentColor;
     transition: transform .2s;
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--stroke-color--icon-hover);
   }
 
   &:focus {

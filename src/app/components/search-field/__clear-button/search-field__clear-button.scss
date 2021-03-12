@@ -6,10 +6,10 @@
   justify-content: center;
   width: $search-field-height;
   height: $search-field-height;
-  color: var(--color--search-field-clear);
+  color: var(--stroke-color--icon-secondary);
 
   &:hover,
   &:focus {
-    color: var(--color--body);
+    color: var(--stroke-color--icon-secondary-hover);
   }
 }

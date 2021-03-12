@@ -14,6 +14,7 @@ $blue: #0f73ee;
   $gray: #e8eaed;
   $light-gray: #f4f5f7;
   $white: #fff;
+  $gray-shadow: #d5d8dd;
 
   // Light theme defined colors
   --dark-red: #{$dark-red};
@@ -27,22 +28,35 @@ $blue: #0f73ee;
   // Colors with opacity
   --gray-60: #{rgba($gray, .6)};
   --light-gray-50: #{rgba($light-gray, .5)};
-  --dark-blue-50: #{rgba($dark-blue, .5)};
   --red-5: #{rgba($red, .05)};
   --blue-5: #{rgba($blue, .05)};
+  --gray-shadow-50: #{rgba($gray-shadow, .5)};
 }
 
 @mixin dark-css-colors() {
+  $text-blue: #538bf7;
+  $dark-blue: #292b37;
+  $dark-gray: #7c7f89;
+  $gray: #464958;
+  $light-gray: #3c3f4f;
+  $white: #ebebed;
+  $nightfall-blue: #343747;
+  $gray-shadow: #1d1e26;
+
   // Dark theme defined colors,
   // that have a light theme counterpart
-  --text-blue: #538bf7;
-  --dark-blue: #292b37;
-  --dark-gray: #7c7f89;
-  --gray: #464958;
-  --light-gray: #3c3f4f;
-  --white: #ebebed;
+  --text-blue: #{$text-blue};
+  --dark-blue: #{$dark-blue};
+  --dark-gray: #{$dark-gray};
+  --gray: #{$gray};
+  --light-gray: #{$light-gray};
+  --white: #{$white};
+
+  // Colors with opacity
+  --gray-60: #{rgba($gray, .6)};
+  --gray-shadow-50: #{rgba($gray-shadow, .5)};
 
   // Dark theme defined colors,
   // that don't have a light theme counterpart
-  --nightfall-blue: #343747;
+  --nightfall-blue: #{$nightfall-blue};
 }

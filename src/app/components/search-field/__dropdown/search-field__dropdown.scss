@@ -7,6 +7,6 @@
   left: 0;
   padding: 12px 0;
   border-radius: 3px;
-  box-shadow: 0 4px 10px 0 rgba(213, 216, 221, .5);
+  box-shadow: 0 4px 10px 0 var(--box-shadow--search-field-dropdown);
   background-color: var(--background-color--body);
 }

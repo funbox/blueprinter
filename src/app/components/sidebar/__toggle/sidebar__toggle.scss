@@ -9,4 +9,10 @@
   width: 24px;
   height: 24px;
   margin-right: 14px;
+  color: var(--stroke-color--icon);
+
+  &:hover,
+  &:focus {
+    color: var(--stroke-color--icon-hover);
+  }
 }
