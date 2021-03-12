@@ -9,10 +9,4 @@
   width: 24px;
   height: 24px;
   margin-right: 14px;
-  background: url('./sidebar__toggle.svg') no-repeat center;
-
-  &:hover,
-  &:focus {
-    background: url('./sidebar__toggle--focused.svg');
-  }
 }

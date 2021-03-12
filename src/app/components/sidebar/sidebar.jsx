@@ -2,6 +2,8 @@ import Resizable from 'app/components/resizable';
 import Button from 'fb-base-blocks/button';
 import isHotkey from 'app/common/utils/helpers/is-hotkey';
 
+import Sidebar__ToggleIcon from './__toggle-icon/sidebar__toggle-icon.svg?inline';
+
 const SIDEBAR_SIZE = {
   CLOSED: 52,
   MIN: 240,
@@ -125,6 +127,10 @@ class Sidebar extends React.Component {
           mix={b('sidebar__toggle')}
           mods={{
             onlyIcon: true,
+          }}
+          icon={{
+            content: <Sidebar__ToggleIcon/>,
+            mix: b('sidebar__toggle-icon'),
           }}
           text={TOGGLE_HOTKEY.TEXT}
           onClick={this.toggleSidebarStage}
