@@ -156,7 +156,7 @@
     }
 
     tr:nth-child(2n) {
-      background-color: $light-gray;
+      background-color: var(--background-color--table-highlight);
     }
   }
 }
