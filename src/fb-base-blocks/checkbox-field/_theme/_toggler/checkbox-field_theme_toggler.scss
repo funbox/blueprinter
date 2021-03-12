@@ -10,7 +10,7 @@ $offset: 4px;
     width: $label-width;
     height: 24px;
     border-radius: 12px;
-    background-color: $cloudy-gray;
+    background-color: var(--background-color--toggler);
 
     &::before {
       content: '';
@@ -21,12 +21,12 @@ $offset: 4px;
       height: $indicator-size;
       margin-top: $offset;
       border-radius: 50%;
-      background-color: $white;
+      background-color: var(--background-color--toggler-indicator);
       transition: transform .2s ease-out;
     }
 
     &:hover {
-      background-color: $dark-gray;
+      background-color: var(--background-color--toggler-hover);
     }
   }
 
@@ -36,36 +36,36 @@ $offset: 4px;
 
   .checkbox-field__input {
     &:focus-visible + .checkbox-field__label {
-      background-color: $dark-gray;
+      background-color: var(--background-color--toggler-hover);
     }
   }
 
   &.checkbox-field_checked {
     .checkbox-field__label {
-      background-color: $green;
+      background-color: var(--background-color--toggler-checked);
 
       &::before {
         transform: translateX(#{$label-width - $indicator-size - $offset});
       }
 
       &:hover {
-        background-color: $dark-gray;
+        background-color: var(--background-color--toggler-hover);
       }
     }
 
     .checkbox-field__input {
       &:focus-visible + .checkbox-field__label {
-        background-color: $dark-gray;
+        background-color: var(--background-color--toggler-hover);
       }
     }
   }
 
   &.checkbox-field_disabled {
     .checkbox-field__label {
-      background-color: $gray;
+      background-color: var(--background-color--toggler-disabled);
 
       &::before {
-        background-color: $cloudy-gray;
+        background-color: var(--background-color--toggler-indicator-disabled);
       }
     }
   }

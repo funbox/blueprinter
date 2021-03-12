@@ -16,6 +16,16 @@ $post-method-color--primary: $green;
   --stroke-color--primary: var(--gray);
 
   --background-color--body: var(--white);
+
+  --background-color--toggler: #{$cloudy-gray};
+  --background-color--toggler-hover: var(--dark-gray);
+  --background-color--toggler-checked: #{$green};
+  --background-color--toggler-disabled: var(--gray);
+  --background-color--toggler-indicator: #{$white};
+  --background-color--toggler-indicator-disabled: #{$cloudy-gray};
+
+  --background-color--theme-toggler-icon: #{$orange};
+  --background-color--theme-toggler-icon-active: #{$white};
 }
 
 @mixin dark-css-vars() {
