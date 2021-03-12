@@ -1,14 +1,11 @@
 .search-stripe__manual-search-button {
+  display: flex;
   flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
   position: relative;
   width: 32px;
   height: 32px;
-  background: transparent url('./search-stripe__manual-search-button.svg') no-repeat center;
-  background-size: 16px;
-
-  &:hover, &:focus {
-    background-image: url('./search-stripe__manual-search-button--hover.svg');
-  }
 
   &:hover {
     .search-stripe__button-hint {
