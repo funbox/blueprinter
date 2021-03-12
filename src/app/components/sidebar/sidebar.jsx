@@ -1,5 +1,6 @@
 import Resizable from 'app/components/resizable';
 import Button from 'fb-base-blocks/button';
+import isHotkey from 'app/common/utils/helpers/is-hotkey';
 
 const SIDEBAR_SIZE = {
   CLOSED: 52,
@@ -10,11 +11,6 @@ const TOGGLE_HOTKEY = {
   TEXT: '(S)',
   CODE: 83,
 };
-
-function isToggleHotkey(e) {
-  const isTargetInput = e.target.tagName.toLowerCase() === 'input';
-  return !isTargetInput && !e.ctrlKey && e.keyCode === TOGGLE_HOTKEY.CODE;
-}
 
 const propTypes = {
   children: PropTypes.node.isRequired,
@@ -78,7 +74,7 @@ class Sidebar extends React.Component {
   }
 
   onToggleKeyDown(e) {
-    if (isToggleHotkey(e)) this.toggleSidebarStage();
+    if (isHotkey(e, TOGGLE_HOTKEY.CODE)) this.toggleSidebarStage();
   }
 
   onClosedSidebarClick() {
