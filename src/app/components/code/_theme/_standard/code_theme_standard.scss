@@ -7,7 +7,7 @@
   line-height: 1;
   border: 1px solid var(--stroke-color--primary);
   border-radius: 4px;
-  background-color: $light-gray;
+  background-color: var(--background-color--code);
 
   @media print {
     background: none;
