@@ -23,7 +23,7 @@
     text-decoration: none;
     text-overflow: ellipsis;
     vertical-align: top;
-    color: $color--body;
+    color: var(--color--body);
 
     // https://github.com/postcss/autoprefixer/issues/776
     /* autoprefixer: ignore next */

@@ -13,7 +13,7 @@
   @media print {
     border: 1px dashed $dark-blue;
     background: none;
-    color: $color--body;
+    color: var(--color--body);
   }
 
   + .action-card__href {

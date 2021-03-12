@@ -2,7 +2,7 @@
   color: $color--highlight;
 
   @media print {
-    color: $color--body;
+    color: var(--color--body);
   }
 
   &::after {
