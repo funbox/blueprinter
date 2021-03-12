@@ -1,5 +1,5 @@
 .transition__example-label_selected {
-  color: $color--highlight;
+  color: var(--color--highlight);
 
   @media print {
     color: var(--color--body);
@@ -13,7 +13,7 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: $color--highlight;
+    background-color: var(--color--highlight);
 
     @media print {
       display: none;

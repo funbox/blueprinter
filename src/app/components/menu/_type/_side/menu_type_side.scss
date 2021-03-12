@@ -86,7 +86,7 @@
 
   .menu__item-title_highlighted {
     > .menu__item-text {
-      color: $color--highlight;
+      color: var(--color--highlight);
     }
   }
 }

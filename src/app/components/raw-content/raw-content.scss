@@ -81,7 +81,7 @@
 
   a {
     text-decoration: none;
-    color: $color--highlight;
+    color: var(--color--highlight);
 
     &:focus,
     &:hover {

@@ -25,7 +25,7 @@
 
   &:hover {
     @media not print {
-      color: $color--highlight;
+      color: var(--color--highlight);
       cursor: pointer;
     }
   }
