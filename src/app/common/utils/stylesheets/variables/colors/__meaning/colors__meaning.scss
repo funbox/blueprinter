@@ -54,6 +54,11 @@ $post-method-color--primary: $green;
 
   --color--searh-result-hint: #{$cloudy-gray};
   --background-color--searh-result-hover: var(--light-gray-50);
+
+  --color--header: #{$dark-red};
+  --color--number: #{$dark-red};
+  --color--string: #{$blue};
+  --color--query-value: #{$orange};
 }
 
 @mixin dark-css-vars() {
