@@ -4,7 +4,7 @@
   margin: 0;
   padding: 12px;
   border-radius: 3px;
-  background-color: rgba(15, 115, 238, .08);
+  background-color: rgba($blue, .08);
 
   @media print {
     padding: 4px;
