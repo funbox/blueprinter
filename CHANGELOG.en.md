@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.44.0 (12.03.2021)
+
+* Update test documentation.
+
 ## 3.43.0 (05.03.2021)
 
 * Update elements style after moving to Figma.
