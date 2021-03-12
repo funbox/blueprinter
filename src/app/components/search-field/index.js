@@ -5,6 +5,7 @@ require('../mark/mark.scss');
 require('./__icon/search-field__icon.scss');
 require('./__badge/search-field__badge.scss');
 require('./__clear-button/search-field__clear-button.scss');
+require('./__clear-button-icon/search-field__clear-button-icon.scss');
 require('./__dropdown/search-field__dropdown.scss');
 require('./__field/search-field__field.scss');
 require('./__input/search-field__input.scss');

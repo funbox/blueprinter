@@ -1,12 +1,15 @@
 @import '../seach-field.vars';
 
 .search-field__clear-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: $search-field-height;
   height: $search-field-height;
-  background: transparent url('./search-field__clear-button.svg') no-repeat center;
-  background-size: 10px;
+  color: var(--color--search-field-clear);
 
-  &:hover, &:focus {
-    background-image: url('./search-field__clear-button--focused.svg');
+  &:hover,
+  &:focus {
+    color: var(--color--body);
   }
 }

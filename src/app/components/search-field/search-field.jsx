@@ -7,6 +7,7 @@ import locationParams from 'app/common/utils/helpers/location-params';
 
 import SearchField__OptionList from './__option-list';
 
+import SearchField__ClearButtonIcon from './__clear-button-icon/search-field__clear-button-icon.svg?inline';
 import SearchField__Icon from './__icon/search-field__icon.svg?inline';
 
 const SEARCH_OPTIONS_PER_FRAME = 10;
@@ -273,6 +274,10 @@ class SearchField extends React.Component {
               mix={[b('search-field__clear-button')]}
               mods={{
                 onlyIcon: true,
+              }}
+              icon={{
+                content: <SearchField__ClearButtonIcon/>,
+                mix: b('search-field__clear-button-icon'),
               }}
               htmlFor="search-field-input"
               text="Очистить поле"
