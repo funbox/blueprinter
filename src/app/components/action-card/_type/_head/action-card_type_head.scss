@@ -8,7 +8,7 @@
   }
 
   .action-card__method-href-container {
-    background-color: rgba($head-method-color--primary, .08);
+    background-color: var(--background-color--action-card-standard);
 
     @media print {
       background: none;

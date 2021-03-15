@@ -6,6 +6,6 @@
   font-size: 12px;
   line-height: 16px;
   border-radius: 3px;
-  background-color: $blue;
-  color: $white;
+  background-color: var(--background-color--message-card-link);
+  color: var(--color--badge);
 }

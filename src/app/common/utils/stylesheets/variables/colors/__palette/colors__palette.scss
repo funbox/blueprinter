@@ -6,14 +6,14 @@ $orange: #ffa625;
 $green: #1ebc86;
 $blue: #0f73ee;
 
+$gray: #e8eaed;
+$light-gray: #f4f5f7;
+
 @mixin light-css-colors() {
   $dark-red: #d33653;
   $text-blue: #253cff;
   $dark-blue: #14182f;
   $dark-gray: #8b929c;
-  $gray: #e8eaed;
-  $light-gray: #f4f5f7;
-  $white: #fff;
   $gray-shadow: #d5d8dd;
 
   // Light theme defined colors
@@ -30,10 +30,18 @@ $blue: #0f73ee;
   --light-gray-50: #{rgba($light-gray, .5)};
   --red-5: #{rgba($red, .05)};
   --blue-5: #{rgba($blue, .05)};
+  --blue-8: #{rgba($blue, .08)};
+  --green-10: #{rgba($green, .1)};
+  --red-8: #{rgba($red, .08)};
+  --orange-8: #{rgba($orange, .08)};
   --gray-shadow-50: #{rgba($gray-shadow, .5)};
 }
 
 @mixin dark-css-colors() {
+  // Universal colors with opacity
+  --gray-10: #{rgba($gray, .1)};
+  --light-gray-10: #{rgba($light-gray, .1)};
+
   $text-blue: #538bf7;
   $dark-blue: #292b37;
   $dark-gray: #7c7f89;
@@ -54,6 +62,10 @@ $blue: #0f73ee;
 
   // Colors with opacity
   --gray-60: #{rgba($gray, .6)};
+  --text-blue-15: #{rgba($text-blue, .15)};
+  --green-15: #{rgba($green, .15)};
+  --red-15: #{rgba($red, .15)};
+  --orange-15: #{rgba($orange, .15)};
   --gray-shadow-50: #{rgba($gray-shadow, .5)};
 
   // Dark theme defined colors,

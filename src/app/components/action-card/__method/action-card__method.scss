@@ -7,8 +7,7 @@
   font-weight: 700;
   line-height: 16px;
   border-radius: 3px;
-  background-color: $blue;
-  color: $white;
+  color: var(--color--badge);
 
   @media print {
     border: 1px dashed var(--stroke-color--secondary);

@@ -13,7 +13,6 @@ $post-method-color--primary: $green;
   --color--secondary: var(--dark-gray);
   --color--highlight: var(--text-blue);
   --color--error: #{$red};
-  --color--error-secondary: var(--dark-red);
   --color--note: #{$blue};
   --color--badge: #{$white};
   --color--heading-print: #{$blue};
@@ -34,6 +33,7 @@ $post-method-color--primary: $green;
   --background-color--table-highlight: var(--light-gray);
   --background-color--href: var(--background-color--body);
 
+  --stroke-color--href: var(--gray);
   --stroke-color--checkbox-checked: var(--text-blue);
   --stroke-color--checkbox-hover: #{$blue};
   --stroke-color--checkbox-disabled: var(--gray);
@@ -66,6 +66,15 @@ $post-method-color--primary: $green;
   --color--number: var(--dark-red);
   --color--string: #{$blue};
   --color--query-value: #{$orange};
+
+  --background-color--action-card-standard: var(--blue-8);
+  --background-color--action-card-post: var(--green-10);
+  --background-color--action-card-delete: var(--red-8);
+  --background-color--action-card-patch: var(--orange-8);
+  --background-color--action-card-put: var(--orange-8);
+
+  --background-color--message-card-container: var(--blue-8);
+  --background-color--message-card-link: #{$blue};
 }
 
 @mixin dark-css-vars() {
@@ -84,4 +93,19 @@ $post-method-color--primary: $green;
 
   --color--searh-result-hint: var(--dark-gray);
   --background-color--searh-result-hover: var(--light-gray);
+
+  --background-color--href: var(--light-gray-10);
+  --stroke-color--href: var(--gray-10);
+
+  --color--number: #{$red};
+  --color--header: #{$red};
+  --color--string: var(--text-blue);
+
+  --background-color--action-card-standard: var(--text-blue-15);
+  --background-color--action-card-post: var(--green-15);
+  --background-color--action-card-delete: var(--red-15);
+  --background-color--action-card-patch: var(--orange-15);
+  --background-color--action-card-put: var(--orange-15);
+
+  --background-color--message-card-container: var(--text-blue-15);
 }

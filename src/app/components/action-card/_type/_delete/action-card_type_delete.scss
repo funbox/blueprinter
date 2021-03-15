@@ -8,7 +8,7 @@
   }
 
   .action-card__method-href-container {
-    background-color: rgba($delete-method-color--primary, .08);
+    background-color: var(--background-color--action-card-delete);
 
     @media print {
       background: none;
