@@ -3,56 +3,21 @@
 /* Original theme - https://github.com/chriskempson/tomorrow-theme */
 /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
 
-/* Tomorrow Comment */
-.hljs-comment,
-.hljs-quote {
-  color: #969896;
-}
-
 /* Tomorrow Red */
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag,
-.hljs-name,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-regexp,
-.hljs-attribute,
-.hljs-attr,
-.hljs-deletion {
+.hljs-attr {
   color: var(--color--body);
 }
 
 /* Tomorrow Orange */
 .hljs-number,
-.hljs-built_in,
-.hljs-builtin-name,
 .hljs-literal,
-.hljs-type,
-.hljs-params,
-.hljs-meta,
-.hljs-link {
+.hljs-params {
   color: var(--color--number);
 }
 
 /* Tomorrow Green */
-.hljs-string,
-.hljs-symbol,
-.hljs-bullet,
-.hljs-addition {
+.hljs-string {
   color: var(--color--string);
-}
-
-/* Tomorrow Blue */
-.hljs-title,
-.hljs-section {
-  color: #81a2be;
-}
-
-/* Tomorrow Purple */
-.hljs-keyword,
-.hljs-selector-tag {
-  color: #b294bb;
 }
 
 /* Query String Value */
