@@ -1,5 +1,7 @@
 import Button from 'fb-base-blocks/button';
 
+import Notification__CloseButtonIcon from './__close-button-icon/notification__close-button-icon.svg?inline';
+
 const propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,
@@ -21,6 +23,10 @@ const Notification = (props) => (
       text="Закрыть"
       mods={{
         onlyIcon: true,
+      }}
+      icon={{
+        content: <Notification__CloseButtonIcon/>,
+        mix: b('notification__close-button-icon'),
       }}
       onClick={props.onClose}
     />
