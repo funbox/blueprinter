@@ -18,7 +18,7 @@ export default () => {
           У чекбокса стандартная тема по-умолчанию:
         </SandboxParagraph>
 
-        <SandboxDemo>
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
           <CheckboxField
             mods={{ checked: checked.usual }}
             onChange={(state) => onChange((prevState) => ({ ...prevState, usual: state }))}
@@ -35,7 +35,7 @@ export default () => {
           </InlineCode>
         </SandboxParagraph>
 
-        <SandboxDemo>
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
           <CheckboxField
             mods={{
               hiddenLabel: true,
@@ -51,19 +51,22 @@ export default () => {
           Все состояния чекбокса в статике:
         </SandboxParagraph>
 
-        <SandboxDemo>
-          <p>
-            Пустой:
-          </p>
+        <SandboxParagraph>
+          Пустой:
+        </SandboxParagraph>
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
           <CheckboxField
             onChange={() => {}}
           >
             Вариант 1
           </CheckboxField>
+        </SandboxDemo>
 
-          <p>
-            Отмеченный:
-          </p>
+        <SandboxParagraph>
+          Отмеченный:
+        </SandboxParagraph>
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
+
           <CheckboxField
             mods={{
               checked: true,
@@ -72,10 +75,12 @@ export default () => {
           >
             Вариант 2
           </CheckboxField>
+        </SandboxDemo>
+        <SandboxParagraph>
 
-          <p>
-            Пустой, отключенный:
-          </p>
+          Пустой, отключенный:
+        </SandboxParagraph>
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
           <CheckboxField
             mods={{
               disabled: true,
@@ -84,9 +89,13 @@ export default () => {
           >
             Вариант 1
           </CheckboxField>
-          <p>
-            Отмеченный, отключенный:
-          </p>
+        </SandboxDemo>
+
+        <SandboxParagraph>
+          Отмеченный, отключенный:
+        </SandboxParagraph>
+
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
           <CheckboxField
             mods={{
               checked: true,
@@ -102,7 +111,7 @@ export default () => {
           Чекбокс с длинной подписью в несколько строк:
         </SandboxParagraph>
 
-        <SandboxDemo>
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
           <CheckboxField
             mods={{
               checked: true,
@@ -131,7 +140,7 @@ export default () => {
           .
         </SandboxParagraph>
 
-        <SandboxDemo>
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
           <Toggler
             mods={{
               checked: checked.toggler,
@@ -146,19 +155,21 @@ export default () => {
           Все состояния переключателя в статике:
         </SandboxParagraph>
 
-        <SandboxDemo>
-          <p>
-            Пустой:
-          </p>
+        <SandboxParagraph>
+          Пустой:
+        </SandboxParagraph>
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
           <Toggler
             onChange={() => {}}
           >
             Вариант 1
           </Toggler>
+        </SandboxDemo>
 
-          <p>
-            Отмеченный:
-          </p>
+        <SandboxParagraph>
+          Отмеченный:
+        </SandboxParagraph>
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
           <Toggler
             mods={{
               checked: true,
@@ -167,10 +178,12 @@ export default () => {
           >
             Вариант 2
           </Toggler>
+        </SandboxDemo>
 
-          <p>
-            Пустой, отключенный:
-          </p>
+        <SandboxParagraph>
+          Пустой, отключенный:
+        </SandboxParagraph>
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
           <Toggler
             mods={{
               disabled: true,
@@ -179,9 +192,12 @@ export default () => {
           >
             Вариант 1
           </Toggler>
-          <p>
-            Отмеченный, отключенный:
-          </p>
+        </SandboxDemo>
+
+        <SandboxParagraph>
+          Отмеченный, отключенный:
+        </SandboxParagraph>
+        <SandboxDemo mods={{ hasThemeToggler: true }}>
           <Toggler
             mods={{
               checked: true,

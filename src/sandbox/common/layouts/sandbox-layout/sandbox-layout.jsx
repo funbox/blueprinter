@@ -1,11 +1,12 @@
 import Page, {
   Page__Body,
   Page__Aside,
+  Page__AsideElement,
   Page__Layout,
 } from 'app/components/page';
 import Sidebar from 'app/components/sidebar';
 import PageTitle from 'app/components/page-title';
-
+import ThemeToggler from 'app/components/theme-toggler';
 import SandboxNavigation from 'sandbox/components/sandbox-navigation';
 
 export default class SandboxLayout extends React.Component {
@@ -33,7 +34,14 @@ export default class SandboxLayout extends React.Component {
             </Page__Aside>
           </Sidebar>
 
-          <Page__Body>{children}</Page__Body>
+          <Page__Body>
+            <Page__Aside mods={{ for: 'actions' }}>
+              <Page__AsideElement mods={{ for: 'theme-toggler' }}>
+                <ThemeToggler/>
+              </Page__AsideElement>
+            </Page__Aside>
+            {children}
+          </Page__Body>
         </Page__Layout>
       </Page>
     );

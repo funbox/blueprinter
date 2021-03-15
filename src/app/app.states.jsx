@@ -1,7 +1,8 @@
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
-import App from './components/app';
+import ThemeProvider from 'app/common/providers/theme-provider';
+import App from 'app/components/app';
 
 const sandbox = () => {
   if (ENV !== 'production') {
@@ -14,10 +15,12 @@ const sandbox = () => {
 
 const component = () => (
   <HashRouter basename={BASE_PATH}>
-    <Switch>
-      {sandbox()}
-      <Route component={App}/>
-    </Switch>
+    <ThemeProvider>
+      <Switch>
+        {sandbox()}
+        <Route component={App}/>
+      </Switch>
+    </ThemeProvider>
   </HashRouter>
 );
 

@@ -1,0 +1,23 @@
+.sandbox-demo_has-theme-toggler {
+  @include light-css-vars;
+
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, .2);
+  background-color: var(--background-color--body);
+  color: var(--color--body);
+
+  .sandbox-demo__canvas {
+    align-self: center;
+  }
+
+  .sandbox-demo__theme-toggler {
+    margin-left: 100px;
+  }
+
+  &.sandbox-demo_theme_dark {
+    @include dark-css-vars;
+  }
+}
