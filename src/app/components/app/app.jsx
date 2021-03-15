@@ -50,10 +50,12 @@ export default class App extends React.Component {
   render() {
     if (topLevelMeta.error) {
       return (
-        <Error
-          error={topLevelMeta.error}
-          warnings={topLevelMeta.warnings}
-        />
+        <ThemeProvider>
+          <Error
+            error={topLevelMeta.error}
+            warnings={topLevelMeta.warnings}
+          />
+        </ThemeProvider>
       );
     }
 
