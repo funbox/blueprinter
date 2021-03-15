@@ -14,7 +14,7 @@ $post-method-color--primary: $green;
   --color--highlight: var(--text-blue);
   --color--blockquote: var(--dark-blue-50);
   --color--error: #{$red};
-  --color--error-secondary: #{$dark-red};
+  --color--error-secondary: var(--dark-red);
   --color--note: #{$blue};
   --color--badge: #{$white};
   --color--heading-print: #{$blue};
@@ -59,8 +59,8 @@ $post-method-color--primary: $green;
   --color--searh-result-hint: #{$cloudy-gray};
   --background-color--searh-result-hover: var(--light-gray-50);
 
-  --color--header: #{$dark-red};
-  --color--number: #{$dark-red};
+  --color--header: var(--dark-red);
+  --color--number: var(--dark-red);
   --color--string: #{$blue};
   --color--query-value: #{$orange};
 }

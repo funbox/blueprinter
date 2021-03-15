@@ -2,12 +2,12 @@
 $white: #fff;
 $cloudy-gray: #c5c8cd;
 $red: #ff4e4e;
-$dark-red: #d33653;
 $orange: #ffa625;
 $green: #1ebc86;
 $blue: #0f73ee;
 
 @mixin light-css-colors() {
+  $dark-red: #d33653;
   $text-blue: #253cff;
   $dark-blue: #14182f;
   $dark-gray: #8b929c;
@@ -16,6 +16,7 @@ $blue: #0f73ee;
   $white: #fff;
 
   // Light theme defined colors
+  --dark-red: #{$dark-red};
   --text-blue: #{$text-blue};
   --dark-blue: #{$dark-blue};
   --dark-gray: #{$dark-gray};
