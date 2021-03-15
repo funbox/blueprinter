@@ -1,7 +1,7 @@
 .inline-code {
   padding: 1px 4px;
   font-family: monospace;
-  border: 1px solid #ccc;
+  border: 1px solid var(--stroke-color--primary);
   border-radius: 3px;
-  background: #f2f2f2;
+  background: var(--background-color--code);
 }

@@ -3,20 +3,11 @@
   position: relative;
   width: 20px;
   text-decoration: none;
-  color: #ccc;
+  color: var(--color--secondary);
   transition: color .2s;
 
   &:hover,
   &:focus {
-    opacity: 1;
-    color: #000;
-  }
-}
-
-.sandbox-anchor-context {
-  &:target {
-    .sandbox-anchor {
-      color: #00f;
-    }
+    color: var(--color--body);
   }
 }

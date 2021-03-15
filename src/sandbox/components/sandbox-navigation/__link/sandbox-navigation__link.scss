@@ -7,11 +7,11 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
-  color: #14182f;
+  color: var(--color--body);
 
   &:hover,
   &:focus {
     outline: none;
-    background-color: #eceef2;
+    background-color: var(--background-color--menu-hover);
   }
 }

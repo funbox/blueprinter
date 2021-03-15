@@ -5,11 +5,11 @@
   text-decoration: none;
   font-size: 14px;
   line-height: 20px;
-  color: #14182f;
+  color: var(--color--body);
 
   &:hover,
   &:focus {
     outline: none;
-    color: #253cff;
+    color: var(--color--highlight);
   }
 }

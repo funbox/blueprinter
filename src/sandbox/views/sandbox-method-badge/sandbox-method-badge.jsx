@@ -24,7 +24,7 @@ export default class SandboxMethodBadge extends React.Component {
             <InlineCode>mods={'{{ type: method }}'}</InlineCode>, где method - один из методов из таблицы ниже.
           </SandboxParagraph>
 
-          <SandboxDemo mods={{ theme: 'air' }}>
+          <SandboxDemo>
             <SandboxTable
               data={badgeTableRows}
               mods={{ for: 'method-badges' }}
