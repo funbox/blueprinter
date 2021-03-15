@@ -1,3 +1,13 @@
+@import '../../colors/colors-sandbox-theme.scss';
+
 .sandbox-layout {
   min-width: 1024px;
+
+  @include light-css-vars-sandbox;
+
+  &.sandbox-layout_theme_dark {
+    @media not print {
+      @include dark-css-vars-sandbox;
+    }
+  }
 }

@@ -16,7 +16,7 @@ export default class SandboxLayout extends React.Component {
     } = this.props;
 
     return (
-      <Page mix="sandbox-layout">
+      <Page mix={b('sandbox-layout', this.props)}>
         <Page__Layout>
           <Sidebar
             mix="page__sidebar"
@@ -50,4 +50,7 @@ export default class SandboxLayout extends React.Component {
 
 SandboxLayout.propTypes = {
   children: PropTypes.node,
+  mods: PropTypes.shape({
+    theme: PropTypes.string,
+  }),
 };

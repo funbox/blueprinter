@@ -1,0 +1,18 @@
+@mixin light-css-vars-sandbox() {
+  $dark-blue: #14182f;
+
+  --background-color--button-sandbox: var(--light-gray);
+  --background-color--sandbox-demo: var(--light-gray);
+  --background-color--button-sandbox-sandbox-hover: var(--gray-60);
+
+  --box-shadow--sandbox-demo: #{rgba($dark-blue, .1)};
+}
+
+@mixin dark-css-vars-sandbox() {
+  $dark-blue: #292b37;
+
+  --background-color--button-sandbox: var(--dark-blue);
+  --background-color--sandbox-demo: var(--dark-blue);
+
+  --box-shadow--sandbox-demo: #{rgba($dark-blue, .3)};
+}

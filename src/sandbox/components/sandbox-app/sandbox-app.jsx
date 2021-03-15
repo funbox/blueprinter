@@ -9,20 +9,31 @@ import SandboxRequestResponseBlock from 'sandbox/views/sandbox-request-response-
 import SandboxSearch from 'sandbox/views/sandbox-search';
 import SandboxCheckbox from 'sandbox/views/sandbox-checkbox';
 import SandboxThemeToggler from 'sandbox/views/sandbox-theme-toggler';
+import withTheme from 'app/common/HOCs/with-theme';
 
-const SandboxApp = () => (
-  <SandboxLayout>
-    <Switch>
-      <Route exact path="/sandbox" component={SandboxHome}/>
-      <Route exact path="/sandbox/side-menu" component={SandboxSideMenu}/>
-      <Route exact path="/sandbox/method-badge" component={SandboxMethodBadge}/>
-      <Route exact path="/sandbox/raw-content" component={SandboxContentSection}/>
-      <Route exact path="/sandbox/request-response" component={SandboxRequestResponseBlock}/>
-      <Route exact path="/sandbox/search" component={SandboxSearch}/>
-      <Route exact path="/sandbox/checkbox" component={SandboxCheckbox}/>
-      <Route exact path="/sandbox/theme-toggler" component={SandboxThemeToggler}/>
-    </Switch>
-  </SandboxLayout>
-);
+const propTypes = {
+  theme: PropTypes.string.isRequired,
+};
 
-export default SandboxApp;
+const SandboxApp = (props) => {
+  const { theme } = props;
+
+  return (
+    <SandboxLayout mods={{ theme }}>
+      <Switch>
+        <Route exact path="/sandbox" component={SandboxHome}/>
+        <Route exact path="/sandbox/side-menu" component={SandboxSideMenu}/>
+        <Route exact path="/sandbox/method-badge" component={SandboxMethodBadge}/>
+        <Route exact path="/sandbox/raw-content" component={SandboxContentSection}/>
+        <Route exact path="/sandbox/request-response" component={SandboxRequestResponseBlock}/>
+        <Route exact path="/sandbox/search" component={SandboxSearch}/>
+        <Route exact path="/sandbox/checkbox" component={SandboxCheckbox}/>
+        <Route exact path="/sandbox/theme-toggler" component={SandboxThemeToggler}/>
+      </Switch>
+    </SandboxLayout>
+  );
+};
+
+SandboxApp.propTypes = propTypes;
+
+export default withTheme(SandboxApp);
