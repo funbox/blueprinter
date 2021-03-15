@@ -1,4 +1,6 @@
 .button_only-icon {
+  position: relative;
+
   .button__text {
     @include visually-hidden;
   }
