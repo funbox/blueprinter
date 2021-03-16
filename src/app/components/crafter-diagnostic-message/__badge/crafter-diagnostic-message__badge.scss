@@ -1,0 +1,16 @@
+.crafter-diagnostic-message__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  text-transform: uppercase;
+  font-family: $baseFontStack_code;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 3px;
+  color: var(--stroke-color--crafter-info-badge);
+
+  + .crafter-diagnostic-message__title {
+    margin-top: 16px;
+  }
+}
