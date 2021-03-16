@@ -1,4 +1,4 @@
 .method-badge_type_put {
-  border-color: $put-method-color--primary;
-  color: $put-method-color--primary;
+  border-color: var(--stroke-color--method-put);
+  color: var(--color--method-put);
 }

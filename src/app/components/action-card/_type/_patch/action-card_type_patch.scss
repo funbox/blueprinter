@@ -1,6 +1,6 @@
 .action-card_type_patch {
   .action-card__method {
-    background-color: $patch-method-color--primary;
+    background-color: var(--background-color--method-patch);
 
     @media print {
       background: none;
@@ -16,6 +16,6 @@
   }
 
   .action-card__example-method {
-    color: $patch-method-color--primary;
+    color: var(--color--method-patch);
   }
 }

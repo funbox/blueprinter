@@ -1,4 +1,4 @@
 .method-badge_type_head {
-  border-color: $head-method-color--primary;
-  color: $head-method-color--primary;
+  border-color: var(--stroke-color--method-standard);
+  color: var(--color--method-standard);
 }

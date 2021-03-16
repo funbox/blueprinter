@@ -1,11 +1,3 @@
-$delete-method-color--primary: $red;
-$get-method-color--primary: $blue;
-$head-method-color--primary: $blue;
-$options-method-color--primary: $blue;
-$patch-method-color--primary: $orange;
-$put-method-color--primary: $orange;
-$post-method-color--primary: $green;
-
 @mixin light-css-vars() {
   @include light-css-colors;
 
@@ -72,6 +64,26 @@ $post-method-color--primary: $green;
   --background-color--action-card-delete: var(--red-8);
   --background-color--action-card-patch: var(--orange-8);
   --background-color--action-card-put: var(--orange-8);
+
+  --color--method-standard: #{$blue};
+  --background-color--method-standard: #{$blue};
+  --stroke-color--method-standard: #{$blue};
+
+  --color--method-post: #{$green};
+  --background-color--method-post: #{$green};
+  --stroke-color--method-post: #{$green};
+
+  --color--method-delete: #{$red};
+  --background-color--method-delete: #{$red};
+  --stroke-color--method-delete: #{$red};
+
+  --color--method-patch: #{$orange};
+  --background-color--method-patch: #{$orange};
+  --stroke-color--method-patch: #{$orange};
+
+  --color--method-put: #{$orange};
+  --background-color--method-put: #{$orange};
+  --stroke-color--method-put: #{$orange};
 
   --background-color--message-card-container: var(--blue-8);
   --background-color--message-card-link: #{$blue};

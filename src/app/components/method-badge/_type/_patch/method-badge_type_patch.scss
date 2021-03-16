@@ -1,4 +1,4 @@
 .method-badge_type_patch {
-  border-color: $patch-method-color--primary;
-  color: $patch-method-color--primary;
+  border-color: var(--stroke-color--method-patch);
+  color: var(--color--method-patch);
 }

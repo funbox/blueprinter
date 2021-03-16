@@ -1,4 +1,4 @@
 .method-badge_type_message {
-  border-color: $get-method-color--primary;
-  color: $get-method-color--primary;
+  border-color: var(--stroke-color--method-standard);
+  color: var(--color--method-standard);
 }

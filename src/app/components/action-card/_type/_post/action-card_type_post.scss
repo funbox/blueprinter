@@ -1,6 +1,6 @@
 .action-card_type_post {
   .action-card__method {
-    background-color: $post-method-color--primary;
+    background-color: var(--background-color--method-post);
 
     @media print {
       background: none;
@@ -16,6 +16,6 @@
   }
 
   .action-card__example-method {
-    color: $post-method-color--primary;
+    color: var(--color--method-post);
   }
 }

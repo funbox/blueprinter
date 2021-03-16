@@ -1,6 +1,6 @@
 .action-card_type_put {
   .action-card__method {
-    background-color: $put-method-color--primary;
+    background-color: var(--background-color--method-put);
 
     @media print {
       background: none;
@@ -16,6 +16,6 @@
   }
 
   .action-card__example-method {
-    color: $put-method-color--primary;
+    color: var(--color--method-put);
   }
 }

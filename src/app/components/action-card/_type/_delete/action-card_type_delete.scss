@@ -1,6 +1,6 @@
 .action-card_type_delete {
   .action-card__method {
-    background-color: $delete-method-color--primary;
+    background-color: var(--background-color--method-delete);
 
     @media print {
       background: none;
@@ -16,6 +16,6 @@
   }
 
   .action-card__example-method {
-    color: $delete-method-color--primary;
+    color: var(--color--method-delete);
   }
 }
