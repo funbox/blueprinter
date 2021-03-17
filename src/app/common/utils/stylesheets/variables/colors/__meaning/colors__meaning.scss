@@ -5,6 +5,7 @@
   --color--secondary: var(--dark-gray);
   --color--highlight: var(--text-blue);
   --color--error: #{$red};
+  --color--error-secondary: var(--dark-red);
   --color--note: #{$blue};
   --color--badge: #{$white};
   --color--heading-print: #{$blue};
@@ -13,6 +14,7 @@
   --stroke-color--secondary: var(--dark-blue);
   --stroke-color--error: #{$red};
   --stroke-color--note: #{$blue};
+  --stroke-color--crafter-info-badge: var(--white);
 
   --background-color--body: var(--white);
   --background-color--scrollbar: #{$cloudy-gray};
@@ -93,6 +95,7 @@
   @include dark-css-colors;
 
   --color--body: var(--white);
+  --color--error-secondary: #{$red};
   --background-color--body: var(--nightfall-blue);
   --background-color--scrollbar: var(--dark-gray);
 
