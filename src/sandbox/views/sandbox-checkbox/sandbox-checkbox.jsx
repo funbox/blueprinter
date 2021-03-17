@@ -3,8 +3,8 @@ import SandboxDemo from 'sandbox/components/sandbox-demo';
 import SandboxParagraph from 'sandbox/components/sandbox-paragraph';
 import InlineCode from 'sandbox/components/inline-code';
 
-import CheckboxField from 'fb-base-blocks/checkbox-field';
-import Toggler from 'fb-base-blocks/toggler';
+import CheckboxField from 'app/components/checkbox-field';
+import Toggler from 'app/components/toggler';
 
 export default () => {
   const [checked, onChange] = React.useState({ usual: false, hiddenLabel: false, toggler: false });

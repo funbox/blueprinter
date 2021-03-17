@@ -1,4 +1,4 @@
-import Toggler from 'fb-base-blocks/toggler';
+import Toggler from 'app/components/toggler';
 import { Theme, THEME_HOTKEY } from 'app/constants/ui-themes';
 import withTheme from 'app/common/HOCs/with-theme';
 

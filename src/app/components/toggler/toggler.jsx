@@ -1,4 +1,4 @@
-import CheckboxField, { propTypes } from '../checkbox-field';
+import CheckboxField, { propTypes } from 'app/components/checkbox-field';
 
 const Toggler = (props) => {
   const { mods, ...rest } = props;
