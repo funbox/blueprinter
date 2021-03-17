@@ -1,4 +1,6 @@
 .page__navigation {
+  @include scrollbar;
+
   overflow-y: auto;
   margin-top: 22px;
 }

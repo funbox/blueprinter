@@ -293,6 +293,7 @@ class SearchField extends React.Component {
           {
             items.length > 0 && (
               <FixedSizeList
+                className={b('search-field__dropdown-scrollable')}
                 height={dropdownHeight}
                 width="100%"
                 itemCount={items.length}

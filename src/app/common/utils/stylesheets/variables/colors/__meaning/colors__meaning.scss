@@ -24,6 +24,7 @@ $post-method-color--primary: $green;
   --stroke-color--note: #{$blue};
 
   --background-color--body: var(--white);
+  --background-color--scrollbar: #{$cloudy-gray};
   --background-color--sidebar: var(--light-gray);
   --background-color--code: var(--light-gray);
   --background-color--error: #{$red};
@@ -72,6 +73,7 @@ $post-method-color--primary: $green;
 
   --color--body: var(--white);
   --background-color--body: var(--nightfall-blue);
+  --background-color--scrollbar: var(--dark-gray);
 
   --background-color--sidebar: var(--dark-blue);
 
