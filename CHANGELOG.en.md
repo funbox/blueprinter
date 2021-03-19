@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.45.0 (19.03.2021)
+
+* Delete fibers.
+
 ## 3.44.0 (12.03.2021)
 
 * Update test documentation.
