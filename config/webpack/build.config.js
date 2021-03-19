@@ -62,5 +62,8 @@ module.exports = merge(
       }),
       new Csso(),
     ],
+    stats: {
+      children: false,
+    },
   },
 );
