@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.45.2 (22.03.2021)
+
+* Setup node_modules caching.
+
 ## 3.45.1 (22.03.2021)
 
 * Disable pipeline for tags.
