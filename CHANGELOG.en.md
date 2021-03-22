@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.45.1 (22.03.2021)
+
+* Disable pipeline for tags.
+
 ## 3.45.0 (19.03.2021)
 
 * Delete fibers.
