@@ -22,7 +22,7 @@
     "lint:js": "eslint --cache -c .eslintrc.js --ext .jsx,.js src config",
     "lint:test": "eslint -c tests/.eslintrc tests",
     "lint": "npm run -s lint:scss && npm run -s lint:js && npm run -s lint:test",
-    "prebuild": "npm run lint && npm run test",
+    "prebuild": "npm run lint",
     "prepublishOnly": "npm run build-static",
     "test": "jest --coverage"
   },
