@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.45.3 (24.03.2021)
+
+* Package auto publishing.
+
 ## 3.45.2 (22.03.2021)
 
 * Setup node_modules caching.
