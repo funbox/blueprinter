@@ -24,7 +24,6 @@
     "lint": "npm run -s lint:scss && npm run -s lint:js && npm run -s lint:test",
     "prebuild": "npm run lint && npm run test",
     "prepublishOnly": "npm run build-static",
-    "postpublish": "bash ./build-docker.sh",
     "test": "jest --coverage"
   },
   "dependencies": {
