@@ -1,7 +1,7 @@
 #!/bin/sh
 
 IMAGE_NAME="funbox/blueprinter"
-CRAFTER_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')
+BLUEPRINTER_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')
 
 docker build --build-arg BLUEPRINTER_VERSION=$BLUEPRINTER_VERSION -t $IMAGE_NAME:$BLUEPRINTER_VERSION - < Dockerfile
 docker push $IMAGE_NAME:$BLUEPRINTER_VERSION
