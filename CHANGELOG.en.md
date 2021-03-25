@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.46.0 (25.03.2021)
+
+* Separate test and build jobs.
+
 ## 3.45.3 (24.03.2021)
 
 * Package auto publishing.
