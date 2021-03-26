@@ -90,6 +90,20 @@
         + text (string)
 
 + Response 200 (application/json)
+  Enum nullable и non-nullable
+    + Attributes
+        + `interval` (enum[number], nullable)
+            + 0 - мониторинг в режиме Онлайн
+            + 15 - мониторинг каждые 15 минут
+            + 30 - мониторинг каждые 30 минут
+            + 60 - мониторинг каждый час
+        + `caller_category` (enum)
+            + spam - Массовый обзвон
+            + fraud - Злокачественный массовый обзвон
+            + ok - Полезный звонок
+            + trusted - Доверенный вызов от партнера
+
++ Response 200 (application/json)
   One Of
     + Attributes
         + One of
