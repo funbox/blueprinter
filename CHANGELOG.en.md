@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.46.2 (29.03.2021)
+
+* Update repository links.
+
 ## 3.46.1 (29.03.2021)
 
 * Delete `no_proxy` variable.
