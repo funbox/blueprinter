@@ -1,8 +1,9 @@
 import Code from 'app/components/code';
 import { get } from 'app/common/utils/helpers/getters';
+import { optionMetaShape, isOptionSelected } from 'app/common/utils/helpers/body-generation';
 
 const Attribute__Row = (props) => {
-  const { attributeData, parentType } = props;
+  const { attributeData, parentType, onOptionSelect, selectedOptions } = props;
   const {
     attributeKey,
     attributeType,
@@ -11,6 +12,7 @@ const Attribute__Row = (props) => {
     attributeDescription,
     attributeStructureName,
     recursive,
+    optionMeta,
   } = attributeData;
 
   const enumMember = parentType === 'enum';
@@ -80,6 +82,19 @@ const Attribute__Row = (props) => {
             {attributeExample.toString()}
           </p>
         )}
+        {oneOfMember && (
+          <input
+            type="checkbox"
+            title="Показать пример Body"
+            checked={isOptionSelected(optionMeta.id, selectedOptions)}
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+            onChange={(event) => {
+              onOptionSelect(optionMeta, event.target.checked);
+            }}
+          />
+        )}
       </dd>
     </dl>
   );
@@ -98,9 +113,12 @@ Attribute__Row.propTypes = {
       PropTypes.object,
     ),
     attributeDescription: PropTypes.string,
+    optionMeta: optionMetaShape,
   }),
   parentType: PropTypes.string,
   onClick: PropTypes.func,
+  onOptionSelect: PropTypes.func,
+  selectedOptions: PropTypes.arrayOf(optionMetaShape),
 };
 
 function getAttributePropContent(prop) {

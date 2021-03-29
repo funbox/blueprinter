@@ -6,6 +6,8 @@ import Code from 'app/components/code';
 import RawContent from 'app/components/raw-content';
 import { htmlFromText } from 'app/common/utils/helpers';
 
+import { addOptionMetaToAttributes, generateBody } from 'app/common/utils/helpers/body-generation';
+
 import Transition__ExampleList from '../__example-list';
 
 export const propTypes = {
@@ -35,11 +37,13 @@ class Transition__Body extends React.PureComponent {
 
     this.state = {
       selectedTransaction: props.availableTransactions[0],
+      selectedOptions: [],
     };
 
     this.availableTransactions = props.availableTransactions;
 
     this.onOptionLabelClick = this.onOptionLabelClick.bind(this);
+    this.onOptionSelect = this.onOptionSelect.bind(this);
   }
 
   onOptionLabelClick(labelId) {
@@ -47,7 +51,23 @@ class Transition__Body extends React.PureComponent {
       availableTransactions,
     } = this.props;
     const selectedTransaction = availableTransactions[labelId];
-    this.setState({ selectedTransaction });
+    this.setState({
+      selectedTransaction,
+      selectedOptions: [],
+    });
+  }
+
+  onOptionSelect(optionMeta, selected) {
+    this.setState(prevState => {
+      if (selected) {
+        return {
+          selectedOptions: [...prevState.selectedOptions, optionMeta],
+        };
+      }
+      return {
+        selectedOptions: prevState.selectedOptions.filter(opt => opt.id !== optionMeta.id),
+      };
+    });
   }
 
   render() {
@@ -58,6 +78,7 @@ class Transition__Body extends React.PureComponent {
 
     const {
       selectedTransaction,
+      selectedOptions,
     } = this.state;
 
     if (!selectedTransaction) return null;
@@ -67,12 +88,14 @@ class Transition__Body extends React.PureComponent {
     const {
       title,
       headers,
-      attributes,
-      body,
+      body: defaultBody,
+      bodyTemplate,
       schema,
       structureType,
       description,
     } = selectedTransaction;
+
+    const attributes = selectedTransaction.attributes && addOptionMetaToAttributes(selectedTransaction.attributes);
 
     const descriptionPredecessor = contentType === 'request' && !!title ? title.trim() : undefined;
 
@@ -86,6 +109,7 @@ class Transition__Body extends React.PureComponent {
       };
     });
 
+    const body = (selectedOptions.length > 0 && bodyTemplate) ? generateBody(attributes, bodyTemplate, selectedOptions) : defaultBody;
     const formattedBody = body && (isString(body) ? body.trim() : JSON.stringify(body, null, 2));
     const isJsonBody = body && body[0] === '{';
 
@@ -143,7 +167,11 @@ class Transition__Body extends React.PureComponent {
             mods={{ for: 'transition-content' }}
             mix={b('transition__section')}
           >
-            <AttributesList attributes={attributes}/>
+            <AttributesList
+              attributes={attributes}
+              onOptionSelect={this.onOptionSelect}
+              selectedOptions={selectedOptions}
+            />
           </Section>
         )}
 

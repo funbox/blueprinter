@@ -10,15 +10,25 @@ export function getSourceElementIndexByType(source, type) {
   return source.content.findIndex(item => item.element === type);
 }
 
+export function getSourceElementIndexByTypeAndClass(source, type, cls) {
+  return source.content.findIndex(item => (
+    item.element === type && item.meta.classes.content[0].content === cls));
+}
+
 export function getBody(source) {
-  const index = getSourceElementIndexByType(source, 'asset');
+  const index = getSourceElementIndexByTypeAndClass(source, 'asset', 'messageBody');
+
+  return (index > -1) ? source.content[index].content : null;
+}
+
+export function getBodyTemplate(source) {
+  const index = getSourceElementIndexByTypeAndClass(source, 'asset', 'messageBodyTemplate');
 
   return (index > -1) ? source.content[index].content : null;
 }
 
 export function getSchema(source) {
-  const index = source.content.findIndex(item => (
-    item.element === 'asset' && item.meta.classes.content[0].content === 'messageBodySchema'));
+  const index = getSourceElementIndexByTypeAndClass(source, 'asset', 'messageBodySchema');
 
   return (index > -1) ? source.content[index].content : null;
 }

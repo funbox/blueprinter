@@ -1,5 +1,6 @@
 import SlideToggle from 'react-slide-toggle';
 import ViewContext from 'app/components/app/view-context';
+import { optionMetaShape } from 'app/common/utils/helpers/body-generation';
 
 import Attribute__Row from './__row';
 
@@ -26,8 +27,10 @@ class Attribute extends React.Component {
       attributeData,
       parentType,
       renderNestedAttrs,
+      onOptionSelect,
       mods = {},
       mix = [],
+      selectedOptions,
     } = this.props;
 
     const { collapsed } = this.state;
@@ -74,6 +77,8 @@ class Attribute extends React.Component {
               attributeData={attributeData}
               parentType={parentType}
               onClick={onToggle}
+              onOptionSelect={onOptionSelect}
+              selectedOptions={selectedOptions}
             />
 
             {!!hasChildren && !collapsed && (
@@ -103,11 +108,14 @@ Attribute.propTypes = {
       PropTypes.object,
     ),
     attributeDescription: PropTypes.string,
+    optionMeta: optionMetaShape,
   }),
   parentType: PropTypes.string,
   renderNestedAttrs: PropTypes.func,
   mods: PropTypes.object,
   mix: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  onOptionSelect: PropTypes.func,
+  selectedOptions: PropTypes.arrayOf(optionMetaShape),
 };
 
 export default Attribute;

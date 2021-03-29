@@ -1,8 +1,9 @@
 import Attribute from 'app/components/attribute';
 import { getAttributeChildren, extractAttributeData } from 'app/common/utils/helpers';
+import { optionMetaShape } from 'app/common/utils/helpers/body-generation';
 
 const AttributesList = (props) => {
-  const { attributes, parentType, nested = false } = props;
+  const { attributes, parentType, nested = false, onOptionSelect, selectedOptions } = props;
 
   return (
     <ul className={b('attributes-list')}>
@@ -18,6 +19,8 @@ const AttributesList = (props) => {
                 attributes={nestedAttrs}
                 parentType={attributeType}
                 nested
+                onOptionSelect={onOptionSelect}
+                selectedOptions={selectedOptions}
               />
             )) : (() => null);
 
@@ -28,6 +31,8 @@ const AttributesList = (props) => {
                 attributeData={attributeData}
                 parentType={parentType}
                 renderNestedAttrs={renderNestedAttrs}
+                onOptionSelect={onOptionSelect}
+                selectedOptions={selectedOptions}
               />
             </li>
           );
@@ -39,12 +44,16 @@ const AttributesList = (props) => {
 
 AttributesList.defaultProps = {
   attributes: [],
+  onOptionSelect: () => {},
+  selectedOptions: [],
 };
 
 AttributesList.propTypes = {
   attributes: PropTypes.arrayOf(PropTypes.object),
   parentType: PropTypes.string,
   nested: PropTypes.bool,
+  onOptionSelect: PropTypes.func,
+  selectedOptions: PropTypes.arrayOf(optionMetaShape),
 };
 
 export default AttributesList;

@@ -67,6 +67,7 @@ const extractAttributeData = (attribute) => {
     attributeProps,
     attributeStructureName,
     recursive,
+    optionMeta: attribute.optionMeta,
   };
 };
 

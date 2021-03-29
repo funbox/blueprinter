@@ -1,6 +1,6 @@
 import deepEqual from 'deep-equal';
 import { MESSAGE_DEFAULT_TITLE, STANDARD_TYPES } from 'app/constants/defaults';
-import { get, getSourceElementIndexByType, getBody, getSchema, getDescription } from './getters';
+import { get, getSourceElementIndexByType, getBody, getBodyTemplate, getSchema, getDescription } from './getters';
 import { combineHashes, combineRoutes, createHash, createRoute, createSlug, getHashCode, hashFromComment } from './hash';
 
 const propertyAttributes = ['required', 'optional']; // see https://apielements.org/en/latest/element-definitions.html#member-element
@@ -47,6 +47,7 @@ class ActionProcessor {
         structureType: getDataStructureType(processedRequest),
         attributes: get('content').from(this.fillAdditionalAttributes(processedRequest)),
         body: getBody(sourceRequest),
+        ...(getBodyTemplate(sourceRequest) ? { bodyTemplate: getBodyTemplate(sourceRequest) } : {}),
         description: getDescription(sourceRequest),
         headers: sourceRequest.attributes.headers ? sourceRequest.attributes.headers.content.map(extractHeaderData) : null,
         schema: getSchema(sourceRequest),
@@ -57,6 +58,7 @@ class ActionProcessor {
         structureType: getDataStructureType(processedResponse),
         attributes: get('content').from(this.fillAdditionalAttributes(processedResponse)),
         body: getBody(sourceResponse),
+        ...(getBodyTemplate(sourceResponse) ? { bodyTemplate: getBodyTemplate(sourceResponse) } : {}),
         description: getDescription(sourceResponse),
         headers: sourceResponse.attributes.headers ? sourceResponse.attributes.headers.content.map(extractHeaderData) : null,
         schema: getSchema(sourceResponse),
@@ -143,6 +145,7 @@ class ActionProcessor {
       description: getDescription(message),
       attributes: get('content').from(this.fillAdditionalAttributes(processedMessage)),
       body: getBody(message),
+      ...(getBodyTemplate(message) ? { bodyTemplate: getBodyTemplate(message) } : {}),
       schema: getSchema(message),
       hashForLegacyUrl: messageLegacyHash,
       route: messageRoute,
