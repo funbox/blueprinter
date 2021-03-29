@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.46.1 (29.03.2021)
+
+* Delete `no_proxy` variable.
+
 ## 3.46.0 (25.03.2021)
 
 * Separate test and build jobs.
