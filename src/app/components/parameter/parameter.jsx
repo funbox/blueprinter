@@ -50,9 +50,9 @@ const URIParameter = (props) => {
         </div>
         <div className={b('parameter__default')}>
           {
-            defaultValue && (
+            ![null, undefined].includes(defaultValue) && (
               <Parameter__Prop title="Default">
-                {defaultValue}
+                {defaultValue.toString()}
               </Parameter__Prop>
             )
           }
