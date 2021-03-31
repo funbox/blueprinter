@@ -97,6 +97,11 @@
     "moduleDirectories": [
       "node_modules",
       "src"
+    ],
+    "coverageReporters": [
+      "html",
+      "text",
+      "cobertura"
     ]
   }
 }
