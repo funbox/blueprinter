@@ -51,6 +51,8 @@ Session.vim
 /test-reports
 /gemini-*
 /screenshots
+/coverage
+junit.xml
 
 
 # -- Sass --
