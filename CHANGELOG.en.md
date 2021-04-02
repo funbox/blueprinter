@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.47.1 (02.04.2021)
+
+* Fix rendering of falsy default values.
+
 ## 3.47.0 (02.04.2021)
 
 * Update gitlab-ci configuration.
