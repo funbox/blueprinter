@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.47.0 (02.04.2021)
+
+* Update gitlab-ci configuration.
+
 ## 3.46.2 (29.03.2021)
 
 * Update repository links.
