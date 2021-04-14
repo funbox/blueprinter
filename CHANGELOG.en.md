@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.47.2 (14.04.2021)
+
+* Fix rendering of nullable enums.
+
 ## 3.47.1 (02.04.2021)
 
 * Fix rendering of falsy default values.
