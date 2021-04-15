@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.48.0 (15.04.2021)
+
+* Add dark theme.
+
 ## 3.47.2 (14.04.2021)
 
 * Fix rendering of nullable enums.
