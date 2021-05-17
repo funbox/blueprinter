@@ -1,4 +1,6 @@
 .attribute__description-container {
+  display: flex;
+  flex-direction: column;
   width: 60%;
   margin: 0;
   padding-left: 10px;

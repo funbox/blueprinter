@@ -9,6 +9,7 @@ require('./__props/attribute__props.scss');
 require('./__prop/attribute__prop.scss');
 require('./__row/attribute__row.scss');
 require('./__type/attribute__type.scss');
+require('./__control/attribute__control.scss');
 
 require('./_has-children/attribute_has-children.scss');
 require('./_nested/attribute_nested.scss');

@@ -87,7 +87,9 @@ const Attribute__Row = (props) => {
           <CheckboxField
             mods={{
               theme: 'standard',
+              for: 'oneof-option',
               checked: isOptionSelected(optionMeta.id, selectedOptions),
+              hiddenLabel: !isOptionSelected(optionMeta.id, selectedOptions),
             }}
             mix={b('attribute__control')}
             onChange={(checked) => {

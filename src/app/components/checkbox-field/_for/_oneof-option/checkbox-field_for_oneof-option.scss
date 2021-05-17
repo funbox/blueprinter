@@ -1,0 +1,14 @@
+.checkbox-field_for_oneof-option {
+  .checkbox-field__label {
+    flex-direction: row-reverse;
+
+    &::before {
+      margin-right: 0;
+      margin-left: 8px;
+    }
+  }
+
+  .checkbox-field__label-content {
+    color: var(--color--secondary);
+  }
+}
