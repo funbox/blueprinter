@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@funbox/commonmark": "0.29.0-fb-1.0.3",
-    "@funbox/crafter": "2.17.1",
+    "@funbox/crafter": "2.24.0",
     "@funbox/free-port-finder": "2.0.1",
     "browser-sync": "2.26.14",
     "react-hot-loader": "4.12.19",
@@ -105,6 +105,9 @@
       "text",
       "cobertura"
     ],
-    "reporters": [ "default", "jest-junit" ]
+    "reporters": [
+      "default",
+      "jest-junit"
+    ]
   }
 }
