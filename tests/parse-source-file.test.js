@@ -21,13 +21,6 @@ describe('parse-source-file', () => {
     );
   });
 
-  it('handles an error without position details', async () => {
-    await testBlueprint(
-      blueprintFixtures.withReducedError.source,
-      blueprintFixtures.withReducedError.processed,
-    );
-  });
-
   it('parses title, metadata and description of a blueprint', async () => {
     await testBlueprint(
       blueprintFixtures.withMeta.source,

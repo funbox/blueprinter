@@ -25,7 +25,7 @@ module.exports.processed = {
         text: 'fixed-type keyword is redundant',
         positionDetails: {
           line: 7,
-          column: 11,
+          column: 9,
         },
         id: 0,
       },

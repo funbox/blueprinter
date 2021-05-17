@@ -6,7 +6,6 @@ const withDescriptions = require('./with-descriptions');
 const withMessages = require('./with-messages');
 const withAnchors = require('./with-anchors');
 const withNamelessSections = require('./with-nameless-sections');
-const withReducedError = require('./with-reduced-error');
 
 module.exports = {
   simple,
@@ -17,5 +16,4 @@ module.exports = {
   withMessages,
   withAnchors,
   withNamelessSections,
-  withReducedError,
 };
