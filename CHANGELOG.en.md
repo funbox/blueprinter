@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.49.0 (17.05.2021)
+
+* Generate body examples from templates that contain all One Of options.
+
 ## 3.48.0 (15.04.2021)
 
 * Add dark theme.
