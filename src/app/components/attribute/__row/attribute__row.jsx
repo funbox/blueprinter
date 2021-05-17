@@ -1,4 +1,5 @@
 import Code from 'app/components/code';
+import CheckboxField from 'app/components/checkbox-field';
 import { get } from 'app/common/utils/helpers/getters';
 import { optionMetaShape, isOptionSelected } from 'app/common/utils/helpers/body-generation';
 
@@ -83,17 +84,19 @@ const Attribute__Row = (props) => {
           </p>
         )}
         {oneOfMember && (
-          <input
-            type="checkbox"
+          <CheckboxField
+            mods={{
+              theme: 'standard',
+              checked: isOptionSelected(optionMeta.id, selectedOptions),
+            }}
+            mix={b('attribute__control')}
+            onChange={(checked) => {
+              onOptionSelect(optionMeta, checked);
+            }}
             title="Показать пример Body"
-            checked={isOptionSelected(optionMeta.id, selectedOptions)}
-            onClick={(event) => {
-              event.stopPropagation();
-            }}
-            onChange={(event) => {
-              onOptionSelect(optionMeta, event.target.checked);
-            }}
-          />
+          >
+            Body
+          </CheckboxField>
         )}
       </dd>
     </dl>
