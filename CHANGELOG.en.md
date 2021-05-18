@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.50.0 (18.05.2021)
+
+* Use CheckboxField component to render options in OneOf.
+
 ## 3.49.0 (17.05.2021)
 
 * Generate body examples from templates that contain all One Of options.
