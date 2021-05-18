@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.51.0 (18.05.2021)
+
+* Create a new release after merging to master.
+
 ## 3.50.0 (18.05.2021)
 
 * Use CheckboxField component to render options in OneOf.
