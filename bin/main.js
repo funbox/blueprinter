@@ -46,12 +46,13 @@ const createRefract = (inputFileName, strictMode, buildMode) => crafter.parseFil
     }
   });
 
-const sendStaticFile = async (outputFileName, refractData) => {
+const sendStaticFile = async (outputFileName, refractData, customCssData) => {
   const htmlData = await readFile(staticFileLocation, { encoding: 'utf-8' });
 
   const htmlWithRefract = htmlData
     // вторым параметром передаётся функция, чтобы определённые символы в refractData не применились как шаблоны замены
     .replace('<script src="./refract.js"></script>', () => `<script>${refractData}</script>`)
+    .replace('<link href="./custom-style.css" rel="stylesheet">',`<style>${customCssData}</style>`)
     .replace(/\/favicon/g, `${BASE_PATH}/static$&`)
     .replace(/\/safari-pinned-tab/, `${BASE_PATH}/static$&`)
     .replace(/\/apple-touch-icon/, `${BASE_PATH}/static$&`);
@@ -77,9 +78,17 @@ const renderRefract = async (inputFileName, strictMode = false, buildMode = fals
   return basicRenderRefract(inputFileName, processor, strictMode, buildMode);
 };
 
-const renderAndBuild = async (inputFileName, outputFileName, strictMode = false) => {
+const renderCustomCss = async (cssFileName) => {
+  const customCss = await readFile(cssFileName, { encoding: 'utf-8' });
+
+  return customCss;
+};
+
+const renderAndBuild = async (inputFileName, cssFileName, outputFileName, strictMode = false) => {
   const [refractData] = await renderRefract(inputFileName, strictMode, true);
-  await sendStaticFile(outputFileName, refractData);
+  const customCssData = cssFileName ? await renderCustomCss(cssFileName) : '';
+
+  await sendStaticFile(outputFileName, refractData, customCssData);
   console.log(`Rendering done. Open "${outputFileName}" to see result.`);
 };
 
@@ -87,5 +96,6 @@ module.exports = {
   BASE_PATH,
   basicRenderRefract,
   renderRefract,
+  renderCustomCss,
   renderAndBuild,
 };
