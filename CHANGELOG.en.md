@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.52.0 (20.05.2021)
+
+* Add the ability to include a custom css file.
+
 ## 3.51.0 (18.05.2021)
 
 * Create a new release after merging to master.
