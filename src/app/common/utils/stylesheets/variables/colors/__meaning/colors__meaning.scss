@@ -89,6 +89,10 @@
 
   --background-color--message-card-container: var(--blue-8);
   --background-color--message-card-link: #{$blue};
+
+  --color--info-button: #{$white};
+  --background-color--info-button: var(--text-blue);
+  --background-color--info-button-hover: #{$blue};
 }
 
 @mixin dark-css-vars() {
@@ -123,4 +127,8 @@
   --background-color--action-card-put: var(--orange-15);
 
   --background-color--message-card-container: var(--text-blue-15);
+
+  --color--info-button: #{$white};
+  --background-color--info-button: var(--text-blue);
+  --background-color--info-button-hover: #{$blue};
 }
