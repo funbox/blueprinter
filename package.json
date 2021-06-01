@@ -41,6 +41,7 @@
     "@babel/preset-env": "7.8.4",
     "@babel/preset-react": "7.8.3",
     "@funbox/eslint-config": "4.14.0",
+    "@funbox/react-aria-modal": "4.0.0-fb-1.1.1-pre",
     "@funbox/scss-imports-loader": "2.1.0",
     "@funbox/scss-lint-config": "2.7.0",
     "@funbox/scss-utils": "1.1.1",
