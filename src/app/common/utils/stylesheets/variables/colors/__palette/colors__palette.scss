@@ -35,6 +35,8 @@ $light-gray: #f4f5f7;
   --red-8: #{rgba($red, .08)};
   --orange-8: #{rgba($orange, .08)};
   --gray-shadow-50: #{rgba($gray-shadow, .5)};
+  --dark-blue-50: #{rgba($dark-blue, .5)};
+  --dark-blue-80: #{rgba($dark-blue, .8)};
 }
 
 @mixin dark-css-colors() {

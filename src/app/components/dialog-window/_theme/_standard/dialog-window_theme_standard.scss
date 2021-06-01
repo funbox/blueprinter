@@ -1,0 +1,49 @@
+$tablet-portrait: 720px;
+
+.dialog-window_theme_standard {
+  position: relative;
+  box-sizing: border-box;
+  width: 640px;
+  padding: 50px;
+  border-radius: 3px;
+  box-shadow: 0 4px 10px var(--box-shadow--dialog-window);
+  background: var(--background-color--body);
+
+  .dialog-window__close {
+    position: absolute;
+    top: 48px;
+    right: 42px;
+    width: 32px;
+    height: 32px;
+    color: var(--stroke-color--icon);
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover, &:focus {
+      color: var(--stroke-color--icon-hover);
+    }
+  }
+
+  .dialog-window__header {
+    margin-bottom: 32px;
+  }
+
+  .dialog-window__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28px;
+  }
+
+  &.dialog-window_hidden-title {
+    .dialog-window__header {
+      margin: 0;
+    }
+
+    .dialog-window__title {
+      @include visually-hidden;
+    }
+  }
+}

@@ -93,6 +93,9 @@
   --color--info-button: #{$white};
   --background-color--info-button: var(--text-blue);
   --background-color--info-button-hover: #{$blue};
+
+  --background-color--dialog-backdrop: var(--dark-blue-80);
+  --box-shadow--dialog-window: var(--dark-blue-50);
 }
 
 @mixin dark-css-vars() {
@@ -131,4 +134,6 @@
   --color--info-button: #{$white};
   --background-color--info-button: var(--text-blue);
   --background-color--info-button-hover: #{$blue};
+
+  --box-shadow--dialog-window: var(--gray-shadow-50);
 }
