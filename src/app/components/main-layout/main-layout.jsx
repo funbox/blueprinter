@@ -18,6 +18,7 @@ import ApiHost from 'app/components/api-host';
 import Link from 'app/components/link';
 import SearchStripe from 'app/components/search-stripe';
 import ThemeToggler from 'app/components/theme-toggler';
+import InfoButton from 'app/components/info-button';
 
 import { API_DEFAULT_TITLE } from 'app/constants/defaults';
 
@@ -123,6 +124,10 @@ class MainLayout extends React.PureComponent {
                   </Notification>
                 </Page__AsideElement>
               )}
+
+              <Page__AsideElement mods={{ for: 'info-button' }}>
+                <InfoButton/>
+              </Page__AsideElement>
             </Page__Aside>
 
             <MainContent>

@@ -1,7 +1,10 @@
+$vertical-padding: 40px;
+$horizontal-padding: 50px;
+
 .page__aside_for_actions {
   position: absolute;
-  top: 40px;
-  right: 50px;
+  top: $vertical-padding;
+  right: $horizontal-padding;
 
   @media print {
     display: none;
@@ -19,7 +22,14 @@
 
   .page__aside-element_for_notification {
     position: sticky;
-    top: 40px;
+    top: $vertical-padding;
+  }
+
+  .page__aside-element_for_info-button {
+    position: fixed;
+    right: $horizontal-padding;
+    bottom: $vertical-padding;
+    margin-top: 0;
   }
 
   &.page__aside_with_notification {
