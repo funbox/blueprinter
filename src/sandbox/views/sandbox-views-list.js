@@ -33,6 +33,10 @@ module.exports = {
       to: '/sandbox/theme-toggler',
     },
     {
+      name: 'Помощь по сервису',
+      to: '/sandbox/service-info',
+    },
+    {
       name: '...',
     },
   ],
