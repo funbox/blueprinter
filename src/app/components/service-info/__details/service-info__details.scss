@@ -1,0 +1,17 @@
+.service-info__details {
+  position: relative;
+  margin: 0;
+  padding: 14px 0;
+
+  &:not(:last-of-type) {
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -100%;
+      width: 200%;
+      height: 1px;
+      background-color: var(--stroke-color--primary);
+    }
+  }
+}
