@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Code from 'app/components/code';
 
 const propTypes = {
@@ -5,6 +6,7 @@ const propTypes = {
   subtitle: PropTypes.string,
   definitions: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string,
       term: PropTypes.string,
       details: PropTypes.string,
       note: PropTypes.node,
@@ -30,7 +32,7 @@ const ServiceInfo__Section = (props) => {
       <div className={b('service-info__body')}>
         <dl className={b('service-info__definitions')}>
           { definitions.map(definition => (
-            <>
+            <Fragment key={definition.id}>
               <dt className={b('service-info__term')}>
                 <Code mods={{ theme: 'standard' }} mix={b('service-info__code')}>
                   {definition.term}
@@ -44,7 +46,7 @@ const ServiceInfo__Section = (props) => {
                   </span>
                 )}
               </dd>
-            </>
+            </Fragment>
           ))}
         </dl>
       </div>

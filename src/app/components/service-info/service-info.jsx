@@ -8,14 +8,17 @@ const ServiceInfo = () => (
       title="Горячие клавиши"
       definitions={[
         {
+          id: 'key-theme',
           term: 'N',
           details: 'Переключает светлую тему на тёмную и обратно',
         },
         {
+          id: 'key-sidebar',
           term: 'S',
           details: 'Скрывает и раскрывает сайдбар',
         },
         {
+          id: 'key-search',
           term: '/',
           details: 'Переводит фокус в поле поиска',
         },
@@ -26,6 +29,7 @@ const ServiceInfo = () => (
       subtitle="Модификатор указывается в строке поиска перед поисковым запросом"
       definitions={[
         {
+          id: 'search-method',
           term: 'method:*',
           details: 'Оставляет в результатах поиска только экшены с указанным методом',
           note: (
@@ -43,14 +47,17 @@ const ServiceInfo = () => (
           ),
         },
         {
+          id: 'search-group',
           term: 'type:group',
           details: 'Ищет только группы',
         },
         {
+          id: 'search-resource',
           term: 'type:resource',
           details: 'Ищет только ресурсы',
         },
         {
+          id: 'search-action',
           term: 'type:action',
           details: 'Ищет только экшены',
         },
