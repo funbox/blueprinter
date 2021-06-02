@@ -13,6 +13,7 @@ import ActionRoutes from 'app/views/actions';
 import Error from 'app/views/error';
 import ContentNotFound from 'app/views/404';
 import ManualSearch from 'app/views/manual-search';
+import ServiceInfoDialog from 'app/components/service-info-dialog';
 
 import ViewContext, { ViewMode } from './view-context';
 
@@ -27,7 +28,19 @@ const {
   actions,
 } = parsedSource;
 
+const isModal = location => {
+  const modalPaths = ['/service-help'];
+  return modalPaths.indexOf(location.pathname) >= 0;
+};
+
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.lastBackgroundLocation = { pathname: '/' };
+    this.closeModal = this.closeModal.bind(this);
+  }
+
   componentDidMount() {
     const { location, history } = this.props;
 
@@ -41,9 +54,22 @@ export default class App extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname) {
+    const { history, location } = this.props;
+
+    if (prevProps.location.pathname !== location.pathname) {
       window.scrollTo(0, 0);
     }
+
+    if (history.action !== 'POP') {
+      if (!isModal(location)) {
+        this.lastBackgroundLocation = location;
+      }
+    }
+  }
+
+  closeModal() {
+    const { history } = this.props;
+    history.push(this.lastBackgroundLocation);
   }
 
   render() {
@@ -63,6 +89,11 @@ export default class App extends React.Component {
     const routes = groupRoutes.concat(resourceRoutes, actionRoutes);
     const emptyApib = routes.length === 0;
 
+    const { location } = this.props;
+
+    const isModalLocation = isModal(location);
+    const backgroundLocation = isModalLocation ? this.lastBackgroundLocation : location;
+
     return (
       <MainLayout
         topLevelMeta={topLevelMeta}
@@ -70,7 +101,7 @@ export default class App extends React.Component {
         resources={resources}
         actions={actions}
       >
-        <Switch>
+        <Switch location={backgroundLocation}>
           <Route
             exact
             path="/"
@@ -106,6 +137,13 @@ export default class App extends React.Component {
             component={ContentNotFound}
           />
         </Switch>
+
+        {/* Модальные роуты */}
+        <Route
+          exact
+          path="/service-help"
+          render={() => (<ServiceInfoDialog isOpen onClose={this.closeModal}/>)}
+        />
       </MainLayout>
     );
   }

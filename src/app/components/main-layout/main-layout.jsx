@@ -126,7 +126,7 @@ class MainLayout extends React.PureComponent {
               )}
 
               <Page__AsideElement mods={{ for: 'info-button' }}>
-                <InfoButton/>
+                <InfoButton to="/service-help"/>
               </Page__AsideElement>
             </Page__Aside>
 
