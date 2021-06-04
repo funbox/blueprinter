@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.53.0 (04.06.2021)
+
+* Add a popup with information about Blueprinter-frontend features.
+
 ## 3.52.0 (20.05.2021)
 
 * Add the ability to include a custom css file.
