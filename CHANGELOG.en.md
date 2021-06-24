@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.0 (24.06.2021)
+
+* Use Crafter v3.
+
 ## 3.53.0 (04.06.2021)
 
 * Add a popup with information about Blueprinter-frontend features.
