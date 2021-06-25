@@ -14,6 +14,8 @@ const TOGGLE_HOTKEY = {
   CODE: 83,
 };
 
+const MAX_SIDEBAR_TO_CONTENT_RATIO = 0.4;
+
 const propTypes = {
   children: PropTypes.node.isRequired,
   direction: PropTypes.oneOfType([
@@ -39,6 +41,7 @@ class Sidebar extends React.Component {
 
     this.state = {
       isClosed: false,
+      maxWidth: undefined,
     };
 
     this.toggleSidebarStage = this.toggleSidebarStage.bind(this);
@@ -46,14 +49,18 @@ class Sidebar extends React.Component {
     this.onClosedSidebarClick = this.onClosedSidebarClick.bind(this);
     this.onResize = this.onResize.bind(this);
     this.onResizeStop = this.onResizeStop.bind(this);
+    this.setMaxSidebarSize = this.setMaxSidebarSize.bind(this);
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.onToggleKeyDown);
+    window.addEventListener('resize', this.setMaxSidebarSize);
+    this.setMaxSidebarSize();
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onToggleKeyDown);
+    window.removeEventListener('resize', this.setMaxSidebarSize);
   }
 
   updateSize() {
@@ -67,6 +74,11 @@ class Sidebar extends React.Component {
     }
 
     this.resizable.current.updateSize({ width, height });
+  }
+
+  setMaxSidebarSize() {
+    const viewportWith = document.documentElement.clientWidth;
+    this.setState({ maxWidth: Math.floor(viewportWith * MAX_SIDEBAR_TO_CONTENT_RATIO) });
   }
 
   toggleSidebarStage() {
@@ -116,7 +128,7 @@ class Sidebar extends React.Component {
       initialSize,
     } = this.props;
 
-    const { isClosed } = this.state;
+    const { isClosed, maxWidth } = this.state;
 
     return (
       <div
@@ -140,6 +152,7 @@ class Sidebar extends React.Component {
           mix={b('sidebar__resizable')}
           direction={direction}
           initialSize={{ ...initialSize }}
+          maxSize={{ width: maxWidth }}
           onResize={this.onResize}
           onResizeStop={this.onResizeStop}
         >
