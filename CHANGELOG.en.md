@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.1 (28.06.2021)
+
+* Fix setting of backgroundLocation after page first loading.
+
 ## 4.1.0 (28.06.2021)
 
 * Fix elements behaviour in case of small viewport width.
