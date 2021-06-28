@@ -1,8 +1,10 @@
 $vertical-padding: 40px;
 $horizontal-padding: 50px;
+$toggler-safe-space: 8px;
 
 .page__aside_for_actions {
   position: absolute;
+  z-index: 2;
   top: $vertical-padding;
   right: $horizontal-padding;
 
@@ -17,7 +19,10 @@ $horizontal-padding: 50px;
   }
 
   .page__aside-element_for_theme-toggler {
+    transform: translate($toggler-safe-space, -$toggler-safe-space);
+    padding: $toggler-safe-space;
     text-align: right;
+    background: var(--background-color--body);
   }
 
   .page__aside-element_for_notification {
