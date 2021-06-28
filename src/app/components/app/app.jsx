@@ -37,7 +37,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.lastBackgroundLocation = { pathname: '/' };
+    const curLoc = props.location;
+    this.lastBackgroundLocation = isModal(curLoc) ? { pathname: '/' } : curLoc;
     this.closeModal = this.closeModal.bind(this);
   }
 
