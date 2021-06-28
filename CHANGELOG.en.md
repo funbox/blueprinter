@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.0 (28.06.2021)
+
+* Fix elements behaviour in case of small viewport width.
+
 ## 4.0.0 (24.06.2021)
 
 * Use Crafter v3.
