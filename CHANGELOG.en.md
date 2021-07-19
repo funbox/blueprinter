@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.2 (19.07.2021)
+
+* Fix parsing of URI parameters that contain symbols "~", ".", "-".
+
 ## 4.1.1 (28.06.2021)
 
 * Fix setting of backgroundLocation after page first loading.
