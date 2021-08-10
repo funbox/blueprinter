@@ -70,7 +70,7 @@ const basicRenderRefract = async (inputFileName, processResult, strictMode = fal
 
   const refractData = processResult ? processResult(refract) : refract;
 
-  return [refractData, filePaths];
+  return [refractData, filePaths.map(filePath => path.join(path.dirname(inputFileName), filePath))];
 };
 
 const renderRefract = async (inputFileName, strictMode = false, buildMode = false) => {
