@@ -2,12 +2,6 @@ import { STANDARD_TYPES } from 'app/constants/defaults';
 import { get } from './getters';
 import extractCategories from './extract-categories';
 
-const getDataStructureId = (dataStructure) => (
-  Array.isArray(dataStructure.content)
-    ? dataStructure.content[0].meta.id.content
-    : dataStructure.content.meta.id.content
-);
-
 const defaultCategories = extractCategories(); // TODO: что лучше — фоллбэк на дефолтное значение или бросить исключение?
 
 export default class InheritanceResolver {
@@ -45,7 +39,7 @@ export default class InheritanceResolver {
 
     if (!referenceDataStructure) return false;
 
-    const referencedDS = this.categories.dataStructuresArray.find(ds => getDataStructureId(ds) === referenceDataStructure);
+    const referencedDS = this.categories.dataStructuresArray.find(ds => ds.id === referenceDataStructure);
     const refDSContent = get('content', 'content').from(referencedDS);
 
     if (referenceDataStructure === member.element) return !member.content;
@@ -77,7 +71,7 @@ export default class InheritanceResolver {
 
     const type = valueMember.element;
     const referencedDataStructure = this.categories.dataStructuresArray.find(ds => (
-      getDataStructureId(ds) === (type === 'ref' ? valueMember.content : valueMember.element)
+      ds.id === (type === 'ref' ? valueMember.content : valueMember.element)
     ));
     const referencedSchemaStructure = this.categories.schemaStructuresArray.find(ss => (
       ss.meta.id.content === valueMember.element
@@ -115,7 +109,7 @@ export default class InheritanceResolver {
 
   fillValueMemberWithDataStructureContent(referencedDataStructure, member, memberParent) {
     const type = member.element;
-    const dataStructureId = getDataStructureId(referencedDataStructure);
+    const dataStructureId = referencedDataStructure.id;
 
     if (this.usedStructuresMap.has(dataStructureId)) {
       this.usedStructuresMap.get(dataStructureId).recursive = true;

@@ -56,5 +56,17 @@ export default function extractCategories(content) {
     categories.resourceGroupArray.unshift(groupForStandaloneResources);
   }
 
+  categories.dataStructuresArray.forEach(dataStructure => {
+    dataStructure.id = getDataStructureId(dataStructure);
+  });
+
   return categories;
+}
+
+export function getDataStructureId(dataStructure) {
+  return (
+    Array.isArray(dataStructure.content)
+      ? dataStructure.content[0].meta.id.content
+      : dataStructure.content.meta.id.content
+  );
 }

@@ -37,6 +37,7 @@ describe('extract-categories', () => {
     expect(categories.resourcePrototypesArray).toHaveLength(0);
 
     expect(categories.dataStructuresArray[0]).toEqual({
+      id: 'NamedType',
       element: 'dataStructure',
       content: {
         element: 'object',
@@ -55,6 +56,7 @@ describe('extract-categories', () => {
     });
     expect(categories.dataStructuresArray[1]).toEqual({
       element: 'dataStructure',
+      id: 'NamedString',
       content: {
         element: 'string',
         meta: { id: { element: 'string', content: 'NamedString' } },
