@@ -90,6 +90,14 @@ describe('Inheritance resolver', () => {
     expect(resolver.getCacheSize()).toBe(0);
   });
 
+  it('a member which inherits from a data structure and has own properties cannot be cached', async () => {
+    const categories = await getCategories(fixtures.cache.source);
+    const resolver = new InheritanceResolver(categories);
+    resolver.cacheDataStructure(fixtures.cache.memberWithReferenceAndOwnStructure);
+
+    expect(resolver.getCacheSize()).toBe(0);
+  });
+
   it('cached member can be obtained', async () => {
     const categories = await getCategories(fixtures.cache.source);
     const resolver = new InheritanceResolver(categories);
@@ -109,6 +117,17 @@ describe('Inheritance resolver', () => {
     const cached = resolver.getCachedDataStructure(fixtures.cacheAttributes.memberToObtain);
 
     expect(cached).toBeNull();
+  });
+
+  it('accounts nested data structure presence when caching', async () => {
+    const categories = await getCategories(fixtures.cache.source);
+    const resolver = new InheritanceResolver(categories);
+
+    resolver.cacheDataStructure(resolver.resolveInheritance(fixtures.cache.memberWithResponseA));
+    resolver.cacheDataStructure(resolver.resolveInheritance(fixtures.cache.memberWithResponseB));
+    resolver.cacheDataStructure(resolver.resolveInheritance(fixtures.cache.memberWithResponseC));
+
+    expect(resolver.getCacheSize()).toBe(3);
   });
 
   it('handles attributes override', async () => {
