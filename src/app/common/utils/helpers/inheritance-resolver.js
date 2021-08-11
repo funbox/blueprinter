@@ -20,12 +20,8 @@ export default class InheritanceResolver {
   }
 
   getCachedDataStructure(member) {
-    const referenceDataStructure = member.referenceDataStructure || member.element;
-
-    if (!referenceDataStructure) return null;
-
-    const attrs = this.getSortedAttributesString(member);
-    const cachedDataStructure = this.cachedDataStructures.get(referenceDataStructure + attrs);
+    const cacheKey = this.getMemberCacheKey(member);
+    const cachedDataStructure = this.cachedDataStructures.get(cacheKey);
 
     if (!cachedDataStructure) return null;
 
@@ -48,14 +44,24 @@ export default class InheritanceResolver {
   }
 
   cacheDataStructure(member) {
-    if (!member.referenceDataStructure) return;
-
     const canUseFromCache = this.canUseFromCache(member);
 
     if (!canUseFromCache) return;
 
+    const cacheKey = this.getMemberCacheKey(member);
+    if (!cacheKey) return;
+    this.cachedDataStructures.set(cacheKey, member);
+  }
+
+  getMemberCacheKey(member) {
+    const referenceDataStructure = member.referenceDataStructure;
+
+    if (!referenceDataStructure) return null;
+
     const attrs = this.getSortedAttributesString(member);
-    this.cachedDataStructures.set(member.referenceDataStructure + attrs, member);
+    const usedStructures = (member.usedStructures || []).sort().toString();
+
+    return (referenceDataStructure + attrs + usedStructures);
   }
 
   getSortedAttributesString(member) {
@@ -80,6 +86,7 @@ export default class InheritanceResolver {
     if (referencedDataStructure) {
       this.fillValueMemberWithDataStructureContent(referencedDataStructure, valueMember, parent);
       valueMember.recursive = referencedDataStructure.recursive;
+      valueMember.usedStructures = [referencedDataStructure.id];
     }
 
     if (referencedSchemaStructure) {
@@ -99,9 +106,16 @@ export default class InheritanceResolver {
     const childElementContent = childElement.content;
 
     if (Array.isArray(childElementContent)) {
-      childElementContent.map(item => this.resolveInheritance(item, childElement));
+      childElementContent.map(item => {
+        const resolvedItem = this.resolveInheritance(item, childElement);
+        const childUsedStructures = resolvedItem.usedStructures || [];
+        valueMember.usedStructures = [...(valueMember.usedStructures || []), ...childUsedStructures];
+        return resolvedItem;
+      });
     } else if (childElementContent && childElementContent.value) {
       this.resolveInheritance(childElementContent.value, valueMember);
+      const childUsedStructures = childElementContent.value.usedStructures || [];
+      valueMember.usedStructures = [...(valueMember.usedStructures || []), ...childUsedStructures];
     }
 
     return valueMember;
