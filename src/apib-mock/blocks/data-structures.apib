@@ -42,6 +42,23 @@
 + `text`: `Hello world` (string, required) - текст сообщения
 + `tags` (array[Tag], optional) - теги сообщения
 
+## Base Response (object)
++ status: OK (required, fixed) - успешный результат
++ result (optional, object) - объект с данными
+
+## Response A (object)
++ client_id (enum[string], optional)
+  + Members
+    + web
+
+## Response B (object)
++ timestamp: `1560513461` (number, required)
++ body: `Завтра +5, возможны цунами` (string, required)
+
+## Response C (object)
++ msisdn: 79251112233 (number, required)
++ status: `subscribed` (string, required)
+
 
 # Group Data Structures
 
@@ -63,3 +80,23 @@
 
 + Response 200 (application/json)
     + Attributes (SelectObjects)
+
+
+## GET /base-and-unique
+
+Демонстрация использования базовой структуры для формирования ответа и переопределения одного из полей этой структуры отдельной структурой
+
++ Response 200 (application/json)
+  Base + Response A
+  + Attributes (Base Response)
+    + result(Response A)
+
++ Response 200 (application/json)
+  Base + Response B
+  + Attributes (Base Response)
+    + result(array[Response B])
+
++ Response 200 (application/json)
+  Base + Response C
+  + Attributes (Base Response)
+    + result(Response C)
