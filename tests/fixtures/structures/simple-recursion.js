@@ -41,10 +41,22 @@ module.exports.processed = {
             },
           },
           recursive: true,
+          usedStructures: [
+            'DNSServer',
+          ],
         },
       },
+      usedStructures: [
+        'DNSServer',
+        'DNSServer',
+      ],
     },
   ],
   referenceDataStructure: 'DNSServer',
   recursive: true,
+  usedStructures: [
+    'DNSServer',
+    'DNSServer',
+    'DNSServer',
+  ],
 };

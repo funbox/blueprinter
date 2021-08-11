@@ -81,8 +81,17 @@ module.exports.processed = {
               ],
             },
           },
+          usedStructures: [
+            'Post Code',
+          ],
         },
       },
+      usedStructures: [
+        'Post Code',
+      ],
     },
+  ],
+  usedStructures: [
+    'Post Code',
   ],
 };

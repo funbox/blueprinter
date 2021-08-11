@@ -70,8 +70,17 @@ module.exports.processed = {
               ],
             },
           },
+          usedStructures: [
+            'Age',
+          ],
         },
       },
+      usedStructures: [
+        'Age',
+      ],
     },
+  ],
+  usedStructures: [
+    'Age',
   ],
 };

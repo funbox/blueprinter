@@ -64,4 +64,5 @@ module.exports.processed = {
     },
   ],
   referenceDataStructure: 'User',
+  usedStructures: ['User'],
 };
