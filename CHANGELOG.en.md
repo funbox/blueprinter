@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.2.1 (13.08.2021)
+
+* Fix page reload after files update if a doc.apib file is in a subdirectory.
+
 ## 4.2.0 (22.07.2021)
 
 * Use kaniko to build a Docker image.
