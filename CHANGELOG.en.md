@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.0 (20.08.2021)
+
+* Setup notification about new releases.
+
 ## 4.2.1 (13.08.2021)
 
 * Fix page reload after files update if a doc.apib file is in a subdirectory.
