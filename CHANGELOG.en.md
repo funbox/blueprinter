@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.1 (20.08.2021)
+
+* Update key by which data structures are cached.
+
 ## 4.3.0 (20.08.2021)
 
 * Setup notification about new releases.
