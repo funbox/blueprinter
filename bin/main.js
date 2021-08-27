@@ -52,10 +52,8 @@ const sendStaticFile = async (outputFileName, refractData, customCssData) => {
   const htmlWithRefract = htmlData
     // вторым параметром передаётся функция, чтобы определённые символы в refractData не применились как шаблоны замены
     .replace('<script src="./refract.js"></script>', () => `<script>${refractData}</script>`)
-    .replace('<link href="./custom-style.css" rel="stylesheet">',`<style>${customCssData}</style>`)
-    .replace(/\/favicon/g, `${BASE_PATH}/static$&`)
-    .replace(/\/safari-pinned-tab/, `${BASE_PATH}/static$&`)
-    .replace(/\/apple-touch-icon/, `${BASE_PATH}/static$&`);
+    .replace('<link href="./custom-style.css" rel="stylesheet">',`<style>${customCssData}</style>`);
+
   try {
     await mkdir(path.dirname(outputFileName), { recursive: true });
     await writeFile(outputFileName, htmlWithRefract);
