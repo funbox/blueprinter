@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.2 (01.09.2021)
+
+* Repair favicon of a generated HTML file.
+
 ## 4.3.1 (20.08.2021)
 
 * Update key by which data structures are cached.
