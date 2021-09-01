@@ -11,11 +11,12 @@ const propTypes = {
       details: PropTypes.string,
       note: PropTypes.node,
     }),
-  ).isRequired,
+  ),
+  children: PropTypes.node,
 };
 
 const ServiceInfo__Section = (props) => {
-  const { title, subtitle, definitions } = props;
+  const { title, subtitle, definitions, children } = props;
 
   return (
     <section className={b('service-info__section', props)}>
@@ -30,25 +31,29 @@ const ServiceInfo__Section = (props) => {
         )}
       </div>
       <div className={b('service-info__body')}>
-        <dl className={b('service-info__definitions')}>
-          { definitions.map(definition => (
-            <Fragment key={definition.id}>
-              <dt className={b('service-info__term')}>
-                <Code mods={{ theme: 'standard' }} mix={b('service-info__code')}>
-                  {definition.term}
-                </Code>
-              </dt>
-              <dd className={b('service-info__details')}>
-                {definition.details}
-                { definition.note && (
-                  <span className={b('service-info__note')}>
-                    {definition.note}
-                  </span>
-                )}
-              </dd>
-            </Fragment>
-          ))}
-        </dl>
+        {definitions && (
+          <dl className={b('service-info__definitions')}>
+            { definitions.map(definition => (
+              <Fragment key={definition.id}>
+                <dt className={b('service-info__term')}>
+                  <Code mods={{ theme: 'standard' }} mix={b('service-info__code')}>
+                    {definition.term}
+                  </Code>
+                </dt>
+                <dd className={b('service-info__details')}>
+                  {definition.details}
+                  { definition.note && (
+                    <span className={b('service-info__note')}>
+                      {definition.note}
+                    </span>
+                  )}
+                </dd>
+              </Fragment>
+            ))}
+          </dl>
+        )}
+
+        {children}
       </div>
     </section>
   );
