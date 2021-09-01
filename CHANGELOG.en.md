@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.4.0 (01.09.2021)
+
+* Add a tutorial link to the help dialog.
+
 ## 4.3.2 (01.09.2021)
 
 * Repair favicon of a generated HTML file.
