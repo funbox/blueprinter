@@ -10,17 +10,17 @@ const ServiceInfo = () => (
         {
           id: 'key-theme',
           term: 'N',
-          details: 'Переключает светлую тему на тёмную и обратно',
+          details: 'переключает светлую тему на тёмную и обратно',
         },
         {
           id: 'key-sidebar',
           term: 'S',
-          details: 'Скрывает и раскрывает сайдбар',
+          details: 'скрывает и раскрывает сайдбар',
         },
         {
           id: 'key-search',
           term: '/',
-          details: 'Переводит фокус в поле поиска',
+          details: 'переводит фокус в поле поиска',
         },
       ]}
     />
@@ -31,7 +31,7 @@ const ServiceInfo = () => (
         {
           id: 'search-method',
           term: 'method:*',
-          details: 'Оставляет в результатах поиска только экшены с указанным методом',
+          details: 'оставляет в\u00A0результатах поиска только экшены с\u00A0указанным методом',
           note: (
             <>
               где * — HTTP-метод (GET, POST, PUT, DELETE и т.д.).
@@ -42,24 +42,24 @@ const ServiceInfo = () => (
               {' '}
               или
               {' '}
-              <Code mods={{ theme: 'standard' }}>method:post</Code>
+              <Code mods={{ theme: 'standard' }}>method:post</Code>.
             </>
           ),
         },
         {
           id: 'search-group',
           term: 'type:group',
-          details: 'Ищет только группы',
+          details: 'ищет только группы',
         },
         {
           id: 'search-resource',
           term: 'type:resource',
-          details: 'Ищет только ресурсы',
+          details: 'ищет только ресурсы',
         },
         {
           id: 'search-action',
           term: 'type:action',
-          details: 'Ищет только экшены',
+          details: 'ищет только экшены',
         },
       ]}
     />
