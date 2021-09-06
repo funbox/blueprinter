@@ -2,4 +2,16 @@
   + .service-info__section {
     margin-top: 40px;
   }
+
+  .service-info__details {
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+
+  .service-info__term {
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
 }
