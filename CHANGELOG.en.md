@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.5.0 (06.09.2021)
+
+* Fix paddings in the help dialog.
+
 ## 4.4.0 (01.09.2021)
 
 * Add a tutorial link to the help dialog.
