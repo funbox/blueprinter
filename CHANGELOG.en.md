@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.6.0 (06.09.2021)
+
+* Delete irrelevant information about Jenkins from the readme file.
+
 ## 4.5.0 (06.09.2021)
 
 * Fix paddings in the help dialog.
