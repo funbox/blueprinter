@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.7.0 (06.09.2021)
+
+* Update text in the help dialog according to design.
+
 ## 4.6.0 (06.09.2021)
 
 * Delete irrelevant information about Jenkins from the readme file.
