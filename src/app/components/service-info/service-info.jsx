@@ -26,7 +26,7 @@ const ServiceInfo = () => (
     />
     <ServiceInfo__Section
       title="Модификаторы поиска"
-      subtitle="Модификатор указывается в строке поиска перед поисковым запросом"
+      subtitle="Модификатор указывается в строке поиска перед поисковым запросом."
       definitions={[
         {
           id: 'search-method',
@@ -34,15 +34,15 @@ const ServiceInfo = () => (
           details: 'оставляет в\u00A0результатах поиска только экшены с\u00A0указанным методом',
           note: (
             <>
-              где * — HTTP-метод (GET, POST, PUT, DELETE и т.д.).
+              где * — HTTP-метод (GET, POST, PUT, DELETE и т.д.),
               <br/>
-              Пример:
+              например:
               {' '}
               <Code mods={{ theme: 'standard' }}>method:get</Code>
               {' '}
               или
               {' '}
-              <Code mods={{ theme: 'standard' }}>method:post</Code>.
+              <Code mods={{ theme: 'standard' }}>method:post</Code>
             </>
           ),
         },
