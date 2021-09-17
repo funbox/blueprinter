@@ -1,4 +1,4 @@
-const ENV = process.env.NODE_ENV || process.env.JENKINS_URL && 'ci' || 'dev';
+const ENV = process.env.NODE_ENV || process.env.CI && 'ci' || 'dev';
 
 const PATH = {
   BASE: '',
