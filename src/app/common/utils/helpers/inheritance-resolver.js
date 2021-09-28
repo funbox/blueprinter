@@ -1,6 +1,7 @@
 import { STANDARD_TYPES } from 'app/constants/defaults';
 import { get } from './getters';
 import extractCategories from './extract-categories';
+import { getHashCode } from './hash';
 
 const defaultCategories = extractCategories(); // TODO: что лучше — фоллбэк на дефолтное значение или бросить исключение?
 
@@ -59,9 +60,9 @@ export default class InheritanceResolver {
     if (!referenceDataStructure) return null;
 
     const attrs = this.getSortedAttributesString(member);
-    const usedStructures = (member.usedStructures || []).sort().toString();
+    const usedStructuresHash = member.usedStructuresHash || 0;
 
-    return (referenceDataStructure + attrs + usedStructures);
+    return (referenceDataStructure + attrs + String(usedStructuresHash));
   }
 
   getSortedAttributesString(member) {
@@ -86,7 +87,7 @@ export default class InheritanceResolver {
     if (referencedDataStructure) {
       this.fillValueMemberWithDataStructureContent(referencedDataStructure, valueMember, parent);
       valueMember.recursive = referencedDataStructure.recursive;
-      valueMember.usedStructures = [referencedDataStructure.id];
+      valueMember.usedStructuresHash = getHashCode(referencedDataStructure.id);
     }
 
     if (referencedSchemaStructure) {
@@ -106,16 +107,18 @@ export default class InheritanceResolver {
     const childElementContent = childElement.content;
 
     if (Array.isArray(childElementContent)) {
-      childElementContent.map(item => {
+      const hashContainer = childElementContent.map(item => {
         const resolvedItem = this.resolveInheritance(item, childElement);
-        const childUsedStructures = resolvedItem.usedStructures || [];
-        valueMember.usedStructures = [...(valueMember.usedStructures || []), ...childUsedStructures];
-        return resolvedItem;
-      });
+        return resolvedItem.usedStructuresHash || 0;
+      }).filter(h => h !== 0);
+      const childElementsAverageHash = (
+        hashContainer.reduce((acc, hash) => (acc + hash), 0) / Math.max(hashContainer.length, 1)
+      );
+      valueMember.usedStructuresHash = (valueMember.usedStructuresHash || 0) + childElementsAverageHash;
     } else if (childElementContent && childElementContent.value) {
       this.resolveInheritance(childElementContent.value, valueMember);
-      const childUsedStructures = childElementContent.value.usedStructures || [];
-      valueMember.usedStructures = [...(valueMember.usedStructures || []), ...childUsedStructures];
+      const childStructuresHash = childElementContent.value.usedStructuresHash || 0;
+      valueMember.usedStructuresHash = (valueMember.usedStructuresHash || 0) + childStructuresHash;
     }
 
     return valueMember;
