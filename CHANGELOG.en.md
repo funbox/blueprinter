@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.8.1 (28.09.2021)
+
+* Fix memory overflow error when parsing a large documentation.
+
 ## 4.8.0 (08.09.2021)
 
 * Update text in the help dialog according to design.
