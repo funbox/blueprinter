@@ -107,18 +107,11 @@ export default class InheritanceResolver {
     const childElementContent = childElement.content;
 
     if (Array.isArray(childElementContent)) {
-      const hashContainer = childElementContent.map(item => {
-        const resolvedItem = this.resolveInheritance(item, childElement);
-        return resolvedItem.usedStructuresHash || 0;
-      }).filter(h => h !== 0);
-      const childElementsAverageHash = (
-        hashContainer.reduce((acc, hash) => (acc + hash), 0) / Math.max(hashContainer.length, 1)
-      );
-      valueMember.usedStructuresHash = (valueMember.usedStructuresHash || 0) + childElementsAverageHash;
+      const resolvedChildren = childElementContent.map(item => this.resolveInheritance(item, childElement));
+      valueMember.usedStructuresHash = this.combineStructureHashValues(valueMember, resolvedChildren);
     } else if (childElementContent && childElementContent.value) {
-      this.resolveInheritance(childElementContent.value, valueMember);
-      const childStructuresHash = childElementContent.value.usedStructuresHash || 0;
-      valueMember.usedStructuresHash = (valueMember.usedStructuresHash || 0) + childStructuresHash;
+      const resolvedChild = this.resolveInheritance(childElementContent.value, valueMember);
+      valueMember.usedStructuresHash = this.combineStructureHashValues(valueMember, [resolvedChild]);
     }
 
     return valueMember;
@@ -197,5 +190,13 @@ export default class InheritanceResolver {
       member.referenceDataStructure = dataStructureId;
     }
     this.usedStructuresMap.delete(dataStructureId);
+  }
+
+  combineStructureHashValues(parentElement, childElements = []) {
+    const hashContainer = childElements.map(el => el.usedStructuresHash || 0).filter(h => h !== 0);
+    const childElementsAverageHash = (
+      hashContainer.reduce((acc, hash) => (acc + hash), 0) / Math.max(hashContainer.length, 1)
+    );
+    return (parentElement.usedStructuresHash || 0) + childElementsAverageHash;
   }
 }
