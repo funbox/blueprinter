@@ -53,5 +53,5 @@ module.exports.processed = {
     },
   ],
   referenceDataStructure: 'NewZoneMonitoring',
-  usedStructures: ['NewZoneMonitoring'],
+  usedStructuresHash: 467360436,
 };

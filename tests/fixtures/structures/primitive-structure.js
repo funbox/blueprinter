@@ -70,17 +70,11 @@ module.exports.processed = {
               ],
             },
           },
-          usedStructures: [
-            'Age',
-          ],
+          usedStructuresHash: 65759,
         },
       },
-      usedStructures: [
-        'Age',
-      ],
+      usedStructuresHash: 65759,
     },
   ],
-  usedStructures: [
-    'Age',
-  ],
+  usedStructuresHash: 65759,
 };

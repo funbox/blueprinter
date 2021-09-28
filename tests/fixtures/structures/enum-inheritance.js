@@ -81,17 +81,11 @@ module.exports.processed = {
               ],
             },
           },
-          usedStructures: [
-            'Post Code',
-          ],
+          usedStructuresHash: -347669139,
         },
       },
-      usedStructures: [
-        'Post Code',
-      ],
+      usedStructuresHash: -347669139,
     },
   ],
-  usedStructures: [
-    'Post Code',
-  ],
+  usedStructuresHash: -347669139,
 };

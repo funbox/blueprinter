@@ -40,7 +40,7 @@ module.exports.processed = {
         attributes: [
           {
             element: 'member',
-            usedStructures: [],
+            usedStructuresHash: 0,
             content: {
               key: {
                 element: 'string',

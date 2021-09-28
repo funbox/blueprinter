@@ -114,7 +114,7 @@ module.exports.processed = {
                 element: 'array',
               },
             },
-            usedStructures: [],
+            usedStructuresHash: 0,
           },
         ],
         body: '{\n  "o": {\n    "a": "hello"\n  }\n}',
