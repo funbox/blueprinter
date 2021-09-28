@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.8.2 (28.09.2021)
+
+* Replace JENKINS_URL env variable with CI variable.
+
 ## 4.8.1 (28.09.2021)
 
 * Fix memory overflow error when parsing a large documentation.
