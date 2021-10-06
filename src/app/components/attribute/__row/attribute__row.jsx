@@ -83,7 +83,7 @@ const Attribute__Row = (props) => {
             {attributeExample.toString()}
           </p>
         )}
-        {oneOfMember && (
+        {oneOfMember && selectedOptions && (
           <CheckboxField
             mods={{
               theme: 'standard',
