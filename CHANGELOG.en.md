@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.9.0 (07.10.2021)
+
+* Reduce size of the resulting bundle.
+
 ## 4.8.3 (07.10.2021)
 
 * Fix manual search page.
