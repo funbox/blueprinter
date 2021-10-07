@@ -1,4 +1,4 @@
-import Highlight from 'react-highlight';
+import Highlight from 'react-highlight/lib/optimized';
 
 const observerAvailable = 'IntersectionObserver' in window;
 
