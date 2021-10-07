@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.8.3 (07.10.2021)
+
+* Fix manual search page.
+
 ## 4.8.2 (28.09.2021)
 
 * Replace JENKINS_URL env variable with CI variable.
