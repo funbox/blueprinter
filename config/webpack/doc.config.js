@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const path = require('path');
 
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
