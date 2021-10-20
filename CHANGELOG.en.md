@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.10.0 (20.10.2021)
+
+* Use node:14.18.0-stretch-slim as a base Docker image.
+
 ## 4.9.0 (07.10.2021)
 
 * Reduce size of the resulting bundle.
