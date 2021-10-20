@@ -15,7 +15,7 @@
     "build-production": "BABEL_ENV=production webpack --config ./config/webpack/build.production.config.js",
     "build-static": "BABEL_ENV=production node ./bin/build-static.js",
     "dev": "npm-run-all --parallel watch-stub start-dev",
-    "start-dev": "webpack-dev-server --progress --config ./config/webpack/dev.config.js",
+    "start-dev": "webpack serve --progress --config ./config/webpack/dev.config.js",
     "make-stub": "node ./scripts/generate-stub.js",
     "watch-stub": "node ./scripts/watch-stub.js",
     "lint:scss": "stylelint \"src/**/*.scss\" --syntax scss --fix --config .stylelintrc --cache",
