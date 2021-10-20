@@ -99,8 +99,6 @@ module.exports = {
     new webpack.DefinePlugin({
       BASE_PATH: JSON.stringify(PATH.BASE),
       ENV: JSON.stringify(ENV),
-      // для того, чтобы редаксы-реакты выкидывали ненужный код при минификации
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.ENV': JSON.stringify(process.env.ENV),
     }),
     new webpack.ProvidePlugin({
