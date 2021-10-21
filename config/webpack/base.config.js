@@ -17,7 +17,7 @@ module.exports = {
   output: {
     path: path.resolve(PATH.PROJECT, PATH.PUBLIC),
     publicPath: PATH.BASE,
-    filename: '[name].[hash:16].js',
+    filename: '[name].[contenthash:16].js',
   },
   resolve: {
     modules: [path.resolve(PATH.PROJECT, 'src'), 'node_modules'],
