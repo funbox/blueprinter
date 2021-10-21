@@ -58,7 +58,7 @@
     "clean-webpack-plugin": "3.0.0",
     "core-js": "3.6.4",
     "css-loader": "3.4.2",
-    "csso-webpack-plugin": "2.0.0-beta.1",
+    "csso-webpack-plugin": "2.0.0-beta.3",
     "deep-equal": "2.0.1",
     "eslint": "5.16.0",
     "file-loader": "5.0.2",
