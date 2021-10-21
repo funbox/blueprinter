@@ -12,7 +12,7 @@ const config = merge(
     name: 'doc',
     mode: 'production',
     optimization: {
-      noEmitOnErrors: true,
+      emitOnErrors: false,
       minimize: true,
     },
     output: {
