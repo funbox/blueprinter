@@ -52,7 +52,7 @@
     "autoprefixer": "9.7.4",
     "babel-loader": "8.0.6",
     "babel-plugin-transform-react-remove-prop-types": "0.4.24",
-    "base64-inline-loader": "1.1.1",
+    "base64-inline-loader": "2.0.1",
     "bem-react-helper": "1.1.2",
     "chokidar": "3.3.1",
     "clean-webpack-plugin": "3.0.0",
