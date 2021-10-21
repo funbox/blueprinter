@@ -13,7 +13,6 @@ const config = merge(
     mode: 'production',
     optimization: {
       emitOnErrors: false,
-      minimize: true,
     },
     output: {
       path: path.resolve(PATH.PROJECT, 'static'),
