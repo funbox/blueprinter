@@ -99,7 +99,6 @@ module.exports = {
     new webpack.DefinePlugin({
       BASE_PATH: JSON.stringify(PATH.BASE),
       ENV: JSON.stringify(ENV),
-      'process.env.ENV': JSON.stringify(process.env.ENV),
     }),
     new webpack.ProvidePlugin({
       React: 'react',
