@@ -122,6 +122,7 @@ module.exports = {
         useShortDoctype: true,
       },
       chunks: ['app', 'vendor'],
+      scriptLoading: 'blocking',
     }),
   ],
 };

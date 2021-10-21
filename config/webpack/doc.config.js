@@ -2,6 +2,7 @@ const { merge } = require('webpack-merge');
 const path = require('path');
 
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const { PATH } = require('./vars');
 
@@ -20,7 +21,7 @@ const config = merge(
       filename: '[name].[contenthash].js',
     },
     plugins: [
-      new HtmlWebpackInlineSourcePlugin(),
+      new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),
     ],
   },
 );
@@ -33,7 +34,7 @@ config.module.rules.forEach(rule => {
 
 config.plugins.forEach(plugin => {
   if (plugin.constructor.name === 'HtmlWebpackPlugin') {
-    plugin.options.inlineSource = '.(js|css)$';
+    plugin.userOptions.inlineSource = '.(js|css)$';
   }
 });
 
