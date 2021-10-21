@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.11.0 (21.10.2021)
+
+* Update dependencies to support Node 14.18.0.
+
 ## 4.10.0 (20.10.2021)
 
 * Use node:14.18.0-stretch-slim as a base Docker image.
