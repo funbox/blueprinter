@@ -85,22 +85,22 @@ module.exports.processed = {
                 href: '/resource-with-anchor',
                 method: 'GET',
               },
+              requests: [],
+              responses: [
+                {
+                  headers: [
+                    {
+                      key: 'Content-Type',
+                      value: 'application/json',
+                    },
+                  ],
+                  statusCode: 200,
+                },
+              ],
               content: [
                 {
                   element: 'copy',
                   content: '<!-- anchor: first-action -->',
-                },
-                {
-                  request: {},
-                  response: {
-                    headers: [
-                      {
-                        key: 'Content-Type',
-                        value: 'application/json',
-                      },
-                    ],
-                    statusCode: 200,
-                  },
                 },
               ],
               type: 'transaction',
@@ -271,22 +271,22 @@ module.exports.processed = {
             href: '/resource-with-anchor',
             method: 'GET',
           },
+          requests: [],
+          responses: [
+            {
+              headers: [
+                {
+                  key: 'Content-Type',
+                  value: 'application/json',
+                },
+              ],
+              statusCode: 200,
+            },
+          ],
           content: [
             {
               element: 'copy',
               content: '<!-- anchor: first-action -->',
-            },
-            {
-              request: {},
-              response: {
-                headers: [
-                  {
-                    key: 'Content-Type',
-                    value: 'application/json',
-                  },
-                ],
-                statusCode: 200,
-              },
             },
           ],
           type: 'transaction',
@@ -403,22 +403,22 @@ module.exports.processed = {
         href: '/resource-with-anchor',
         method: 'GET',
       },
+      requests: [],
+      responses: [
+        {
+          headers: [
+            {
+              key: 'Content-Type',
+              value: 'application/json',
+            },
+          ],
+          statusCode: 200,
+        },
+      ],
       content: [
         {
           element: 'copy',
           content: '<!-- anchor: first-action -->',
-        },
-        {
-          request: {},
-          response: {
-            headers: [
-              {
-                key: 'Content-Type',
-                value: 'application/json',
-              },
-            ],
-            statusCode: 200,
-          },
         },
       ],
       type: 'transaction',

@@ -49,199 +49,170 @@ module.exports.processed = {
     href: '/user',
     method: 'POST',
   },
-  content: [
+  requests: [
     {
-      request: {
-        structureType: {
-          type: 'object',
-          typeAttributes: null,
-        },
-        attributes: [
-          {
-            element: 'member',
-            content: {
-              key: {
-                element: 'string',
-                content: 'name',
-              },
-              value: {
-                element: 'string',
-                attributes: {
-                  typeAttributes: {
-                    content: [
-                      {
-                        element: 'string',
-                        content: 'non-nullable',
-                      },
-                    ],
-                    element: 'array',
-                  },
+      structureType: {
+        type: 'object',
+        typeAttributes: null,
+      },
+      attributes: [
+        {
+          element: 'member',
+          content: {
+            key: {
+              element: 'string',
+              content: 'name',
+            },
+            value: {
+              element: 'string',
+              attributes: {
+                typeAttributes: {
+                  content: [
+                    {
+                      element: 'string',
+                      content: 'non-nullable',
+                    },
+                  ],
+                  element: 'array',
                 },
               },
             },
-            attributes: {
-              typeAttributes: {
-                content: [
-                  {
-                    element: 'string',
-                    content: 'optional',
-                  },
-                ],
-                element: 'array',
-              },
-            },
           },
-        ],
-        body: '{\n  "name": "hello"\n}',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/json',
-          },
-        ],
-        schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "name": {\n      "type": "string"\n    }\n  }\n}',
-      },
-      response: {
-        structureType: {
-          type: 'object',
-          typeAttributes: null,
-        },
-        attributes: [
-          {
-            element: 'member',
-            content: {
-              key: {
-                element: 'string',
-                content: 'status',
-              },
-              value: {
-                element: 'string',
-                attributes: {
-                  typeAttributes: {
-                    element: 'array',
-                    content: [
-                      {
-                        element: 'string',
-                        content: 'fixed',
-                      },
-                      {
-                        element: 'string',
-                        content: 'non-nullable',
-                      },
-                    ],
-                  },
+          attributes: {
+            typeAttributes: {
+              content: [
+                {
+                  element: 'string',
+                  content: 'optional',
                 },
-                content: 'ok',
-              },
-            },
-            attributes: {
-              typeAttributes: {
-                content: [
-                  {
-                    element: 'string',
-                    content: 'optional',
-                  },
-                ],
-                element: 'array',
-              },
+              ],
+              element: 'array',
             },
           },
-        ],
-        body: '{\n  "status": "ok"\n}',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/json',
-          },
-        ],
-        schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "status": {\n      "type": "string",\n      "enum": [\n        "ok"\n      ]\n    }\n  }\n}',
-        statusCode: 200,
-      },
-    },
-    {
-      request: {},
-      response: {},
-    },
-    {
-      request: {},
-      response: {
-        statusCode: 500,
-      },
-    },
-    {
-      request: {},
-      response: {},
-    },
-    {
-      request: {},
-      response: {},
-    },
-    {
-      request: {},
-      response: {},
-    },
-    {
-      request: {
-        structureType: {
-          type: 'object',
-          typeAttributes: null,
         },
-        attributes: [
-          {
-            element: 'member',
-            content: {
-              key: {
-                element: 'string',
-                content: 'address',
-              },
-              value: {
-                element: 'string',
-                attributes: {
-                  typeAttributes: {
-                    content: [
-                      {
-                        element: 'string',
-                        content: 'non-nullable',
-                      },
-                    ],
-                    element: 'array',
-                  },
+      ],
+      body: '{\n  "name": "hello"\n}',
+      headers: [
+        {
+          key: 'Content-Type',
+          value: 'application/json',
+        },
+      ],
+      schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "name": {\n      "type": "string"\n    }\n  }\n}',
+    },
+    {
+      structureType: {
+        type: 'object',
+        typeAttributes: null,
+      },
+      attributes: [
+        {
+          element: 'member',
+          content: {
+            key: {
+              element: 'string',
+              content: 'address',
+            },
+            value: {
+              element: 'string',
+              attributes: {
+                typeAttributes: {
+                  content: [
+                    {
+                      element: 'string',
+                      content: 'non-nullable',
+                    },
+                  ],
+                  element: 'array',
                 },
               },
             },
-            attributes: {
-              typeAttributes: {
-                content: [
-                  {
-                    element: 'string',
-                    content: 'optional',
-                  },
-                ],
-                element: 'array',
-              },
+          },
+          attributes: {
+            typeAttributes: {
+              content: [
+                {
+                  element: 'string',
+                  content: 'optional',
+                },
+              ],
+              element: 'array',
             },
           },
-        ],
-        body: '{\n  "address": "hello"\n}',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/json',
-          },
-        ],
-        schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "address": {\n      "type": "string"\n    }\n  }\n}',
-      },
-      response: {},
-    },
-    {
-      request: {},
-      response: {},
-    },
-    {
-      request: {},
-      response: {},
+        },
+      ],
+      body: '{\n  "address": "hello"\n}',
+      headers: [
+        {
+          key: 'Content-Type',
+          value: 'application/json',
+        },
+      ],
+      schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "address": {\n      "type": "string"\n    }\n  }\n}',
     },
   ],
+  responses: [
+    {
+      structureType: {
+        type: 'object',
+        typeAttributes: null,
+      },
+      attributes: [
+        {
+          element: 'member',
+          content: {
+            key: {
+              element: 'string',
+              content: 'status',
+            },
+            value: {
+              element: 'string',
+              attributes: {
+                typeAttributes: {
+                  element: 'array',
+                  content: [
+                    {
+                      element: 'string',
+                      content: 'fixed',
+                    },
+                    {
+                      element: 'string',
+                      content: 'non-nullable',
+                    },
+                  ],
+                },
+              },
+              content: 'ok',
+            },
+          },
+          attributes: {
+            typeAttributes: {
+              content: [
+                {
+                  element: 'string',
+                  content: 'optional',
+                },
+              ],
+              element: 'array',
+            },
+          },
+        },
+      ],
+      body: '{\n  "status": "ok"\n}',
+      headers: [
+        {
+          key: 'Content-Type',
+          value: 'application/json',
+        },
+      ],
+      schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "status": {\n      "type": "string",\n      "enum": [\n        "ok"\n      ]\n    }\n  }\n}',
+      statusCode: 200,
+    },
+    {
+      statusCode: 500,
+    },
+  ],
+  content: [],
   type: 'transaction',
   routePreset: null,
   nestedRoutePresets: [],

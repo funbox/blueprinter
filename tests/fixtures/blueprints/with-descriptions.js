@@ -88,124 +88,126 @@ module.exports.processed = {
                 href: '/users',
                 method: 'POST',
               },
+              requests: [
+                {
+                  structureType: {
+                    type: 'object',
+                    typeAttributes: null,
+                  },
+                  attributes: [
+                    {
+                      element: 'member',
+                      content: {
+                        key: {
+                          element: 'string',
+                          content: 'name',
+                        },
+                        value: {
+                          element: 'string',
+                          attributes: {
+                            typeAttributes: {
+                              content: [
+                                {
+                                  element: 'string',
+                                  content: 'non-nullable',
+                                },
+                              ],
+                              element: 'array',
+                            },
+                          },
+                        },
+                      },
+                      attributes: {
+                        typeAttributes: {
+                          content: [
+                            {
+                              element: 'string',
+                              content: 'optional',
+                            },
+                          ],
+                          element: 'array',
+                        },
+                      },
+                    },
+                  ],
+                  body: '{\n  "name": "hello"\n}',
+                  description: 'Test request description',
+                  headers: [
+                    {
+                      key: 'Content-Type',
+                      value: 'application/json',
+                    },
+                  ],
+                  schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "name": {\n      "type": "string"\n    }\n  }\n}',
+                },
+              ],
+              responses: [
+                {
+                  structureType: {
+                    type: 'object',
+                    typeAttributes: null,
+                  },
+                  attributes: [
+                    {
+                      element: 'member',
+                      content: {
+                        key: {
+                          element: 'string',
+                          content: 'status',
+                        },
+                        value: {
+                          element: 'string',
+                          attributes: {
+                            samples: {
+                              element: 'array',
+                              content: [
+                                {
+                                  element: 'string',
+                                  content: 'ok',
+                                },
+                              ],
+                            },
+                            typeAttributes: {
+                              content: [
+                                {
+                                  element: 'string',
+                                  content: 'non-nullable',
+                                },
+                              ],
+                              element: 'array',
+                            },
+                          },
+                        },
+                      },
+                      attributes: {
+                        typeAttributes: {
+                          content: [
+                            {
+                              element: 'string',
+                              content: 'optional',
+                            },
+                          ],
+                          element: 'array',
+                        },
+                      },
+                    },
+                  ],
+                  body: '{\n  "status": "ok"\n}',
+                  description: 'Test response description',
+                  headers: [
+                    {
+                      key: 'Content-Type',
+                      value: 'application/json',
+                    },
+                  ],
+                  schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "status": {\n      "type": "string"\n    }\n  }\n}',
+                  statusCode: 200,
+                },
+              ],
               content: [
                 {
                   element: 'copy',
                   content: 'Test transition description',
-                },
-                {
-                  request: {
-                    structureType: {
-                      type: 'object',
-                      typeAttributes: null,
-                    },
-                    attributes: [
-                      {
-                        element: 'member',
-                        content: {
-                          key: {
-                            element: 'string',
-                            content: 'name',
-                          },
-                          value: {
-                            element: 'string',
-                            attributes: {
-                              typeAttributes: {
-                                content: [
-                                  {
-                                    element: 'string',
-                                    content: 'non-nullable',
-                                  },
-                                ],
-                                element: 'array',
-                              },
-                            },
-                          },
-                        },
-                        attributes: {
-                          typeAttributes: {
-                            content: [
-                              {
-                                element: 'string',
-                                content: 'optional',
-                              },
-                            ],
-                            element: 'array',
-                          },
-                        },
-                      },
-                    ],
-                    body: '{\n  "name": "hello"\n}',
-                    description: 'Test request description',
-                    headers: [
-                      {
-                        key: 'Content-Type',
-                        value: 'application/json',
-                      },
-                    ],
-                    schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "name": {\n      "type": "string"\n    }\n  }\n}',
-                  },
-                  response: {
-                    structureType: {
-                      type: 'object',
-                      typeAttributes: null,
-                    },
-                    attributes: [
-                      {
-                        element: 'member',
-                        content: {
-                          key: {
-                            element: 'string',
-                            content: 'status',
-                          },
-                          value: {
-                            element: 'string',
-                            attributes: {
-                              samples: {
-                                element: 'array',
-                                content: [
-                                  {
-                                    element: 'string',
-                                    content: 'ok',
-                                  },
-                                ],
-                              },
-                              typeAttributes: {
-                                content: [
-                                  {
-                                    element: 'string',
-                                    content: 'non-nullable',
-                                  },
-                                ],
-                                element: 'array',
-                              },
-                            },
-                          },
-                        },
-                        attributes: {
-                          typeAttributes: {
-                            content: [
-                              {
-                                element: 'string',
-                                content: 'optional',
-                              },
-                            ],
-                            element: 'array',
-                          },
-                        },
-                      },
-                    ],
-                    body: '{\n  "status": "ok"\n}',
-                    description: 'Test response description',
-                    headers: [
-                      {
-                        key: 'Content-Type',
-                        value: 'application/json',
-                      },
-                    ],
-                    schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "status": {\n      "type": "string"\n    }\n  }\n}',
-                    statusCode: 200,
-                  },
                 },
               ],
               type: 'transaction',
@@ -280,124 +282,126 @@ module.exports.processed = {
             href: '/users',
             method: 'POST',
           },
+          requests: [
+            {
+              structureType: {
+                type: 'object',
+                typeAttributes: null,
+              },
+              attributes: [
+                {
+                  element: 'member',
+                  content: {
+                    key: {
+                      element: 'string',
+                      content: 'name',
+                    },
+                    value: {
+                      element: 'string',
+                      attributes: {
+                        typeAttributes: {
+                          content: [
+                            {
+                              element: 'string',
+                              content: 'non-nullable',
+                            },
+                          ],
+                          element: 'array',
+                        },
+                      },
+                    },
+                  },
+                  attributes: {
+                    typeAttributes: {
+                      content: [
+                        {
+                          element: 'string',
+                          content: 'optional',
+                        },
+                      ],
+                      element: 'array',
+                    },
+                  },
+                },
+              ],
+              body: '{\n  "name": "hello"\n}',
+              description: 'Test request description',
+              headers: [
+                {
+                  key: 'Content-Type',
+                  value: 'application/json',
+                },
+              ],
+              schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "name": {\n      "type": "string"\n    }\n  }\n}',
+            },
+          ],
+          responses: [
+            {
+              structureType: {
+                type: 'object',
+                typeAttributes: null,
+              },
+              attributes: [
+                {
+                  element: 'member',
+                  content: {
+                    key: {
+                      element: 'string',
+                      content: 'status',
+                    },
+                    value: {
+                      element: 'string',
+                      attributes: {
+                        samples: {
+                          element: 'array',
+                          content: [
+                            {
+                              element: 'string',
+                              content: 'ok',
+                            },
+                          ],
+                        },
+                        typeAttributes: {
+                          content: [
+                            {
+                              element: 'string',
+                              content: 'non-nullable',
+                            },
+                          ],
+                          element: 'array',
+                        },
+                      },
+                    },
+                  },
+                  attributes: {
+                    typeAttributes: {
+                      content: [
+                        {
+                          element: 'string',
+                          content: 'optional',
+                        },
+                      ],
+                      element: 'array',
+                    },
+                  },
+                },
+              ],
+              body: '{\n  "status": "ok"\n}',
+              description: 'Test response description',
+              headers: [
+                {
+                  key: 'Content-Type',
+                  value: 'application/json',
+                },
+              ],
+              schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "status": {\n      "type": "string"\n    }\n  }\n}',
+              statusCode: 200,
+            },
+          ],
           content: [
             {
               element: 'copy',
               content: 'Test transition description',
-            },
-            {
-              request: {
-                structureType: {
-                  type: 'object',
-                  typeAttributes: null,
-                },
-                attributes: [
-                  {
-                    element: 'member',
-                    content: {
-                      key: {
-                        element: 'string',
-                        content: 'name',
-                      },
-                      value: {
-                        element: 'string',
-                        attributes: {
-                          typeAttributes: {
-                            content: [
-                              {
-                                element: 'string',
-                                content: 'non-nullable',
-                              },
-                            ],
-                            element: 'array',
-                          },
-                        },
-                      },
-                    },
-                    attributes: {
-                      typeAttributes: {
-                        content: [
-                          {
-                            element: 'string',
-                            content: 'optional',
-                          },
-                        ],
-                        element: 'array',
-                      },
-                    },
-                  },
-                ],
-                body: '{\n  "name": "hello"\n}',
-                description: 'Test request description',
-                headers: [
-                  {
-                    key: 'Content-Type',
-                    value: 'application/json',
-                  },
-                ],
-                schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "name": {\n      "type": "string"\n    }\n  }\n}',
-              },
-              response: {
-                structureType: {
-                  type: 'object',
-                  typeAttributes: null,
-                },
-                attributes: [
-                  {
-                    element: 'member',
-                    content: {
-                      key: {
-                        element: 'string',
-                        content: 'status',
-                      },
-                      value: {
-                        element: 'string',
-                        attributes: {
-                          samples: {
-                            element: 'array',
-                            content: [
-                              {
-                                element: 'string',
-                                content: 'ok',
-                              },
-                            ],
-                          },
-                          typeAttributes: {
-                            content: [
-                              {
-                                element: 'string',
-                                content: 'non-nullable',
-                              },
-                            ],
-                            element: 'array',
-                          },
-                        },
-                      },
-                    },
-                    attributes: {
-                      typeAttributes: {
-                        content: [
-                          {
-                            element: 'string',
-                            content: 'optional',
-                          },
-                        ],
-                        element: 'array',
-                      },
-                    },
-                  },
-                ],
-                body: '{\n  "status": "ok"\n}',
-                description: 'Test response description',
-                headers: [
-                  {
-                    key: 'Content-Type',
-                    value: 'application/json',
-                  },
-                ],
-                schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "status": {\n      "type": "string"\n    }\n  }\n}',
-                statusCode: 200,
-              },
             },
           ],
           type: 'transaction',
@@ -452,124 +456,126 @@ module.exports.processed = {
         href: '/users',
         method: 'POST',
       },
+      requests: [
+        {
+          structureType: {
+            type: 'object',
+            typeAttributes: null,
+          },
+          attributes: [
+            {
+              element: 'member',
+              content: {
+                key: {
+                  element: 'string',
+                  content: 'name',
+                },
+                value: {
+                  element: 'string',
+                  attributes: {
+                    typeAttributes: {
+                      content: [
+                        {
+                          element: 'string',
+                          content: 'non-nullable',
+                        },
+                      ],
+                      element: 'array',
+                    },
+                  },
+                },
+              },
+              attributes: {
+                typeAttributes: {
+                  content: [
+                    {
+                      element: 'string',
+                      content: 'optional',
+                    },
+                  ],
+                  element: 'array',
+                },
+              },
+            },
+          ],
+          body: '{\n  "name": "hello"\n}',
+          description: 'Test request description',
+          headers: [
+            {
+              key: 'Content-Type',
+              value: 'application/json',
+            },
+          ],
+          schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "name": {\n      "type": "string"\n    }\n  }\n}',
+        },
+      ],
+      responses: [
+        {
+          structureType: {
+            type: 'object',
+            typeAttributes: null,
+          },
+          attributes: [
+            {
+              element: 'member',
+              content: {
+                key: {
+                  element: 'string',
+                  content: 'status',
+                },
+                value: {
+                  element: 'string',
+                  attributes: {
+                    samples: {
+                      element: 'array',
+                      content: [
+                        {
+                          element: 'string',
+                          content: 'ok',
+                        },
+                      ],
+                    },
+                    typeAttributes: {
+                      content: [
+                        {
+                          element: 'string',
+                          content: 'non-nullable',
+                        },
+                      ],
+                      element: 'array',
+                    },
+                  },
+                },
+              },
+              attributes: {
+                typeAttributes: {
+                  content: [
+                    {
+                      element: 'string',
+                      content: 'optional',
+                    },
+                  ],
+                  element: 'array',
+                },
+              },
+            },
+          ],
+          body: '{\n  "status": "ok"\n}',
+          description: 'Test response description',
+          headers: [
+            {
+              key: 'Content-Type',
+              value: 'application/json',
+            },
+          ],
+          schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "status": {\n      "type": "string"\n    }\n  }\n}',
+          statusCode: 200,
+        },
+      ],
       content: [
         {
           element: 'copy',
           content: 'Test transition description',
-        },
-        {
-          request: {
-            structureType: {
-              type: 'object',
-              typeAttributes: null,
-            },
-            attributes: [
-              {
-                element: 'member',
-                content: {
-                  key: {
-                    element: 'string',
-                    content: 'name',
-                  },
-                  value: {
-                    element: 'string',
-                    attributes: {
-                      typeAttributes: {
-                        content: [
-                          {
-                            element: 'string',
-                            content: 'non-nullable',
-                          },
-                        ],
-                        element: 'array',
-                      },
-                    },
-                  },
-                },
-                attributes: {
-                  typeAttributes: {
-                    content: [
-                      {
-                        element: 'string',
-                        content: 'optional',
-                      },
-                    ],
-                    element: 'array',
-                  },
-                },
-              },
-            ],
-            body: '{\n  "name": "hello"\n}',
-            description: 'Test request description',
-            headers: [
-              {
-                key: 'Content-Type',
-                value: 'application/json',
-              },
-            ],
-            schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "name": {\n      "type": "string"\n    }\n  }\n}',
-          },
-          response: {
-            structureType: {
-              type: 'object',
-              typeAttributes: null,
-            },
-            attributes: [
-              {
-                element: 'member',
-                content: {
-                  key: {
-                    element: 'string',
-                    content: 'status',
-                  },
-                  value: {
-                    element: 'string',
-                    attributes: {
-                      samples: {
-                        element: 'array',
-                        content: [
-                          {
-                            element: 'string',
-                            content: 'ok',
-                          },
-                        ],
-                      },
-                      typeAttributes: {
-                        content: [
-                          {
-                            element: 'string',
-                            content: 'non-nullable',
-                          },
-                        ],
-                        element: 'array',
-                      },
-                    },
-                  },
-                },
-                attributes: {
-                  typeAttributes: {
-                    content: [
-                      {
-                        element: 'string',
-                        content: 'optional',
-                      },
-                    ],
-                    element: 'array',
-                  },
-                },
-              },
-            ],
-            body: '{\n  "status": "ok"\n}',
-            description: 'Test response description',
-            headers: [
-              {
-                key: 'Content-Type',
-                value: 'application/json',
-              },
-            ],
-            schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "status": {\n      "type": "string"\n    }\n  }\n}',
-            statusCode: 200,
-          },
         },
       ],
       type: 'transaction',

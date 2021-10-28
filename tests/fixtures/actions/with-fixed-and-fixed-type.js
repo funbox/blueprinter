@@ -27,108 +27,107 @@ module.exports.processed = {
     href: '/foo',
     method: 'GET',
   },
-  content: [
+  requests: [],
+  responses: [
     {
-      request: {},
-      response: {
-        structureType: {
-          type: 'object',
-          typeAttributes: null,
-        },
-        attributes: [
-          {
-            element: 'member',
-            content: {
-              key: {
-                element: 'string',
-                content: 'o',
-              },
-              value: {
-                element: 'object',
-                attributes: {
-                  typeAttributes: {
-                    element: 'array',
-                    content: [
-                      {
-                        element: 'string',
-                        content: 'fixed',
-                      },
-                      {
-                        element: 'string',
-                        content: 'non-nullable',
-                      },
-                    ],
-                  },
+      structureType: {
+        type: 'object',
+        typeAttributes: null,
+      },
+      attributes: [
+        {
+          element: 'member',
+          content: {
+            key: {
+              element: 'string',
+              content: 'o',
+            },
+            value: {
+              element: 'object',
+              attributes: {
+                typeAttributes: {
+                  element: 'array',
+                  content: [
+                    {
+                      element: 'string',
+                      content: 'fixed',
+                    },
+                    {
+                      element: 'string',
+                      content: 'non-nullable',
+                    },
+                  ],
                 },
-                content: [
-                  {
-                    element: 'member',
-                    content: {
-                      key: {
-                        element: 'string',
-                        content: 'a',
-                      },
-                      value: {
-                        element: 'string',
-                        content: 'hello',
-                        attributes: {
-                          typeAttributes: {
-                            content: [
-                              {
-                                element: 'string',
-                                content: 'fixed',
-                              },
-                              {
-                                element: 'string',
-                                content: 'non-nullable',
-                              },
-                            ],
-                            element: 'array',
-                          },
+              },
+              content: [
+                {
+                  element: 'member',
+                  content: {
+                    key: {
+                      element: 'string',
+                      content: 'a',
+                    },
+                    value: {
+                      element: 'string',
+                      content: 'hello',
+                      attributes: {
+                        typeAttributes: {
+                          content: [
+                            {
+                              element: 'string',
+                              content: 'fixed',
+                            },
+                            {
+                              element: 'string',
+                              content: 'non-nullable',
+                            },
+                          ],
+                          element: 'array',
                         },
                       },
                     },
-                    attributes: {
-                      typeAttributes: {
-                        content: [
-                          {
-                            element: 'string',
-                            content: 'optional',
-                          },
-                        ],
-                        element: 'array',
-                      },
+                  },
+                  attributes: {
+                    typeAttributes: {
+                      content: [
+                        {
+                          element: 'string',
+                          content: 'optional',
+                        },
+                      ],
+                      element: 'array',
                     },
                   },
-                ],
-              },
+                },
+              ],
             },
-            attributes: {
-              typeAttributes: {
-                content: [
-                  {
-                    element: 'string',
-                    content: 'optional',
-                  },
-                ],
-                element: 'array',
-              },
+          },
+          attributes: {
+            typeAttributes: {
+              content: [
+                {
+                  element: 'string',
+                  content: 'optional',
+                },
+              ],
+              element: 'array',
             },
-            usedStructuresHash: 0,
           },
-        ],
-        body: '{\n  "o": {\n    "a": "hello"\n  }\n}',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/json',
-          },
-        ],
-        schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "o": {\n      "type": "object",\n      "properties": {\n        "a": {\n          "type": "string",\n          "enum": [\n            "hello"\n          ]\n        }\n      },\n      "required": [\n        "a"\n      ],\n      "additionalProperties": false\n    }\n  }\n}',
-        statusCode: 200,
-      },
+          usedStructuresHash: 0,
+        },
+      ],
+      body: '{\n  "o": {\n    "a": "hello"\n  }\n}',
+      headers: [
+        {
+          key: 'Content-Type',
+          value: 'application/json',
+        },
+      ],
+      schema: '{\n  "$schema": "http://json-schema.org/draft-04/schema#",\n  "type": "object",\n  "properties": {\n    "o": {\n      "type": "object",\n      "properties": {\n        "a": {\n          "type": "string",\n          "enum": [\n            "hello"\n          ]\n        }\n      },\n      "required": [\n        "a"\n      ],\n      "additionalProperties": false\n    }\n  }\n}',
+      statusCode: 200,
     },
   ],
+  content: [],
   type: 'transaction',
   routePreset: null,
   nestedRoutePresets: [],

@@ -46,20 +46,19 @@ module.exports.processed = {
                 href: '/users',
                 method: 'GET',
               },
-              content: [
+              requests: [],
+              responses: [
                 {
-                  request: {},
-                  response: {
-                    headers: [
-                      {
-                        key: 'Content-Type',
-                        value: 'application/json',
-                      },
-                    ],
-                    statusCode: 200,
-                  },
+                  headers: [
+                    {
+                      key: 'Content-Type',
+                      value: 'application/json',
+                    },
+                  ],
+                  statusCode: 200,
                 },
               ],
+              content: [],
               type: 'transaction',
               routePreset: null,
               nestedRoutePresets: [],
@@ -134,20 +133,19 @@ module.exports.processed = {
             href: '/users',
             method: 'GET',
           },
-          content: [
+          requests: [],
+          responses: [
             {
-              request: {},
-              response: {
-                headers: [
-                  {
-                    key: 'Content-Type',
-                    value: 'application/json',
-                  },
-                ],
-                statusCode: 200,
-              },
+              headers: [
+                {
+                  key: 'Content-Type',
+                  value: 'application/json',
+                },
+              ],
+              statusCode: 200,
             },
           ],
+          content: [],
           type: 'transaction',
           routePreset: null,
           nestedRoutePresets: [],
@@ -200,20 +198,19 @@ module.exports.processed = {
         href: '/users',
         method: 'GET',
       },
-      content: [
+      requests: [],
+      responses: [
         {
-          request: {},
-          response: {
-            headers: [
-              {
-                key: 'Content-Type',
-                value: 'application/json',
-              },
-            ],
-            statusCode: 200,
-          },
+          headers: [
+            {
+              key: 'Content-Type',
+              value: 'application/json',
+            },
+          ],
+          statusCode: 200,
         },
       ],
+      content: [],
       type: 'transaction',
       routePreset: null,
       nestedRoutePresets: [],

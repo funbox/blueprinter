@@ -31,22 +31,22 @@ module.exports.processed = {
     href: '/users',
     method: 'GET',
   },
+  requests: [],
+  responses: [
+    {
+      headers: [
+        {
+          key: 'Content-Type',
+          value: 'application/json',
+        },
+      ],
+      statusCode: 200,
+    },
+  ],
   content: [
     {
       element: 'copy',
       content: '<!-- anchor: action-anchor -->',
-    },
-    {
-      request: {},
-      response: {
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/json',
-          },
-        ],
-        statusCode: 200,
-      },
     },
   ],
   type: 'transaction',
