@@ -30,11 +30,13 @@ class ActionProcessor {
   refactorAction(action, parentSource) {
     let method = '';
     const copyElements = [];
+    const requests = [];
+    const responses = [];
 
-    const transactions = action.content.reduce((acc, trans) => {
+    action.content.forEach((trans) => {
       if (trans.element === 'copy') {
         copyElements.push(trans);
-        return acc;
+        return;
       }
 
       const sourceRequest = trans.content.find(tItem => tItem.element === 'httpRequest');
@@ -43,7 +45,7 @@ class ActionProcessor {
       const processedResponse = this.resolveSourceElementInheritance(sourceResponse);
       method = get('attributes', 'method', 'content').from(sourceRequest);
 
-      const request = {
+      const formattedRequest = removeEmpty({
         structureType: getDataStructureType(processedRequest),
         attributes: get('content').from(this.fillAdditionalAttributes(processedRequest)),
         body: getBody(sourceRequest),
@@ -52,9 +54,9 @@ class ActionProcessor {
         headers: sourceRequest.attributes.headers ? sourceRequest.attributes.headers.content.map(extractHeaderData) : null,
         schema: getSchema(sourceRequest),
         title: get('meta', 'title', 'content').from(sourceRequest),
-      };
+      });
 
-      const response = {
+      const formattedResponse = removeEmpty({
         structureType: getDataStructureType(processedResponse),
         attributes: get('content').from(this.fillAdditionalAttributes(processedResponse)),
         body: getBody(sourceResponse),
@@ -63,27 +65,30 @@ class ActionProcessor {
         headers: sourceResponse.attributes.headers ? sourceResponse.attributes.headers.content.map(extractHeaderData) : null,
         schema: getSchema(sourceResponse),
         statusCode: get('attributes', 'statusCode', 'content').from(sourceResponse),
-      };
+      });
 
-      const formattedTransaction = {
-        request: removeEmpty(request),
-        response: removeEmpty(response),
-      };
+      const isRequestUnique = !requests.some(isSameRequest);
+      const isResponseUnique = !responses.some(isSameResponse);
 
-      if (acc.length === 0) {
-        acc.push(formattedTransaction);
-        return acc;
+      if (isRequestUnique && hasData(formattedRequest)) {
+        requests.push(formattedRequest);
+      }
+      if (isResponseUnique && hasData(formattedResponse)) {
+        responses.push(formattedResponse);
       }
 
-      const isRequestUnique = !acc.some(t => deepEqual(t.request, formattedTransaction.request));
-      const isResponseUnique = !acc.some(t => deepEqual(t.response, formattedTransaction.response));
+      function isSameRequest(existingRequest) {
+        return deepEqual(existingRequest, formattedRequest);
+      }
 
-      acc.push({
-        request: isRequestUnique ? formattedTransaction.request : {},
-        response: isResponseUnique ? formattedTransaction.response : {},
-      });
-      return acc;
-    }, []);
+      function isSameResponse(existingResponse) {
+        return deepEqual(existingResponse, formattedResponse);
+      }
+
+      function hasData(reqOrRes) {
+        return Object.values(reqOrRes).some(Boolean);
+      }
+    });
 
     const href = get('attributes', 'href', 'content').from(action);
     const title = get('meta', 'title', 'content').from(action);
@@ -112,7 +117,9 @@ class ActionProcessor {
         href,
         method,
       },
-      content: copyElements.concat(transactions),
+      content: copyElements,
+      requests,
+      responses,
       type: 'transaction',
       routePreset: presetHash ? route : null,
       nestedRoutePresets: [],

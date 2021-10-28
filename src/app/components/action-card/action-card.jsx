@@ -97,7 +97,8 @@ const ActionCard = (props) => {
         )}
 
         <TransitionContainer
-          transactions={action.content.filter(el => !isCopy(el))}
+          requests={action.requests}
+          responses={action.responses}
           transitionProps={{
             mix: 'action-card__content',
             parentId: id,

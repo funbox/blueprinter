@@ -4,34 +4,16 @@ import Transition from 'app/components/transition';
 import ViewContext from 'app/components/app/view-context';
 
 const TransitionContainer = (props) => {
-  let availableRequests = [];
-  let availableResponses = [];
   const {
-    transactions,
+    requests,
+    responses,
     transitionProps = {},
   } = props;
-
-  if (transactions.length > 0) {
-    availableRequests = transactions.reduce((reqArray, transaction) => {
-      if (Object.values(transaction.request).some(value => !!value)) {
-        reqArray.push(transaction.request);
-      }
-
-      return reqArray;
-    }, []);
-    availableResponses = transactions.reduce((respArray, transaction) => {
-      if (Object.values(transaction.response).some(value => !!value)) {
-        respArray.push(transaction.response);
-      }
-
-      return respArray;
-    }, []);
-  }
 
   return (
     <Fragment>
       {
-        availableRequests.length > 0 && (
+        requests.length > 0 && (
           <ViewContext.Consumer>
             {value => (
               <Transition
@@ -40,7 +22,7 @@ const TransitionContainer = (props) => {
                 }}
                 title="Requests"
                 contentType="request"
-                availableTransactions={availableRequests}
+                availableTransactions={requests}
                 {...transitionProps}
               />
             )}
@@ -49,7 +31,7 @@ const TransitionContainer = (props) => {
       }
 
       {
-        availableResponses.length > 0 && (
+        responses.length > 0 && (
           <ViewContext.Consumer>
             {value => (
               <Transition
@@ -58,7 +40,7 @@ const TransitionContainer = (props) => {
                 }}
                 title="Responses"
                 contentType="response"
-                availableTransactions={availableResponses}
+                availableTransactions={responses}
                 {...transitionProps}
               />
             )}
@@ -70,13 +52,15 @@ const TransitionContainer = (props) => {
 };
 
 TransitionContainer.propTypes = {
-  transactions: PropTypes.arrayOf(
-    PropTypes.shape({
-      request: PropTypes.object,
-      response: PropTypes.object,
-    }),
-  ),
+  requests: PropTypes.arrayOf(PropTypes.object),
+  responses: PropTypes.arrayOf(PropTypes.object),
   transitionProps: PropTypes.object,
+};
+
+TransitionContainer.defaultProps = {
+  requests: [],
+  responses: [],
+  transitionProps: {},
 };
 
 export default TransitionContainer;
