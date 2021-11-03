@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.11.1 (03.11.2021)
+
+* Fix page reload after documentation is changed.
+
 ## 4.11.0 (21.10.2021)
 
 * Update dependencies to support Node 14.18.0.
