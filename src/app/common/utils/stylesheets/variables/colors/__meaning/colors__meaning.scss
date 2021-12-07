@@ -28,6 +28,7 @@
   --background-color--href: var(--background-color--body);
 
   --stroke-color--href: var(--gray);
+  --stroke-color--checkbox: #{$cloudy-gray};
   --stroke-color--checkbox-checked: var(--text-blue);
   --stroke-color--checkbox-hover: #{$blue};
   --stroke-color--checkbox-disabled: var(--gray);
@@ -118,6 +119,7 @@
 
   --background-color--href: var(--light-gray-10);
   --stroke-color--href: var(--gray-10);
+  --stroke-color--checkbox: var(--dark-gray);
 
   --color--number: #{$red};
   --color--header: #{$red};
