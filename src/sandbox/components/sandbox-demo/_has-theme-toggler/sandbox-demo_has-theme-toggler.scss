@@ -1,5 +1,9 @@
+@import '../../../common/colors/colors-sandbox-theme';
+
 .sandbox-demo_has-theme-toggler {
   @include light-css-vars;
+
+  @include light-css-vars-sandbox;
 
   display: flex;
   justify-content: space-between;
@@ -11,6 +15,8 @@
 
   .sandbox-demo__canvas {
     align-self: center;
+    padding: 20px;
+    box-shadow: inset 0 0 5px var(--box-shadow--sandbox-demo);
   }
 
   .sandbox-demo__theme-toggler {
@@ -19,5 +25,7 @@
 
   &.sandbox-demo_theme_dark {
     @include dark-css-vars;
+
+    @include dark-css-vars-sandbox;
   }
 }

@@ -10,9 +10,10 @@
 
 @mixin dark-css-vars-sandbox() {
   $dark-blue: #292b37;
+  $gray: #464958;
 
   --background-color--button-sandbox: var(--dark-blue);
   --background-color--sandbox-demo: var(--dark-blue);
 
-  --box-shadow--sandbox-demo: #{rgba($dark-blue, .3)};
+  --box-shadow--sandbox-demo: #{$gray};
 }
