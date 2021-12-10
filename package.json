@@ -23,7 +23,7 @@
     "lint:test": "eslint -c tests/.eslintrc tests",
     "lint": "npm run -s lint:scss && npm run -s lint:js && npm run -s lint:test",
     "prebuild": "npm run lint",
-    "prepublishOnly": "npm run build-static",
+    "prepublishOnly": "lawyer && npm run build-static",
     "test": "jest --coverage"
   },
   "dependencies": {
