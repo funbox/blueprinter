@@ -1,8 +1,8 @@
 .service-info__definitions {
   display: grid;
+  grid-template-columns: max-content 1fr;
   align-items: center;
   overflow-x: hidden;
   margin: 0;
   column-gap: 20px;
-  grid-template-columns: max-content 1fr;
 }
