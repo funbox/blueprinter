@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.12.0 (10.12.2021)
+
+* Update border color of checkbox according to design.
+
 ## 4.11.1 (03.11.2021)
 
 * Fix page reload after documentation is changed.
