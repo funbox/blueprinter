@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.13.0 (11.12.2021)
+
+* Run Lawyer.
+
 ## 4.12.0 (10.12.2021)
 
 * Update border color of checkbox according to design.
