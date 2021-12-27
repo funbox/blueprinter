@@ -1,4 +1,4 @@
-import deepEqual from 'deep-equal';
+import { deepEqual } from 'fast-equals';
 import { MESSAGE_DEFAULT_TITLE, STANDARD_TYPES } from 'app/constants/defaults';
 import { get, getSourceElementIndexByType, getBody, getBodyTemplate, getSchema, getDescription } from './getters';
 import { combineHashes, combineRoutes, createHash, createRoute, createSlug, getHashCode, hashFromComment } from './hash';
