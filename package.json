@@ -27,10 +27,10 @@
     "test": "jest --coverage"
   },
   "dependencies": {
-    "@funbox/commonmark": "0.29.0-fb-1.0.3",
     "@funbox/crafter": "3.4.1",
     "@funbox/free-port-finder": "2.0.1",
     "browser-sync": "2.26.14",
+    "commonmark": "0.30.0",
     "react-hot-loader": "4.12.19",
     "yargs": "15.4.1"
   },

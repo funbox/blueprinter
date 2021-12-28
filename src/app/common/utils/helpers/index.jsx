@@ -1,11 +1,10 @@
 import parser from 'html-react-parser';
+import { Parser, HtmlRenderer, Node } from 'commonmark';
 import Anchor from 'app/components/anchor';
 import { get, getDescriptionHeadersWithHash } from './getters';
 
-const commonmark = require('@funbox/commonmark');
-
-const markdownParser = new commonmark.Parser();
-const htmlRenderer = new commonmark.HtmlRenderer({ softbreak: '<br />' }); // render soft breaks as hard breaks
+const markdownParser = new Parser();
+const htmlRenderer = new HtmlRenderer({ softbreak: '<br />' }); // render soft breaks as hard breaks
 
 const customFenceRegex = /:{3}\s?(note|warning)/;
 
@@ -163,8 +162,8 @@ function parseTextWithCustomBlocks(text) {
   fencedBlocks = fencedBlocks.map(block => {
     const contentText = block.contentLines.join(splitChar);
     const parsedContent = markdownParser.parse(contentText);
-    const openingTag = new commonmark.Node('html_block');
-    const closingTag = new commonmark.Node('html_block');
+    const openingTag = new Node('html_block');
+    const closingTag = new Node('html_block');
     openingTag.literal = `<div class="${b('information', { mods: { type: block.type } })}">`;
     closingTag.literal = '</div>';
     parsedContent.prependChild(openingTag);
