@@ -27,7 +27,7 @@
     "test": "jest --coverage"
   },
   "dependencies": {
-    "@funbox/crafter": "3.4.1",
+    "@funbox/crafter": "3.6.0",
     "@funbox/free-port-finder": "2.0.1",
     "browser-sync": "2.26.14",
     "commonmark": "0.30.0",
