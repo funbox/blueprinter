@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.14.0 (28.12.2021)
+
+* Replace a fork of `commonmark.js` with the original package.
+
 ## 4.13.0 (11.12.2021)
 
 * Run Lawyer.
