@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.15.0 (30.12.2021)
+
+* Replace a fork of `react-aria-modal` with the original package.
+
 ## 4.14.0 (28.12.2021)
 
 * Replace a fork of `commonmark.js` with the original package.
