@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import AriaModal from '@funbox/react-aria-modal';
+import AriaModal from 'react-aria-modal';
 
 const propTypes = {
   mods: PropTypes.shape({
