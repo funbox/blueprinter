@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import cookies from 'app/common/utils/helpers/cookies';
 import { Theme, themeCookieName, THEME_HOTKEY } from 'app/constants/ui-themes';
-import documentationDomain from 'app/constants/documentation-domain';
 import isHotkey from 'app/common/utils/helpers/is-hotkey';
 
 const defaultThemeState = {
@@ -72,7 +71,7 @@ class ThemeProvider extends React.Component {
 
   updateTheme(theme) {
     this.applyTheme(theme);
-    cookies.set({ name: themeCookieName, value: theme, options: { domain: documentationDomain } });
+    cookies.set({ name: themeCookieName, value: theme, options: { domain: this.documentationDomain } });
     this.darkQuery.removeListener(this.applySystemTheme);
   }
 
@@ -80,6 +79,10 @@ class ThemeProvider extends React.Component {
     const currentTheme = this.state.theme;
     const newTheme = currentTheme === Theme.DARK ? Theme.LIGHT : Theme.DARK;
     this.updateTheme(newTheme);
+  }
+
+  get documentationDomain() {
+    return window.location.hostname.split('.').slice(-2).join('.');
   }
 
   render() {
