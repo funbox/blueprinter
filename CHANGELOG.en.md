@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.16.0 (26.01.2022)
+
+* Update domain to be set in a dark-theme cookie.
+
 ## 4.15.0 (30.12.2021)
 
 * Replace a fork of `react-aria-modal` with the original package.
