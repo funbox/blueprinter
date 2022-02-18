@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.16.2 (18.02.2022)
+
+* Delete private link to the tutorial.
+
 ## 4.16.1 (18.02.2022)
 
 * Set uniqueName for global variables in webpack build.
