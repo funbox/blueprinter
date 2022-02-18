@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.16.1 (18.02.2022)
+
+* Set uniqueName for global variables in webpack build.
+
 ## 4.16.0 (26.01.2022)
 
 * Update domain to be set in a dark-theme cookie.
