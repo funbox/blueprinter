@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.17.0 (13.04.2022)
+
+* Improve parsing of actions.
+
 ## 4.16.2 (18.02.2022)
 
 * Delete private link to the tutorial.
