@@ -1,6 +1,6 @@
 @import '../seach-field.vars';
 
-@import '~@funbox/scss-utils/placeholder';
+@import '~@funboxteam/scss-utils/placeholder';
 
 .search-field__input {
   padding-top: #{($search-field-height - 16px) / 2};

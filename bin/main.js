@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const crafter = require('@funbox/crafter');
+const crafter = require('@funboxteam/crafter');
 
 const { errMessage, astHasError, rejectCrafterError, extendAst } = require('./utils');
 

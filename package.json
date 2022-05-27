@@ -1,5 +1,5 @@
 {
-  "name": "@funbox/blueprinter-frontend",
+  "name": "@funboxteam/blueprinter",
   "version": "4.17.1",
   "description": "Replacement of Aglio library for rendering generated AST as HTML page.",
   "files": [
@@ -7,7 +7,7 @@
     "/static"
   ],
   "bin": {
-    "blueprinter-frontend": "./bin/index.js"
+    "blueprinter": "./bin/index.js"
   },
   "scripts": {
     "start": "npm run dev",
@@ -27,8 +27,8 @@
     "test": "jest --coverage"
   },
   "dependencies": {
-    "@funbox/crafter": "3.6.0",
-    "@funbox/free-port-finder": "2.0.1",
+    "@funboxteam/crafter": "4.0.0",
+    "@funboxteam/free-port-finder": "3.1.1",
     "browser-sync": "2.26.14",
     "commonmark": "0.30.0",
     "react-hot-loader": "4.12.19",
@@ -40,10 +40,10 @@
     "@babel/plugin-transform-react-constant-elements": "7.8.3",
     "@babel/preset-env": "7.8.4",
     "@babel/preset-react": "7.8.3",
-    "@funbox/eslint-config": "4.14.0",
-    "@funbox/scss-imports-loader": "2.1.0",
-    "@funbox/scss-utils": "1.1.1",
-    "@funbox/scss-vars-loader": "2.1.0",
+    "@funboxteam/eslint-config": "7.1.0",
+    "@funboxteam/scss-imports-loader": "2.1.1",
+    "@funboxteam/scss-utils": "2.0.0",
+    "@funboxteam/scss-vars-loader": "2.2.0",
     "@funboxteam/scss-lint-config": "3.0.0",
     "@hot-loader/react-dom": "16.11.0",
     "@svgr/webpack": "5.5.0",

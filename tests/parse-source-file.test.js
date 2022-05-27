@@ -1,4 +1,4 @@
-import Crafter from '@funbox/crafter';
+import Crafter from '@funboxteam/crafter';
 import parseSourceFile from 'app/common/utils/helpers/parse-source-file';
 import IdProvider from 'app/common/utils/helpers/id-provider';
 

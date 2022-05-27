@@ -18,7 +18,7 @@ const config = merge(
       path: path.resolve(PATH.PROJECT, 'static'),
       publicPath: PATH.BASE,
       filename: '[name].[contenthash].js',
-      uniqueName: 'blueprinter-frontend',
+      uniqueName: 'blueprinter',
     },
     plugins: [
       new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),

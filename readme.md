@@ -1,4 +1,4 @@
-# @funbox/blueprinter-frontend
+# @funboxteam/blueprinter
 
 **Blueprinter** — это рендерер API Blueprint. Он получает на вход AST API в формате [Elements](https://apielements.org/)
 и генерирует HTML-страницу с документацией.
@@ -34,7 +34,7 @@ Drafter также был заменён собственным парсером
 ## Установка
 
 ```shell
-npm install --save @funbox/blueprinter-frontend
+npm install --save @funboxteam/blueprinter
 ```
 
 ## Использование
@@ -44,8 +44,8 @@ npm install --save @funbox/blueprinter-frontend
 ```json
 {
   "scripts": {
-    "dev": "blueprinter-frontend -i doc.apib -s -p 3000",
-    "doc": "blueprinter-frontend -i doc.apib -o index.html"
+    "dev": "blueprinter -i doc.apib -s -p 3000",
+    "doc": "blueprinter -i doc.apib -o index.html"
   }
 }
 ```

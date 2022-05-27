@@ -1,4 +1,4 @@
-import Crafter from '@funbox/crafter';
+import Crafter from '@funboxteam/crafter';
 import InheritanceResolver from 'app/common/utils/helpers/inheritance-resolver';
 import extractCategories from 'app/common/utils/helpers/extract-categories';
 

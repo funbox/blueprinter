@@ -1,4 +1,4 @@
-import Crafter from '@funbox/crafter';
+import Crafter from '@funboxteam/crafter';
 import extractCategories from 'app/common/utils/helpers/extract-categories';
 
 describe('extract-categories', () => {

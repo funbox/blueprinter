@@ -1,5 +1,5 @@
 module.exports = {
-  extends: '@funbox',
+  extends: '@funboxteam',
   env: {
     browser: true
   },

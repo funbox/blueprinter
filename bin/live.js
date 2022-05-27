@@ -1,4 +1,4 @@
-const { isPortFree } = require('@funbox/free-port-finder');
+const { isPortFree } = require('@funboxteam/free-port-finder');
 
 const browserSync = require('browser-sync').create();
 

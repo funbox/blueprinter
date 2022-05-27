@@ -14,7 +14,7 @@ module.exports = merge(
           use: {
             loader: 'babel-loader',
           },
-          exclude: /node_modules[\\/](?!(blueprinter-frontend)[\\/]).*/,
+          exclude: /node_modules[\\/](?!(blueprinter)[\\/]).*/,
         },
         {
           test: /\.scss$/,
@@ -49,12 +49,12 @@ module.exports = merge(
               },
             },
             {
-              loader: '@funbox/scss-imports-loader',
+              loader: '@funboxteam/scss-imports-loader',
               options: {
                 paths: require('../scss-imports'),
               },
             },
-            '@funbox/scss-vars-loader',
+            '@funboxteam/scss-vars-loader',
           ],
         },
       ],
