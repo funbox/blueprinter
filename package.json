@@ -41,11 +41,11 @@
     "yargs": "15.4.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.8.3",
-    "@babel/plugin-proposal-object-rest-spread": "7.8.3",
-    "@babel/plugin-transform-react-constant-elements": "7.8.3",
-    "@babel/preset-env": "7.8.4",
-    "@babel/preset-react": "7.8.3",
+    "@babel/plugin-proposal-class-properties": "7.17.12",
+    "@babel/plugin-proposal-object-rest-spread": "7.17.12",
+    "@babel/plugin-transform-react-constant-elements": "7.17.12",
+    "@babel/preset-env": "7.17.12",
+    "@babel/preset-react": "7.17.12",
     "@funboxteam/eslint-config": "7.1.0",
     "@funboxteam/scss-imports-loader": "2.1.1",
     "@funboxteam/scss-utils": "2.0.0",
