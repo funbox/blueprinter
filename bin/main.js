@@ -50,7 +50,7 @@ const sendStaticFile = async (outputFileName, refractData, customCssData) => {
   const htmlData = await readFile(staticFileLocation, { encoding: 'utf-8' });
 
   const htmlWithRefract = htmlData
-    // вторым параметром передаётся функция, чтобы определённые символы в refractData не применились как шаблоны замены
+    // use a function as the second parameter of `replace` to not account particular chars as replace templates
     .replace('<script src="./refract.js"></script>', () => `<script>${refractData}</script>`)
     .replace('<link href="./custom-style.css" rel="stylesheet">',`<style>${customCssData}</style>`);
 

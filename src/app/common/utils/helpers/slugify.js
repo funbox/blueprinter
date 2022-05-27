@@ -11,12 +11,12 @@ const defaultOptions = {
 
 /**
  *
- * @param {string} string - исходная строка
+ * @param {string} string - source string
  * @param {Object=} options
- * @param {string=} options.replacement - символ, на который заменится пробел
- * @param {boolean=} options.lower - привести к нижнему регистру
- * @param {RegExp=} options.remove - символы, которые будут удалены
- * @param {boolean=} options.transliterate - использовать транслитерацию символов
+ * @param {string=} options.replacement - char to replace space
+ * @param {boolean=} options.lower - cast to lowercase
+ * @param {RegExp=} options.remove - chars to be deleted
+ * @param {boolean=} options.transliterate - apply transliteration
  */
 export default function (string, options = {}) {
   if (typeof string !== 'string') {

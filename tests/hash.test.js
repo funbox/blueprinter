@@ -89,7 +89,7 @@ describe('hash code generator', () => {
     const hashCode2 = getCharHashCode(sequence[1]);
     const hashCode3 = getCharHashCode(sequence[2]);
 
-    // 31 здесь — магическое число, на котором базируется хэш-код
+    // 31 is a magic number on which hash code is based
     expect(getHashCode('ba')).toBe(31 * hashCode1 + hashCode2);
     expect(getHashCode('bar')).toBe(31 * getHashCode('ba') + hashCode3);
   });

@@ -64,7 +64,7 @@ class TextField extends React.Component {
   static getInputTypeFromMod(mod) {
     switch (mod) {
       case 'number':
-        // Не работает, когда в поле маска
+        // Doesn't work with a masked input field
         // https://github.com/sanniassin/react-input-mask/issues/110
         return 'tel';
       default:

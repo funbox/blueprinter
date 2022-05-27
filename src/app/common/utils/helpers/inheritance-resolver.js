@@ -3,7 +3,7 @@ import { get } from './getters';
 import extractCategories from './extract-categories';
 import { getHashCode } from './hash';
 
-const defaultCategories = extractCategories(); // TODO: что лучше — фоллбэк на дефолтное значение или бросить исключение?
+const defaultCategories = extractCategories();
 
 export default class InheritanceResolver {
   constructor(categories = defaultCategories) {

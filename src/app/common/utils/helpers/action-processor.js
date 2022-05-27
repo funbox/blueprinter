@@ -93,7 +93,7 @@ class ActionProcessor {
     const href = get('attributes', 'href', 'content').from(action);
     const title = get('meta', 'title', 'content').from(action);
     const displayedTitle = title || `${method.toUpperCase()} ${href}`;
-    const description = getDescription({ content: copyElements }); // чтобы не обходить содержимое action заново
+    const description = getDescription({ content: copyElements }); // to reduce repeated parsing of an action
 
     const { route: parentRoute, hashForLegacyUrl: parentLegacyHash } = parentSource;
 

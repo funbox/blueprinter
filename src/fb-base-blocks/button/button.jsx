@@ -5,7 +5,7 @@ const Button = React.forwardRef((props, ref) => {
     mods = {},
     children,
     to,
-    href, // "to" не работает с внешними url, для них используем "href"
+    href, // "to" is used only for internal URLs, for external use href
     icon,
     text,
     type,

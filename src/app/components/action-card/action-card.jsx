@@ -12,8 +12,8 @@ import formatHref from 'app/common/utils/helpers/format-href';
 const parseQuery = query => {
   if (!query) return [];
 
-  // Декодирование URI реализовано по аналогии с модулем querystringify, который
-  // используется по умолчанию для парсинга query строк в библиотеке url-parse
+  // Decoding of a URI is the same as in the querystringify module which
+  // is used by default in the url-parse library as a query string parser
   const decodedQuery = decodeURIComponent(query.replace(/\+/g, ' '));
 
   return decodedQuery

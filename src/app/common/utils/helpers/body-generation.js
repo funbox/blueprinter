@@ -1,14 +1,13 @@
 /*
-Если в UI не выбрано ни одной опции, то отображается body по умолчанию из ассета messageBody.
-Если выбранные опции есть, то body генерируется динамически на клиенте из ассета messageBodyTemplate.
+If no option is selected in UI, show default body from "messageBody" asset.
+If any option is selected, generate body dynamically using "messageBodyTemplate" asset.
 
-Каждой опции присваивается мета-инфорамация в виде числового id и массива nestedIds, содержащего идентификаторы
-всех вложенных опций.
+Every option obtains metadata as a set of a numeric id and an array "nestedIds" with ids of all nested options.
 
-Когда пользователь выбирает опцию для вывода body, её путь добавляется в массив selectedOptions.
+Blueprinter adds path of a particular option to the "selectedOptions" array when user selects the option.
 
-getTreeWithOneOfsAndOptions обходит дерево атрибутов и создаёт новое дерево, содержащее только элементы one of и option.
-Пример дерева с выбранными опциями 1, 2, 6 и 7:
+"getTreeWithOneOfsAndOptions" traverses the attributes tree and creates a new tree with only "one of" and "option" elements.
+An example of a tree with selected options 1, 2, 6 and 7:
 
 [One Of]
   [option 1] *
@@ -21,7 +20,7 @@ getTreeWithOneOfsAndOptions обходит дерево атрибутов и с
   [option 6] *
   [option 7] *
 
-Значение selectedOptions для этого примера:
+selectedOptions of this example:
 
 [
   { id: 1, nestedIds: [] },
@@ -30,9 +29,9 @@ getTreeWithOneOfsAndOptions обходит дерево атрибутов и с
   { id: 7, nestedIds: [] }
 ]
 
-getTreeWithNextOptionVariants создаёт на основе предыдущего дерева новое дерево, содержащее только опции.
-Эти опции ссылаются на возможные следующие опции в комбинации. Каждый уникальный путь от корня к листу - это одна из комбинаций.
-Пример такого дерева:
+"getTreeWithNextOptionVariants" uses the previous tree as a foundation for a new tree with options.
+These options refer to the next possible options in the combination. Every unique path from the root to a leaf is a combination.
+An example of such tree:
 
 [root]
   [option 1]
@@ -42,18 +41,18 @@ getTreeWithNextOptionVariants создаёт на основе предыдущ�
     [option 6]
     [option 7]
 
-getPathCombinations обходит дерево, полученное с помощью getTreeWithNextOptionVariants, и создаёт список всех возможных
-комбинаций выбранных опций:
+"getPathCombinations" traverses the tree from the "getTreeWithNextOptionVariants" function and creates a list of
+all possible combinations of selected options:
 
 1) 1, 6
 2) 1, 7
 3) 2, 6
 4) 2, 7
 
-Для каждой комбинации генерируется body. При генерации из каждого поля __oneOf__ выбирается ровно одна опция.
-1) Если опция есть в текущей комбинации, то выбирается она.
-2) Иначе выбирается опция, которая содержит хотя бы одну из опций в текущей комбинации.
-3) Иначе выбирается первая опция.
+Each combination generates a body. Only one option from __oneOf__ field is selected.
+1) If an option exists in the current combination, select it.
+2) Otherwise select an option which contains at least one of options in the current combination.
+3) Else select first option.
 */
 
 export function addOptionMetaToAttributes(attributes) {
@@ -306,9 +305,9 @@ export const optionMetaShape = PropTypes.shape({
 });
 
 /**
- * Удаляет лишние выбранные опции — опции, которые содержат в себе какую-то из других выбранных опций.
+ * Removes redundant selected options. Such option contains any of other selected options.
  *
- * Например, если выбраны опции 1 и 2, и опция 1 включает опцию 2, то опция 1 — лишняя.
+ * E.g. if options 1 and 2 are selected, and option 1 includes option 2, then option 1 is redundant.
  */
 function removeRedundantOptions(selectedOptions) {
   const selectedIds = selectedOptions.map(option => option.id);

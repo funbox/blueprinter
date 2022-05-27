@@ -3,7 +3,7 @@ const Menu = (props) => {
     children,
   } = props;
 
-  // TODO изменить тег, если в меню всего один пункт
+  // TODO change the "ul" tag if a menu has the only one element
 
   return (
     <ul className={b('menu', props)}>

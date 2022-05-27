@@ -33,7 +33,7 @@ const createRoute = (title, transform = createHash) => (
   ROUTE_DELIMITER.concat(
     transform(sanitizeRoute(title)),
   )
-  // здесь можно было бы энкодить заголовок, но в ReactRouter это не работает, он декодит обратно
+  // React Router doesn't allow us to encode a title; it decodes the title back
   // https://github.com/ReactTraining/history/issues/505
 );
 

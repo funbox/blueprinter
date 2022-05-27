@@ -7,7 +7,7 @@
   left: 0;
   overflow: auto;
   text-align: center;
-  -webkit-overflow-scrolling: touch; // фикс скролла в Safari на iOS https://stackoverflow.com/a/32993873
+  -webkit-overflow-scrolling: touch; // Fix scroll in iOS Safari https://stackoverflow.com/a/32993873
 
   &::after {
     content: '';

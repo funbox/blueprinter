@@ -60,7 +60,7 @@ const parseSourceFile = (ast, idProvider) => {
       route: groupRoute,
     };
 
-    group.hashForLegacyUrl = groupLegacyHash; // используется в app.jsx@convertLegacyUrl
+    group.hashForLegacyUrl = groupLegacyHash; // is used in app.jsx@convertLegacyUrl
     group.route = groupRoute;
     group.title = groupTitle;
     group.id = idProvider.getUniqueId();
@@ -90,7 +90,7 @@ const parseSourceFile = (ast, idProvider) => {
 
       const rActualIndex = groupDescription ? rIndex : (rIndex + 1);
       const rHashCode = getHashCode(`${resourceTitle || ''}-${resourceHref || ''}`);
-      const rHashMidPart = resourceHref ? resourceHref.slice(1) : slugify(resourceTitle); // у SubGroup нет href
+      const rHashMidPart = resourceHref ? resourceHref.slice(1) : slugify(resourceTitle); // SubGroup does not have href
 
       const rPresetHash = resourceDescription && hashFromComment(resourceDescription);
       const rHashBase = `resource-${rHashMidPart}-${rHashCode.toString(16)}`;

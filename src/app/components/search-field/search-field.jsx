@@ -148,7 +148,7 @@ class SearchField extends React.Component {
     const inputIsFocused = document.activeElement === inputElement;
 
     if (event.keyCode === FORWARD_SLASH_KEY_CODE && !inputIsFocused) {
-      event.preventDefault(); // иначе символ `/` сразу же попадает в инпут поиска
+      event.preventDefault(); // prevent the slash symbol to go directly in the search input
       inputElement.focus();
     }
   }

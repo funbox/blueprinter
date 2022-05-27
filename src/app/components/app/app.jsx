@@ -139,7 +139,7 @@ export default class App extends React.Component {
           />
         </Switch>
 
-        {/* Модальные роуты */}
+        {/* Modal routes */}
         <Route
           exact
           path="/service-help"
