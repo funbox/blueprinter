@@ -41,9 +41,9 @@ const URIParameter = (props) => {
           {
             typeAttributes && (
               <span className={b('parameter__attributes')}>
-                {'('}
+                (
                 {typeAttributes.map(attr => attr.content).join(', ')}
-                {')'}
+                )
               </span>
             )
           }

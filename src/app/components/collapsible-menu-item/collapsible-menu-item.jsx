@@ -28,8 +28,8 @@ class CollapsibleMenuItem extends React.Component {
     } = this.props;
     const { collapsed } = this.state;
 
-    const localMods = Object.assign({ collapsed }, mods);
-    const localProps = Object.assign({}, this.props);
+    const localMods = { collapsed, ...mods };
+    const localProps = { ...this.props };
 
     delete localProps.getSubmenuContent;
     delete localProps.collapsed;

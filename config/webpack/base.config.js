@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack');
 const path = require('path');
 
@@ -108,7 +109,7 @@ module.exports = {
     }),
     new webpack.ContextReplacementPlugin(
       /highlight.js[\\/]lib[\\/]languages$/,
-      new RegExp('^./(json|http|plaintext)$'),
+      /^.\/(json|http|plaintext)$/,
     ),
     new HtmlWebpackPlugin({
       template: path.resolve(PATH.PROJECT, 'src/index.ejs'),

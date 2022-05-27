@@ -66,6 +66,7 @@ MessageContent.propTypes = {
   message: PropTypes.shape({
     attributes: PropTypes.arrayOf(PropTypes.object),
     body: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    schema: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   }),
 };
 

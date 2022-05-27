@@ -49,8 +49,7 @@ class Resource extends React.Component {
                       />
                     </Resource__Action>
                   )
-              ))
-            }
+              ))}
           </div>
         </div>
       </section>
@@ -65,6 +64,7 @@ Resource.defaultProps = {
 Resource.propTypes = {
   resource: PropTypes.shape({
     title: PropTypes.string,
+    route: PropTypes.string,
     content: PropTypes.array,
   }),
   location: PropTypes.shape({

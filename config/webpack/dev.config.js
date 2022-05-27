@@ -1,9 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 
 const { merge } = require('webpack-merge');
 
 module.exports = merge(
-  require('./base.config.js'),
+  require('./base.config'),
   {
     name: 'dev',
     mode: 'development',

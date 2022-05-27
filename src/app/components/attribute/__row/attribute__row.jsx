@@ -118,6 +118,8 @@ Attribute__Row.propTypes = {
       PropTypes.object,
     ),
     attributeDescription: PropTypes.string,
+    attributeStructureName: PropTypes.string,
+    recursive: PropTypes.bool,
     optionMeta: optionMetaShape,
   }),
   parentType: PropTypes.string,

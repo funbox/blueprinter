@@ -57,6 +57,7 @@ ResourceGroupSection.defaultProps = {
 
 ResourceGroupSection.propTypes = {
   group: PropTypes.shape({
+    route: PropTypes.string,
     title: PropTypes.string,
     content: PropTypes.array,
   }),

@@ -76,7 +76,7 @@ class Dialog extends React.Component {
     );
 
     return (
-      <Fragment>
+      <>
         {isModal && (
           <ReactAriaModal
             titleId={id}
@@ -93,7 +93,7 @@ class Dialog extends React.Component {
             {dialogWindow}
           </ReactAriaModal>
         )}
-      </Fragment>
+      </>
     );
   }
 }

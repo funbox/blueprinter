@@ -35,7 +35,7 @@ const Button = React.forwardRef((props, ref) => {
 
   const title = props.title || props.text;
 
-  const localProps = Object.assign({}, props, buttonProps, externalLinkProps);
+  const localProps = { ...props, ...buttonProps, ...externalLinkProps };
   delete localProps.mods;
   delete localProps.mix;
   delete localProps.icon;

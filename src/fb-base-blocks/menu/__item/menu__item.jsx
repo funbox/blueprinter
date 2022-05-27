@@ -13,7 +13,7 @@ const Menu__Item = (props) => {
   const isCurrent = mods ? mods.current : false;
   const Tag = tag || (isCurrent ? 'span' : Link);
 
-  const localProps = Object.assign({}, props);
+  const localProps = { ...props };
 
   delete localProps.mods;
   delete localProps.mix;

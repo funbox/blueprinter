@@ -22,6 +22,8 @@ const propTypes = {
   mods: PropTypes.object,
   items: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string,
+      to: PropTypes.string,
       label: PropTypes.string,
       value: PropTypes.string,
       type: PropTypes.oneOf(['group', 'resource', 'action', 'message']),
@@ -232,7 +234,7 @@ class SearchField extends React.Component {
       items,
     } = this.props;
 
-    const textFieldProps = Object.assign({}, this.props);
+    const textFieldProps = { ...this.props };
     const textFieldMods = textFieldProps.mods || {};
 
     delete textFieldProps.mods;

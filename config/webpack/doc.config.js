@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const { merge } = require('webpack-merge');
 const path = require('path');
 
@@ -7,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { PATH } = require('./vars');
 
 const config = merge(
-  require('./build.config.js'),
+  require('./build.config'),
   {
     name: 'doc',
     mode: 'production',

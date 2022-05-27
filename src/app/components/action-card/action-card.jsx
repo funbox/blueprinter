@@ -111,10 +111,15 @@ const ActionCard = (props) => {
 
 ActionCard.propTypes = {
   action: PropTypes.shape({
+    route: PropTypes.string,
+    title: PropTypes.string,
+    id: PropTypes.string,
     element: PropTypes.string,
     meta: PropTypes.object,
     content: PropTypes.array,
     attributes: PropTypes.object,
+    requests: PropTypes.arrayOf(PropTypes.object),
+    responses: PropTypes.arrayOf(PropTypes.object),
   }),
   href: PropTypes.string,
   method: PropTypes.string,

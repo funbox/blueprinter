@@ -157,6 +157,7 @@ App.propTypes = {
   }),
   history: PropTypes.shape({
     push: PropTypes.func,
+    action: PropTypes.string,
   }),
 };
 

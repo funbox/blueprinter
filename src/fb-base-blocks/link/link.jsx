@@ -14,7 +14,7 @@ const Link = (props) => {
     rel: 'nofollow noopener noreferrer',
   } : {};
 
-  const localProps = Object.assign({}, props, externalLinkProps);
+  const localProps = { ...props, ...externalLinkProps };
 
   delete localProps.mods;
   delete localProps.mix;
@@ -38,6 +38,5 @@ Link.propTypes = {
   ]),
   href: PropTypes.string,
 };
-
 
 export default Link;

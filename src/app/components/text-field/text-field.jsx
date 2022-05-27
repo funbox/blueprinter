@@ -151,7 +151,7 @@ class TextField extends React.Component {
       placeholderMask = value ? TextField.getPseudoPlaceholder(value, placeholderMask) : placeholderMask;
     }
 
-    const inputProps = Object.assign({}, input);
+    const inputProps = { ...input };
     const inputMix = inputProps.mix || [];
 
     delete inputProps.mix;

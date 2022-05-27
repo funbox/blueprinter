@@ -108,6 +108,7 @@ Attribute.propTypes = {
       PropTypes.object,
     ),
     attributeDescription: PropTypes.string,
+    recursive: PropTypes.bool,
     optionMeta: optionMetaShape,
   }),
   parentType: PropTypes.string,

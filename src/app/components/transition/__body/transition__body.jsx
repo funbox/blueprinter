@@ -248,7 +248,7 @@ function getAttributesTitle(structureType) {
       >
         {structureType.name}
       </Code>
-      {')'}
+      )
       {typeAttributes}
     </>
   );

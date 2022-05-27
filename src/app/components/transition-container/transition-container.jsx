@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import Transition from 'app/components/transition';
 
 import ViewContext from 'app/components/app/view-context';
@@ -11,7 +10,7 @@ const TransitionContainer = (props) => {
   } = props;
 
   return (
-    <Fragment>
+    <>
       {
         requests.length > 0 && (
           <ViewContext.Consumer>
@@ -47,7 +46,7 @@ const TransitionContainer = (props) => {
           </ViewContext.Consumer>
         )
       }
-    </Fragment>
+    </>
   );
 };
 

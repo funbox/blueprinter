@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const { merge } = require('webpack-merge');
 
 const path = require('path');
@@ -6,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Csso = require('csso-webpack-plugin').default;
 
 module.exports = merge(
-  require('./base.config.js'),
+  require('./base.config'),
   {
     name: 'build',
     mode: 'none',

@@ -21,7 +21,7 @@ const htmlFromText = (text, wrap = 'no-wrap', Tag = 'div') => {
     return <Tag dangerouslySetInnerHTML={{ __html: htmlString }}/>;
   }
 
-  return <React.Fragment>{parser(htmlString)}</React.Fragment>;
+  return <>{parser(htmlString)}</>;
 };
 
 const extractAttributeData = (attribute) => {

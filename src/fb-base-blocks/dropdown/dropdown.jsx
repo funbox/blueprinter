@@ -29,12 +29,14 @@ class Dropdown extends React.Component {
     this.liftingStateUp = this.liftingStateUp.bind(this);
   }
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     if (this.props.mods && this.props.mods.opened) {
       this.open();
     }
   }
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillReceiveProps(nextProps) {
     if (nextProps.mods && nextProps.mods.opened !== undefined) {
       this.setState({
@@ -135,7 +137,7 @@ class Dropdown extends React.Component {
 
     mods.opened = opened;
 
-    const handleProps = Object.assign({}, handle);
+    const handleProps = { ...handle };
     const handleMods = handleProps.mods || {};
     const handleMix = handleProps.mix || [];
 
@@ -166,8 +168,7 @@ class Dropdown extends React.Component {
             >
               {!handleText && handle.content}
             </Button>
-          )
-        }
+          )}
         {mods.handle === 'link'
           && (
             <Link
@@ -181,8 +182,7 @@ class Dropdown extends React.Component {
             >
               {handle.content}
             </Link>
-          )
-        }
+          )}
 
         <div className="dropdown__popup-context">
           <div

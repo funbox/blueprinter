@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path'); // eslint-disable-line import/no-extraneous-dependencies
 
 module.exports = {
   projectBasePath: path.join(__dirname, '/..'),

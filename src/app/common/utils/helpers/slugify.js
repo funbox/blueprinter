@@ -18,7 +18,7 @@ const defaultOptions = {
  * @param {RegExp=} options.remove - chars to be deleted
  * @param {boolean=} options.transliterate - apply transliteration
  */
-export default function (string, options = {}) {
+export default function slugify(string, options = {}) {
   if (typeof string !== 'string') {
     throw new TypeError(`Expected a string, got \`${typeof string}\``);
   }

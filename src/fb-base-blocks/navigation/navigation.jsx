@@ -15,7 +15,7 @@ const Navigation = (props) => {
     mix: ['navigation__menu'],
   };
 
-  const dropdownProps = Object.assign({}, dropdown, { popup: popupDefaultProps });
+  const dropdownProps = { ...dropdown, popup: popupDefaultProps };
 
   return (
     <nav className={b('navigation', props)}>
@@ -28,8 +28,7 @@ const Navigation = (props) => {
           <div className="navigation__menu">
             {children}
           </div>
-        )
-      }
+        )}
       {!!mods.dropdown
         && (
           <Dropdown
@@ -37,8 +36,7 @@ const Navigation = (props) => {
           >
             {children}
           </Dropdown>
-        )
-      }
+        )}
     </nav>
   );
 };
