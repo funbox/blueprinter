@@ -41,6 +41,7 @@ module.exports = merge(
             {
               loader: 'sass-loader',
               options: {
+                sourceMap: true,
                 sassOptions: {
                   includePaths: [path.resolve('src')],
                 },
