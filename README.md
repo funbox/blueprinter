@@ -1,16 +1,27 @@
 # @funboxteam/blueprinter
 
-**Blueprinter** is an [API Blueprint](https://apiblueprint.org/) renderer. It uses API AST in the form of [API Elements](https://apielements.org/) and generates an HTML page with documentation.
+<img align="right" width="160" height="160"
+     alt="Blueprinter avatar"
+     src="./logo.png">
+
+**Blueprinter** is an [API Blueprint](https://apiblueprint.org/) renderer. It uses API AST in the form of
+[API Elements](https://apielements.org/) and generates an HTML page with documentation.
 
 [По-русски](./README.ru.md)
 
 ## Rationale
 
-API Blueprint standard is mostly maintained by [Apiary](https://apiary.io/), which owns the official parser [Drafter](https://github.com/apiaryio/drafter). Other enthusiasts help to develop some [tools](https://apiblueprint.org/tools.html) to work with API Blueprint, including renderers.
+API Blueprint standard is mostly maintained by [Apiary](https://apiary.io/), which owns the official parser
+[Drafter](https://github.com/apiaryio/drafter). Other enthusiasts help to develop some [tools](https://apiblueprint.org/tools.html)
+to work with API Blueprint, including renderers.
 
-For a long time, our company had been using Drafter and [aglio](https://github.com/danielgtaylor/aglio) renderer as a standard set to work with APIB documentation. But we gradually started to understand that functionalities of these tools weren't enough for us.
+For a long time, our company had been using Drafter and [aglio](https://github.com/danielgtaylor/aglio) renderer as
+a standard set to work with APIB documentation. But we gradually started to understand that functionalities of these tools
+weren't enough for us.
 
-**Blueprinter** appeared as a replacement for aglio, since its source code is difficult to read and maintain and used technologies are obsolete. The author of the project has abandoned it and does not accept new change requests. We also replaced Drafter with our own parser [Crafter](https://github.com/funbox/crafter).
+**Blueprinter** appeared as a replacement for aglio, since its source code is difficult to read and maintain and used
+technologies are obsolete. The author of the project has abandoned it and does not accept new change requests.
+We also replaced Drafter with our own parser [Crafter](https://github.com/funbox/crafter).
 
 Our implementations are written in JavaScript and they are easy to maintain and develop by front-end developers.
 
@@ -56,7 +67,8 @@ Add the next commands in `package.json`:
 - `-s, --server` — activates live server mode.
 - `-h, --host <host>` — sets live server host. Default value is `127.0.0.1`.
 - `-p, --port <port>` — sets live server port. Default value is `3000`.
-- `-c, --css <file>` — allows to specify path to a custom CSS file. Styles from this files will be attached to page. Any possible compatibility issues between relevant Blueprinter version and a custom CSS file remain on the conscience of the file developer.
+- `-c, --css <file>` — allows to specify path to a custom CSS file. Styles from this files will be attached to page.
+Any possible compatibility issues between relevant Blueprinter version and a custom CSS file remain on the conscience of the file developer.
 
 ## Run in Docker
 
@@ -69,7 +81,8 @@ docker run \
   funbox/blueprinter -i doc.apib -o index.html
 ```
 
-`--rm` option will automatically clean up and remove created container after render completion, and `-v` option will mount current host directory with documentation to some directory in the container.
+`--rm` option will automatically clean up and remove created container after render completion, and `-v` option will
+mount current host directory with documentation to some directory in the container.
 
 The default working directory of the image is set to `/app`, therefore it is easier to mount
 a host directory into the `/app` as in the example above. In that case just the name `you-doc-file.apib` will work fine.
@@ -158,7 +171,8 @@ APIB documentation can contain a lot of diverse entities, so the search field pr
 where you need to find an attribute value or a URI parameter. To find something manually we added a separate page with
 sequential list of all content of a documentation. To access this page, press icon button right to the search field.
 
-The page contains all groups, resources, requests, and responses outputted consequently. All attributes in Attributes sections are expanded. Therefore, you can search through documentation by browser means, e.g. using `Ctrl + F` key combination.
+The page contains all groups, resources, requests, and responses outputted consequently. All attributes in Attributes
+sections are expanded. Therefore, you can search through documentation by browser means, e.g. using `Ctrl + F` key combination.
 
 ### Save as PDF
 
@@ -205,3 +219,5 @@ to work with documentation.
 Historically, the battle was between [API Blueprint](https://apiblueprint.org/) and [Swagger](https://swagger.io/).
 We chose API Blueprint for two reasons. Firstly, the source code of documentation that is described using API Blueprint is more readable to humans.
 Secondly, at the time of research conducted, Swagger lacked several important features, as `One Of` support.
+
+[![Sponsored by FunBox](https://funbox.ru/badges/sponsored_by_funbox_centered.svg)](https://funbox.ru)
