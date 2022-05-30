@@ -127,7 +127,7 @@ class Dropdown extends React.Component {
       children,
       mods = {},
       mix = [],
-      handle = { content: 'Меню' },
+      handle = { content: 'Menu' },
       popup = { mix: [] },
     } = this.props;
 

@@ -128,7 +128,7 @@ class Transition__Body extends React.PureComponent {
 
         {!!description && (
           <Section
-            title="Описание"
+            title="Description"
             titleTag="h5"
             mods={{ hiddenTitle: true }}
             mix={b('transition__description')}

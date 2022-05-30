@@ -62,7 +62,7 @@ const Attribute__Row = (props) => {
           && !oneOfElement
           && !oneOfMember
           && (
-            <p className={b('attribute__type')} title={recursive ? 'Эта структура является рекурсивной' : undefined}>
+            <p className={b('attribute__type')} title={recursive ? 'Recursive structure' : undefined}>
               <Code mods={{ theme: 'standard', recursive }}>
                 {
                   recursive && attributeStructureName
@@ -95,7 +95,7 @@ const Attribute__Row = (props) => {
             onChange={(checked) => {
               onOptionSelect(optionMeta, checked);
             }}
-            title="Показать пример Body"
+            title="Show Body example"
           >
             Body
           </CheckboxField>

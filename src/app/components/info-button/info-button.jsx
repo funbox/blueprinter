@@ -8,7 +8,7 @@ const propTypes = {
 const InfoButton = ({ onClick, to }) => (
   <Button
     mix={b('info-button')}
-    title="Открыть окно помощи"
+    title="Show help"
     mods={{ onlyIcon: true }}
     onClick={onClick}
     to={to}

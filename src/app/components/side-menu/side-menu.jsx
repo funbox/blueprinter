@@ -2,7 +2,7 @@ import Navigation from 'app/components/navigation';
 import SideNestedMenu from 'app/components/side-nested-menu';
 
 const SideMenu = ({ data }) => (
-  <Navigation title="Ресурсы API" mods={{ for: 'side-menu' }}>
+  <Navigation title="API resources" mods={{ for: 'side-menu' }}>
     { data && (
       <SideNestedMenu
         content={data}

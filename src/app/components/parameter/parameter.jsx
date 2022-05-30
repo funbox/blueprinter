@@ -28,7 +28,7 @@ const URIParameter = (props) => {
       <div className={b('parameter__content')}>
         <div className={b('parameter__main-info')}>
           <Parameter__Prop
-            title="Название"
+            title="Name"
             mods={{ for: 'name' }}
           >
             {name}

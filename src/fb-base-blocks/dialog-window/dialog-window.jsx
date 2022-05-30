@@ -37,11 +37,11 @@ const DialogWindow = (props) => {
   } = props;
 
   if (!closeButton.title) {
-    closeButton.title = 'Закрыть';
+    closeButton.title = 'Close';
   }
 
   if (!closeButton.text) {
-    closeButton.text = 'Закрыть';
+    closeButton.text = 'Close';
   }
 
   return (

@@ -267,7 +267,7 @@ class SearchField extends React.Component {
           onBlur={this.onInputBlur}
           value={filterString}
           onChange={this.onSearch}
-          placeholder="Поиск"
+          placeholder="Search"
           {...textFieldProps}
         >
           { filterString.length > 0 && (
@@ -282,7 +282,7 @@ class SearchField extends React.Component {
                 mix: b('search-field__clear-button-icon'),
               }}
               htmlFor="search-field-input"
-              text="Очистить поле"
+              text="Clear"
               onClick={this.resetSearch}
             />
           )}
@@ -340,7 +340,7 @@ class SearchField extends React.Component {
           {
             items.length === 0 && (
               <p className={b('search-field__message')}>
-                Ничего не найдено
+                No results
               </p>
             )
           }

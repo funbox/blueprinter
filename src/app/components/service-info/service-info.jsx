@@ -5,42 +5,42 @@ const ServiceInfo = () => (
   <div className={b('service-info')}>
     <ServiceInfo__Section
       mods={{ for: 'hot-keys' }}
-      title="Горячие клавиши"
+      title="Hotkeys"
       definitions={[
         {
           id: 'key-theme',
           term: 'N',
-          details: 'переключает светлую тему на тёмную и обратно',
+          details: 'toggles dark theme',
         },
         {
           id: 'key-sidebar',
           term: 'S',
-          details: 'скрывает и раскрывает сайдбар',
+          details: 'toggles sidebar',
         },
         {
           id: 'key-search',
           term: '/',
-          details: 'переводит фокус в поле поиска',
+          details: 'sets focus on the search field',
         },
       ]}
     />
     <ServiceInfo__Section
-      title="Модификаторы поиска"
-      subtitle="Модификатор указывается в строке поиска перед поисковым запросом."
+      title="Search modifiers"
+      subtitle="Type a modifier in the search field before the search query."
       definitions={[
         {
           id: 'search-method',
           term: 'method:*',
-          details: 'оставляет в\u00A0результатах поиска только экшены с\u00A0указанным методом',
+          details: 'filters result to list only actions with the specified method',
           note: (
             <>
-              где * — HTTP-метод (GET, POST, PUT, DELETE и т.д.),
+              where * is an HTTP method (GET, POST, PUT, DELETE, etc.),
               <br/>
-              например:
+              for example:
               {' '}
               <Code mods={{ theme: 'standard' }}>method:get</Code>
               {' '}
-              или
+              or
               {' '}
               <Code mods={{ theme: 'standard' }}>method:post</Code>
             </>
@@ -49,17 +49,17 @@ const ServiceInfo = () => (
         {
           id: 'search-group',
           term: 'type:group',
-          details: 'ищет только группы',
+          details: 'finds only groups',
         },
         {
           id: 'search-resource',
           term: 'type:resource',
-          details: 'ищет только ресурсы',
+          details: 'finds only resources',
         },
         {
           id: 'search-action',
           term: 'type:action',
-          details: 'ищет только экшены',
+          details: 'finds only actions',
         },
       ]}
     />

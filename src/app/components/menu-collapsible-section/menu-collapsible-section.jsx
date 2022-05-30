@@ -108,7 +108,7 @@ class MenuCollapsibleSection extends React.Component {
                 mods={{
                   onlyIcon: true,
                 }}
-                text={collapsed ? 'Раскрыть' : 'Свернуть'}
+                text={collapsed ? 'Expand' : 'Collapse'}
                 onClick={onToggle}
               />
             </div>

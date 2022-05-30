@@ -14,7 +14,7 @@ const PageDescription = (props) => {
   return (
     <RawContent mix={[b('page__description'), mix]}>
       <h2>
-        Общие сведения
+        General information
       </h2>
 
       {htmlFromText(props.description)}

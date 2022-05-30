@@ -22,25 +22,25 @@
 
   &_type_group {
     &::before {
-      content: 'Г';
+      content: 'G';
     }
   }
 
   &_type_resource {
     &::before {
-      content: 'Р';
+      content: 'R';
     }
   }
 
   &_type_action {
     &::before {
-      content: 'Э';
+      content: 'A';
     }
   }
 
   &_type_message {
     &::before {
-      content: 'С';
+      content: 'M';
     }
   }
 }

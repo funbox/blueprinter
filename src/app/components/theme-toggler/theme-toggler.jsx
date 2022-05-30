@@ -26,7 +26,7 @@ const ThemeToggler = (props) => {
         onChange={onDarkThemeToggle}
         title={THEME_HOTKEY.TEXT}
       >
-        Включить тёмную тему
+        Toggle dark theme
       </Toggler>
     </div>
   );

@@ -25,7 +25,7 @@ const ServiceInfoDialog = (props) => {
           theme: 'standard',
           hiddenTitle: true,
         }}
-        title="Полезная информация"
+        title="Useful information"
         closeButton={{
           mods: {
             onlyIcon: true,

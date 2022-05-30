@@ -6,7 +6,7 @@ const Navigation = (props) => {
     titleTag,
     children,
     mods = {},
-    dropdown = { mods: {}, handle: { content: 'Меню' } },
+    dropdown = { mods: {}, handle: { content: 'Menu' } },
   } = props;
 
   const TitleTag = titleTag || 'h2';

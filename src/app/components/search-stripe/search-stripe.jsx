@@ -12,7 +12,7 @@ const SearchStripe = (props) => (
 
     <Button
       text={{
-        content: 'Перейти на страницу ручного поиска',
+        content: 'To manual search page',
         mix: b('search-stripe__button-hint'),
       }}
       icon={{

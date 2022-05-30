@@ -25,7 +25,7 @@ const Error = (props) => (
       <Page__Main>
         <Page__Title>
           <PageTitle>
-            Ошибки и предупреждения
+            Errors and warnings
           </PageTitle>
         </Page__Title>
 

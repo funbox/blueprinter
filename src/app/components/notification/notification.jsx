@@ -20,7 +20,7 @@ const Notification = (props) => (
     </div>
     <Button
       mix={b('notification__close-button')}
-      text="Закрыть"
+      text="Close"
       mods={{
         onlyIcon: true,
       }}
