@@ -1,45 +1,40 @@
 # @funboxteam/blueprinter
 
-**Blueprinter** — это рендерер [API Blueprint](https://apiblueprint.org/). Он получает на вход AST API в формате [Elements](https://apielements.org/)
-и генерирует HTML-страницу с документацией.
+**Blueprinter** is an [API Blueprint](https://apiblueprint.org/) renderer. It uses API AST in the form of [API Elements](https://apielements.org/) and generates an HTML page with documentation.
 
-## Мотивация
+[По-русски](./README.ru.md)
 
-Стандарт API Blueprint разрабатывает компания [Apiary](https://apiary.io/), ей принадлежит официальный парсер [Drafter](https://github.com/apiaryio/drafter).
-Параллельно энтузиасты разрабатывают другие [инструменты](https://apiblueprint.org/tools.html) для работы с API Blueprint,
-в том числе и рендерилки.
+## Rationale
 
-Долгое время стандартным набором в компании для работы с APIB было сочетание парсера Drafter и рендерера [aglio](https://github.com/danielgtaylor/aglio).
-Через Drafter и aglio удобно работать с документацией, но их функционала нам стало недостаточно: во время работы
-над проектами часто требуются новые фичи и исправление багов.
+API Blueprint standard is mostly maintained by [Apiary](https://apiary.io/), which owns the official parser [Drafter](https://github.com/apiaryio/drafter). Other enthusiasts help to develop some [tools](https://apiblueprint.org/tools.html) to work with API Blueprint, including renderers.
 
-**Blueprinter** появился как замена aglio, поскольку код в aglio трудно читать и поддерживать,
-а используемые технологии устарели. Автор aglio забросил проект и не принимает новые PR.
-Drafter также был заменён собственным парсером [Crafter](https://github.com/funbox/crafter).
+For a long time, our company had been using Drafter and [aglio](https://github.com/danielgtaylor/aglio) renderer as a standard set to work with APIB documentation. But we gradually started to understand that functionalities of these tools weren't enough for us.
 
-Наши реализации написаны на JavaScript, их легко развивать и поддерживать силами
-разработчиков фронтенда без привлечения других специалистов.
+**Blueprinter** appeared as a replacement for aglio, since its source code is difficult to read and maintain and used technologies are obsolete. The author of the project has abandoned it and does not accept new change requests. We also replaced Drafter with our own parser [Crafter](https://github.com/funbox/crafter).
 
-## Преимущества
+Our implementations are written in JavaScript and they are easy to maintain and develop by front-end developers.
 
-- **Современный дизайн.** С поддержкой тёмной темы!
-- **Поиск по документации.** Можно быстро переходить к группам, ресурсам и экшенам, находя их по части URL или заголовкам.
-- **Версия для печати.** В режиме печати со страницы удаляется всё лишнее и остаётся только нужный контент в адаптированном виде.
-- **Выбор опций One Of.** В нашей реализации можно выбирать разные опции внутри [One Of](https://apiblueprint.org/documentation/mson/specification.html#52-one-of-type) и динамически формировать пример тела ответа.
-- **Страница ручного поиска.** Функциональности поисковой строки может быть недостаточно, если нужно найти часть описания или отдельно
-  взятый атрибут. На странице ручного поиска можно воспользоваться стандартным браузерным поиском по тексту.
-- **Отображение предупреждений и ошибок парсинга.** Предупреждения, связанные с парсингом документации, отображаются в виде специального уведомления.
-  Ошибка парсинга, не позволяющая отобразить весь документ, выводится в виде отдельной страницы с детальной информацией.
+## Features
 
-## Установка
+- **Modern design.** Dark theme included!
+- **Search in documentation.** You can use part of URL or a title to find groups, resources or actions, and quickly access them.
+- **Print version.** This version removes all unnecessary content and leaves obligatory content in adapted mode.
+- **One Of options selector.** Our tool allows you to select different options of
+[One Of](https://apiblueprint.org/documentation/mson/specification.html#52-one-of-type) element and generate response body dynamically.
+- **Manual search page.** You may found that the search field is not enough when it comes to finding a part of a description
+or a particular attribute. Manual search page allows you to use standard browser finder to search through text.
+- **Information about parsing warnings and errors.** Parsing warnings pop up as a notification. Parsing error which blocks
+page rendering shows up as a separate page with detailed information.
+
+## Installation
 
 ```shell
 npm install --save @funboxteam/blueprinter
 ```
 
-## Использование
+## Usage
 
-Добавить команды в `package.json`:
+Add the next commands in `package.json`:
 
 ```json
 {
@@ -50,23 +45,22 @@ npm install --save @funboxteam/blueprinter
 }
 ```
 
-Скрипт `dev` запустит на порту 3000 live-сервер с отрендеренной документацией и будет следить за изменениями исходных файлов.
-Скрипт `doc` сгенерирует конечный HTML-файл с документацией и сохранит его как `index.html`.
+`dev` script will run a live server with rendered docs at port 3000 and watch changes in source documentation.
+`doc` script will generate resulting HTML file with documentation and save it as `index.html`.
 
-## CLI опции
+## CLI options
 
-- `-i, --input <file>` — задаёт исходный APIB-файл, который нужно отрендерить.
-- `-o, --output <file>` — задаёт название конечного HTML-файла.
-- `-S, --strict` — включает «строгий» режим парсинга, в котором любое предупреждение приведёт к ошибке сборки.
-- `-s, --server` — активирует режим live-сервера.
-- `-h, --host <host>` — задаёт адрес локального live-сервера. По умолчанию `127.0.0.1`.
-- `-p, --port <port>` — задаёт порт локального live-сервера. По умолчанию `3000`.
-- `-c, --css <file>` — позволяет указать путь к кастомному CSS-файлу, стили из которого будут подключены на странице.
-  Любые проблемы совместимости актуальной версии Blueprinter и кастомного CSS-файла остаются на совести разработчика файла.
+- `-i, --input <file>` — sets the source APIB file to render.
+- `-o, --output <file>` — sets the name of the output HTML file.
+- `-S, --strict` — enables parsing "strict" mode in which any warning will cause build error.
+- `-s, --server` — activates live server mode.
+- `-h, --host <host>` — sets live server host. Default value is `127.0.0.1`.
+- `-p, --port <port>` — sets live server port. Default value is `3000`.
+- `-c, --css <file>` — allows to specify path to a custom CSS file. Styles from this files will be attached to page. Any possible compatibility issues between relevant Blueprinter version and a custom CSS file remain on the conscience of the file developer.
 
-## Использование через Docker
+## Run in Docker
 
-Blueprinter можно запустить в виде Docker-контейнера, выполнив следующую команду в директории с APIB-документацией:
+To run Blueprinter as a Docker container execute the next command in the directory with documentation:
 
 ```shell
 docker run \
@@ -75,17 +69,15 @@ docker run \
   funbox/blueprinter -i doc.apib -o index.html
 ```
 
-Здесь опция `--rm` автоматически удалит созданный контейнер после завершения рендера документации,
-а опция `-v` примонтирует текущую хост-директорию с документацией в некоторую директорию в контейнере.
+`--rm` option will automatically clean up and remove created container after render completion, and `-v` option will mount current host directory with documentation to some directory in the container.
 
-По умолчанию рабочей директорией образа задана директория `/app`, поэтому  удобнее всего смонтировать хост-директорию
-непосредственно в `/app`, как это сделано в примере выше. В таком случае в качестве параметра `-i` можно передать
-просто название файла `файл-с-документацией.apib`, иначе придётся указывать путь к APIB-файлу относительно созданного в контейнере пути.
+The default working directory of the image is set to `/app`, therefore it is easier to mount
+a host directory into the `/app` as in the example above. In that case just the name `you-doc-file.apib` will work fine.
+Otherwise, you should specify path to the APIB file relative to the created in the container path.
 
-### Использование через Docker в режиме dev-сервера
+### Docker and dev server mode
 
-Чтобы запустить Blueprinter в контейнере в режиме dev-сервера, нужно выполнить следующую команду
-в директории с вашей APIB-документацией:
+To run Blueprinter in Docker as a dev server execute the next command in the directory with documentation:
 
 ```shell
 docker run \
@@ -95,23 +87,22 @@ docker run \
   funbox/blueprinter -i doc.apib -s -p 3000
 ```
 
-Если в параметре `-p` для Blueprinter передаётся порт, отличный от `3000`, нужно также открыть доступ к этому порту
-в контейнере из хост-системы, указав в параметрах Docker опцию `-p port:port`.
+If you specify `-p` parameter for Blueprint which differs from `3000`, don't forget to open access to this port
+from your host system and modify Docker option `-p port:port`.
 
-**Внимание!** При завершении процесса dev-сервера через `Ctrl/Cmd + C` процесс с
-контейнером отсоединяется (переводится в `detached`), но контейнер при этом
-остаётся запущенным.
+**Attention!** When you stop a dev server process via `Ctrl/Cmd + C`, the process just detaches from a terminal
+but the container itself still stays running.
 
-Чтобы остановить контейнер, необходимо использовать команды:
+To stop container use the next commands:
 
 ```shell
-docker ps # смотрим ID запущенного контейнера
-docker stop <container> # останавливаем контейнер с указанным ID
+docker ps # get ID of the running container
+docker stop <container> # stop container with specific ID
 ```
 
-### Использование Docker-контейнера в Windows
+### Docker container in Windows
 
-При запуске контейнера в Windows нужно добавлять слэш (`/`) перед вызовом `pwd`:
+To run a container in Windows, add a slash (`/`) before `pwd`:
 
 ```shell
 docker run \
@@ -120,116 +111,97 @@ docker run \
   funbox/blueprinter -i doc.apib -o index.html
 ```
 
-Кроме того, примонтированная директория может быть пустой. В таком случае
-необходимо убедиться, что в настройках Docker Desktop for Windows, в разделе
-Shared Drives включен шаринг нужного диска (стоит галка). Если диск не расшарен,
-необходимо отметить его как `shared`, применить изменения и перезапустить Docker
-Desktop.
+There is a chance that the mounted directory is empty. In this case, check that your hard drive is marked as shared.
+This setting can be found in the settings of Docker Desktop for Windows, Shared Drives section.
+If the disk is not shared, mark it as `shared`, apply changes, and restart Docker Desktop.
 
-## Функциональные возможности
+## Functional capabilities
 
-### Поиск групп, ресурсов и экшенов
+### Quick access to groups, resources and actions
 
-HTML-страница с отрендеренной документацией содержит поле для поиска различных
-ресурсов. Автоматически установить фокус на поле поиска можно клавишей `/`.
+HTML page with rendered documentation has a field to search certain resources. You can set focus on the search field with `/` key.
 
-Поиск производится по следующим сущностям:
+The search is performed on the following entities:
 
-- Заголовки и описания групп, ресурсов и экшенов.
-- href экшенов.
+- Titles and descriptions of groups, resources and actions.
+- href of actions.
 
-При этом результаты поиска выводятся в следующем порядке:
+Search result appear in the next order:
 
-1. Совпадения по href экшенов.
-2. Совпадения по заголовкам групп, ресурсов и экшенов.
-3. Совпадения по описаниям групп, ресурсов и экшенов.
+1. Matching of href of actions.
+2. Matching of titles of groups, resources and actions.
+3. Matching of descriptions of groups, resources and actions.
 
-Кроме ввода обычного поискового запроса, например `empl` или `сотр`, также
-доступны некоторые модификаторы (фильтры) поиска. В общем виде запрос с
-модификатором имеет вид `modType:modValue query`, где `query` — нужный поисковый
-запрос. В частности, доступны фильтры по типу ресурса и по HTTP-методу:
+If a simple search query as `empl` of `/list` is not enough, you can apply search modifiers (filters).
+The general form of a query is `modType:modValue query` where `query` is the desired search query. You can filter results
+by resource type and by HTTP method.
 
-- Фильтр по типу — `type:action query`. Возможные значения: `type:group query`,
-  `type:resource query`, `type:action query`.
-- Фильтр по методу — `method:METHOD query`, где `METHOD` — нужный HTTP-метод
-  (GET, POST, DELETE и так далее). Метод можно вводить как в нижнем регистре,
-  так и в верхнем.
+- To filter by type use `type:action query`. Available values are `type:group query`,
+`type:resource query`, `type:action query`.
+- To filter by method use `method:METHOD query` where `METHOD` is one of HTTP methods (GET, POST, DELETE, and so on).
+Both lowercase and uppercase will do.
 
-Таким образом, чтобы вывести только GET-запросы, у которых href содержит
-`employ`, можно ввести в поисковой строке:
+So, to list only GET requests with href containing `employ`, type in the search field:
 
-```
+```text
 method:get employ
 ```
 
-Чтобы модификатор применился, поисковый запрос должен начинаться с `modType`.
-Это значит, что если необходимо найти в документации фразу
-`method:get - пример фильтра`, то можно использовать первым символом запроса
-пробел (` method:get - пример фильтра`). Модификатор при этом не применится,
-пробел учитываться не будет, а поиск будет выполняться именно по фразе
-`method:get - пример фильтра`.
+To apply modifier, search query should start with `modType`. It means that if you need to find in doc the phrase
+`method:get - filter example`, you can use whitespace as the first symbol of the query (` method:get - filter example`).
+In this case no modifiers will be applied, leading whitespace won't be considered, and search will be performed
+exactly on the phrase `method:get - filter example`.
 
-### Поиск через `Ctrl/Cmd + F`
+### Search via `Ctrl/Cmd + F`
 
-APIB-документация содержит много разнородных сущностей, поэтому поле поиска
-может не помочь в ряде случаев, когда нужно искать по значению атрибута или по
-URI-параметру. Для ручного поиска добавлена страница с последовательным выводом
-всего контента документации, попасть на которую можно через кнопку-пиктограмму
-справа от поля поиска.
+APIB documentation can contain a lot of diverse entities, so the search field probably won't be helpful in some cases
+where you need to find an attribute value or a URI parameter. To find something manually we added a separate page with
+sequential list of all content of a documentation. To access this page, press icon button right to the search field.
 
-На этой странице все группы, ресурсы, запросы и ответы выводятся
-последовательно, также раскрыты все атрибуты в секциях Attributes. Таким
-образом, можно искать по документации, используя браузерные средства, например
-через комбинацию клавиш `Ctrl + F`.
+The page contains all groups, resources, requests, and responses outputted consequently. All attributes in Attributes sections are expanded. Therefore, you can search through documentation by browser means, e.g. using `Ctrl + F` key combination.
 
-### Сохранение в PDF
+### Save as PDF
 
-PDF-версия документации оптимизирована для удобного просмотра.
-Содержание в начале документа упрощает навигацию к выбранному разделу.
-Блок с описанием JSON-схемы скрыт в версии для печати.
+PDF-version of a documentation is optimized for easy viewing. List of content at the beginning of a doc provides easy
+access to the selected section. All blocks with JSON schemas are hidden.
 
-Для сохранения документации в формате PDF средствами браузера Chrome нужно выполнить следующие действия:
+To save documentation as PDF in Chrome browsers, follow the next steps:
 
-- перейти на страницу ручного поиска, попасть на которую можно через кнопку-пиктограмму справа от поля поиска;
-- в меню браузера выбрать опцию печати страницы;
-- в открывшемся диалоге просмотра печати страницы выбрать в настройках принтера «Сохранить как PDF»
-  и вид раскладки «Книжная»;
-- сохранить документацию с указанными настройками.
+- navigate to the manual search page via icon button next to the search field;
+- in browser context menu select print option;
+- in the print dialog select destination "Save as PDF" and layout mode "Portrait";
+- save documentation with selected settings.
 
-## Работа с проектом для разработки
+## Development
 
-### Установка зависимостей
+### Dependency installation
 
 ```shell
 npm install
 ```
 
-### Запуск проекта
-
-Запуск проекта в режиме разработки:
+### Run in dev mode
 
 ```shell
 npm start
 ```
 
-Проект запустится по адресу http://localhost:8080.
+Default dev server address is http://localhost:8080.
 
-### Сборка проекта
+### Build
 
-Для локальной сборки проекта:
+To build project locally run
+
 ```shell
 npm run build
 ```
 
-## Почему API Blueprint
+## Why API Blueprint
 
-В нашей компании разрабатывается большое количество JSON API. Их необходимо
-описывать и согласовывать, отслеживать изменения и показывать документацию
-большому кругу лиц, поэтому возникла необходимость в удобном формате и средствах для
-работы с документацией.
+We use JSON API widely in the company, so each day our developers face such issues as describing and approving API documentation,
+tracking changes, distributing documentation among partners, and so on. That is why we felt a strong need for convenient tools
+to work with documentation.
 
-Исторически в компании происходил выбор между
-[API Blueprint](https://apiblueprint.org/) и [Swagger](https://swagger.io/). Мы
-выбрали API Blueprint по двум причинам. Во-первых, исходный код документации,
-описанной с помощью API Blueprint, проще воспринимается человеком. Во-вторых, на
-момент исследования в Swagger не хватало ряда важных возможностей, например `One Of`.
+Historically, the battle was between [API Blueprint](https://apiblueprint.org/) and [Swagger](https://swagger.io/).
+We chose API Blueprint for two reasons. Firstly, the source code of documentation that is described using API Blueprint is more readable to humans.
+Secondly, at the time of research conducted, Swagger lacked several important features, as `One Of` support.

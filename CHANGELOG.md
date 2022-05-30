@@ -1,845 +1,841 @@
-# История изменений проекта
-
-## 4.17.1 (05.05.2022)
-
-* Доработка обрезания длинных заголовков пунктов меню документации.
+# Changelog
 
 ## 4.17.0 (13.04.2022)
 
-* Улучшение парсинга экшенов.
+* Improve parsing of actions.
 
 ## 4.16.2 (18.02.2022)
 
-* Удаление блока с ссылкой на туториал из кода.
+* Delete private link to the tutorial.
 
 ## 4.16.1 (18.02.2022)
 
-* Установка uniqueName для глобальных переменных при сборке webpack.
+* Set uniqueName for global variables in webpack build.
 
 ## 4.16.0 (26.01.2022)
 
-* Корректировка определения домена для установки куки с темой.
+* Update domain to be set in a dark-theme cookie.
 
 ## 4.15.0 (30.12.2021)
 
-* Замена форка `@funbox/react-aria-modal` на оригинальный пакет.
+* Replace a fork of `react-aria-modal` with the original package.
 
 ## 4.14.0 (28.12.2021)
 
-* Замена форка `@funbox/commonmark` на оригинальный пакет.
+* Replace a fork of `commonmark.js` with the original package.
 
 ## 4.13.0 (11.12.2021)
 
-* Добавление Юриста.
+* Run Lawyer.
 
 ## 4.12.0 (10.12.2021)
 
-* Приведение цвета обводки чекбокса к дизайну.
+* Update border color of checkbox according to design.
 
 ## 4.11.1 (03.11.2021)
 
-* Исправление перезагрузки страницы при изменении файлов документации.
+* Fix page reload after documentation is changed.
 
 ## 4.11.0 (21.10.2021)
 
-* Обновление зависимостей с переходом на Node версии 14.18.0.
+* Update dependencies to support Node 14.18.0.
 
 ## 4.10.0 (20.10.2021)
 
-* Замена базового Докер-образа на node:14.18.0-stretch-slim.
+* Use node:14.18.0-stretch-slim as a base Docker image.
 
 ## 4.9.0 (07.10.2021)
 
-* Уменьшение размера финального бандла.
+* Reduce size of the resulting bundle.
 
 ## 4.8.3 (07.10.2021)
 
-* Исправление работоспособности страницы ручного поиска.
+* Fix manual search page.
 
 ## 4.8.2 (28.09.2021)
 
-* Замена переменной окружения JENKINS_URL на CI.
+* Replace JENKINS_URL env variable with CI variable.
 
 ## 4.8.1 (28.09.2021)
 
-* Исправление ошибки с переполением памяти при обработке больших документаций.
+* Fix memory overflow error when parsing a large documentation.
 
 ## 4.8.0 (08.09.2021)
 
-* Обновление текста диалога помощи в соответствии с макетом.
+* Update text in the help dialog according to design.
 
 ## 4.7.0 (06.09.2021)
 
-* Обновление текста диалога помощи в соответствии с макетом.
+* Update text in the help dialog according to design.
 
 ## 4.6.0 (06.09.2021)
 
-* Удаление неактуальной информации о Jenkins из readme.md.
+* Delete irrelevant information about Jenkins from the readme file.
 
 ## 4.5.0 (06.09.2021)
 
-* Исправление отступов в диалоге помощи.
+* Fix paddings in the help dialog.
 
 ## 4.4.0 (01.09.2021)
 
-* Добавление ссылки на туториал в диалог помощи.
+* Add a tutorial link to the help dialog.
 
 ## 4.3.2 (01.09.2021)
 
-* Исправление отображения фавиконки в сгенерированном HTML.
+* Repair favicon of a generated HTML file.
 
 ## 4.3.1 (20.08.2021)
 
-* Доработка ключа, по которому кэшируются структуры данных.
+* Update key by which data structures are cached.
 
 ## 4.3.0 (20.08.2021)
 
-* Настройка уведомлений о релизах.
+* Setup notification about new releases.
 
 ## 4.2.1 (13.08.2021)
 
-* Исправление перезагрузки страницы при изменении файлов, если doc.apib лежит в поддиректории.
+* Fix page reload after files update if a doc.apib file is in a subdirectory.
 
 ## 4.2.0 (22.07.2021)
 
-* Перевод сборки docker-образа с dind на kaniko.
+* Use kaniko to build a Docker image.
 
 ## 4.1.2 (19.07.2021)
 
-* Исправление парсинга параметров URI, содержащих символы "~", ".", "-".
+* Fix parsing of URI parameters that contain symbols "~", ".", "-".
 
 ## 4.1.1 (28.06.2021)
 
-* Исправление задания backgroundLocation при загрузке страницы.
+* Fix setting of backgroundLocation after page first loading.
 
 ## 4.1.0 (28.06.2021)
 
-* Исправление поведения элементов при узком вьюпорте.
+* Fix elements behaviour in case of small viewport width.
 
 ## 4.0.0 (24.06.2021)
 
-* Переход на crafter 3.
+* Use Crafter v3.
 
 ## 3.53.0 (04.06.2021)
 
-* Реализация попапа с информацией о возможностях blueprinter-frontend.
+* Add a popup with information about Blueprinter-frontend features.
 
 ## 3.52.0 (20.05.2021)
 
-* Добавление возможности подключения кастомного css файла.
+* Add the ability to include a custom css file.
 
 ## 3.51.0 (18.05.2021)
 
-* Настройка создания релизов при мерже в мастер.
+* Create a new release after merging to master.
 
 ## 3.50.0 (18.05.2021)
 
-* Использование компонента CheckboxField для выбора опций в OneOf.
+* Use CheckboxField component to render options in OneOf.
 
 ## 3.49.0 (17.05.2021)
 
-* Генерация примеров body из шаблонов, содержащих все варианты опций One Of.
+* Generate body examples from templates that contain all One Of options.
 
 ## 3.48.0 (15.04.2021)
 
-* Добавление тёмной темы.
+* Add dark theme.
 
 ## 3.47.2 (14.04.2021)
 
-* Исправление отображения nullable enum.
+* Fix rendering of nullable enums.
 
 ## 3.47.1 (02.04.2021)
 
-* Исправление отображения falsy default секций.
+* Fix rendering of falsy default values.
 
 ## 3.47.0 (02.04.2021)
 
-* Доработка конфигурации gitlab-ci.
+* Update gitlab-ci configuration.
 
 ## 3.46.2 (29.03.2021)
 
-* Замена ссылок репозиториев на gitlab.
+* Update repository links.
 
 ## 3.46.1 (29.03.2021)
 
-* Удаление переменной `no_proxy`.
+* Delete `no_proxy` variable.
 
 ## 3.46.0 (25.03.2021)
 
-* Разделение запуска тестов и билда.
+* Separate test and build jobs.
 
 ## 3.45.3 (24.03.2021)
 
-* Автопубликация пакета.
+* Package auto publishing.
 
 ## 3.45.2 (22.03.2021)
 
-* Настройка кэша node_modules.
+* Setup node_modules caching.
 
 ## 3.45.1 (22.03.2021)
 
-* Отключение tags pipeline.
+* Disable pipeline for tags.
 
 ## 3.45.0 (19.03.2021)
 
-* Удаление fibers.
+* Delete fibers.
 
 ## 3.44.0 (12.03.2021)
 
-* Обновление тестовой документации.
+* Update test documentation.
 
 ## 3.43.0 (05.03.2021)
 
-* Обновление стилей элементов после переноса дизайна в Figma.
+* Update elements style after moving to Figma.
 
 ## 3.42.0 (05.03.2021)
 
-* Вывод форматированного описания в запросах и ответах.
+* Display formatted description of requests and responses.
 
 ## 3.41.1 (05.03.2021)
 
-* Исправление ошибки hot reload при локальной разработке.
+* Fix hot reload error in dev mode.
 
 ## 3.41.0 (04.03.2021)
 
-* Реализация скрытия/открытия сайдбара.
+* Implement sidebar folding/unfolding.
 
 ## 3.40.1 (04.03.2021)
 
-* Исправление работы поиска для сообщений без тела (атрибутов).
+* Correctly search messages without any content (without attributes).
 
 ## 3.40.0 (04.03.2021)
 
-Обновление версии caniuse-lite.
+Update caniuse-lite version.
 
 ## 3.39.0 (26.02.2021)
 
-* Добавление отображения описания у элементов One Of.
+* Show a description of a One Of element.
 
 ## 3.38.0 (25.02.2021)
 
-* Добавление unit-тестов.
+* Add unit tests.
 
 ## 3.37.1 (18.02.2021)
 
-* Исправление переполнения содержимого бокового меню.
+* Fix overflow of side navigation.
 
 ## 3.37.0 (16.02.2021)
 
-* Аудит зависимостей.
+* Run dependencies audit.
 
 ## 3.36.3 (15.02.2021)
 
-* Добавление плагина babel-plugin-transform-react-remove-prop-types.
+* Add babel-plugin-transform-react-remove-prop-types plugin.
 
 ## 3.36.2 (08.02.2021)
 
-* Исправление подстановки refract'а в html-файл.
+* Fix including refract tree in a HTML file.
 
 ## 3.36.1 (05.02.2021)
 
-* Починка отображения атрибутов у сообщений.
+* Fix rendering of attributes in Messages section.
 
 ## 3.36.0 (26.01.2021)
 
-* Адаптация версии для печати HTML-документа для просмотра в PDF формате.
+* Add adapted version of HTML document to print it as a PDF file.
 
 ## 3.35.3 (20.01.2021)
 
-* Исправление редиректа для URL без групп и ресурсов.
+* Fix redirect to URL without groups or resources.
 
 ## 3.35.2 (20.01.2021)
 
-* Исправление взаимодействия с value-атрибутами.
+* Fix interaction with value attributes.
 
 ## 3.35.1 (20.01.2021)
 
-* Исправление открытия атрибута после двойного клика.
+* Fix attribute unfolding after double click.
 
 ## 3.35.0 (31.12.2020)
 
-* Переход на crafter 2.
+* Update to crafter v2.
 
 ## 3.34.0 (25.12.2020)
 
-* Доработка определения моноширинных шрифтов для кода.
+* Use monospace font in code blocks.
 
 ## 3.33.0 (30.11.2020)
 
-* Обновление вёрстки страницы с информацией об ошибке.
+* Update markup of error page.
 
 ## 3.32.0 (24.11.2020)
 
-* Оптимизация работы функций fillAdditionalAttributes и resolveSourceElementInheritance.
+* Optimize functions "fillAdditionalAttributes" and "resolveSourceElementInheritance".
 
 ## 3.31.0 (18.11.2020)
 
-* Добавление отображения атрибутов у секции Attributes.
+* Display attributes of Attributes section.
 
 ## 3.30.0 (13.11.2020)
 
-* Добавление отображения атрибута "fixed" в дочерних полях.
+* Display "fixed" attribute in the attributes list of nested members.
 
 ## 3.29.0 (26.10.2020)
 
-* Оптимизация шрифтов и целевых браузеров.
+* Optimize fonts and target browsers.
 
 ## 3.28.1 (26.10.2020)
 
-* Исправление ошибки при добавлении якорей к заголовкам в описании.
+* Fix an error caused by adding anchors to description headings.
 
 ## 3.28.0 (12.10.2020)
 
-* Использование логгера предупреждений при генерации рефракта.
+* Use a separate logger to output warnings during refract generation.
 
 ## 3.27.0 (21.09.2020)
 
-* Отображение расширенной информации об ошибке.
+* Display extended error information.
 
 ## 3.26.0 (16.09.2020)
 
-* Исправление предупреждения в сервисе и ошибок в песочнице.
+* Fix warnings and errors in the project and in the sandbox.
 
 ## 3.25.6 (15.09.2020)
 
-* Доработка получения nestedTypes именованных типов при наследовании.
+* Fix nested types of a named type extracted during inheritance processing.
 
 ## 3.25.5 (04.08.2020)
 
-* Исправление вотчинга файлов apib в зависимостях.
+* Fix watching of apib files.
 
 ## 3.25.4 (24.07.2020)
 
-* Исправление раскрытия пунктов сайдбара при открытии ресурса с кастомным якорем.
+* Fix sidebar navigation behaviour when a resource with a custom anchor is opened.
 
 ## 3.25.3 (24.07.2020)
 
-* Исправление рендера экшена с повторяющимся параметром.
+* Fix rendering of an action with a repeating parameter.
 
 ## 3.25.2 (23.07.2020)
 
-* Заполнение атрибутов массивов.
+* Fill in array attributes.
 
 ## 3.25.1 (21.07.2020)
 
-* Исправление отображения информации об ошибке Crafter'а.
+* Improve displaying of a Crafter error.
 
 ## 3.25.0 (17.07.2020)
 
-* Доработка проверки типа секции MemberTypeGroup в именованных типах.
+* Improve check of a MemberTypeGroup section in a named type.
 
 ## 3.24.0 (16.07.2020)
 
-* Доработка отображения рекурсивных атрибутов.
+* Improve displaying of recursive attributes.
 
 ## 3.23.0 (09.07.2020)
 
-* Улучшение текста `README.md`.
+* Improve `README.md`.
 
 ## 3.22.0 (08.07.2020)
 
-* Обновление Crafter до 1.57.0.
+* Update Crafter to 1.57.0.
 
 ## 3.21.1 (08.07.2020)
 
-* Удаление фигурных скобок из роутов.
+* Generate routes without curly braces.
 
 ## 3.21.0 (07.07.2020)
 
-* Добавление заголовка в описания для запросов.
+* Add headers to a response description.
 
 ## 3.20.3 (22.06.2020)
 
-* Исправление обработки импортов в импортированном файле.
+* Fix processing imports inside of an imported file.
 
 ## 3.20.2 (22.06.2020)
 
-* Исправление парсинга секции Resource идущей после Resource Prototypes.
+* Fix parsing of a Resource section that comes after a Resource Prototypes section.
 
 ## 3.20.1 (22.06.2020)
 
-* Исправление рендера ошибки от crafter без source map.
+* Fix rendering of a Crafter error without a source map.
 
 ## 3.20.0 (22.06.2020)
 
-* Распознание первой ноды подключаемого файла при импорте.
+* Detect first node of an imported file.
 
 ## 3.19.0 (17.06.2020)
 
-* Переход на Node.js 12.16.3 в Docker образе.
+* Use Node.js 12.16.3 as the base Docker image.
 
 ## 3.18.1 (11.06.2020)
 
-* Учёт возможного наличия рекурсивных Data Structure.
+* Account presence of recursive data structures.
 
 ## 3.18.0 (29.05.2020)
 
-* Формирование роутов по новому принципу.
+* Rework routes generation.
 
 ## 3.17.0 (20.05.2020)
 
-* Исправление рендеринга url параметров со звёздочкой.
+* Fix rendering of URI parameters that have star symbol.
 
 ## 3.16.0 (15.05.2020)
 
-* Поддержка рекурсивных объектов.
+* Add support of recursive objects.
 
 ## 3.15.0 (24.04.2020)
 
-* Добавление страницы для поиска через ctrl+f.
+* Add the page for manual search.
 
 ## 3.14.2 (21.04.2020)
 
-* Исправление перезапуска отладочного сервера.
+* Fix restart of a local dev server.
 
 ## 3.14.1 (15.04.2020)
 
-* Добавление типа для секции Attributes.
+* Add data type to Attributes section.
 
 ## 3.14.0 (15.04.2020)
 
-* Доработка отображения атрибутов структур данных.
+* Improve rendering of attributes in data structures.
 
 ## 3.13.2 (14.04.2020)
 
-* Удаление definitions для наследуемых типов.
+* Delete definitions of inherited types.
 
 ## 3.13.1 (09.04.2020)
 
-* Исправление отображения 0 в enum типах.
+* Fix displaying "0" in enum types.
 
 ## 3.13.0 (08.04.2020)
 
-* Отображение примеров для атрибутов с вложенным контентом.
+* Display samples of attributes with nested content.
 
 ## 3.12.3 (07.04.2020)
 
-* Исправление рендера пунктов боковой навигации.
+* Fix rendering of elements of the side navigation.
 
 ## 3.12.2 (07.04.2020)
 
-* Исправление ошибки про некорректный mime type в dev-режиме.
+* Fix error caused by incorrect mime-type in dev mode.
 
 ## 3.12.1 (31.03.2020)
 
-* Исправление перемещения между результатами поиска с помощью клавиатуры.
+* Fix navigation between search results using a keyboard.
 
 ## 3.12.0 (30.03.2020)
 
-* Фокусирование на поле поиска при нажатии на клавишу «slash».
+* Focus on the search field when «slash» key is pressed.
 
 ## 3.11.0 (30.03.2020)
 
-* Доработка отображения результатов поиска.
+* Improve displaying of search results.
 
 ## 3.10.0 (27.03.2020)
 
-* Реализация поиска по новому алгоритму.
+* Implement new algorithm of search.
 
 ## 3.9.3 (23.03.2020)
 
-* Добавление проверки на переопределение полей.
+* Add a check for member fields precedence.
 
 ## 3.9.2 (23.03.2020)
 
-* Исправление получения примеров атрибута.
+* Fix displaying samples of an attribute.
 
 ## 3.9.1 (20.03.2020)
 
-* Исправить отображение списков.
+* Fix lists rendering.
 
 ## 3.9.0 (20.03.2020)
 
-* Скрытие блока со схемой.
+* Collapse sections with a schema.
 
 ## 3.8.0 (20.03.2020)
 
-* Подсветка параметров url в примере запроса.
+* Highlight URL parameters in a sample of a response.
 
 ## 3.7.0 (27.02.2020)
 
-* Обновление зависимостей.
+* Update dependencies.
 
 ## 3.6.1 (25.02.2020)
 
-* Обновление react-hot-loader.
+* Update react-hot-loader.
 
 ## 3.6.0 (18.02.2020)
 
-* Перевод на локальные конфиги webpack.
+* Use local webpack configs.
 
 ## 3.5.2 (18.02.2020)
 
-* Добавление проверки уникальности response.
+* Add a check for unique response.
 
 ## 3.5.1 (18.02.2020)
 
-* Рефакторинг боковой навигации.
+* Refactor side navigation.
 
 ## 3.5.0 (12.02.2020)
 
-* Замена шрифта Montserrat на Roboto и исправление стилей сайдбара.
+* Use Roboto font and fix styles of the sidebar.
 
 ## 3.4.1 (12.02.2020)
 
-* Исправление рендеринга url параметров со звёздочкой.
+* Fix parsing of URI parameters that have star symbol.
 
 ## 3.4.0 (10.02.2020)
 
-* Доработка подсветки пунктуации кода.
+* Improve highlight of code punctuation.
 
 ## 3.3.1 (03.02.2020)
 
-* Удаление ограничения минимальной длины поискового запроса.
+* Delete constraints of search query minimum length.
 
 ## 3.3.0 (28.01.2020)
 
-* Возможность просмотра HTML-файла документации без веб-сервера.
+* Add the ability to open resulting HTML file without any web server.
 
 ## 3.2.1 (24.01.2020)
 
-* Исправление установки зависимостей eslint.
+* Fix eslint dependencies installation.
 
 ## 3.2.0 (23.01.2020)
 
-* Добавление strict-режима сборки.
+* Add strict build mode.
 
 ## 3.1.0 (09.01.2020)
 
-* Отображение названий методов в верхнем регистре.
+* Display HTTP methods names in uppercase.
 
 ## 3.0.0 (27.12.2019)
 
-* Переход на новый дизайн.
+* Implement new design.
 
 ## 2.26.0 (24.12.2019)
 
-* Устранение предупреждений webpack при сборке.
+* Fix webpack errors during building.
 
 ## 2.25.2 (20.12.2019)
 
-* Исправление задания хэшей ресурсам без заголовков.
+* Fix hashes of untitled resources.
 
 ## 2.25.1 (20.12.2019)
 
-* Исправление перехода по якорю в Firefox.
+* Fix scroll to anchor in Firefox.
 
 ## 2.25.0 (08.11.2019)
 
-* Добавление отображения первой строки описания ответа в табах.
+* Show first line of a request description in tabs header. 
 
 ## 2.24.1 (06.11.2019)
 
-* Исправление итогового статуса сборки с ошибкой Crafter.
+* Fix resulting status of a build containing a Crafter error.
 
 ## 2.24.0 (17.10.2019)
 
-* Удаление схлопывания заголовка ресурса и единичного экшена в левом меню.
+* Cancel collapsing of a resource and its only action in the navigation in the left column.
 
 ## 2.23.0 (08.10.2019)
 
-* Обновление зависимостей.
+* Update dependencies.
 
 ## 2.22.0 (08.10.2019)
 
-* Хранение полученного рефракта в памяти вместо записи в refract.js.
+* Keep generated refract in memory instead of an external file.
 
 ## 2.21.1 (07.10.2019)
 
-* Исправление отображения ресурса без заголовка в левой колонке.
+* Fix display of a resource without a title in the left column.
 
 ## 2.21.0 (03.10.2019)
 
-* Обновление зависимостей с уязвимостями по безопасности.
+* Update vulnerable dependencies.
 
 ## 2.20.1 (03.10.2019)
 
-* Исправление отображения 0 или false в качестве примера.
+* Fix display of "0" or "false" used as an example.
 
 ## 2.20.0 (02.10.2019)
 
-* Добавление Dockerfile для сборки образа.
+* Add Dockerfile to build an image.
 
 ## 2.19.0 (30.09.2019)
 
-* Переопределение якоря через комментарий html.
+* Use HTML comments to override anchors.
 
 ## 2.18.0 (19.09.2019)
 
-* Добавление обработки схема-типов.
+* Add parsing of Schema types.
 
 ## 2.17.2 (11.09.2019)
 
-* Исправление server_name для https.
+* Fix server_name for https.
 
 ## 2.17.1 (03.09.2019)
 
-* Исправление конфига nginx.
+* Fix NGINX config.
 
 ## 2.17.0 (03.09.2019)
 
-* Использование исходного apib-документа для получения refract-стаба.
+* Use source apib file to generate refract stub.
 
 ## 2.16.0 (30.08.2019)
 
-* Правильная реализация вотчинга файлов использованных при построении документации.
+* Improve watching of files being used to build the doc.
 
 ## 2.15.7 (23.08.2019)
 
-* Исправление парсинга блоков с заголовками при импорте.
+* Fix parsing of imported docs with the Headers section.
 
 ## 2.15.6 (20.08.2019)
 
-* Доработка сообщения об ошибке при отсутствии искомого блока.
+* Improve error message when expected block is not found.
 
 ## 2.15.5 (15.08.2019)
 
-* Исправление рендера элементов enum в секции Attributes.
+* Fix rendering of enum elements in Attributes section.
 
 ## 2.15.4 (07.08.2019)
 
-* Исправление отображения нуля при использовании параметра "minimum".
+* Fix null values rendering when "minimum" parameter is used.
 
 ## 2.15.3 (30.07.2019)
 
-* Исправление генерации описания параметров URI.
+* Fix generation of URI parameters description.
 
 ## 2.15.2 (29.07.2019)
 
-* Исправление ошибки подключения библиотеки @funbox/free-port-finder.
+* Correctly require @funbox/free-port-finder lib.
 
 ## 2.15.1 (29.07.2019)
 
-* Обновление зависимости от библиотеки @funbox/free-port-finder.
+* Update version of @funbox/free-port-finder.
 
 ## 2.15.0 (23.07.2019)
 
-* Реализация создания директорий для output файла.
+* Create a directory for the output file.
 
 ## 2.14.1 (08.07.2019)
 
-* Рендеринг uri параметров со звёздочкой в итоговом url.
+* Render URI parameters with star modifier in the resulting url.
 
 ## 2.14.0 (17.06.2019)
 
-* Добавление опциональных атрибутов non-nullable и optional в поля объектов.
+* Add attributes `non-nullable` and `optional` to object fields.
 
 ## 2.13.0 (14.06.2019)
 
-* Отображение json-schema у секций Message.
+* Display JSON schema of Message sections.
 
 ## 2.12.0 (11.06.2019)
 
-* Вывод ошибок и предупреждений от Crafter.
+* Display errors and warnings from Crafter.
 
 ## 2.11.2 (08.06.2019)
 
-* Генерация корректного body для примитивных типов без примеров.
+* Generate correct body for a primitive type that lacks sample.
 
 ## 2.11.1 (06.06.2019)
 
-* Исправление рендера меню с ресурсами, содержащими только описание.
+* Fix rendering of menu with resources which contain only a description.
 
 ## 2.11.0 (04.06.2019)
 
-* Отображение секций SubGroup и Message.
+* Display SubGroup and Message sections.
 
 ## 2.10.3 (04.06.2019)
 
-* Исправление парсинга пустого тела ответа в crafter.
+* Fix parsing of an empty response body in Crafter.
 
 ## 2.10.2 (29.05.2019)
 
-* Исправление парсинга атрибутов у именованных типов.
+* Fix parsing of attributes of named types.
 
 ## 2.10.1 (25.05.2019)
 
-* Исправление потери отступов у code_block.
+* Fix missing indentation of code block.
 
 ## 2.10.0 (23.05.2019)
 
-* Добавление в readme.md описания использования на других проектах.
+* Add installation and usage info to readme.
 
 ## 2.9.2 (20.05.2019)
 
-* Исправление парсинга параметров URI со звёздочкой в actions.
+* Fix parsing of a URI parameter with star (*) operator.
 
 ## 2.9.1 (14.05.2019)
 
-* Корректировка применения отрицательных отступов при синхронизации положения карточек Action и блока Transition.
+* Fix negative margins applied to Action and Transition cards.
 
 ## 2.9.0 (13.05.2019)
 
-* Конвертация значений нетипизированных элементов массива.
-* Корректировка json-схем для fixed и fixed-type элементов.
-* Исправление парсинга блока кода в блочном описании.
+* Convert values of untyped elements of an array.
+* Fix JSON schema generated for fixed and fixed-type elements.
+* Fix parsing of code block in a block description.
 
 ## 2.8.0 (07.05.2019)
 
-* Обработка секций :::note и :::warning при рендере документации.
+* Display `:::note` and `:::warning` sections in documentation.
 
 ## 2.7.1 (02.05.2019)
 
-* Исправление отображения длинных URL.
+* Fix rendering of long URLs.
 
 ## 2.7.0 (02.05.2019)
 
-* Актуализация песочницы.
+* Update sandbox.
 
 ## 2.6.0 (29.04.2019)
 
-* Исправление обработки секций resourcePrototype.
-* Исправление проверки совпадающих атрибутов при резолве наследования.
-* Исправление проверки типа атрибутов при сравнении.
-* Исправление передачи атрибута fixed-type вложенным элементам.
-* Возможность отображения блоков в описании.
-* Конвертирование вложенных элементов enum.
+* Improve ResourcePrototype section processing.
+* Improve check for identical attributes during inheritance resolving.
+* Improve attributes check during attributes comparison.
+* Improve passing `fixed-type` attribute to nested elements.
+* Display blocks in description.
+* Convert nested elements of an enum.
 
 ## 2.5.0 (17.04.2019)
 
-* Оптимизация первой отрисовки страницы.
+* Optimize page first render.
 
 ## 2.4.0 (16.04.2019)
 
-* Улучшение отображения названия параметра.
+* Improve parameter name display.
 
 ## 2.3.2 (11.04.2019)
 
-* Исправление формирования таблицы enum-значений массива.
+* Fix generation of a set of enumerable values of an array.
 
 ## 2.3.1 (11.04.2019)
 
-* Исправление наследования от enum.
-* Исправление наследования от именованных типов.
+* Fix inheritance from enumerables.
+* Fix inheritance from named types.
 
 ## 2.3.0 (08.04.2019)
 
-* Удаление ключевого слова fixed-type для массивов из дерева.
+* Delete `fixed-type` keyword from array definition.
 
 ## 2.2.0 (06.04.2019)
 
-* Отображение параметризованных атрибутов в правой колонке.
+* Display parameterized attributes in the right column.
 
 ## 2.1.7 (18.03.2019)
 
-* Отображение схемы запроса.
+* Render request schema.
 
 ## 2.1.6 (13.03.2019)
 
-* Использование дефолтных значений в body и json-schema.
+* Use default values in body and JSON schema.
 
 ## 2.1.5 (07.03.2019)
 
-* Доработки секции Default и возможность вкладывать Default и Sample в примитивы.
-* Исправление парсинга атрибутов.
-* Добавление предупреждения если в action отсутствуют ответы.
-* Исправление процессинга именованных примитивных типов.
+* Improve Default section and allow to include Default and Sample into primitives.
+* Fix attributes parsing.
+* Show a warning if action has no responses.
+* Fix processing of named primitive types.
 
 ## 2.1.4 (01.03.2019)
 
-* Исправление рендеринга документации без группы запросов.
+* Fix rendering a documentation without any resource group.
 
 ## 2.1.3 (01.03.2019)
 
-* Исправление рендеринга action с пустым содержимым.
+* Fix rendering of an empty action.
 
 ## 2.1.2 (01.03.2019)
 
-* Исправление парсинга именованных эндпоинтов.
+* Fix parsing of named endpoints.
 
 ## 2.1.1 (27.02.2019)
 
-* Обработка enum uri-параметра с пропущенным "+ Members".
+* Process an enumerable URI parameter with missing `+ Members` keyword.
 
 ## 2.1.0 (27.02.2019)
 
-* Улучшение вывода параметров с enum-значениями.
+* Improve rendering parameters with enum values.
 
 ## 2.0.3 (27.02.2019)
 
-* Получение значения uri-параметра для сложных типов.
+* Extract value of a URI parameter in case of a complex type.
 
 ## 2.0.2 (26.02.2019)
 
-* Исправление импорта файлов.
+* Fix import processing.
 
 ## 2.0.1 (26.02.2019)
 
-* Обработка вложенных элементов href-параметра в виде описания.
+* Process nested elements of a href parameter as a description.
 
 ## 2.0.0 (22.02.2019)
 
-* Замена drafter на crafter.
+* Replace drafter with crafter.
 
 ## 1.6.0 (21.02.2019)
 
-* Подсветка атрибута required.
+* Highlight `required` attributes.
 
 ## 1.5.1 (16.02.2019)
 
-* Исправление ошибки ненайденного скрипта.
+* Fix error of a missing script.
 
 ## 1.5.0 (09.01.2019)
 
-* Поддержка node.js 10.
+* Add node.js 10 support.
 
 ## 1.4.1 (28.12.2018)
 
-* Обработка markdown-разметки в описаниях URI параметров.
+* Process markdown markup in description of URI parameters.
 
 ## 1.4.0 (27.12.2018)
 
-* Использование commonmarkjs вместо showdown для рендера html.
+* Use commonmarkjs instead of showdown to render HTML.
 
 ## 1.3.5 (06.12.2018)
 
-* Исправление механизма построения хеш-ссылок.
+* Change the way hash links are built.
 
 ## 1.3.4 (26.11.2018)
 
-* Исправление замечаний линтера.
+* Fix linter warnings.
 
 ## 1.3.3 (15.11.2018)
 
-* Исправление отображения параметров url в фигурных скобках.
+* Fix rendering of a url parameter with curly braces.
 
 ## 1.3.2 (13.11.2018)
 
-* Исправление переноса параметров href транзакции.
-* Исправление отображения href с параметрами enum-типа.
-* Задание увеличенного отступа для пункта меню с лейблом метода.
-* Получение заголовка от ресурса для транзакции без заголовка.
-* Объединение пунктов бокового меню с ресурсом и единственной транзакцией.
-* Исправление резолва наследования ноды member с контентом.
-* Назначение правильного типа структуры при разрешении наследования.
-* Исправление обработки содержимого enum-атрибута.
+* Fix line break within href parameters.
+* Fix href parameters containing enum elements.
+* Increase spacing of a menu element containing a method label.
+* Pass a title of a resource to the nested unnamed transaction.
+* Merge menu elements containing a resource and its only transaction.
+* Fix inheritance resolving of a member node with some content.
+* Set correct type of a structure during inheritance resolving.
+* Fix processing of an enum attribute content.
 
 ## 1.3.1 (10.10.2018)
 
-* Обновление версии @funbox/sass-lint до 1.10.2-fb-2.0.1.
-* Обновление версии @funbox/protagonist до 1.6.8-fb-2.0.0.
+* Update @funbox/sass-lint to version 1.10.2-fb-2.0.1.
+* Update @funbox/protagonist to version 1.6.8-fb-2.0.0.
 
 ## 1.3.0 (17.09.2018)
 
-* Оптимизация перерисовки блоков при взаимодействии с меню.
+* Optimize sections repaint during manipulations with menu
 
 ## 1.2.2 (17.09.2018)
 
-* Удаление лишних файлов перед публикацией пакета.
+* Exclude redundant files from the published package
 
 ## 1.2.1 (11.09.2018)
 
-* Исправление ошибок рендера реакт-компонентов.
+* Fix render errors in React components
 
 ## 1.2.0 (10.09.2018)
 
-* Изменение схемы формирования статичного HTML.
-* Исключение необходимости установки React для сборки документации.
+* Update build process of static HTML
+* Exclude React from mandatory dependencies to build documentation
 
 ## 1.1.0 (09.09.2018)
 
-* Добавление заголовков из описания в качестве пунктов меню.
+* Use headers from description as elements of navigation
 
 ## 1.0.0 (04.09.2018)
 
-* Начальная версия проекта.
+* Initial version
