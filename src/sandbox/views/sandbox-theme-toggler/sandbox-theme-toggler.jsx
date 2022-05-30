@@ -8,10 +8,10 @@ export default () => {
 
   return (
     <div>
-      <h2>Переключатель тем</h2>
+      <h2>Theme toggler</h2>
 
       <SandboxParagraph>
-        Включенное состояние обозначает применённую темную тему:
+        Checked state means dark theme is enabled:
       </SandboxParagraph>
 
       <SandboxDemo mods={{ theme: 'standard' }}>

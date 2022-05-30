@@ -1,39 +1,39 @@
 module.exports = {
   views: [
     {
-      name: 'Главная',
+      name: 'Main',
       to: '/sandbox',
     },
     {
-      name: 'Боковое меню',
+      name: 'Side menu',
       to: '/sandbox/side-menu',
     },
     {
-      name: 'Бейдж http-метода',
+      name: 'HTTP method badge',
       to: '/sandbox/method-badge',
     },
     {
-      name: 'Контентная область',
+      name: 'Content area',
       to: '/sandbox/raw-content',
     },
     {
-      name: 'Блок структуры запроса-ответа',
+      name: 'Request/response blocks',
       to: '/sandbox/request-response',
     },
     {
-      name: 'Поиск',
+      name: 'Search',
       to: '/sandbox/search',
     },
     {
-      name: 'Чекбокс',
+      name: 'Checkbox',
       to: '/sandbox/checkbox',
     },
     {
-      name: 'Переключатель тем',
+      name: 'Theme toggler',
       to: '/sandbox/theme-toggler',
     },
     {
-      name: 'Помощь по сервису',
+      name: 'Service info',
       to: '/sandbox/service-info',
     },
     {

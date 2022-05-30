@@ -3,7 +3,7 @@ export default {
   meta: {
     description: {
       element: 'string',
-      content: 'список идентификаторов',
+      content: 'identifiers list',
     },
   },
   attributes: {

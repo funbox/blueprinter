@@ -22,9 +22,9 @@ export default class SandboxRequestResponseBlock extends React.Component {
   render() {
     return (
       <div>
-        <h2>Блок структуры запроса-ответа</h2>
+        <h2>Request/response blocks</h2>
 
-        <SandboxSection id="code-snippet" title="Блок вывода фрагмента кода">
+        <SandboxSection id="code-snippet" title="Code snippet">
           <SandboxDemo>
             <CodeSnippet>
               {JSON.stringify(body, null, 2)}
@@ -38,7 +38,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
           </SandboxDemo>
 
           <SandboxParagraph>
-            Передача модификатора <InlineCode>{'mods={{ disabledSyntax: true }}'}</InlineCode> отключает подсветку:
+            To disable syntax highlight provide <InlineCode>{'mods={{ disabledSyntax: true }}'}</InlineCode> modifier:
           </SandboxParagraph>
 
           <SandboxDemo>
@@ -48,7 +48,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
           </SandboxDemo>
 
           <SandboxParagraph>
-            Для подсветки http-заголовков можно использовать свойство
+            To highlight HTTP headers provide prop
             {' '}
             <InlineCode>syntax=&quot;http&quot;</InlineCode>:
           </SandboxParagraph>
@@ -62,43 +62,43 @@ export default class SandboxRequestResponseBlock extends React.Component {
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="single-attribute" title="Одиночный атрибут">
+        <SandboxSection id="single-attribute" title="Single attribute">
           <SandboxDemo mods={{ for: 'attributes-list' }}>
             <AttributesList attributes={[singleAttribute]}/>
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="object-attribute" title="Атрибут-объект">
+        <SandboxSection id="object-attribute" title="Object attribute">
           <SandboxDemo mods={{ for: 'attributes-list' }}>
             <AttributesList attributes={[objectAttribute]}/>
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="array-attribute" title="Атрибут-массив">
+        <SandboxSection id="array-attribute" title="Array attribute">
           <SandboxDemo mods={{ for: 'attributes-list' }}>
             <AttributesList attributes={[arrayAttribute]}/>
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="complex-object" title="Вложенный объект">
+        <SandboxSection id="complex-object" title="Complex object attribute">
           <SandboxDemo mods={{ for: 'attributes-list' }}>
             <AttributesList attributes={[complexObject]}/>
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="array-of-objects" title="Массив объектов">
+        <SandboxSection id="array-of-objects" title="Array of object">
           <SandboxDemo mods={{ for: 'attributes-list' }}>
             <AttributesList attributes={[arrayOfObjects]}/>
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="attributes-block" title="Блок атрибутов">
+        <SandboxSection id="attributes-block" title="Attributes block">
           <SandboxDemo mods={{ for: 'attributes-list' }}>
             <AttributesList attributes={attributeBlock}/>
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="request-response-section" title="Запрос-ответ">
+        <SandboxSection id="request-response-section" title="Request-response">
           <SandboxDemo mods={{ for: 'transition-block' }}>
             <TransitionContainer
               transactions={request.content}

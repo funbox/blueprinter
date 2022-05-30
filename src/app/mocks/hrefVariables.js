@@ -13,7 +13,7 @@ const hrefVariables = [
     meta: {
       description: {
         element: 'string',
-        content: 'количество записей N, которое нужно возвратить. Максимальное значение - 100; если передано большее значение, нужно возвратить 100 записей.',
+        content: 'number of records N to return. Max value - 100; if requested more than max, return 100 records.',
       },
       title: {
         element: 'string',
@@ -47,7 +47,7 @@ const hrefVariables = [
     meta: {
       description: {
         element: 'string',
-        content: 'возвратить N новостей, опубликованных после новости с id=xxx',
+        content: 'return N news, published after the news record with id=xxx',
       },
       title: {
         element: 'string',

@@ -1,9 +1,9 @@
 {
-  "name": "Иван Иванов",
+  "name": "James Johnson",
   "email": "test@example.com",
   "msisdn": 79000000001,
   "kind": "problem",
-  "message": "тест",
+  "message": "test",
   "captcha": "",
   "paymentChannel": "web"
 }

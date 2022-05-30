@@ -16,10 +16,10 @@ export default () => {
 
   return (
     <div>
-      <h2>Помощь по сервису</h2>
+      <h2>Service info</h2>
 
       <SandboxParagraph>
-        Кнопка открытия модального окна с информацией по сервису:
+        Button to show service info dialog:
       </SandboxParagraph>
 
       <SandboxDemo mods={{ theme: 'standard' }}>
@@ -27,7 +27,7 @@ export default () => {
       </SandboxDemo>
 
       <SandboxParagraph>
-        Диалог
+        Dialog
       </SandboxParagraph>
 
       <SandboxDemo mods={{ theme: 'standard' }}>
@@ -36,7 +36,7 @@ export default () => {
             theme: 'sandbox',
           }}
           onClick={toggleDialog}
-          text="Показать диалог"
+          text="Show dialog"
         />
         <Dialog
           mods={{
@@ -51,7 +51,7 @@ export default () => {
             mods={{
               theme: 'standard',
             }}
-            title="Уведомление"
+            title="Notification"
             closeButton={{
               mods: {
                 onlyIcon: true,
@@ -59,14 +59,14 @@ export default () => {
             }}
           >
             <p>
-              Никому не говорите, что вы видели это сообщение.
+              This message contains confidential information and is intended only for the individual named.
             </p>
           </DialogWindow>
         </Dialog>
       </SandboxDemo>
 
       <SandboxParagraph>
-        Окно диалога
+        Dialog window
       </SandboxParagraph>
 
       <SandboxDemo mods={{ theme: 'standard' }}>
@@ -74,7 +74,7 @@ export default () => {
           mods={{
             theme: 'standard',
           }}
-          title="Уведомление"
+          title="Attention"
           closeButton={{
             mods: {
               onlyIcon: true,
@@ -82,7 +82,7 @@ export default () => {
           }}
         >
           <p>
-            Никому не говорите, что вы видели это сообщение.
+            This message contains confidential information and is intended only for the individual named.
           </p>
         </DialogWindow>
       </SandboxDemo>

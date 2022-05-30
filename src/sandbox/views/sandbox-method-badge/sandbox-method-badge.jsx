@@ -17,11 +17,11 @@ export default class SandboxMethodBadge extends React.Component {
 
     return (
       <div>
-        <h2>Бейдж http-метода</h2>
+        <h2>HTTP method badge</h2>
 
         <SandboxSection id="method-bage">
           <SandboxParagraph>
-            <InlineCode>mods={'{{ type: method }}'}</InlineCode>, где method - один из методов из таблицы ниже.
+            <InlineCode>mods={'{{ type: method }}'}</InlineCode>, where method is one of methods from the table below.
           </SandboxParagraph>
 
           <SandboxDemo>
@@ -32,8 +32,9 @@ export default class SandboxMethodBadge extends React.Component {
           </SandboxDemo>
 
           <SandboxParagraph>
-            Для не-REST взаимодействия, например, в сокетах, можно использовать бейдж с
-            модификатором <InlineCode>mods={'{{ type: message }}'}</InlineCode>
+            For non-REST interaction (e.g. sockets) one can use badge with modifier
+            {' '}
+            <InlineCode>mods={'{{ type: message }}'}</InlineCode>
           </SandboxParagraph>
 
           <SandboxDemo>

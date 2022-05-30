@@ -27,7 +27,7 @@ export default class SandboxLayout extends React.Component {
                 mods={{ for: 'main-content' }}
                 mix="page__title"
               >
-                Навигация по песочнице
+                Sandbox navigation
               </PageTitle>
 
               <SandboxNavigation mix="page__navigation"/>

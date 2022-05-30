@@ -11,11 +11,11 @@ export default () => {
 
   return (
     <div>
-      <h2>Чекбокс</h2>
+      <h2>Checkbox</h2>
 
-      <SandboxSection title="Стандартный чекбокс" id="standard-checkbox">
+      <SandboxSection title="Default checkbox" id="standard-checkbox">
         <SandboxParagraph>
-          У чекбокса стандартная тема по-умолчанию:
+          Checkbox has standard default theme
         </SandboxParagraph>
 
         <SandboxDemo mods={{ hasThemeToggler: true }}>
@@ -23,12 +23,12 @@ export default () => {
             mods={{ checked: checked.usual }}
             onChange={(state) => onChange((prevState) => ({ ...prevState, usual: state }))}
           >
-            Чекбокс
+            Checkbox
           </CheckboxField>
         </SandboxDemo>
 
         <SandboxParagraph id="standard-checkbox-hidden-label">
-          Стандартный чекбокс со скрытым лейблом:
+          Standard checkbox with hidden label:
           {' '}
           <InlineCode>
             mods={'{{ hiddenLabel: true }}'}
@@ -43,27 +43,27 @@ export default () => {
             }}
             onChange={(state) => onChange((prevState) => ({ ...prevState, hiddenLabel: state }))}
           >
-            Чекбокс
+            Checkbox
           </CheckboxField>
         </SandboxDemo>
 
         <SandboxParagraph id="standard-checkbox-states">
-          Все состояния чекбокса в статике:
+          All checkbox states:
         </SandboxParagraph>
 
         <SandboxParagraph>
-          Пустой:
+          Unchecked:
         </SandboxParagraph>
         <SandboxDemo mods={{ hasThemeToggler: true }}>
           <CheckboxField
             onChange={() => {}}
           >
-            Вариант 1
+            Option 1
           </CheckboxField>
         </SandboxDemo>
 
         <SandboxParagraph>
-          Отмеченный:
+          Checked:
         </SandboxParagraph>
         <SandboxDemo mods={{ hasThemeToggler: true }}>
 
@@ -73,12 +73,12 @@ export default () => {
             }}
             onChange={() => {}}
           >
-            Вариант 2
+            Option 2
           </CheckboxField>
         </SandboxDemo>
         <SandboxParagraph>
 
-          Пустой, отключенный:
+          Unchecked, disabled:
         </SandboxParagraph>
         <SandboxDemo mods={{ hasThemeToggler: true }}>
           <CheckboxField
@@ -87,12 +87,12 @@ export default () => {
             }}
             onChange={() => {}}
           >
-            Вариант 1
+            Option 1
           </CheckboxField>
         </SandboxDemo>
 
         <SandboxParagraph>
-          Отмеченный, отключенный:
+          Checked, disabled:
         </SandboxParagraph>
 
         <SandboxDemo mods={{ hasThemeToggler: true }}>
@@ -103,12 +103,12 @@ export default () => {
             }}
             onChange={() => {}}
           >
-            Вариант 1
+            Option 1
           </CheckboxField>
         </SandboxDemo>
 
         <SandboxParagraph id="standard-checkbox-multiline">
-          Чекбокс с длинной подписью в несколько строк:
+          Checkbox with large multiline label:
         </SandboxParagraph>
 
         <SandboxDemo mods={{ hasThemeToggler: true }}>
@@ -118,23 +118,22 @@ export default () => {
             }}
             onChange={() => {}}
           >
-            Цитата как бы придвигает к нам прошлое, при этом волокно представляет собой жидкофазный подтекст.
-            Различное расположение мгновенно. Индуцированное соответствие разъедает жидкий катализатор,
-            таким образом за синтез 3,4-метилендиоксиметамфетамина ожидает уголовное наказание.
-            Бордосская жидкость, в отличие от классического случая, иллюстрирует мифологический бензол,
-            и это придает ему свое звучание, свой характер.
+            I guess we could discuss the implications of the phrase meant to be. That is if we wanted to drown ourselves
+            in a sea of backwardly referential semantics and other mumbo-jumbo. Maybe such a discussion would result in
+            the determination that meant to be is exactly as meaningless a phrase as it seems to be, and that none of
+            us is actually meant to be doing anything at all.
           </CheckboxField>
         </SandboxDemo>
       </SandboxSection>
 
-      <SandboxSection title="Переключатель" id="toggler-checkbox">
+      <SandboxSection title="Toggler" id="toggler-checkbox">
         <SandboxParagraph>
-          Чекбокс-переключатель:
+          Toggling checkbox:
           {' '}
           <InlineCode>
             mods={'{{ theme: toggler }}'}
           </InlineCode>
-          . Для удобства вынесен в отдельный компонент
+          . For convenience purposes shared as a separate component
           {' '}
           <InlineCode>Toggler</InlineCode>
           .
@@ -147,27 +146,27 @@ export default () => {
             }}
             onChange={(state) => onChange((prevState) => ({ ...prevState, toggler: state }))}
           >
-            Чекбокс
+            Checkbox
           </Toggler>
         </SandboxDemo>
 
         <SandboxParagraph id="toggler-checkbox-states">
-          Все состояния переключателя в статике:
+          All toggler states:
         </SandboxParagraph>
 
         <SandboxParagraph>
-          Пустой:
+          Unchecked:
         </SandboxParagraph>
         <SandboxDemo mods={{ hasThemeToggler: true }}>
           <Toggler
             onChange={() => {}}
           >
-            Вариант 1
+            Option 1
           </Toggler>
         </SandboxDemo>
 
         <SandboxParagraph>
-          Отмеченный:
+          Checked:
         </SandboxParagraph>
         <SandboxDemo mods={{ hasThemeToggler: true }}>
           <Toggler
@@ -176,12 +175,12 @@ export default () => {
             }}
             onChange={() => {}}
           >
-            Вариант 2
+            Option 2
           </Toggler>
         </SandboxDemo>
 
         <SandboxParagraph>
-          Пустой, отключенный:
+          Unchecked, disabled:
         </SandboxParagraph>
         <SandboxDemo mods={{ hasThemeToggler: true }}>
           <Toggler
@@ -190,12 +189,12 @@ export default () => {
             }}
             onChange={() => {}}
           >
-            Вариант 1
+            Option 1
           </Toggler>
         </SandboxDemo>
 
         <SandboxParagraph>
-          Отмеченный, отключенный:
+          Checked, disabled:
         </SandboxParagraph>
         <SandboxDemo mods={{ hasThemeToggler: true }}>
           <Toggler
@@ -205,7 +204,7 @@ export default () => {
             }}
             onChange={() => {}}
           >
-            Вариант 1
+            Option 1
           </Toggler>
         </SandboxDemo>
       </SandboxSection>

@@ -32,74 +32,74 @@ export default class SandboxContentSection extends React.Component {
   render() {
     return (
       <div>
-        <h2>Типографика</h2>
+        <h2>Typography</h2>
 
-        <SandboxSection id="raw-content" title="Контентная область">
+        <SandboxSection id="raw-content" title="Content area">
           <SandboxParagraph>
-            Стили контентной области — стили на простую html-разметку, локализованные внутри контейнера контентной
-            области, чтобы избежать конфликтов со стилями интерфейса.
+            Styles of content area are styles for raw HTML markup localized inside of raw content container
+            to prevent conflicts with interface styles.
           </SandboxParagraph>
 
           <SandboxDemo mods={{ for: 'typography' }}>
             <RawContent>
-              <h1>Пример заголовка уровня 1 / API Title</h1>
+              <h1>Example of h1 heading / API Title</h1>
 
-              <h2>Заголовок h2 / Subtitle</h2>
+              <h2>Title h2 / Subtitle</h2>
 
-              <h3>Заголовок h3 / Heading level 3</h3>
+              <h3>Title h3 / Heading level 3</h3>
 
-              <p>Простой параграф с текстом.</p>
-              <p>Еще один параграф.</p>
+              <p>Simple paragraph.</p>
+              <p>Another paragraph.</p>
 
-              <p><a href="#nowhere">Ссылка</a></p>
+              <p><a href="#nowhere">Link</a></p>
 
-              <p><em>Наклонный шрифт текста</em></p>
+              <p><em>Cursive font</em></p>
 
-              <p><strong>Жирный шрифт текста</strong></p>
+              <p><strong>Bold font</strong></p>
 
               <ul>
-                <li>Элементы</li>
-                <li>неупорядоченного</li>
-                <li>списка</li>
+                <li>Elements</li>
+                <li>of unordered</li>
+                <li>list</li>
               </ul>
 
               <ol>
-                <li>Элементы</li>
-                <li>упорядоченного</li>
-                <li>списка</li>
+                <li>Elements</li>
+                <li>of ordered</li>
+                <li>list</li>
               </ol>
 
               <blockquote>
-                <p>Здесь могла быть ваша цитата</p>
+                <p>Place your quote here</p>
               </blockquote>
 
-              <p>Инлайн-код: <code>_session_id: 5262d64b892e8d4341000001</code></p>
+              <p>Inline code: <code>_session_id: 5262d64b892e8d4341000001</code></p>
 
-              <p>Блок кода:</p>
+              <p>Code block:</p>
               <pre>
                 <code>Foo bar baz</code>
               </pre>
 
-              <p>Простая таблица:</p>
+              <p>Simple table:</p>
               <table>
                 <thead>
                   <tr>
-                    <th>Заголовок 1</th>
-                    <th>Заголовок 2</th>
+                    <th>Header 1</th>
+                    <th>Header 2</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Значение 1</td>
-                    <td>Значение 2</td>
+                    <td>Data 1</td>
+                    <td>Data 2</td>
                   </tr>
                   <tr>
-                    <td>Значение 3</td>
-                    <td>Значение 4</td>
+                    <td>Data 3</td>
+                    <td>Data 4</td>
                   </tr>
                   <tr>
-                    <td>Значение 5</td>
-                    <td>Значение 6</td>
+                    <td>Data 5</td>
+                    <td>Data 6</td>
                   </tr>
                 </tbody>
               </table>
@@ -108,9 +108,9 @@ export default class SandboxContentSection extends React.Component {
           </SandboxDemo>
         </SandboxSection>
 
-        <h1>Контент</h1>
+        <h1>Content</h1>
 
-        <SandboxSection id="resource-group-section" title="Блок Resource group">
+        <SandboxSection id="resource-group-section" title="Resource group block">
           <SandboxDemo>
             <ResourceGroupSection
               location={{ pathname: '/group-zony' }}
@@ -119,12 +119,12 @@ export default class SandboxContentSection extends React.Component {
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="main-content" title="Блок основного контента страницы">
+        <SandboxSection id="main-content" title="Main content block">
           <SandboxDemo>
             <Page>
               <MainContent
                 title="API Blueprint"
-                description={<p>Документация API проекта «Новый проект»</p>}
+                description={<p>API documentation for project &quot;New project&quot;</p>}
               >
                 <ResourceGroupSection
                   location={{ pathname: '/group-zony' }}
@@ -135,7 +135,7 @@ export default class SandboxContentSection extends React.Component {
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="resource" title="Блок Resource">
+        <SandboxSection id="resource" title="Resource block">
           <SandboxDemo>
             <Resource
               location={{ pathname: '/group-zony' }}
@@ -145,13 +145,13 @@ export default class SandboxContentSection extends React.Component {
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="parameters" title="Блок параметров">
+        <SandboxSection id="parameters" title="Parameters block">
           <SandboxDemo>
             <Parameters params={hrefVariables}/>
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="action" title="Блок Action">
+        <SandboxSection id="action" title="Action block">
           <SandboxDemo mods={{ for: 'action-toggle' }}>
             {httpMethods.map(method => (
               <Button
@@ -174,7 +174,7 @@ export default class SandboxContentSection extends React.Component {
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="message" title="Блок Message">
+        <SandboxSection id="message" title="Message block">
           <SandboxDemo>
             <MessageCard
               location={{ pathname: '/group-zony' }}
@@ -184,7 +184,7 @@ export default class SandboxContentSection extends React.Component {
           </SandboxDemo>
         </SandboxSection>
 
-        <SandboxSection id="note-warning-sections" title="Секции Note и Warning">
+        <SandboxSection id="note-warning-sections" title="Note and Warning sections">
           <SandboxDemo>
             <Resource
               location={{ pathname: '/group-zony' }}

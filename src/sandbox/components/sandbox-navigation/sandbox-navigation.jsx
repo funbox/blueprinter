@@ -11,7 +11,7 @@ export default class SandboxNavigation extends React.Component {
             mix="sandbox-navigation__service-link"
             to="/"
           >
-            Перейти в сервис
+            Back to project
           </Link>
 
           <ul className="sandbox-navigation__list">

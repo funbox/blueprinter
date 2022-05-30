@@ -4,15 +4,15 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "имя отправителя отзыва"
+      "description": "feedback sender name"
     },
     "email": {
       "type": "string",
-      "description": "email отправителя отзыва"
+      "description": "feedback sender email"
     },
     "msisdn": {
       "type": "number",
-      "description": "телефон отправителя отзыва"
+      "description": "feedback sender phone"
     },
     "kind": {
       "type": "string",
@@ -22,7 +22,7 @@
         "improvement",
         "partner"
       ],
-      "description": "тип запроса"
+      "description": "feedback type"
     },
     "message": {
       "type": "string"

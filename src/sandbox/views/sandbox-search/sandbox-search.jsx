@@ -8,22 +8,22 @@ import SearchField from 'app/components/search-field';
 const items = [
   {
     value: 'group-apply',
-    label: 'Групповое применение',
+    label: 'Group apply',
     type: 'group',
   },
   {
     value: 'group',
-    label: 'Группа',
+    label: 'Group',
     type: 'group',
   },
   {
     value: 'change-group',
-    label: 'Изменить группу сотрудников',
+    label: 'Change employees group',
     type: 'resource',
   },
   {
     value: 'get-group-employees',
-    label: 'Получить сотрудников группы',
+    label: 'Get employees group',
     type: 'action',
     method: 'get',
   },
@@ -38,10 +38,10 @@ export default class SandboxRequestResponseBlock extends React.Component {
   render() {
     return (
       <div>
-        <h2>Поиск</h2>
+        <h2>Search</h2>
 
         <SandboxSection id="search-field">
-          <SandboxParagraph>Есть более 10 результатов</SandboxParagraph>
+          <SandboxParagraph>More than 10 results in list</SandboxParagraph>
 
           <SandboxDemo mods={{ theme: 'standard', for: 'search-field' }}>
             <SearchField
@@ -51,7 +51,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
             />
           </SandboxDemo>
 
-          <SandboxParagraph>Есть менее 10 результатов</SandboxParagraph>
+          <SandboxParagraph>Less than 10 results in list</SandboxParagraph>
 
           <SandboxDemo mods={{ theme: 'standard', for: 'search-field' }}>
             <SearchField
@@ -61,7 +61,7 @@ export default class SandboxRequestResponseBlock extends React.Component {
             />
           </SandboxDemo>
 
-          <SandboxParagraph>Нет результатов</SandboxParagraph>
+          <SandboxParagraph>No results</SandboxParagraph>
 
           <SandboxDemo mods={{ theme: 'standard', for: 'search-field' }}>
             <SearchField

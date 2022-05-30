@@ -8,7 +8,7 @@ export default class SandboxSideMenu extends React.Component {
   render() {
     return (
       <div>
-        <h2>Боковое меню</h2>
+        <h2>Side menu</h2>
 
         <SandboxSection id="side-menu">
           <SandboxDemo mods={{ for: 'side-menu' }}>
