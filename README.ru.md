@@ -239,4 +239,8 @@ npm run build
 описанной с помощью API Blueprint, проще воспринимается человеком. Во-вторых, на
 момент исследования в Swagger не хватало ряда важных возможностей, например `One Of`.
 
+## Благодарности
+
+Клёвый логотип для проекта нарисовал [Игорь Гарибальди](https://pandabanda.com/).
+
 [![Sponsored by FunBox](https://funbox.ru/badges/sponsored_by_funbox_centered.svg)](https://funbox.ru)

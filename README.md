@@ -220,4 +220,8 @@ Historically, the battle was between [API Blueprint](https://apiblueprint.org/) 
 We chose API Blueprint for two reasons. Firstly, the source code of documentation that is described using API Blueprint is more readable to humans.
 Secondly, at the time of research conducted, Swagger lacked several important features, as `One Of` support.
 
+## Credits
+
+Awesome logo for the project was made by [Igor Garybaldi](https://pandabanda.com/).
+
 [![Sponsored by FunBox](https://funbox.ru/badges/sponsored_by_funbox_centered.svg)](https://funbox.ru)
