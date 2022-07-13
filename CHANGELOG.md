@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.0.0 (14.07.2022)
+
+Published the package on Github and added LICENSE file.
+
+
 ## 4.17.0 (13.04.2022)
 
 * Improve parsing of actions.
