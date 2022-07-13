@@ -1,5 +1,10 @@
 # Migration
 
+## 4.17.1 → 5.0.0
+
+Nothing changed. We just moved the package to the new scope — `@funboxteam`.
+
+
 ## 3.53.0 → 4.0.0
 
 Complete refactoring of imports. If some data structure to be used in a file, you now need to import it explicitly in that file.
