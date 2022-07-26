@@ -1,6 +1,8 @@
 import Code from 'app/components/code';
 import CheckboxField from 'app/components/checkbox-field';
+import RawContent from 'app/components/raw-content';
 import { get } from 'app/common/utils/helpers/getters';
+import { htmlFromText, maybeMarkdown } from 'app/common/utils/helpers';
 import { optionMetaShape, isOptionSelected } from 'app/common/utils/helpers/body-generation';
 
 const Attribute__Row = (props) => {
@@ -74,9 +76,9 @@ const Attribute__Row = (props) => {
           )
         }
         {attributeDescription && (
-          <p className="attribute__description">
-            {attributeDescription}
-          </p>
+          <RawContent mix={b('attribute__description')}>
+            {maybeMarkdown(attributeDescription) ? htmlFromText(attributeDescription) : attributeDescription}
+          </RawContent>
         )}
         {attributeExample !== null && !enumMember && (
           <p className="attribute__example">
