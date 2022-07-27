@@ -7,6 +7,7 @@ const markdownParser = new Parser();
 const htmlRenderer = new HtmlRenderer({ softbreak: '<br />' }); // render soft breaks as hard breaks
 
 const customFenceRegex = /:{3}\s?(note|warning)/;
+const plainTextRegex = /^[A-Za-zа-яА-ЯёЁ\s\d.,]+$/;
 
 const htmlFromText = (text, wrap = 'no-wrap', Tag = 'div') => {
   let parsedMarkdown;
@@ -124,6 +125,8 @@ const withHeaderAnchors = (description, pathname) => {
   return React.cloneElement(html, {}, modifiedChildren);
 };
 
+const maybeMarkdown = (text) => !plainTextRegex.test(text);
+
 function parseTextWithCustomBlocks(text) {
   const splitChar = '\n';
   const lines = text.split(splitChar);
@@ -217,4 +220,5 @@ export {
   getAttributeChildren,
   htmlFromText,
   withHeaderAnchors,
+  maybeMarkdown,
 };
