@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.1.0 (27.07.2022)
+
+Added an ability to use Markdown in attributes descriptions.
+
+
 ## 5.0.1 (14.07.2022)
 
 Switched to react-highlight@0.12.0 instead of 0.14.0, because [0.14.0 is buggy](https://github.com/akiran/react-highlight/issues/80).
