@@ -23,15 +23,37 @@ const propTypes = {
 
 class SideNestedMenu__Item extends React.Component {
   shouldComponentUpdate(nextProps) {
-    const { route, location, visible } = this.props;
-    const { visible: nVisible, location: nLocation } = nextProps;
+    const { route, location, visible, nestedRoutePresets } = this.props;
+    const { visible: nVisible, location: nLocation, nestedRoutePresets: nNestedRoutePresets } = nextProps;
 
     const prevMatch = matchRoute(route, location.pathname);
     const nextMatch = matchRoute(route, nLocation.pathname);
+
     const visibilityChange = visible !== nVisible;
     const locationChange = location.pathname !== nLocation.pathname;
     const selectedChange = ((prevMatch || nextMatch) && locationChange);
-    return selectedChange || visibilityChange;
+
+    return selectedChange || visibilityChange || nestedRoutePresets.includes(location.pathname) !== nNestedRoutePresets.includes(nLocation.pathname);
+  }
+
+  calculateSelectedMenuItem() {
+    const {
+      mods: { hasSubmenu },
+      route,
+      location: { pathname },
+      nestedRoutePresets,
+    } = this.props;
+
+    switch (true) {
+      case !!nestedRoutePresets.length && !pathname.includes(`${route}/`):
+        return matchRoute(route, pathname, true) || nestedRoutePresets.includes(pathname);
+
+      case !hasSubmenu:
+        return matchRoute(route, pathname, true);
+
+      default:
+        return matchRoute(route, pathname);
+    }
   }
 
   render() {
@@ -48,7 +70,8 @@ class SideNestedMenu__Item extends React.Component {
       nestedRoutePresets,
     } = this.props;
 
-    const selected = matchRoute(route, location.pathname) || nestedRoutePresets.includes(location.pathname);
+    const selected = this.calculateSelectedMenuItem();
+
     const current = matchRoute(route, location.pathname, true);
     const localMods = {
       ...mods,
