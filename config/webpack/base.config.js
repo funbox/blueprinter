@@ -51,11 +51,10 @@ module.exports = {
               {
                 loader: '@svgr/webpack',
                 options: {
-                  svgo: true,
                   svgoConfig: {
-                    full: true,
                     plugins: [{
-                      prefixIds: {
+                      name: 'prefixIds',
+                      params: {
                         prefixIds: true,
                         prefixClassNames: false,
                       },
