@@ -1,4 +1,11 @@
-import Highlight from 'react-highlight/lib/optimized';
+import Lowlight from 'react-lowlight';
+import json from 'highlight.js/lib/languages/json';
+import http from 'highlight.js/lib/languages/http';
+import plaintext from 'highlight.js/lib/languages/plaintext';
+
+Lowlight.registerLanguage('http', http);
+Lowlight.registerLanguage('json', json);
+Lowlight.registerLanguage('plaintext', plaintext);
 
 const observerAvailable = 'IntersectionObserver' in window;
 
@@ -40,17 +47,18 @@ class CodeSnippet extends React.Component {
 
   render() {
     const { useHighlight } = this.state;
-    const disabledSyntax = this.props.mods && this.props.mods.disabledSyntax;
+    const { disabledSyntax } = this.props.mods;
     const preferredSyntax = this.props.syntax;
-    const languages = disabledSyntax ? [] : ['json', 'http'];
 
     return (
       <div className={b('code-snippet', this.props)} ref={this.el}>
         {
           useHighlight ? (
-            <Highlight languages={languages} className={disabledSyntax ? 'plaintext' : preferredSyntax}>
-              {this.props.children}
-            </Highlight>
+            <Lowlight
+              className="code-snippet__raw"
+              language={disabledSyntax ? 'plaintext' : preferredSyntax}
+              value={this.props.children}
+            />
           ) : (
             <pre className="code-snippet__raw">
               {this.props.children}
@@ -64,6 +72,7 @@ class CodeSnippet extends React.Component {
 
 CodeSnippet.defaultProps = {
   syntax: 'json',
+  mods: {},
 };
 
 CodeSnippet.propTypes = {
