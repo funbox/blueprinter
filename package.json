@@ -52,7 +52,7 @@
     "@funboxteam/scss-utils": "2.0.0",
     "@funboxteam/scss-vars-loader": "2.2.0",
     "@hot-loader/react-dom": "16.11.0",
-    "@svgr/webpack": "5.5.0",
+    "@svgr/webpack": "6.3.1",
     "@types/react": "16.9.20",
     "autoprefixer": "9.7.4",
     "babel-loader": "8.0.6",
