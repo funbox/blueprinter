@@ -1,5 +1,3 @@
-// stylelint-disable selector-max-type
-
 .code-snippet {
   padding: 12px 20px;
   font-family: $baseFontStack_code;
@@ -13,9 +11,5 @@
     line-height: 16px;
     border: 1px solid var(--stroke-color--primary);
     background: none;
-  }
-
-  pre {
-    margin: 0;
   }
 }

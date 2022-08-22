@@ -1,6 +1,6 @@
 {
   "name": "@funboxteam/blueprinter",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "Replacement of Aglio library for rendering generated AST as HTML page.",
   "repository": {
     "type": "git",
@@ -67,6 +67,7 @@
     "eslint": "7.32.0",
     "fast-equals": "2.0.4",
     "file-loader": "5.0.2",
+    "highlight.js": "11.6.0",
     "html-react-parser": "0.10.1",
     "html-webpack-inline-source-plugin": "1.0.0-beta.2",
     "html-webpack-plugin": "5.4.0",
@@ -81,7 +82,7 @@
     "react": "16.12.0",
     "react-aria-modal": "4.0.1",
     "react-dom": "16.12.0",
-    "react-highlight": "0.12.0",
+    "react-lowlight": "3.0.0",
     "react-router-dom": "5.1.2",
     "react-slide-toggle": "0.3.3",
     "react-window": "1.8.5",

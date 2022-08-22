@@ -111,7 +111,7 @@ class Transition__Body extends React.PureComponent {
 
     const body = (selectedOptions.length > 0 && bodyTemplate) ? generateBody(attributes, bodyTemplate, selectedOptions) : defaultBody;
     const formattedBody = body && (isString(body) ? body.trim() : JSON.stringify(body, null, 2));
-    const isJsonBody = body && body[0] === '{';
+    const isJsonBody = formattedBody && ['{', '['].includes(formattedBody[0]);
 
     return (
       <>
