@@ -1,5 +1,14 @@
 # Changelog
 
+## 5.1.1 (22.08.2022)
+
+Updated @svgr/webpack to fix potential vulnerability.
+
+Also, replace react-highlight with react-lowlight to fix another one potential vulnerability.
+
+Potentially the overall potential of the package is less potentially vulnerable than ever before.
+
+
 ## 5.1.0 (27.07.2022)
 
 Added an ability to use Markdown in attributes descriptions.
