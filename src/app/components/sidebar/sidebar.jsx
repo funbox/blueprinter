@@ -40,9 +40,12 @@ class Sidebar extends React.Component {
     this.resizable = React.createRef();
 
     this.state = {
+      resizableEnabled: true,
       isClosed: false,
       maxWidth: undefined,
     };
+
+    this.printMode = window.matchMedia('print');
 
     this.toggleSidebarStage = this.toggleSidebarStage.bind(this);
     this.onToggleKeyDown = this.onToggleKeyDown.bind(this);
@@ -50,17 +53,21 @@ class Sidebar extends React.Component {
     this.onResize = this.onResize.bind(this);
     this.onResizeStop = this.onResizeStop.bind(this);
     this.setMaxSidebarSize = this.setMaxSidebarSize.bind(this);
+    this.toggleResizable = this.toggleResizable.bind(this);
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.onToggleKeyDown);
     window.addEventListener('resize', this.setMaxSidebarSize);
+    this.printMode.addListener(this.toggleResizable);
+    this.toggleResizable();
     this.setMaxSidebarSize();
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onToggleKeyDown);
     window.removeEventListener('resize', this.setMaxSidebarSize);
+    this.printMode.removeListener(this.toggleResizable);
   }
 
   updateSize() {
@@ -121,6 +128,13 @@ class Sidebar extends React.Component {
     }
   }
 
+  toggleResizable() {
+    const printModeEnabled = this.printMode.matches;
+    this.setState({
+      resizableEnabled: !printModeEnabled,
+    });
+  }
+
   render() {
     const {
       direction,
@@ -128,7 +142,7 @@ class Sidebar extends React.Component {
       initialSize,
     } = this.props;
 
-    const { isClosed, maxWidth } = this.state;
+    const { isClosed, maxWidth, resizableEnabled } = this.state;
 
     return (
       <div
@@ -147,17 +161,19 @@ class Sidebar extends React.Component {
           text={TOGGLE_HOTKEY.TEXT}
           onClick={this.toggleSidebarStage}
         />
-        <Resizable
-          ref={this.resizable}
-          mix={b('sidebar__resizable')}
-          direction={direction}
-          initialSize={{ ...initialSize }}
-          maxSize={{ width: maxWidth }}
-          onResize={this.onResize}
-          onResizeStop={this.onResizeStop}
-        >
-          {children}
-        </Resizable>
+        { resizableEnabled ? (
+          <Resizable
+            ref={this.resizable}
+            mix={b('sidebar__resizable')}
+            direction={direction}
+            initialSize={{ ...initialSize }}
+            maxSize={{ width: maxWidth }}
+            onResize={this.onResize}
+            onResizeStop={this.onResizeStop}
+          >
+            {children}
+          </Resizable>
+        ) : children}
       </div>
     );
   }
