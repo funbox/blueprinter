@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.2.0 (24.08.2022)
+
+Improved styles used when user prints the documentation.
+
+
 ## 5.1.1 (22.08.2022)
 
 Updated @svgr/webpack to fix potential vulnerability.

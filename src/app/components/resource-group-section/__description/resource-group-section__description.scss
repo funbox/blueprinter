@@ -1,3 +1,5 @@
 .resource-group-section__description {
-  margin: 16px 0;
+  &:not(:empty) {
+    margin: 16px 0;
+  }
 }

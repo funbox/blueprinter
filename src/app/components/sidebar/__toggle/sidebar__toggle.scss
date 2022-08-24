@@ -15,4 +15,8 @@
   &:focus {
     color: var(--stroke-color--icon-hover);
   }
+
+  @media print {
+    display: none;
+  }
 }

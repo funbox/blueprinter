@@ -95,6 +95,10 @@ const withHeaderAnchors = (description, pathname) => {
   const headers = getDescriptionHeadersWithHash(description);
   const html = htmlFromText(description);
 
+  if (isEmptyHtml(html)) {
+    return null;
+  }
+
   if (headers.length === 0) {
     return html;
   }
@@ -213,6 +217,16 @@ function getAttributeExample(valueElement) {
 
 function isPrimitive(value) {
   return ['string', 'number', 'boolean'].includes(typeof value);
+}
+
+function isEmptyHtml(reactElement) {
+  if (typeof reactElement.props.children === 'string') {
+    return !reactElement.props.children.trim();
+  }
+
+  return React.Children.toArray(reactElement.props.children).every(child => (
+    typeof child === 'string' && !child.trim()
+  ));
 }
 
 export {
