@@ -1,3 +1,5 @@
 .action-card__description {
-  margin-bottom: 18px;
+  &:not(:empty) {
+    margin-bottom: 18px;
+  }
 }
