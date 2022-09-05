@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.2.1 (05.09.2022)
+
+Fixed simultaneous highlighting of menu items of the same level.
+
+
 ## 5.2.0 (24.08.2022)
 
 Improved styles used when user prints the documentation.
