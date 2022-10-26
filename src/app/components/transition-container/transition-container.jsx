@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import Transition from 'app/components/transition';
 
 import ViewContext from 'app/components/app/view-context';
@@ -19,7 +20,7 @@ const TransitionContainer = (props) => {
                 mods={{
                   view: value,
                 }}
-                title="Requests"
+                title={t`Requests`}
                 contentType="request"
                 availableTransactions={requests}
                 {...transitionProps}
@@ -37,7 +38,7 @@ const TransitionContainer = (props) => {
                 mods={{
                   view: value,
                 }}
-                title="Responses"
+                title={t`Responses`}
                 contentType="response"
                 availableTransactions={responses}
                 {...transitionProps}

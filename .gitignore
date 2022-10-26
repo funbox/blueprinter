@@ -67,3 +67,7 @@ junit.xml
 
 # -- Static files --
 /static
+
+# -- Generated i18n catalog files
+
+/src/locales/**/*.js

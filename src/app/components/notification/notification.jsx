@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import Button from 'fb-base-blocks/button';
 
 import Notification__CloseButtonIcon from './__close-button-icon/notification__close-button-icon.svg?inline';
@@ -20,7 +21,7 @@ const Notification = (props) => (
     </div>
     <Button
       mix={b('notification__close-button')}
-      text="Close"
+      text={t`Close`}
       mods={{
         onlyIcon: true,
       }}

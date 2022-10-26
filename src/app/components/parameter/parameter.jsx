@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import RawContent from 'app/components/raw-content';
 import { htmlFromText } from 'app/common/utils/helpers';
 import { get } from 'app/common/utils/helpers/getters';
@@ -28,7 +29,7 @@ const URIParameter = (props) => {
       <div className={b('parameter__content')}>
         <div className={b('parameter__main-info')}>
           <Parameter__Prop
-            title="Name"
+            title={t`Name`}
             mods={{ for: 'name' }}
           >
             {name}

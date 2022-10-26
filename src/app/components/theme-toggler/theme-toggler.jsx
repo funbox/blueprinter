@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import Toggler from 'app/components/toggler';
 import { Theme, THEME_HOTKEY } from 'app/constants/ui-themes';
 import withTheme from 'app/common/HOCs/with-theme';
@@ -26,7 +27,7 @@ const ThemeToggler = (props) => {
         onChange={onDarkThemeToggle}
         title={THEME_HOTKEY.TEXT}
       >
-        Toggle dark theme
+        {t`Toggle dark theme`}
       </Toggler>
     </div>
   );

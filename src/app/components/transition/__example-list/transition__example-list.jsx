@@ -1,3 +1,5 @@
+import { t } from '@lingui/macro';
+
 const Transition__ExampleList = (props) => {
   const {
     options,
@@ -20,7 +22,7 @@ const Transition__ExampleList = (props) => {
           className={b('transition__example-label', { mods: { selected: option.selected } })}
           onClick={option.selected ? null : onClick}
         >
-          {option.content || `Example ${index + 1}`}
+          {option.content || t`Example ${index + 1}`}
         </li>
       ))}
     </ul>

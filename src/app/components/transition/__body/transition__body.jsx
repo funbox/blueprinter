@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import AttributesList from 'app/components/attributes-list';
 import CodeSnippet from 'app/components/code-snippet';
 import CollapsibleSection from 'app/components/collapsible-section';
@@ -112,6 +113,10 @@ class Transition__Body extends React.PureComponent {
     const body = (selectedOptions.length > 0 && bodyTemplate) ? generateBody(attributes, bodyTemplate, selectedOptions) : defaultBody;
     const formattedBody = body && (isString(body) ? body.trim() : JSON.stringify(body, null, 2));
     const isJsonBody = formattedBody && ['{', '['].includes(formattedBody[0]);
+    const emptyContentText = {
+      request: t`This request has no content`,
+      response: t`This response has no content`,
+    };
 
     return (
       <>
@@ -122,13 +127,13 @@ class Transition__Body extends React.PureComponent {
 
         {isEmpty && (
           <p className="transition__no-content-notice">
-            This {contentType} has no content
+            {emptyContentText[contentType]}
           </p>
         )}
 
         {!!description && (
           <Section
-            title="Description"
+            title={t`Description`}
             titleTag="h5"
             mods={{ hiddenTitle: true }}
             mix={b('transition__description')}
@@ -146,7 +151,7 @@ class Transition__Body extends React.PureComponent {
 
         {!!headers && headers.length > 0 && (
           <Section
-            title="Headers"
+            title={t`Headers`}
             titleTag="h5"
             mods={{ for: 'transition-content' }}
             mix={b('transition__section')}
@@ -177,7 +182,7 @@ class Transition__Body extends React.PureComponent {
 
         {!!formattedBody && (
           <Section
-            title="Body"
+            title={t`Body`}
             titleTag="h5"
             mods={{ for: 'transition-content' }}
             mix={b('transition__section')}
@@ -194,7 +199,7 @@ class Transition__Body extends React.PureComponent {
           <CollapsibleSection
             mix="transition__section"
             mods={{ print: 'hidden' }}
-            title="Schema"
+            title={t`Schema`}
           >
             <Section
               mods={{ for: 'transition-content' }}
@@ -225,7 +230,7 @@ function isString(s) {
 }
 
 function getAttributesTitle(structureType) {
-  const prefix = 'Attributes';
+  const prefix = t`Attributes`;
 
   if (!structureType) return prefix;
 

@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import PropTypes from 'prop-types';
 import Section from 'app/components/section';
 import URIParameter, { parameterProps } from 'app/components/parameter';
@@ -10,7 +11,7 @@ class Parameters extends React.Component {
 
     return (
       <Section
-        title="URI Parameters"
+        title={t`URI Parameters`}
         titleTag="h5"
         mods={{ for: 'uri-parameters' }}
         mix={mix}

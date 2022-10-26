@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import Page, {
   Page__Body,
   Page__Title,
@@ -25,7 +26,7 @@ const Error = (props) => (
       <Page__Main>
         <Page__Title>
           <PageTitle>
-            Errors and warnings
+            <Trans>Errors and warnings</Trans>
           </PageTitle>
         </Page__Title>
 

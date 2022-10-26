@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import Dialog from 'app/components/dialog';
 import DialogWindow from 'app/components/dialog-window';
 import ServiceInfo from 'app/components/service-info';
@@ -25,7 +26,7 @@ const ServiceInfoDialog = (props) => {
           theme: 'standard',
           hiddenTitle: true,
         }}
-        title="Useful information"
+        title={t`Useful information`}
         closeButton={{
           mods: {
             onlyIcon: true,

@@ -1,10 +1,11 @@
+import { t } from '@lingui/macro';
 import Link from 'app/components/link';
 
 const PrintMenu = ({ data }) => {
   if (!data) return null;
 
   return (
-    <nav className={b('print-menu')}>
+    <nav className={b('print-menu')} data-title={t`Content`}>
       {data.map((categoryElement, i) => (
         <div key={`category${i}`}>
           <Link

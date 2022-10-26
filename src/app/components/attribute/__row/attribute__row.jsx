@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import Code from 'app/components/code';
 import CheckboxField from 'app/components/checkbox-field';
 import RawContent from 'app/components/raw-content';
@@ -64,7 +65,7 @@ const Attribute__Row = (props) => {
           && !oneOfElement
           && !oneOfMember
           && (
-            <p className={b('attribute__type')} title={recursive ? 'Recursive structure' : undefined}>
+            <p className={b('attribute__type')} title={recursive ? t`Recursive structure` : undefined}>
               <Code mods={{ theme: 'standard', recursive }}>
                 {
                   recursive && attributeStructureName
@@ -97,7 +98,7 @@ const Attribute__Row = (props) => {
             onChange={(checked) => {
               onOptionSelect(optionMeta, checked);
             }}
-            title="Show Body example"
+            title={t`Show Body example`}
           >
             Body
           </CheckboxField>

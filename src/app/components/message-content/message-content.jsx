@@ -1,3 +1,4 @@
+import { Trans, t } from '@lingui/macro';
 import AttributesList from 'app/components/attributes-list';
 import CodeSnippet from 'app/components/code-snippet';
 import Section from 'app/components/section';
@@ -18,13 +19,13 @@ const MessageContent = (props) => {
     <div className={b('message-content', props)}>
       {isEmpty && (
         <p className="message-content__no-content-notice">
-          This message has no content
+          <Trans>This message has no content</Trans>
         </p>
       )}
 
       {!!attributes && attributes.length > 0 && (
         <Section
-          title="Attributes"
+          title={t`Attributes`}
           titleTag="h5"
           mods={{ for: 'transition-content' }}
           mix={b('message-content__section')}
@@ -35,7 +36,7 @@ const MessageContent = (props) => {
 
       {!!body && (
         <Section
-          title="Body"
+          title={t`Body`}
           titleTag="h5"
           mods={{ for: 'transition-content' }}
           mix={b('message-content__section')}
@@ -48,7 +49,7 @@ const MessageContent = (props) => {
 
       {!!schema && (
         <Section
-          title="Schema"
+          title={t`Schema`}
           titleTag="h5"
           mods={{ for: 'transition-content' }}
           mix={b('message-content__section')}

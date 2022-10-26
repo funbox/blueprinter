@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import Button from 'fb-base-blocks/button';
 
 const propTypes = {
@@ -8,7 +9,7 @@ const propTypes = {
 const InfoButton = ({ onClick, to }) => (
   <Button
     mix={b('info-button')}
-    title="Show help"
+    title={t`Show help`}
     mods={{ onlyIcon: true }}
     onClick={onClick}
     to={to}
