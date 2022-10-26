@@ -11,6 +11,7 @@ module.exports = {
   ],
   plugins: [
     require.resolve('react-hot-loader/babel'),
+    require.resolve('babel-plugin-macros'),
     require.resolve('@babel/plugin-proposal-object-rest-spread'),
     require.resolve('@babel/plugin-proposal-class-properties'),
   ],
