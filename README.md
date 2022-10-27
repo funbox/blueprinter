@@ -69,6 +69,7 @@ Add the next commands in `package.json`:
 - `-p, --port <port>` — sets live server port. Default value is `3000`.
 - `-c, --css <file>` — allows to specify path to a custom CSS file. Styles from this files will be attached to page.
 Any possible compatibility issues between relevant Blueprinter version and a custom CSS file remain on the conscience of the file developer.
+- `-l, --locale <locale>` — sets a locale to be used as UI language. Default value is `en`. Available locales are `en`, `ru`.
 
 ## Run in Docker
 
@@ -209,6 +210,18 @@ To build project locally run
 ```shell
 npm run build
 ```
+
+### i18n support
+
+This project supports multiple locales for UI texts (for now, English and Russian languages are provided).
+
+To mark text as translated, use `t` or `Trans` from [@lingui/macro](https://lingui.js.org/ref/macro.html#overview).
+To make translation appear in the actual interface, the next steps should be done:
+
+- run `npm run extract` to update JSON translations catalogs (see `src/locales/{locale}/messages`);
+- fill in missed translations for new texts;
+- run `npm run compile` to compile translation catalogs to JavaScript files;
+- commit all changes.
 
 ## Why API Blueprint
 
