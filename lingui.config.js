@@ -6,4 +6,5 @@ module.exports = {
   }],
   format: 'minimal',
   sourceLocale: 'en',
+  compileNamespace: 'window.i18n',
 };

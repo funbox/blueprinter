@@ -1,12 +1,10 @@
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
-import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 
 import ThemeProvider from 'app/common/providers/theme-provider';
 import App from 'app/components/app';
-import { messages as enMessages } from 'locales/en/messages';
-import { messages as ruMessages } from 'locales/ru/messages';
+import i18n from 'app/app.i18n';
 
 const sandbox = () => {
   if (ENV !== 'production') {
@@ -16,12 +14,6 @@ const sandbox = () => {
 
   return null;
 };
-
-i18n.load({
-  en: enMessages,
-  ru: ruMessages,
-});
-i18n.activate('ru');
 
 const component = () => (
   <HashRouter basename={BASE_PATH}>
