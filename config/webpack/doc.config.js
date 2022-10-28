@@ -20,7 +20,7 @@ const config = merge(
     output: {
       path: path.resolve(PATH.PROJECT, 'static'),
       publicPath: PATH.BASE,
-      filename: '[name].js',
+      filename: '[name].[contenthash].js',
       uniqueName: 'blueprinter',
     },
     plugins: [
