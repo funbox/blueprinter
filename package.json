@@ -30,9 +30,10 @@
     "lint": "npm run -s lint:scss && npm run -s lint:js && npm run -s lint:test",
     "prebuild": "npm run lint",
     "prepublishOnly": "if [ -z \"$CI\" ]; then lawyer; fi && npm run build-static",
-    "test": "npm run compile && jest --coverage",
+    "test": "npm run test-locales && jest --coverage",
+    "test-locales": "npm run extract && npm run compile -- --strict",
     "extract": "lingui extract",
-    "compile": "lingui compile --strict"
+    "compile": "lingui compile"
   },
   "dependencies": {
     "@funboxteam/crafter": "4.0.0",
