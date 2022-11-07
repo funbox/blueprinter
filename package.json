@@ -19,7 +19,7 @@
     "start": "npm run dev",
     "build": "npm run make-stub && BABEL_ENV=production webpack --config ./config/webpack/build.config.js --mode=development",
     "build-production": "BABEL_ENV=production webpack --config ./config/webpack/build.production.config.js --mode=production",
-    "build-static": "BABEL_ENV=production node ./bin/build-static.js",
+    "build-static": "NODE_ENV=production BABEL_ENV=production webpack --config ./config/webpack/doc.config.js --mode=production",
     "dev": "npm-run-all --parallel watch-stub start-dev",
     "start-dev": "webpack serve --progress --config ./config/webpack/dev.config.js --mode=development",
     "make-stub": "node ./scripts/generate-stub.js",
