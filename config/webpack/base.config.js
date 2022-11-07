@@ -112,6 +112,7 @@ module.exports = {
     ),
     new HtmlWebpackPlugin({
       template: path.resolve(PATH.PROJECT, 'src/index.ejs'),
+      environment: ENV,
       minify: {
         collapseWhitespace: true,
         removeComments: true,

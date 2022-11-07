@@ -2,8 +2,8 @@
 const { merge } = require('webpack-merge');
 const path = require('path');
 
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlInlineScriptPlugin = require('html-inline-script-webpack-plugin');
+const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 
 const { PATH } = require('./vars');
 
@@ -15,6 +15,7 @@ const config = merge(
     optimization: {
       emitOnErrors: false,
     },
+    bail: true,
     output: {
       path: path.resolve(PATH.PROJECT, 'static'),
       publicPath: PATH.BASE,
@@ -22,7 +23,10 @@ const config = merge(
       uniqueName: 'blueprinter',
     },
     plugins: [
-      new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),
+      new HtmlInlineScriptPlugin({
+        scriptMatchPattern: [/vendor.+\.js$/, /app.+\.js$/],
+      }),
+      new HTMLInlineCSSWebpackPlugin(),
     ],
   },
 );
@@ -30,12 +34,6 @@ const config = merge(
 config.module.rules.forEach(rule => {
   if (rule.test.toString().includes('woff')) {
     rule.use.loader = 'base64-inline-loader?name=[name].[ext]';
-  }
-});
-
-config.plugins.forEach(plugin => {
-  if (plugin.constructor.name === 'HtmlWebpackPlugin') {
-    plugin.userOptions.inlineSource = '.(js|css)$';
   }
 });
 
