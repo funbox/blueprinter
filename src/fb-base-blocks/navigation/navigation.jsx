@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import Dropdown from '../dropdown';
 
 const Navigation = (props) => {
@@ -6,7 +7,7 @@ const Navigation = (props) => {
     titleTag,
     children,
     mods = {},
-    dropdown = { mods: {}, handle: { content: 'Menu' } },
+    dropdown = { mods: {}, handle: { content: t`Menu` } },
   } = props;
 
   const TitleTag = titleTag || 'h2';

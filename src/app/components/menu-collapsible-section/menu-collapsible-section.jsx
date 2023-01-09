@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import SlideToggle from 'react-slide-toggle';
 import { withRouter } from 'react-router-dom';
 
@@ -108,7 +109,7 @@ class MenuCollapsibleSection extends React.Component {
                 mods={{
                   onlyIcon: true,
                 }}
-                text={collapsed ? 'Expand' : 'Collapse'}
+                text={collapsed ? t`Expand` : t`Collapse`}
                 onClick={onToggle}
               />
             </div>

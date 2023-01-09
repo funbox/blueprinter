@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import Link from '../link';
 import Button from '../button';
 
@@ -127,7 +128,7 @@ class Dropdown extends React.Component {
       children,
       mods = {},
       mix = [],
-      handle = { content: 'Menu' },
+      handle = { content: t`Menu` },
       popup = { mix: [] },
     } = this.props;
 

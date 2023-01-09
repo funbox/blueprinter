@@ -46,13 +46,15 @@ const createRefract = (inputFileName, strictMode, buildMode) => crafter.parseFil
     }
   });
 
-const sendStaticFile = async (outputFileName, refractData, customCssData) => {
+const sendStaticFile = async (outputFileName, refractData, customCssData, locale, localeData) => {
   const htmlData = await readFile(staticFileLocation, { encoding: 'utf-8' });
 
   const htmlWithRefract = htmlData
     // use a function as the second parameter of `replace` to not account particular chars as replace templates
     .replace('<script src="./refract.js"></script>', () => `<script>${refractData}</script>`)
-    .replace('<link href="./custom-style.css" rel="stylesheet">',`<style>${customCssData}</style>`);
+    .replace('<script src="./locale.js"></script>', () => `<script>${localeData}</script>`)
+    .replace('<link href="./custom-style.css" rel="stylesheet">', `<style>${customCssData}</style>`)
+    .replace(/lang="\w+"/, `lang="${locale}"`);
 
   try {
     await mkdir(path.dirname(outputFileName), { recursive: true });
@@ -82,11 +84,23 @@ const renderCustomCss = async (cssFileName) => {
   return customCss;
 };
 
-const renderAndBuild = async (inputFileName, cssFileName, outputFileName, strictMode = false) => {
+const renderLocale = async (locale) => {
+  const localeFileName = path.resolve(BASE_PATH, `static/locale.${locale}.js`);
+  try {
+    const localeData = await readFile(localeFileName, { encoding: 'utf-8' });
+    return localeData;
+  } catch (e) {
+    console.error(e);
+    return '';
+  }
+};
+
+const renderAndBuild = async (inputFileName, cssFileName, outputFileName, locale, strictMode = false) => {
   const [refractData] = await renderRefract(inputFileName, strictMode, true);
   const customCssData = cssFileName ? await renderCustomCss(cssFileName) : '';
+  const localeData = await renderLocale(locale);
 
-  await sendStaticFile(outputFileName, refractData, customCssData);
+  await sendStaticFile(outputFileName, refractData, customCssData, locale, localeData);
   console.log(`Rendering done. Open "${outputFileName}" to see result.`);
 };
 
@@ -95,5 +109,6 @@ module.exports = {
   basicRenderRefract,
   renderRefract,
   renderCustomCss,
+  renderLocale,
   renderAndBuild,
 };

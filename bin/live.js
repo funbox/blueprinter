@@ -4,15 +4,17 @@ const browserSync = require('browser-sync').create();
 
 let refract = '';
 let customCss = '';
+let localeData = '';
+let locale = 'en';
 
-const { BASE_PATH, renderRefract, renderCustomCss } = require('./main');
+const { BASE_PATH, renderRefract, renderCustomCss, renderLocale } = require('./main');
 
 const serverParams = {
   server: `${BASE_PATH}/static`,
   injectChanges: false,
 };
 
-const renderAndServe = async (inputFileName, cssFileName, port, host) => {
+const renderAndServe = async (inputFileName, cssFileName, port, host, userLocale) => {
   const watchSource = (filePaths) => {
     const watcher = browserSync.watch(filePaths);
 
@@ -51,6 +53,11 @@ const renderAndServe = async (inputFileName, cssFileName, port, host) => {
     filePaths.push(cssFileName);
   }
 
+  if (userLocale) {
+    localeData = await renderLocale(userLocale);
+    locale = userLocale;
+  }
+
   await startServer(port, host).then(() => watchSource([inputFileName, ...filePaths]));
 };
 
@@ -72,6 +79,19 @@ function startServer(port, host) {
         res.setHeader('Content-Type', 'text/css');
         res.end(customCss);
       },
+    },
+    {
+      route: '/locale.js',
+      handle: (req, res) => {
+        res.setHeader('Content-Type', 'text/javascript');
+        res.end(localeData);
+      },
+    },
+  ];
+  serverParams.rewriteRules = [
+    {
+      match: /lang="\w+"/,
+      replace: `lang="${locale}"`,
     },
   ];
 

@@ -1,4 +1,5 @@
 import Button from 'fb-base-blocks/button';
+import { t } from '@lingui/macro';
 
 export const propTypes = {
   children: PropTypes.node,
@@ -37,11 +38,11 @@ const DialogWindow = (props) => {
   } = props;
 
   if (!closeButton.title) {
-    closeButton.title = 'Close';
+    closeButton.title = t`Close`;
   }
 
   if (!closeButton.text) {
-    closeButton.text = 'Close';
+    closeButton.text = t`Close`;
   }
 
   return (

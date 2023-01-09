@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import RawContent from 'app/components/raw-content';
 import { htmlFromText } from 'app/common/utils/helpers';
 
@@ -14,7 +15,7 @@ const PageDescription = (props) => {
   return (
     <RawContent mix={[b('page__description'), mix]}>
       <h2>
-        General information
+        <Trans>General information</Trans>
       </h2>
 
       {htmlFromText(props.description)}

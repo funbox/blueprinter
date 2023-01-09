@@ -1,8 +1,9 @@
+import { t } from '@lingui/macro';
 import PageDescription from 'app/components/page-description';
 
 const ContentNotFound = () => (
   <PageDescription
-    description="Nothing to show."
+    description={t`Nothing to show.`}
   />
 );
 

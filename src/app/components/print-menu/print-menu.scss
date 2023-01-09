@@ -6,7 +6,7 @@
     display: block;
 
     &::before {
-      content: 'Content';
+      content: attr(data-title);
       display: block;
       margin: 0 30px 10px;
       font-size: 18px;

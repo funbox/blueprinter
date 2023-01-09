@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import Button from 'fb-base-blocks/button';
 import SearchFieldContainer from 'app/components/search-field-container';
 
@@ -12,7 +13,7 @@ const SearchStripe = (props) => (
 
     <Button
       text={{
-        content: 'To manual search page',
+        content: t`To manual search page`,
         mix: b('search-stripe__button-hint'),
       }}
       icon={{

@@ -1,4 +1,5 @@
 /* eslint-disable react/no-danger */
+import { t } from '@lingui/macro';
 import { FixedSizeList } from 'react-window';
 import Button from 'fb-base-blocks/button';
 import TextField from 'app/components/text-field';
@@ -267,7 +268,7 @@ class SearchField extends React.Component {
           onBlur={this.onInputBlur}
           value={filterString}
           onChange={this.onSearch}
-          placeholder="Search"
+          placeholder={t`Search`}
           {...textFieldProps}
         >
           { filterString.length > 0 && (
@@ -282,7 +283,7 @@ class SearchField extends React.Component {
                 mix: b('search-field__clear-button-icon'),
               }}
               htmlFor="search-field-input"
-              text="Clear"
+              text={t`Clear`}
               onClick={this.resetSearch}
             />
           )}
@@ -340,7 +341,7 @@ class SearchField extends React.Component {
           {
             items.length === 0 && (
               <p className={b('search-field__message')}>
-                No results
+                {t`No results`}
               </p>
             )
           }
