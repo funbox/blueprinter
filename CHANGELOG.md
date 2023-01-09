@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.3.0 (09.01.2023)
+
+Implemented i18n support. Now you can pick a locale using `--locale` flag. 
+
+`ru` and `en` are available for now. Default is `en`.
+
+
 ## 5.2.1 (05.09.2022)
 
 Fixed simultaneous highlighting of menu items of the same level.
