@@ -38,7 +38,7 @@
   "dependencies": {
     "@funboxteam/crafter": "4.0.0",
     "@funboxteam/free-port-finder": "3.1.1",
-    "browser-sync": "2.27.10",
+    "browser-sync": "2.27.11",
     "commonmark": "0.30.0",
     "react-hot-loader": "4.12.19",
     "yargs": "15.4.1"
