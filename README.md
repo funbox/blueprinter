@@ -1,5 +1,8 @@
 # @funboxteam/blueprinter
 
+[![npm (scoped)](https://img.shields.io/npm/v/@funboxteam/blueprinter)](https://www.npmjs.com/package/@funboxteam/blueprinter)
+[![Coverage Status](https://coveralls.io/repos/github/funbox/blueprinter/badge.svg?branch=master)](https://coveralls.io/github/funbox/blueprinter?branch=master)
+
 <img align="right" width="160" height="160"
      alt="Blueprinter avatar"
      src="./logo.png">
