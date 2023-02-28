@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.3.1 (27.02.2023)
+
+Added a workflow to build and push Docker image.
+
 ## 5.3.0 (09.01.2023)
 
 Implemented i18n support. Now you can pick a locale using `--locale` flag. 
