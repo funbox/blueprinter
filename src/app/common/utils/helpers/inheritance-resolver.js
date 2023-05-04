@@ -1,7 +1,6 @@
 import { STANDARD_TYPES } from 'app/constants/defaults';
 import { get } from './getters';
 import extractCategories from './extract-categories';
-import { getHashCode } from './hash';
 
 const defaultCategories = extractCategories();
 
@@ -20,49 +19,38 @@ export default class InheritanceResolver {
     return this.cachedDataStructures.size;
   }
 
-  getCachedDataStructure(member) {
-    const cacheKey = this.getMemberCacheKey(member);
-    const cachedDataStructure = this.cachedDataStructures.get(cacheKey);
+  canUseCache(memberSource) {
+    const hasContentOverridden = !!memberSource.content;
 
-    if (!cachedDataStructure) return null;
-
-    const canUseFromCache = this.canUseFromCache(member);
-
-    return canUseFromCache ? cachedDataStructure : null;
+    return !hasContentOverridden;
   }
 
-  canUseFromCache(member) {
-    const referenceDataStructure = member.referenceDataStructure || member.element;
+  getCachedDataStructure(member) {
+    const canUseFromCache = this.canUseCache(member);
 
-    if (!referenceDataStructure) return false;
+    if (!canUseFromCache) return null;
 
-    const referencedDS = this.categories.dataStructuresArray.find(ds => ds.id === referenceDataStructure);
-    const refDSContent = get('content', 'content').from(referencedDS);
+    const cacheKey = this.getCacheKey(member);
 
-    if (referenceDataStructure === member.element) return !member.content;
-
-    return member.content ? refDSContent.length === member.content.length : false;
+    return this.cachedDataStructures.get(cacheKey);
   }
 
   cacheDataStructure(member) {
-    const canUseFromCache = this.canUseFromCache(member);
+    const cacheKey = this.getCacheKey(member);
 
-    if (!canUseFromCache) return;
-
-    const cacheKey = this.getMemberCacheKey(member);
     if (!cacheKey) return;
+
     this.cachedDataStructures.set(cacheKey, member);
   }
 
-  getMemberCacheKey(member) {
-    const referenceDataStructure = member.referenceDataStructure;
+  getCacheKey(member) {
+    const referenceDataStructure = member.referenceDataStructure || member.element;
 
     if (!referenceDataStructure) return null;
 
     const attrs = this.getSortedAttributesString(member);
-    const usedStructuresHash = member.usedStructuresHash || 0;
 
-    return (referenceDataStructure + attrs + String(usedStructuresHash));
+    return (referenceDataStructure + attrs);
   }
 
   getSortedAttributesString(member) {
@@ -85,9 +73,12 @@ export default class InheritanceResolver {
     ));
 
     if (referencedDataStructure) {
+      const canCache = this.canUseCache(valueMember);
+
       this.fillValueMemberWithDataStructureContent(referencedDataStructure, valueMember, parent);
       valueMember.recursive = referencedDataStructure.recursive;
-      valueMember.usedStructuresHash = getHashCode(referencedDataStructure.id);
+
+      if (canCache) this.cacheDataStructure(valueMember);
     }
 
     if (referencedSchemaStructure) {
@@ -107,11 +98,9 @@ export default class InheritanceResolver {
     const childElementContent = childElement.content;
 
     if (Array.isArray(childElementContent)) {
-      const resolvedChildren = childElementContent.map(item => this.resolveInheritance(item, childElement));
-      valueMember.usedStructuresHash = this.combineStructureHashValues(valueMember, resolvedChildren);
+      childElementContent.map(item => this.resolveInheritance(item, childElement));
     } else if (childElementContent && childElementContent.value) {
-      const resolvedChild = this.resolveInheritance(childElementContent.value, valueMember);
-      valueMember.usedStructuresHash = this.combineStructureHashValues(valueMember, [resolvedChild]);
+      this.resolveInheritance(childElementContent.value, valueMember);
     }
 
     return valueMember;
@@ -190,13 +179,5 @@ export default class InheritanceResolver {
       member.referenceDataStructure = dataStructureId;
     }
     this.usedStructuresMap.delete(dataStructureId);
-  }
-
-  combineStructureHashValues(parentElement, childElements = []) {
-    const hashContainer = childElements.map(el => el.usedStructuresHash || 0).filter(h => h !== 0);
-    const childElementsAverageHash = (
-      hashContainer.reduce((acc, hash) => (acc + hash), 0) / Math.max(hashContainer.length, 1)
-    );
-    return (parentElement.usedStructuresHash || 0) + childElementsAverageHash;
   }
 }
