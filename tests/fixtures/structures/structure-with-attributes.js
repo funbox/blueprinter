@@ -69,5 +69,4 @@ module.exports.processed = {
     },
   ],
   referenceDataStructure: 'NormalResponse',
-  usedStructuresHash: 455289448,
 };

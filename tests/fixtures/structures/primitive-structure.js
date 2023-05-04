@@ -70,11 +70,8 @@ module.exports.processed = {
               ],
             },
           },
-          usedStructuresHash: 65759,
         },
       },
-      usedStructuresHash: 65759,
     },
   ],
-  usedStructuresHash: 65759,
 };

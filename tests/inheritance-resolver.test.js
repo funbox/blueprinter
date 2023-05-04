@@ -77,7 +77,10 @@ describe('Inheritance resolver', () => {
   it('can cache member with referenced data structure', async () => {
     const categories = await getCategories(fixtures.cache.source);
     const resolver = new InheritanceResolver(categories);
-    resolver.cacheDataStructure(fixtures.cache.memberWithReference);
+
+    const valueMember = simpleObjectClone(fixtures.cache.memberWithReference);
+
+    resolver.resolveInheritance(valueMember, fixtures.cache.parentElement);
 
     expect(resolver.getCacheSize()).toBe(1);
   });
@@ -85,7 +88,10 @@ describe('Inheritance resolver', () => {
   it('a member without referenced data structure cannot be cached', async () => {
     const categories = await getCategories(fixtures.cache.source);
     const resolver = new InheritanceResolver(categories);
-    resolver.cacheDataStructure(fixtures.cache.memberWithoutReference);
+
+    const valueMember = simpleObjectClone(fixtures.cache.memberWithoutReference);
+
+    resolver.resolveInheritance(valueMember, fixtures.cache.parentElement);
 
     expect(resolver.getCacheSize()).toBe(0);
   });
@@ -93,41 +99,49 @@ describe('Inheritance resolver', () => {
   it('a member which inherits from a data structure and has own properties cannot be cached', async () => {
     const categories = await getCategories(fixtures.cache.source);
     const resolver = new InheritanceResolver(categories);
-    resolver.cacheDataStructure(fixtures.cache.memberWithReferenceAndOwnStructure);
+
+    const valueMember = simpleObjectClone(fixtures.cache.memberWithReferenceAndOwnStructure);
+
+    resolver.resolveInheritance(valueMember, fixtures.cache.parentElement);
 
     expect(resolver.getCacheSize()).toBe(0);
+  });
+
+  it('a member which inherits from a data structure and has overrided properties cannot be cached', async () => {
+    const categories = await getCategories(fixtures.cache.source);
+    const resolver = new InheritanceResolver(categories);
+
+    const valueMemberWithOverridedStructure = simpleObjectClone(fixtures.cache.memberWithOverridedStructure);
+    const valueMemberWithOverridedStructureByDS = simpleObjectClone(fixtures.cache.memberWithOverridedStructureByDS);
+
+    resolver.resolveInheritance(valueMemberWithOverridedStructure, fixtures.cache.parentElement);
+    resolver.resolveInheritance(valueMemberWithOverridedStructureByDS, fixtures.cache.parentElement);
+
+    const cached = [...resolver.getCache().keys()];
+
+    expect(cached).not.toContain(fixtures.cache.parentElement.content.element);
   });
 
   it('cached member can be obtained', async () => {
     const categories = await getCategories(fixtures.cache.source);
     const resolver = new InheritanceResolver(categories);
-    resolver.cacheDataStructure(fixtures.cache.memberWithReference);
 
-    const cached = resolver.getCachedDataStructure(fixtures.cache.memberWithReference);
+    const valueMember = simpleObjectClone(fixtures.cache.memberWithReference);
 
-    expect(cached).toBe(fixtures.cache.memberWithReference);
-    expect(cached).toEqual(fixtures.cache.memberWithReference);
+    resolver.resolveInheritance(valueMember, fixtures.cache.parentElement);
+
+    expect(resolver.getCachedDataStructure(fixtures.cache.memberWithReference)).toEqual(fixtures.cache.processed);
   });
 
   it('accounts members attributes when caching', async () => {
     const categories = await getCategories(fixtures.cacheAttributes.source);
     const resolver = new InheritanceResolver(categories);
-    resolver.cacheDataStructure(fixtures.cacheAttributes.memberToCache);
 
-    const cached = resolver.getCachedDataStructure(fixtures.cacheAttributes.memberToObtain);
+    const valueMember = simpleObjectClone(fixtures.cacheAttributes.memberToCache);
 
-    expect(cached).toBeNull();
-  });
+    resolver.resolveInheritance(valueMember, fixtures.cacheAttributes.parentElement);
 
-  it('accounts nested data structure presence when caching', async () => {
-    const categories = await getCategories(fixtures.cache.source);
-    const resolver = new InheritanceResolver(categories);
-
-    resolver.cacheDataStructure(resolver.resolveInheritance(fixtures.cache.memberWithResponseA));
-    resolver.cacheDataStructure(resolver.resolveInheritance(fixtures.cache.memberWithResponseB));
-    resolver.cacheDataStructure(resolver.resolveInheritance(fixtures.cache.memberWithResponseC));
-
-    expect(resolver.getCacheSize()).toBe(3);
+    expect(resolver.getCachedDataStructure(fixtures.cacheAttributes.memberToObtain)).toBeUndefined();
   });
 
   it('handles attributes override', async () => {
@@ -163,4 +177,8 @@ async function testInheritanceFromStructure(source, parentElement, expected) {
   resolver.resolveInheritance(valueMember, parentElement);
 
   expect(valueMember).toEqual(expected);
+}
+
+function simpleObjectClone(object) {
+  return JSON.parse(JSON.stringify(object));
 }

@@ -64,5 +64,4 @@ module.exports.processed = {
     },
   ],
   referenceDataStructure: 'User',
-  usedStructuresHash: 2645995,
 };
