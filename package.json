@@ -36,7 +36,7 @@
     "compile": "lingui compile"
   },
   "dependencies": {
-    "@funboxteam/crafter": "4.0.0",
+    "@funboxteam/crafter": "5.0.1",
     "@funboxteam/free-port-finder": "3.1.1",
     "browser-sync": "2.28.1",
     "commonmark": "0.30.0",
