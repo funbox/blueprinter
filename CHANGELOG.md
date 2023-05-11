@@ -1,8 +1,14 @@
 # Changelog
 
+## 5.3.2 (11.05.2023)
+
+Simplified caching of data structures.
+
+
 ## 5.3.1 (27.02.2023)
 
 Added a workflow to build and push Docker image.
+
 
 ## 5.3.0 (09.01.2023)
 
