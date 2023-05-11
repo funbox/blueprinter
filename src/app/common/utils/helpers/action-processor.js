@@ -201,8 +201,6 @@ class ActionProcessor {
           this.fillAdditionalAttributes(item);
         });
 
-        this.resolver.cacheDataStructure(member);
-
         break;
       }
       case 'member': {

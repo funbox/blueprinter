@@ -2,129 +2,131 @@ module.exports.source = `# My API
 
 # Data Structures
 
-## NormalResponse (object, fixed)
-+ status: ok (required) - штатный ответ
+# User
 
-## Base Response (object)
-+ status: OK (required, fixed) - успешный результат
-+ result (optional, object) - объект с данными
++ name: John (string, required) - user name
++ email
++ phone
++ age (number)
 
-## Response A (object)
-+ client_id (enum[string], optional)
-  + Members
-    + web
+# Name
 
-## Response B (object)
-+ timestamp: \`1560513461\` (number, required)
-+ body: \`Завтра +5, возможны цунами\` (string, required)
++ first (string, required)
++ last (string, required)`;
 
-## Response C (object)
-+ msisdn: 79251112233 (number, required)
-+ status: \`subscribed\` (string, required)
-`;
-
-module.exports.memberWithReference = {
-  element: 'object',
-  content: [
-    {
-      element: 'member',
-      content: {
-        key: { element: 'string', content: 'status' },
-        value: { element: 'string' },
-      },
-    },
-  ],
-  referenceDataStructure: 'NormalResponse',
+module.exports.parentElement = {
+  element: 'dataStructure',
+  content: { element: 'User' },
 };
 
-module.exports.memberWithReferenceAndOwnStructure = {
+module.exports.processed = {
   element: 'object',
   content: [
     {
       element: 'member',
       content: {
-        key: { element: 'string', content: 'status' },
+        key: { element: 'string', content: 'name' },
+        value: {
+          element: 'string',
+          attributes: {
+            samples: {
+              element: 'array',
+              content: [{ element: 'string', content: 'John' }],
+            },
+          },
+        },
+      },
+      attributes: {
+        typeAttributes: {
+          element: 'array',
+          content: [{ element: 'string', content: 'required' }],
+        },
+      },
+      meta: {
+        description: { element: 'string', content: 'user name' },
+      },
+    },
+    {
+      element: 'member',
+      content: {
+        key: { element: 'string', content: 'email' },
         value: { element: 'string' },
       },
     },
     {
       element: 'member',
       content: {
-        key: { element: 'string', content: 'result' },
-        value: { element: 'object' },
+        key: { element: 'string', content: 'phone' },
+        value: { element: 'string' },
       },
     },
     {
       element: 'member',
       content: {
-        key: { element: 'string', content: 'total' },
+        key: { element: 'string', content: 'age' },
         value: { element: 'number' },
       },
     },
   ],
-  referenceDataStructure: 'NormalResponse',
+  referenceDataStructure: 'User',
+};
+
+module.exports.memberWithReference = {
+  element: 'User',
+};
+
+module.exports.memberWithReferenceAndOwnStructure = {
+  element: 'User',
+  content: [
+    {
+      element: 'member',
+      content: {
+        key: { element: 'string', content: 'sex' },
+        value: { element: 'string' },
+      },
+    },
+  ],
+};
+
+module.exports.memberWithOverridedStructure = {
+  element: 'User',
+  content: [
+    {
+      element: 'member',
+      content: {
+        key: { element: 'string', content: 'phone' },
+        value: { element: 'number' },
+      },
+    },
+  ],
+};
+
+module.exports.memberWithOverridedStructureByDS = {
+  element: 'User',
+  content: [
+    {
+      element: 'member',
+      content: {
+        key: { element: 'string', content: 'name' },
+        value: { element: 'Name' },
+      },
+    },
+  ],
+};
+
+module.exports.memberWithReferenceAndOwnAttributes = {
+  element: 'User',
+  attributes: {
+    typeAttributes: {
+      element: 'array',
+      content: [
+        { element: 'string', content: 'fixed' },
+      ],
+    },
+  },
 };
 
 module.exports.memberWithoutReference = {
   element: 'string',
   content: 'hello',
-};
-
-module.exports.memberWithResponseA = {
-  element: 'Base Response',
-  content: [
-    {
-      element: 'member',
-      content: {
-        key: {
-          element: 'string',
-          content: 'result',
-        },
-        value: {
-          element: 'Response A',
-        },
-      },
-    },
-  ],
-};
-
-module.exports.memberWithResponseB = {
-  element: 'Base Response',
-  content: [
-    {
-      element: 'member',
-      content: {
-        key: {
-          element: 'string',
-          content: 'result',
-        },
-        value: {
-          element: 'array',
-          content: [
-            {
-              element: 'Response B',
-            },
-          ],
-        },
-      },
-    },
-  ],
-};
-
-module.exports.memberWithResponseC = {
-  element: 'Base Response',
-  content: [
-    {
-      element: 'member',
-      content: {
-        key: {
-          element: 'string',
-          content: 'result',
-        },
-        value: {
-          element: 'Response C',
-        },
-      },
-    },
-  ],
 };

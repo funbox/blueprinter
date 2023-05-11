@@ -25,7 +25,6 @@ module.exports.processed = {
     },
     {
       element: 'object',
-      usedStructuresHash: 0,
       content: [
         {
           element: 'member',
@@ -45,5 +44,4 @@ module.exports.processed = {
     },
   ],
   referenceDataStructure: 'ArrayTypeExtended',
-  usedStructuresHash: 530108268,
 };
