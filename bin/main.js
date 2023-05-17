@@ -46,7 +46,7 @@ const createRefract = (inputFileName, strictMode, buildMode) => crafter.parseFil
     }
   });
 
-const sendStaticFile = async (outputFileName, refractData, customCssData, locale, localeData) => {
+const sendStaticFile = async (outputFileName, refractData, customCssData, customFavicon, locale, localeData) => {
   const htmlData = await readFile(staticFileLocation, { encoding: 'utf-8' });
 
   const htmlWithRefract = htmlData
@@ -54,6 +54,11 @@ const sendStaticFile = async (outputFileName, refractData, customCssData, locale
     .replace('<script src="./refract.js"></script>', () => `<script>${refractData}</script>`)
     .replace('<script src="./locale.js"></script>', () => `<script>${localeData}</script>`)
     .replace('<link href="./custom-style.css" rel="stylesheet">', `<style>${customCssData}</style>`)
+    .replace(/<link rel="icon" type="image\/png" href="[^"]*"\/?>/, (match) => (
+      customFavicon
+        ? `<link rel="icon" type="image/png" href="data:image/png;base64,${customFavicon}"/>`
+        : match
+    ))
     .replace(/lang="\w+"/, `lang="${locale}"`);
 
   try {
@@ -84,6 +89,18 @@ const renderCustomCss = async (cssFileName) => {
   return customCss;
 };
 
+const renderCustomFavicon = async (faviconFileName) => {
+  const fileExt = path.extname(faviconFileName).toLowerCase();
+
+  if (fileExt !== '.png') {
+    throw new Error('Favicon must be a PNG image.');
+  }
+
+  const customFavicon = await readFile(faviconFileName, { encoding: 'base64' });
+
+  return customFavicon;
+};
+
 const renderLocale = async (locale) => {
   const localeFileName = path.resolve(BASE_PATH, `static/locale.${locale}.js`);
   try {
@@ -95,12 +112,13 @@ const renderLocale = async (locale) => {
   }
 };
 
-const renderAndBuild = async (inputFileName, cssFileName, outputFileName, locale, strictMode = false) => {
+const renderAndBuild = async (inputFileName, cssFileName, faviconFileName, outputFileName, locale, strictMode = false) => {
   const [refractData] = await renderRefract(inputFileName, strictMode, true);
   const customCssData = cssFileName ? await renderCustomCss(cssFileName) : '';
+  const customFaviconData = faviconFileName ? await renderCustomFavicon(faviconFileName) : null;
   const localeData = await renderLocale(locale);
 
-  await sendStaticFile(outputFileName, refractData, customCssData, locale, localeData);
+  await sendStaticFile(outputFileName, refractData, customCssData, customFaviconData, locale, localeData);
   console.log(`Rendering done. Open "${outputFileName}" to see result.`);
 };
 
