@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.4.0 (19.05.2023)
+
+Added an option to provide a custom favicon.
+
+
 ## 5.3.2 (11.05.2023)
 
 Simplified caching of data structures.

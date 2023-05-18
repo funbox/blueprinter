@@ -1,6 +1,6 @@
 {
   "name": "@funboxteam/blueprinter",
-  "version": "5.3.2",
+  "version": "5.4.0",
   "description": "Replacement of Aglio library for rendering generated AST as HTML page.",
   "repository": {
     "type": "git",
