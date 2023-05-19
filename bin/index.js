@@ -14,7 +14,8 @@ argsParser
   .options('s', { alias: 'server', describe: 'Start a local live preview server' })
   .options('h', { alias: 'host', describe: 'Address to bind local preview server to', default: '127.0.0.1' })
   .options('p', { alias: 'port', describe: 'Port for local preview server', default: 3001 })
-  .options('c', { alias: 'css', describe: 'Custom css file' })
+  .options('c', { alias: 'css', describe: 'Custom CSS file' })
+  .options('f', { alias: 'favicon', describe: 'Custom favicon' })
   .options('l', { alias: 'locale', describe: 'Set locale', default: 'en', choices: ['ru', 'en'] });
 
 const argv = argsParser.argv;
@@ -41,7 +42,7 @@ if (argv.s) {
 } else {
   if (!argv.i || !argv.o) argvError();
 
-  renderAndBuild(argv.i, argv.c, argv.o, argv.l, argv.S)
+  renderAndBuild(argv.i, argv.c, argv.f, argv.o, argv.l, argv.S)
     .then(() => exit())
     .catch(error => exit(error));
 }

@@ -73,6 +73,7 @@ Add the next commands in `package.json`:
 - `-c, --css <file>` — allows to specify path to a custom CSS file. Styles from this files will be attached to page.
 Any possible compatibility issues between relevant Blueprinter version and a custom CSS file remain on the conscience of the file developer.
 - `-l, --locale <locale>` — sets a locale to be used as UI language. Default value is `en`. Available locales are `en`, `ru`.
+- `-f, --favicon <file>` — allows to specify path to a custom favicon. Applicable only in build mode, not in dev mode. Accepts only PNG files.
 
 ## Run in Docker
 
