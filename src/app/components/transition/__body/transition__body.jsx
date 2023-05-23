@@ -6,6 +6,7 @@ import Section from 'app/components/section';
 import Code from 'app/components/code';
 import RawContent from 'app/components/raw-content';
 import { htmlFromText } from 'app/common/utils/helpers';
+import { isString } from 'app/common/utils/helpers/guards';
 
 import { addOptionMetaToAttributes, generateBody } from 'app/common/utils/helpers/body-generation';
 
@@ -221,10 +222,6 @@ export default Transition__Body;
 
 function formatHeaders(arrayOfHeaders) {
   return arrayOfHeaders.reduce((res, h) => `${res}${h.key}: ${h.value}\n`, '');
-}
-
-function isString(s) {
-  return (typeof s === 'string' || s instanceof String);
 }
 
 function getAttributesTitle(structureType) {

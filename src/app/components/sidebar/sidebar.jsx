@@ -1,6 +1,6 @@
 import Resizable from 'app/components/resizable';
 import Button from 'fb-base-blocks/button';
-import isHotkey from 'app/common/utils/helpers/is-hotkey';
+import { isHotkey } from 'app/common/utils/helpers/guards';
 
 import Sidebar__ToggleIcon from './__toggle-icon/sidebar__toggle-icon.svg?inline';
 

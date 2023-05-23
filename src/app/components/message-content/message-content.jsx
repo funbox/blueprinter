@@ -5,6 +5,7 @@ import CodeSnippet from 'app/components/code-snippet';
 import Section from 'app/components/section';
 
 import { addOptionMetaToAttributes, generateBody } from 'app/common/utils/helpers/body-generation';
+import { isString } from 'app/common/utils/helpers/guards';
 
 const MessageContent = (props) => {
   const {
@@ -18,7 +19,6 @@ const MessageContent = (props) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const isEmpty = !defaultAttributes && !defaultBody && !schema;
-  const isString = s => (typeof s === 'string' || s instanceof String);
   const onOptionSelect = (optionMeta, selected) => {
     setSelectedOptions(selected
       ? [...selectedOptions, optionMeta]
