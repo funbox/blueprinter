@@ -43,13 +43,16 @@ class ActionProcessor {
       const sourceResponse = trans.content.find(tItem => tItem.element === 'httpResponse');
       const processedRequest = this.resolveSourceElementInheritance(sourceRequest);
       const processedResponse = this.resolveSourceElementInheritance(sourceResponse);
+      const requestBodyTemplate = getBodyTemplate(sourceRequest);
+      const responseBodyTemplate = getBodyTemplate(sourceResponse);
+
       method = get('attributes', 'method', 'content').from(sourceRequest);
 
       const formattedRequest = removeEmpty({
         structureType: getDataStructureType(processedRequest),
         attributes: get('content').from(this.fillAdditionalAttributes(processedRequest)),
         body: getBody(sourceRequest),
-        ...(getBodyTemplate(sourceRequest) ? { bodyTemplate: getBodyTemplate(sourceRequest) } : {}),
+        ...(requestBodyTemplate ? { bodyTemplate: requestBodyTemplate } : {}),
         description: getDescription(sourceRequest),
         headers: sourceRequest.attributes.headers ? sourceRequest.attributes.headers.content.map(extractHeaderData) : null,
         schema: getSchema(sourceRequest),
@@ -60,7 +63,7 @@ class ActionProcessor {
         structureType: getDataStructureType(processedResponse),
         attributes: get('content').from(this.fillAdditionalAttributes(processedResponse)),
         body: getBody(sourceResponse),
-        ...(getBodyTemplate(sourceResponse) ? { bodyTemplate: getBodyTemplate(sourceResponse) } : {}),
+        ...(responseBodyTemplate ? { bodyTemplate: responseBodyTemplate } : {}),
         description: getDescription(sourceResponse),
         headers: sourceResponse.attributes.headers ? sourceResponse.attributes.headers.content.map(extractHeaderData) : null,
         schema: getSchema(sourceResponse),
@@ -143,6 +146,7 @@ class ActionProcessor {
     const messageRoute = presetHash ? createRoute(presetHash) : combineRoutes(parentRoute, createRoute(mainHash, createSlug));
 
     const processedMessage = this.resolveSourceElementInheritance(message);
+    const bodyTemplate = getBodyTemplate(message);
 
     return ({
       id: message.id,
@@ -152,7 +156,7 @@ class ActionProcessor {
       description: getDescription(message),
       attributes: get('content').from(this.fillAdditionalAttributes(processedMessage)),
       body: getBody(message),
-      ...(getBodyTemplate(message) ? { bodyTemplate: getBodyTemplate(message) } : {}),
+      ...(bodyTemplate ? { bodyTemplate } : {}),
       schema: getSchema(message),
       hashForLegacyUrl: messageLegacyHash,
       route: messageRoute,
