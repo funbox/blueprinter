@@ -5,7 +5,7 @@ import CodeSnippet from 'app/components/code-snippet';
 import Section from 'app/components/section';
 
 import { addOptionMetaToAttributes, generateBody } from 'app/common/utils/helpers/body-generation';
-import { isString } from 'app/common/utils/helpers/guards';
+import stringify from 'app/common/utils/helpers/stringify';
 
 const MessageContent = (props) => {
   const {
@@ -59,7 +59,7 @@ const MessageContent = (props) => {
           mix={b('message-content__section')}
         >
           <CodeSnippet mods={{ for: 'asset' }}>
-            {isString(body) ? body.trim() : JSON.stringify(body, null, 2)}
+            {stringify(body)}
           </CodeSnippet>
         </Section>
       )}
@@ -72,7 +72,7 @@ const MessageContent = (props) => {
           mix={b('message-content__section')}
         >
           <CodeSnippet mods={{ for: 'asset' }}>
-            {isString(schema) ? schema.trim() : JSON.stringify(schema, null, 2)}
+            {stringify(schema)}
           </CodeSnippet>
         </Section>
       )}
