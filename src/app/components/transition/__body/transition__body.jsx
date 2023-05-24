@@ -41,8 +41,6 @@ class Transition__Body extends React.PureComponent {
       selectedOptions: [],
     };
 
-    this.availableTransactions = props.availableTransactions;
-
     this.onOptionLabelClick = this.onOptionLabelClick.bind(this);
     this.onOptionSelect = this.onOptionSelect.bind(this);
   }
