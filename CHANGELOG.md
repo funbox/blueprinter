@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.4.1 (25.05.2023)
+
+Fixed an error after options selection in OneOf in a Message structure.
+
+
 ## 5.4.0 (19.05.2023)
 
 Added an option to provide a custom favicon.

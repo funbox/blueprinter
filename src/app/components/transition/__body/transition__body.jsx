@@ -6,6 +6,7 @@ import Section from 'app/components/section';
 import Code from 'app/components/code';
 import RawContent from 'app/components/raw-content';
 import { htmlFromText } from 'app/common/utils/helpers';
+import stringify from 'app/common/utils/helpers/stringify';
 
 import { addOptionMetaToAttributes, generateBody } from 'app/common/utils/helpers/body-generation';
 
@@ -109,7 +110,7 @@ class Transition__Body extends React.PureComponent {
     });
 
     const body = (selectedOptions.length > 0 && bodyTemplate) ? generateBody(attributes, bodyTemplate, selectedOptions) : defaultBody;
-    const formattedBody = body && (isString(body) ? body.trim() : JSON.stringify(body, null, 2));
+    const formattedBody = body && stringify(body);
     const isJsonBody = formattedBody && ['{', '['].includes(formattedBody[0]);
     const emptyContentText = {
       request: t`This request has no content`,
@@ -205,7 +206,7 @@ class Transition__Body extends React.PureComponent {
               <CodeSnippet
                 mods={{ for: 'asset' }}
               >
-                {isString(schema) ? schema : JSON.stringify(schema, null, 2)}
+                {stringify(schema)}
               </CodeSnippet>
             </Section>
           </CollapsibleSection>
@@ -221,10 +222,6 @@ export default Transition__Body;
 
 function formatHeaders(arrayOfHeaders) {
   return arrayOfHeaders.reduce((res, h) => `${res}${h.key}: ${h.value}\n`, '');
-}
-
-function isString(s) {
-  return (typeof s === 'string' || s instanceof String);
 }
 
 function getAttributesTitle(structureType) {

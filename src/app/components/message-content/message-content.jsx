@@ -1,19 +1,32 @@
 import { Trans, t } from '@lingui/macro';
+import { useState } from 'react';
 import AttributesList from 'app/components/attributes-list';
 import CodeSnippet from 'app/components/code-snippet';
 import Section from 'app/components/section';
 
+import { addOptionMetaToAttributes, generateBody } from 'app/common/utils/helpers/body-generation';
+import stringify from 'app/common/utils/helpers/stringify';
+
 const MessageContent = (props) => {
   const {
     message: {
-      attributes,
-      body,
+      attributes: defaultAttributes,
+      body: defaultBody,
+      bodyTemplate,
       schema,
     },
   } = props;
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
-  const isEmpty = !attributes && !body && !schema;
-  const isString = s => (typeof s === 'string' || s instanceof String);
+  const isEmpty = !defaultAttributes && !defaultBody && !schema;
+  const onOptionSelect = (optionMeta, selected) => {
+    setSelectedOptions(selected
+      ? [...selectedOptions, optionMeta]
+      : selectedOptions.filter(opt => opt.id !== optionMeta.id));
+  };
+
+  const attributes = defaultAttributes && addOptionMetaToAttributes(defaultAttributes);
+  const body = (selectedOptions.length && bodyTemplate) ? generateBody(attributes, bodyTemplate, selectedOptions) : defaultBody;
 
   return (
     <div className={b('message-content', props)}>
@@ -30,7 +43,11 @@ const MessageContent = (props) => {
           mods={{ for: 'transition-content' }}
           mix={b('message-content__section')}
         >
-          <AttributesList attributes={attributes}/>
+          <AttributesList
+            attributes={attributes}
+            selectedOptions={selectedOptions}
+            onOptionSelect={onOptionSelect}
+          />
         </Section>
       )}
 
@@ -42,7 +59,7 @@ const MessageContent = (props) => {
           mix={b('message-content__section')}
         >
           <CodeSnippet mods={{ for: 'asset' }}>
-            {isString(body) ? body.trim() : JSON.stringify(body, null, 2)}
+            {stringify(body)}
           </CodeSnippet>
         </Section>
       )}
@@ -55,7 +72,7 @@ const MessageContent = (props) => {
           mix={b('message-content__section')}
         >
           <CodeSnippet mods={{ for: 'asset' }}>
-            {isString(schema) ? schema.trim() : JSON.stringify(schema, null, 2)}
+            {stringify(schema)}
           </CodeSnippet>
         </Section>
       )}
@@ -67,6 +84,7 @@ MessageContent.propTypes = {
   message: PropTypes.shape({
     attributes: PropTypes.arrayOf(PropTypes.object),
     body: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    bodyTemplate: PropTypes.string,
     schema: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   }),
 };

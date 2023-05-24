@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-state */
 import cookies from 'app/common/utils/helpers/cookies';
 import { Theme, themeCookieName, THEME_HOTKEY } from 'app/constants/ui-themes';
-import isHotkey from 'app/common/utils/helpers/is-hotkey';
+import { isHotkey } from 'app/common/utils/helpers/guards';
 
 const defaultThemeState = {
   theme: Theme.LIGHT,

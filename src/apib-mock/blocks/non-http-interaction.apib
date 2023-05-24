@@ -11,8 +11,11 @@
 
 ## NewMessage(ChatMessage)
 
-+ `type`: `newMessage` (string, fixed, required) - тип сообщения — `newMessage`
-
++ One Of
+     + Properties
+        + type: contact (string, required, fixed) - сообщение при установке контакта
+     + Properties
+        + type: standard (string, required, fixed) - сообщение в переписке
 
 # Group Не-HTTP-взаимодействие
 
