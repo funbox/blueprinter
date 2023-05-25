@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.4.2 (27.05.2023)
+
+Restored lost `trim` in stringify function.
+
+
 ## 5.4.1 (25.05.2023)
 
 Fixed an error after options selection in OneOf in a Message structure.
