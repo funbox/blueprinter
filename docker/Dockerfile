@@ -1,4 +1,4 @@
-FROM node:14.18.0-stretch-slim
+FROM node:18.15.0-bullseye-slim
 
 ARG BLUEPRINTER_VERSION=latest
 ARG BUILD_DATE

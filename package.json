@@ -49,7 +49,7 @@
     "@babel/plugin-transform-react-constant-elements": "7.17.12",
     "@babel/preset-env": "7.17.12",
     "@babel/preset-react": "7.17.12",
-    "@funboxteam/eslint-config": "7.1.0",
+    "@funboxteam/eslint-config": "7.3.0",
     "@funboxteam/scss-imports-loader": "2.1.1",
     "@funboxteam/scss-lint-config": "3.0.0",
     "@funboxteam/scss-utils": "2.0.0",
@@ -105,7 +105,7 @@
     "uniqid": "5.4.0",
     "url-parse": "1.5.10",
     "webpack": "5.76.0",
-    "webpack-cli": "4.9.1",
+    "webpack-cli": "4.10.0",
     "webpack-dev-server": "4.9.0",
     "webpack-merge": "5.8.0"
   },
