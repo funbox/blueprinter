@@ -18,12 +18,12 @@ Nothing changed. We just moved the package to the new scope — `@funboxteam`.
 
 Complete refactoring of imports. If some data structure to be used in a file, you now need to import it explicitly in that file.
 
-Changes in attributes example description. If an example should contain multiple values, don't add backticks (`):
+Changes in attributes example description. If an example should contain multiple values, don't add backticks:
 
 ```
 + Attributes
-  + foo: 1,2,3 (array[number])
-  + bar: `single value` (string)
+  + foo: 1,2,3 (array[number]) - no bacticks around multiple values
+  + bar: `single value` (string) - backticks around single example value
 ```
 
 ## 3.38.0 → 3.39.0

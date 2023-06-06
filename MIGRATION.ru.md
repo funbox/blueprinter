@@ -23,12 +23,12 @@ Complete refactoring of imports. If some data structure to be used in a file, yo
 в этот файл.
 
 Изменения в описании примеров значения атрибута. Если пример должен содержать несколько значений, не нужно добавлять
-бэктики (`):
+бэктики:
 
 ```
 + Attributes
-  + foo: 1,2,3 (array[number])
-  + bar: `single value` (string)
+  + foo: 1,2,3 (array[number]) - для нескольких значений бэктики не используются
+  + bar: `single value` (string) - пример с одним значением, заключенным в бэктики
 ```
 
 ## 3.38.0 → 3.39.0
