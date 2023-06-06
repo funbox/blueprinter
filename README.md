@@ -66,14 +66,14 @@ Add the next commands in `package.json`:
 
 - `-i, --input <file>` — sets the source APIB file to render.
 - `-o, --output <file>` — sets the name of the output HTML file.
-- `-S, --strict` — enables parsing "strict" mode in which any warning will cause build error.
 - `-s, --server` — activates live server mode.
 - `-h, --host <host>` — sets live server host. Default value is `127.0.0.1`.
 - `-p, --port <port>` — sets live server port. Default value is `3000`.
-- `-c, --css <file>` — allows to specify path to a custom CSS file. Styles from this files will be attached to page.
+- `--strict` — enables parsing "strict" mode in which any warning will cause build error.
+- `--css <file>` — allows to specify path to a custom CSS file. Styles from this files will be attached to page.
 Any possible compatibility issues between relevant Blueprinter version and a custom CSS file remain on the conscience of the file developer.
-- `-l, --locale <locale>` — sets a locale to be used as UI language. Default value is `en`. Available locales are `en`, `ru`.
-- `-f, --favicon <file>` — allows to specify path to a custom favicon. Applicable only in build mode, not in dev mode. Accepts only PNG files.
+- `--locale <locale>` — sets a locale to be used as UI language. Default value is `en`. Available locales are `en`, `ru`.
+- `--favicon <file>` — allows to specify path to a custom favicon. Applicable only in build mode, not in dev mode. Accepts only PNG files.
 
 ## Run in Docker
 
