@@ -1,5 +1,14 @@
 # Migration
 
+## 5.4.2 → 6.0.0
+
+We've dropped support for Node.js 12.
+The project probably still works on it, because we have not changed anything in the code. But be careful.
+
+We removed one-letter definitions for the next CLI flags: `-S (--strict)`, `-c (--css)`, `-f (--favicon)`, `-l (--locale)`.
+If you've been using any of the above-mentioned options, you should replace `-S` with `--strict`, `-c` with `--css` and so on.
+
+
 ## 4.17.1 → 5.0.0
 
 Nothing changed. We just moved the package to the new scope — `@funboxteam`.

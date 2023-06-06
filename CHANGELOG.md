@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.0.0 (06.06.2023)
+
+Dropped support for Node.js 12.
+
+Also removed one-letter definitions of some CLI flags.
+
+Check the [migration guide](./MIGRATION.md) for details.
+
 ## 5.4.2 (27.05.2023)
 
 Restored lost `trim` in stringify function.
