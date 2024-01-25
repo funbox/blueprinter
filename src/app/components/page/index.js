@@ -13,6 +13,7 @@ require('./__navigation/page__navigation.scss');
 require('./__stripe/_for/_api-host/page__stripe_for_api-host.scss');
 require('./__stripe/_for/_search/page__stripe_for_search.scss');
 require('./__stripe/_for/_group/page__stripe_for_group.scss');
+require('./__stripe/_for/_sort/page-stripe_for_sort.scss');
 require('./__title/page__title.scss');
 
 require('./_type/_error/page_type_error.scss');

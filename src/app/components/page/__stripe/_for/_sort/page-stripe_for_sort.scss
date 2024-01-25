@@ -1,0 +1,9 @@
+.page__stripe_for_sort {
+  margin-top: auto;
+  padding: 16px 18px 16px 30px;
+  border-top: 1px solid var(--stroke-color--primary);
+
+  @media print {
+    display: none;
+  }
+}
