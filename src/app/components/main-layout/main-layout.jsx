@@ -19,6 +19,7 @@ import Link from 'app/components/link';
 import SearchStripe from 'app/components/search-stripe';
 import ThemeToggler from 'app/components/theme-toggler';
 import InfoButton from 'app/components/info-button';
+import SortToggler from 'app/components/sort-toggler';
 
 import { API_DEFAULT_TITLE } from 'app/constants/defaults';
 
@@ -105,6 +106,10 @@ class MainLayout extends React.PureComponent {
                 <SideMenu data={groups}/>
                 <PrintMenu data={groups}/>
               </Page__Navigation>
+
+              <Page__Stripe mods={{ for: 'sort' }}>
+                <SortToggler/>
+              </Page__Stripe>
             </Page__Aside>
           </Sidebar>
 

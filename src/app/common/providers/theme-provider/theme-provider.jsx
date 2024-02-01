@@ -71,7 +71,7 @@ class ThemeProvider extends React.Component {
 
   updateTheme(theme) {
     this.applyTheme(theme);
-    cookies.set({ name: themeCookieName, value: theme, options: { domain: this.documentationDomain } });
+    cookies.set({ name: themeCookieName, value: theme });
     this.darkQuery.removeListener(this.applySystemTheme);
   }
 
@@ -79,10 +79,6 @@ class ThemeProvider extends React.Component {
     const currentTheme = this.state.theme;
     const newTheme = currentTheme === Theme.DARK ? Theme.LIGHT : Theme.DARK;
     this.updateTheme(newTheme);
-  }
-
-  get documentationDomain() {
-    return window.location.hostname.split('.').slice(-2).join('.');
   }
 
   render() {

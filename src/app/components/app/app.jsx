@@ -4,6 +4,7 @@ import parseSourceFile from 'app/common/utils/helpers/parse-source-file';
 import { HASH_DELIMITER } from 'app/common/utils/helpers/hash';
 import IdProvider from 'app/common/utils/helpers/id-provider';
 import sourceMock from 'app/source';
+import { sortService } from 'app/common/services/sort-service';
 
 import MainLayout from 'app/components/main-layout';
 import PageDescription from 'app/components/page-description';
@@ -27,6 +28,10 @@ const {
   resources,
   actions,
 } = parsedSource;
+
+const groupsToDisplay = sortService.isGroupsSortingEnabled
+  ? sortService.sortGroups(groups)
+  : groups;
 
 const isModal = location => {
   const modalPaths = ['/service-help'];
@@ -98,7 +103,7 @@ export default class App extends React.Component {
     return (
       <MainLayout
         topLevelMeta={topLevelMeta}
-        groups={groups}
+        groups={groupsToDisplay}
         resources={resources}
         actions={actions}
       >
@@ -127,7 +132,7 @@ export default class App extends React.Component {
                 }
                 <ManualSearch
                   {...props}
-                  groups={groups}
+                  groups={groupsToDisplay}
                 />
               </ViewContext.Provider>
             )}
