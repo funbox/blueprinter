@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.1.0 (01.02.2024)
+
+Added an option to sort method groups by name.
+
 ## 6.0.0 (06.06.2023)
 
 Dropped support for Node.js 12.
